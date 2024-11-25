@@ -50,7 +50,24 @@ public class MON_GreenSlime extends Entity {
         right2 = setup("/res/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
     }
 
+
     public void setAction() {
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance)/gp.tileSize;
+        if(!onPath){
+
+
+            if( tileDistance < 5){
+                int iii = new Random().nextInt(100)+1;
+                if(iii > 50){
+                    onPath = true;
+                }
+            }
+
+
+
+        }
 
         if (onPath) {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
@@ -77,7 +94,11 @@ public class MON_GreenSlime extends Entity {
                 }
 
                 shotAvailableCounter = 0;
-            } else {
+                if(tileDistance > 5){
+                    onPath = false;
+                }
+            }
+            else {
                 // Decide movement direction every 120 frames
                 actionLockCounter++;
                 if (actionLockCounter == 120) {
@@ -96,14 +117,12 @@ public class MON_GreenSlime extends Entity {
                     actionLockCounter = 0;
                 }
             }
-
         }
     }
 
     public void damageReaction() {
         actionLockCounter = 0;
         direction = gp.player.direction;
-        onPath = true;
     }
 
     public void checkDrop() {

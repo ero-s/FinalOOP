@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -229,7 +230,9 @@ public class Entity {
                 knockBack = false;
                 speed = defaultSpeed;
             }
-        } else {
+        }
+
+        else {
             setAction();
             checkCollision();
 
@@ -273,6 +276,7 @@ public class Entity {
         if (shotAvailableCounter < 30) {
             shotAvailableCounter++;
         }
+
     }
 
     public void damagePlayer(int attack) {
@@ -371,6 +375,9 @@ public class Entity {
             g2.drawImage(image, screenX, screenY, null);
 
             changeAlpha(g2, 1f);
+        }
+        if(onPath && alive && !dying){
+            gp.tileM.drawPath(g2);
         }
     }
 
