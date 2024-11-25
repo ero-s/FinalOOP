@@ -84,6 +84,23 @@ public class Player extends Entity {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
     }
 
     public int getAttack() {
@@ -321,7 +338,14 @@ public class Player extends Entity {
             if (gp.obj[mapNum][i].type == type_pickupOnly) {
                 gp.obj[mapNum][i].use(this);
                 gp.obj[mapNum][i] = null;
-            } else {
+            }
+            else if(gp.obj[mapNum][i].type == type_obstacle){
+                if(keyH.enterPressed){
+                    attackCanceled = true;
+                    gp.obj[mapNum][i].interact();
+                }
+            }
+            else {
                 // INVENTORY ITEMS
                 String text;
                 if (canObtainItem(gp.obj[mapNum][i]) == true){
@@ -456,8 +480,10 @@ public class Player extends Entity {
             }
 
             if (selectedItem.type == type_consumable) {
-                selectedItem.use(this);
-                inventory.remove(itemIndex);
+                if(selectedItem.use(this)){
+                    inventory.remove(itemIndex);
+                }
+
             }
         }
     }
