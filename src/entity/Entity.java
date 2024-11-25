@@ -53,9 +53,6 @@ public class Entity {
     // CHARACTER ATTRIBUTES
     public String name;
     public int defaultSpeed;
-
-
-
     public int speed;
     public int maxLife;
     public int life;
