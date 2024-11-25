@@ -14,7 +14,7 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -22,44 +22,28 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
 
         // TITLE STATE
-        if (gp.gameState == gp.titleState) {
-            titleState(code);
-        }
+        if (gp.gameState == gp.titleState) { titleState(code); }
 
         // PLAY STATE
-        else if (gp.gameState == gp.playState) {
-            playState(code);
-        }
+        else if (gp.gameState == gp.playState) { playState(code); }
 
         // PAUSE STATE
-        else if (gp.gameState == gp.pauseState) {
-            pauseState(code);
-        }
+        else if (gp.gameState == gp.pauseState) { pauseState(code); }
 
         // DIALOGUE STATE
-        else if (gp.gameState == gp.dialogueState) {
-            dialogueState(code);
-        }
+        else if (gp.gameState == gp.dialogueState) { dialogueState(code); }
 
         // CHARACTER STATE
-        else if (gp.gameState == gp.characterState) {
-            characterState(code);
-        }
+        else if (gp.gameState == gp.characterState) { characterState(code); }
 
         // OPTION STATE
-        else if (gp.gameState == gp.optionState) {
-            optionState(code);
-        }
+        else if (gp.gameState == gp.optionState) { optionState(code); }
 
         // GAME OVER STATE
-        else if (gp.gameState == gp.gameOverState) {
-            gameOverState(code);
-        }
+        else if (gp.gameState == gp.gameOverState) { gameOverState(code); }
 
         // TRADE STATE
-        else if (gp.gameState == gp.tradeState) {
-            tradeState(code);
-        }
+        else if (gp.gameState == gp.tradeState) { tradeState(code); }
     }
 
     public void titleState(int code) {
@@ -425,7 +409,7 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
+
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {

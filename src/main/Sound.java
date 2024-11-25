@@ -45,38 +45,20 @@ public class Sound {
         }
     }
 
-    public void play() {
-        clip.start();
-    }
+    public void play() { clip.start(); }
 
-    public void loop() {
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-    }
+    public void loop() { clip.loop(Clip.LOOP_CONTINUOUSLY); }
 
-    public void stop() {
-        clip.stop();
-    }
+    public void stop() { clip.stop(); }
 
     public void checkVolume() {
         switch (volumeScale) {
-            case 0:
-                volume = -80f;
-                break;
-            case 1:
-                volume = -20f;
-                break;
-            case 2:
-                volume = -12f;
-                break;
-            case 3:
-                volume = -5f;
-                break;
-            case 4:
-                volume = 1f;
-                break;
-            case 5:
-                volume = 6f;
-                break;
+            case 0: volume = -80f; break;
+            case 1: volume = -20f; break;
+            case 2: volume = -12f; break;
+            case 3: volume = -5f; break;
+            case 4: volume = 1f; break;
+            case 5: volume = 6f; break;
         }
 
         fc.setValue(volume);

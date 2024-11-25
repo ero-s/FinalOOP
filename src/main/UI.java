@@ -42,10 +42,8 @@ public class UI {
             InputStream is = getClass().getResourceAsStream("/res/font/x12y16pxMaruMonica.ttf");
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (FontFormatException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -75,9 +73,7 @@ public class UI {
         g2.setColor(Color.white);
 
         // TITLE STATE
-        if (gp.gameState == gp.titleState) {
-            drawTitleScreen();
-        }
+        if (gp.gameState == gp.titleState) { drawTitleScreen(); }
 
         // PLAY STATE
         if (gp.gameState == gp.playState) {
@@ -92,9 +88,7 @@ public class UI {
         }
 
         // DIALOGUE STATE
-        if (gp.gameState == gp.dialogueState) {
-            drawDialogueScreen();
-        }
+        if (gp.gameState == gp.dialogueState) { drawDialogueScreen(); }
 
         // CHARACTER STATE
         if (gp.gameState == gp.characterState) {
@@ -103,24 +97,16 @@ public class UI {
         }
 
         // OPTION STATE
-        if (gp.gameState == gp.optionState) {
-            drawOptionScreen();
-        }
+        if (gp.gameState == gp.optionState) { drawOptionScreen(); }
 
         // GAME OVER STATE
-        if (gp.gameState == gp.gameOverState) {
-            drawGameOverScreen();
-        }
+        if (gp.gameState == gp.gameOverState) { drawGameOverScreen(); }
 
         // TRANSITION STATE
-        if (gp.gameState == gp.transitionState) {
-            drawTransition();
-        }
+        if (gp.gameState == gp.transitionState) { drawTransition(); }
 
         // TRADE STATE
-        if (gp.gameState == gp.tradeState) {
-            drawTradeScreen();
-        }
+        if (gp.gameState == gp.tradeState) { drawTradeScreen(); }
     }
 
     public void drawPlayerLife() {
@@ -505,7 +491,7 @@ public class UI {
         }
 
         // CURSOR
-        if (cursor == true) {
+        if (cursor) {
             int cursorX = slotXstart + (slotSize * slotCol);
             int cursorY = slotYstart + (slotSize * slotRow);
             int cursorWidth = gp.tileSize;
@@ -595,18 +581,10 @@ public class UI {
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         switch (subState) {
-            case 0:
-                options_top(frameX, frameY);
-                break;
-            case 1:
-                options_fullScreenNotification(frameX, frameY);
-                break;
-            case 2:
-                options_control(frameX, frameY);
-                break;
-            case 3:
-                options_endGameConfirmation(frameX, frameY);
-                break;
+            case 0: options_top(frameX, frameY); break;
+            case 1: options_fullScreenNotification(frameX, frameY); break;
+            case 2: options_control(frameX, frameY); break;
+            case 3: options_endGameConfirmation(frameX, frameY); break;
         }
 
         gp.keyH.enterPressed = false;
@@ -629,10 +607,10 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
 
-            if (gp.keyH.enterPressed == true) {
-                if (gp.fullScreenOn == false) {
+            if (gp.keyH.enterPressed) {
+                if (!gp.fullScreenOn) {
                     gp.fullScreenOn = true;
-                } else if (gp.fullScreenOn = true) {
+                } else if (gp.fullScreenOn) {
                     gp.fullScreenOn = false;
                 }
                 subState = 1;
@@ -659,7 +637,7 @@ public class UI {
         if (commandNum == 3) {
             g2.drawString(">", textX - 25, textY);
 
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 subState = 2;
                 commandNum = 0;
             }
@@ -671,7 +649,7 @@ public class UI {
         if (commandNum == 4) {
             g2.drawString(">", textX - 25, textY);
 
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 subState = 3;
                 commandNum = 0;
             }
@@ -683,7 +661,7 @@ public class UI {
         if (commandNum == 5) {
             g2.drawString(">", textX - 25, textY);
 
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 gp.gameState = gp.playState;
                 commandNum = 0;
             }
@@ -695,7 +673,7 @@ public class UI {
         g2.setStroke(new BasicStroke(3));
         g2.drawRect(textX, textY, 24, 24);
 
-        if (gp.fullScreenOn == true) {
+        if (gp.fullScreenOn) {
             g2.fillRect(textX, textY, 24, 24);
         }
 
@@ -732,7 +710,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
 
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 subState = 0;
             }
         }
@@ -788,7 +766,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
 
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 subState = 0;
                 commandNum = 3;
             }
@@ -891,7 +869,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", x - 24, y);
 
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 subState = 1;
             }
         }
@@ -903,7 +881,7 @@ public class UI {
         if (commandNum == 1) {
             g2.drawString(">", x - 24, y);
 
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 subState = 2;
             }
         }
@@ -915,7 +893,7 @@ public class UI {
         if (commandNum == 2) {
             g2.drawString(">", x - 24, y);
 
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 commandNum = 0;
                 gp.gameState = gp.dialogueState;
                 currentDialogue = "Come again, hehe!";
@@ -965,7 +943,7 @@ public class UI {
             g2.drawString(text, x, y + 34);
 
             // BUY AN ITEM
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 if (npc.inventory.get(itemIndex).price > gp.player.coin) {
                     subState = 0;
                     gp.gameState = gp.dialogueState;
@@ -1028,7 +1006,7 @@ public class UI {
             g2.drawString(text, x, y + 34);
 
             // SELL AN ITEM
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 if (gp.player.inventory.get(itemIndex) == gp.player.currentWeapon
                         || gp.player.inventory.get(itemIndex) == gp.player.currentShield) {
                     commandNum = 0;

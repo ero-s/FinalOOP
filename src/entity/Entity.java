@@ -106,32 +106,19 @@ public class Entity {
     public final int type_pickupOnly = 7;
     public final int type_obstacle = 8;
 
-    public Entity(GamePanel gp) {
-        this.gp = gp;
-    }
-    public int getLeftX() {
-        return worldX + solidArea.x;
-    }
+    public Entity(GamePanel gp) { this.gp = gp; }
 
-    public int getRightX() {
-        return worldX + solidArea.x + solidArea.width;
-    }
+    public int getLeftX() { return worldX + solidArea.x; }
 
-    public int getTopY() {
-        return worldY + solidArea.y;
-    }
+    public int getRightX() { return worldX + solidArea.x + solidArea.width; }
 
-    public int getBottomY() {
-        return worldY + solidArea.y + solidArea.height;
-    }
+    public int getTopY() { return worldY + solidArea.y; }
 
-    public int getCol() {
-        return (worldX + solidArea.x) / gp.tileSize;
-    }
+    public int getBottomY() { return worldY + solidArea.y + solidArea.height; }
 
-    public int getRow() {
-        return (worldY + solidArea.y) / gp.tileSize;
-    }
+    public int getCol() { return (worldX + solidArea.x) / gp.tileSize; }
+
+    public int getRow() { return (worldY + solidArea.y) / gp.tileSize; }
 
     public int getXdistance(Entity target){
         int xDistance = Math.abs(worldX - target.worldX);
@@ -158,11 +145,9 @@ public class Entity {
         return goalRow;
     }
 
-    public void setAction() {
-    }
+    public void setAction() {}
 
-    public void damageReaction() {
-    }
+    public void damageReaction() {}
 
     public void interact(){}
 
@@ -175,26 +160,16 @@ public class Entity {
         dialogueIndex++;
 
         switch (gp.player.direction) {
-            case "up":
-                direction = "down";
-                break;
-            case "down":
-                direction = "up";
-                break;
-            case "left":
-                direction = "right";
-                break;
-            case "right":
-                direction = "left";
-                break;
+            case "up": direction = "down"; break;
+            case "down": direction = "up"; break;
+            case "left": direction = "right"; break;
+            case "right": direction = "left"; break;
         }
     }
 
-    public boolean use(Entity entity) { return  false;
-    }
+    public boolean use(Entity entity) { return  false; }
 
-    public void checkDrop() {
-    }
+    public void checkDrop() { }
 
     public void dropItem(Entity droppedItem) {
         for (int i = 0; i < gp.obj[1].length; i++) {
@@ -209,25 +184,21 @@ public class Entity {
 
     public Color getParticleColor() {
         Color color = null;
-
         return color;
     }
 
     public int getParticleSize() {
         int size = 0;
-
         return size;
     }
 
     public int getParticleSpeed() {
         int speed = 0;
-
         return speed;
     }
 
     public int getParticleMaxLife() {
         int maxLife = 0;
-
         return maxLife;
     }
 
@@ -257,7 +228,7 @@ public class Entity {
         gp.cChecker.checkEntity(this, gp.iTile);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-        if (this.type == type_monster && contactPlayer == true) {
+        if (this.type == type_monster && contactPlayer) {
             damagePlayer(attack);
         }
     }
@@ -272,7 +243,8 @@ public class Entity {
                 knockBackCounter = 0;
                 knockBack = false;
                 speed = defaultSpeed;
-            } else if (!collisionOn) {spriteCounter++;
+            } else if (!collisionOn) {
+                spriteCounter++;
                 if (spriteCounter > 26) {
                     if (spriteNum == 1) {
                         spriteNum = 2;
@@ -288,6 +260,7 @@ public class Entity {
                     case "right": worldX += speed; break;
                 }
             }
+
             knockBackCounter++;
 
             if (knockBackCounter == 10) {
@@ -304,7 +277,7 @@ public class Entity {
             checkCollision();
 
             // IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (collisionOn == false) {
+            if (!collisionOn) {
                 switch (direction) {
                     case "up": worldY -= speed; break;
                     case "down": worldY += speed; break;
@@ -475,18 +448,10 @@ public class Entity {
 
             // ADJUST PLAYER worldX/Y FOR attackArea
             switch (direction) {
-                case "up":
-                    worldY -= attackArea.height;
-                    break;
-                case "down":
-                    worldY += attackArea.height;
-                    break;
-                case "left":
-                    worldX -= attackArea.width;
-                    break;
-                case "right":
-                    worldX += attackArea.width;
-                    break;
+                case "up": worldY -= attackArea.height; break;
+                case "down": worldY += attackArea.height; break;
+                case "left": worldX -= attackArea.width; break;
+                case "right": worldX += attackArea.width; break;
             }
 
             // CHANGE attackArea INTO solidArea
@@ -525,7 +490,7 @@ public class Entity {
     }
 
     public void damagePlayer(int attack) {
-        if (gp.player.invincible == false) {
+        if (!gp.player.invincible) {
 
             int damage = attack - gp.player.defense;
 
@@ -587,43 +552,43 @@ public class Entity {
 
             switch (direction) {
                 case "up":
-                    if (attacking == false) {
+                    if (!attacking) {
                         if (spriteNum == 1) { image = up1; }
                         if (spriteNum == 2) { image = up2; }
                     }
-                    if (attacking == true) {
+                    if (attacking) {
                         tempScreenY = screenY - gp.tileSize;
                         if (spriteNum == 1) { image = attackUp1; }
                         if (spriteNum == 2) { image = attackUp2; }
                     }
                     break;
                 case "down":
-                    if (attacking == false) {
+                    if (!attacking) {
                         if (spriteNum == 1) { image = down1; }
                         if (spriteNum == 2) { image = down2; }
                     }
-                    if (attacking == true) {
+                    if (attacking) {
                         if (spriteNum == 1) { image = attackDown1; }
                         if (spriteNum == 2) { image = attackDown2; }
                     }
                     break;
                 case "left":
-                    if (attacking == false) {
+                    if (!attacking) {
                         if (spriteNum == 1) { image = left1; }
                         if (spriteNum == 2) { image = left2; }
                     }
-                    if (attacking == true) {
+                    if (attacking) {
                         tempScreenX = screenX - gp.tileSize;
                         if (spriteNum == 1) { image = attackLeft1; }
                         if (spriteNum == 2) { image = attackLeft2; }
                     }
                     break;
                 case "right":
-                    if (attacking == false) {
+                    if (!attacking) {
                         if (spriteNum == 1) { image = right1; }
                         if (spriteNum == 2) { image = right2; }
                     }
-                    if (attacking == true) {
+                    if (attacking) {
                         if (spriteNum == 1) { image = attackRight1; }
                         if (spriteNum == 2) { image = attackRight2; }
                     }
@@ -631,7 +596,7 @@ public class Entity {
             }
 
             // MOSNTER HEALTH BAR
-            if (type == 2 && hpBarOn == true) {
+            if (type == 2 && hpBarOn) {
                 double oneScale = (double) gp.tileSize / maxLife;
                 double hpBarValue = oneScale * life;
 
@@ -649,13 +614,13 @@ public class Entity {
                 }
             }
 
-            if (invincible == true) {
+            if (invincible) {
                 hpBarOn = true;
                 hpBarCounter = 0;
                 changeAlpha(g2, 0.4f);
             }
 
-            if (dying == true) {
+            if (dying) {
                 dyingAnimation(g2);
             }
 
@@ -728,7 +693,7 @@ public class Entity {
 
         gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow);
 
-        if (gp.pFinder.search() == true) {
+        if (gp.pFinder.search()) {
             // NEXT WORLD X / Y
             int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
             int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
@@ -756,7 +721,7 @@ public class Entity {
                 direction = "up";
                 checkCollision();
 
-                if (collisionOn == true) {
+                if (collisionOn) {
                     direction = "left";
                 }
             } else if (enTopY > nextY && enLeftX < nextX) {
@@ -764,7 +729,7 @@ public class Entity {
                 direction = "up";
                 checkCollision();
 
-                if (collisionOn == true) {
+                if (collisionOn) {
                     direction = "right";
                 }
             } else if (enTopY < nextY && enLeftX > nextX) {
@@ -772,7 +737,7 @@ public class Entity {
                 direction = "down";
                 checkCollision();
 
-                if (collisionOn == true) {
+                if (collisionOn) {
                     direction = "left";
                 }
             } else if (enTopY < nextY && enLeftX < nextX) {
@@ -780,7 +745,7 @@ public class Entity {
                 direction = "down";
                 checkCollision();
 
-                if (collisionOn == true) {
+                if (collisionOn) {
                     direction = "right";
                 }
             }
@@ -803,18 +768,10 @@ public class Entity {
         int nextWorldY = user.getTopY();
 
         switch (user.direction) {
-            case "up":
-                nextWorldY = user.getTopY() - 1;
-                break;
-            case "down":
-                nextWorldY = user.getBottomY() + 1;
-                break;
-            case "left":
-                nextWorldX = user.getLeftX() - 1;
-                break;
-            case "right":
-                nextWorldX = user.getRightX() + 1;
-                break;
+            case "up": nextWorldY = user.getTopY() - 1; break;
+            case "down": nextWorldY = user.getBottomY() + 1; break;
+            case "left": nextWorldX = user.getLeftX() - 1; break;
+            case "right": nextWorldX = user.getRightX() + 1; break;
         }
 
         int col = nextWorldX / gp.tileSize;
@@ -833,209 +790,105 @@ public class Entity {
         return index;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
+    public int getSpeed() { return speed; }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
+    public void setSpeed(int speed) { this.speed = speed; }
 
-    public int getDefaultSpeed() {
-        return defaultSpeed;
-    }
+    public int getDefaultSpeed() { return defaultSpeed;}
 
-    public void setDefaultSpeed(int defaultSpeed) {
-        this.defaultSpeed = defaultSpeed;
-    }
+    public void setDefaultSpeed(int defaultSpeed) {this.defaultSpeed = defaultSpeed; }
 
-    public int getMaxLife() {
-        return maxLife;
-    }
+    public int getMaxLife() { return maxLife; }
 
-    public void setMaxLife(int maxLife) {
-        this.maxLife = maxLife;
-    }
+    public void setMaxLife(int maxLife) { this.maxLife = maxLife; }
 
-    public int getLife() {
-        return life;
-    }
+    public int getLife() { return life; }
 
-    public void setLife(int life) {
-        this.life = life;
-    }
+    public void setLife(int life) { this.life = life; }
 
-    public int getMaxMana() {
-        return maxMana;
-    }
+    public int getMaxMana() { return maxMana; }
 
-    public void setMaxMana(int maxMana) {
-        this.maxMana = maxMana;
-    }
+    public void setMaxMana(int maxMana) { this.maxMana = maxMana; }
 
-    public int getMana() {
-        return mana;
-    }
+    public int getMana() { return mana; }
 
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
+    public void setMana(int mana) { this.mana = mana; }
 
-    public int getAmmo() {
-        return ammo;
-    }
+    public int getAmmo() { return ammo; }
 
-    public void setAmmo(int ammo) {
-        this.ammo = ammo;
-    }
+    public void setAmmo(int ammo) { this.ammo = ammo; }
 
-    public int getLevel() {
-        return level;
-    }
+    public int getLevel() { return level; }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
+    public void setLevel(int level) { this.level = level; }
 
-    public int getDexterity() {
-        return dexterity;
-    }
+    public int getDexterity() { return dexterity; }
 
-    public void setDexterity(int dexterity) {
-        this.dexterity = dexterity;
-    }
+    public void setDexterity(int dexterity) { this.dexterity = dexterity; }
 
-    public int getStrength() {
-        return strength;
-    }
+    public int getStrength() { return strength; }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
+    public void setStrength(int strength) { this.strength = strength; }
 
-    public int getAttack() {
-        return attack;
-    }
+    public int getAttack() { return attack; }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
+    public void setAttack(int attack) { this.attack = attack; }
 
-    public int getDefense() {
-        return defense;
-    }
+    public int getDefense() { return defense; }
 
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
+    public void setDefense(int defense) { this.defense = defense; }
 
-    public int getExp() {
-        return exp;
-    }
+    public int getExp() { return exp; }
 
-    public void setExp(int exp) {
-        this.exp = exp;
-    }
+    public void setExp(int exp) { this.exp = exp; }
 
-    public int getNextLevelExp() {
-        return nextLevelExp;
-    }
+    public int getNextLevelExp() { return nextLevelExp; }
 
-    public void setNextLevelExp(int nextLevelExp) {
-        this.nextLevelExp = nextLevelExp;
-    }
+    public void setNextLevelExp(int nextLevelExp) { this.nextLevelExp = nextLevelExp; }
 
-    public int getCoin() {
-        return coin;
-    }
+    public int getCoin() { return coin; }
 
-    public void setCoin(int coin) {
-        this.coin = coin;
-    }
+    public void setCoin(int coin) { this.coin = coin; }
 
-    public Entity getCurrentWeapon() {
-        return currentWeapon;
-    }
+    public Entity getCurrentWeapon() { return currentWeapon; }
 
-    public void setCurrentWeapon(Entity currentWeapon) {
-        this.currentWeapon = currentWeapon;
-    }
+    public void setCurrentWeapon(Entity currentWeapon) { this.currentWeapon = currentWeapon; }
 
-    public int getValue() {
-        return value;
-    }
+    public int getValue() { return value; }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
+    public void setValue(int value) { this.value = value; }
 
-    public Entity getCurrentShield() {
-        return currentShield;
-    }
+    public Entity getCurrentShield() { return currentShield; }
 
-    public void setCurrentShield(Entity currentShield) {
-        this.currentShield = currentShield;
-    }
+    public void setCurrentShield(Entity currentShield) { this.currentShield = currentShield; }
 
-    public Projectile getProjectile() {
-        return projectile;
-    }
+    public Projectile getProjectile() { return projectile; }
 
-    public void setProjectile(Projectile projectile) {
-        this.projectile = projectile;
-    }
+    public void setProjectile(Projectile projectile) { this.projectile = projectile; }
 
-    public ArrayList<Entity> getInventory() {
-        return inventory;
-    }
+    public ArrayList<Entity> getInventory() { return inventory; }
 
-    public void setInventory(ArrayList<Entity> inventory) {
-        this.inventory = inventory;
-    }
+    public void setInventory(ArrayList<Entity> inventory) { this.inventory = inventory; }
 
-    public int getMaxInventorySize() {
-        return maxInventorySize;
-    }
+    public int getMaxInventorySize() { return maxInventorySize; }
 
-    public int getUseCost() {
-        return useCost;
-    }
+    public int getUseCost() { return useCost; }
 
-    public void setUseCost(int useCost) {
-        this.useCost = useCost;
-    }
+    public void setUseCost(int useCost) { this.useCost = useCost; }
 
-    public int getDefenseValue() {
-        return defenseValue;
-    }
+    public int getDefenseValue() { return defenseValue; }
 
-    public void setDefenseValue(int defenseValue) {
-        this.defenseValue = defenseValue;
-    }
+    public void setDefenseValue(int defenseValue) { this.defenseValue = defenseValue; }
 
-    public int getAttackValue() {
-        return attackValue;
-    }
+    public int getAttackValue() { return attackValue; }
 
-    public void setAttackValue(int attackValue) {
-        this.attackValue = attackValue;
-    }
+    public void setAttackValue(int attackValue) { this.attackValue = attackValue; }
 
-    public int getMotion1_duration() {
-        return motion1_duration;
-    }
+    public int getMotion1_duration() { return motion1_duration; }
 
-    public void setMotion1_duration(int motion1_duration) {
-        this.motion1_duration = motion1_duration;
-    }
+    public void setMotion1_duration(int motion1_duration) { this.motion1_duration = motion1_duration; }
 
-    public int getMotion2_duration() {
-        return motion2_duration;
-    }
+    public int getMotion2_duration() { return motion2_duration; }
 
-    public void setMotion2_duration(int motion2_duration) {
-        this.motion2_duration = motion2_duration;
-    }
-
-
+    public void setMotion2_duration(int motion2_duration) { this.motion2_duration = motion2_duration; }
 }

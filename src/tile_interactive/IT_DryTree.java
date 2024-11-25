@@ -39,27 +39,11 @@ public class IT_DryTree extends InteractiveTile {
         return tile;
     }
 
-    public Color getParticleColor() {
-        Color color = new Color(65, 50, 30);
+    public Color getParticleColor() { return new Color(65, 50, 30); }
 
-        return color;
-    }
+    public int getParticleSize() { return 6; }
 
-    public int getParticleSize() {
-        int size = 6;
+    public int getParticleSpeed() { return 1; }
 
-        return size;
-    }
-
-    public int getParticleSpeed() {
-        int speed = 1;
-
-        return speed;
-    }
-
-    public int getParticleMaxLife() {
-        int maxLife = 20;
-
-        return maxLife;
-    }
+    public int getParticleMaxLife() { return 20; }
 }

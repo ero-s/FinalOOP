@@ -29,6 +29,7 @@ public class EventHandler {
             eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
 
             col++;
+
             if (col == gp.maxWorldCol) {
                 col = 0;
                 row++;
@@ -51,29 +52,29 @@ public class EventHandler {
             canTouchEvent = true;
         }
 
-        if (canTouchEvent == true) {
+        if (canTouchEvent) {
             // PIT DAMAGE
-            if (hit(0, 27, 16, "right") == true) {
+            if (hit(0, 27, 16, "right")) {
                 damagePit(gp.dialogueState);
             }
 
             // DRINK RECOVERING
-            else if (hit(0, 23, 12, "up") == true) {
+            else if (hit(0, 23, 12, "up")) {
                 healingPool(gp.dialogueState);
             }
 
             // TELEPORT
-            else if (hit(0, 10, 39, "any") == true) {
+            else if (hit(0, 10, 39, "any")) {
                 teleport(1, 12, 13);
             }
 
             // BACK TELEPORT
-            else if (hit(1, 12, 13, "any") == true) {
+            else if (hit(1, 12, 13, "any")) {
                 teleport(0, 10, 39);
             }
 
             // NPC MERCHANT
-            else if (hit(1, 12, 9, "up") == true) {
+            else if (hit(1, 12, 9, "up") ) {
                 speak(gp.npc[1][0]);
             }
         }
@@ -89,7 +90,7 @@ public class EventHandler {
             eventRect[map][col][row].y = row * gp.tileSize + eventRect[map][col][row].y;
 
             if (gp.player.solidArea.intersects(eventRect[map][col][row])
-                    && eventRect[map][col][row].eventDone == false) {
+                    && !eventRect[map][col][row].eventDone) {
                 if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
                     hit = true;
 
@@ -116,7 +117,7 @@ public class EventHandler {
     }
 
     public void healingPool(int gameState) {
-        if (gp.keyH.enterPressed == true) {
+        if (gp.keyH.enterPressed) {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(2);
@@ -137,7 +138,7 @@ public class EventHandler {
     }
 
     public void speak(Entity entity) {
-        if (gp.keyH.enterPressed == true) {
+        if (gp.keyH.enterPressed) {
             gp.gameState = gp.dialogueState;
             gp.player.attackCanceled = true;
             entity.speak();

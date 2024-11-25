@@ -117,9 +117,7 @@ public class Player extends Entity {
         return currentShieldSlot;
     }
 
-    public int getDefense() {
-        return defense = dexterity * currentShield.defenseValue;
-    }
+    public int getDefense() { return defense = dexterity * currentShield.defenseValue; }
 
     public void getImage() {
         up1 = setup("/res/player/boy_up_1", gp.tileSize, gp.tileSize);
@@ -210,15 +208,10 @@ public class Player extends Entity {
         } else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed ||
                 keyH.rightPressed || keyH.enterPressed) {
 
-            if (keyH.upPressed) {
-                direction = "up";
-            } else if (keyH.downPressed) {
-                direction = "down";
-            } else if (keyH.leftPressed) {
-                direction = "left";
-            } else if (keyH.rightPressed) {
-                direction = "right";
-            }
+            if (keyH.upPressed) { direction = "up"; }
+            else if (keyH.downPressed) { direction = "down"; }
+            else if (keyH.leftPressed) { direction = "left"; }
+            else if (keyH.rightPressed) { direction = "right"; }
 
             // CHECK TILE COLLISION
             collisionOn = false;
@@ -375,9 +368,7 @@ public class Player extends Entity {
                 gp.playSE(6);
 
                 int damage = gp.monster[gp.currentMap][i].attack - defense;
-                if (damage < 1) {
-                    damage = 1;
-                }
+                if (damage < 1) { damage = 1; }
 
                 life -= damage;
                 invincible = true;
@@ -391,18 +382,12 @@ public class Player extends Entity {
             if (!gp.monster[gp.currentMap][i].invincible) {
                 gp.playSE(5);
 
-                if (knockBackPower > 0) {
-                    setKnockBack(gp.monster[gp.currentMap][i] , attacker, knockBackPower);
-                }
+                if (knockBackPower > 0) { setKnockBack(gp.monster[gp.currentMap][i] , attacker, knockBackPower); }
 
-                if(gp.monster[gp.currentMap][i].offBalance){
-                    attack *= 3;
-                }
+                if(gp.monster[gp.currentMap][i].offBalance){ attack *= 3; }
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
-                if (damage < 0) {
-                    damage = 0;
-                }
+                if (damage < 0) { damage = 0; }
 
                 gp.monster[gp.currentMap][i].life -= damage;
                 gp.ui.addMessage(damage + " damage!");

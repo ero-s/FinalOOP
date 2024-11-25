@@ -30,7 +30,7 @@ public class InteractiveTile extends Entity {
     }
 
     public void update() {
-        if (invincible == true) {
+        if (invincible) {
             invincibleCounter++;
             if (invincibleCounter > 20) {
                 invincible = false;

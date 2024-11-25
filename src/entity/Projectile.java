@@ -32,7 +32,7 @@ public class Projectile extends Entity {
         if (user != gp.player) {
             boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-            if (gp.player.invincible == false && contactPlayer == true) {
+            if (!gp.player.invincible && contactPlayer) {
                 damagePlayer(attack);
                 generateParticle(user.projectile, user.projectile);
                 alive = false;
@@ -47,27 +47,17 @@ public class Projectile extends Entity {
         }
 
         life--;
-        if (life <= 0) {
-            alive = false;
-        }
+        if (life <= 0) { alive = false; }
 
         spriteCounter++;
         if (spriteCounter > 12) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            } else if (spriteNum == 2) {
-                spriteNum = 1;
-            }
+            if (spriteNum == 1) { spriteNum = 2; }
+            else if (spriteNum == 2) { spriteNum = 1; }
             spriteCounter = 0;
         }
     }
 
-    public boolean haveResource(Entity user) {
-        boolean haveResource = false;
+    public boolean haveResource(Entity user) { return false; }
 
-        return haveResource;
-    }
-
-    public void subtractResource(Entity user) {
-    }
+    public void subtractResource(Entity user) { }
 }
