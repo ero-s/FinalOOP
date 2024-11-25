@@ -154,7 +154,7 @@ public class Player extends Entity {
 
             // CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
-            pickUpObject(objIndex);
+            pickUpObject(gp.currentMap, objIndex);
 
             // CHECK NPC COLLISION
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
@@ -314,26 +314,25 @@ public class Player extends Entity {
         }
     }
 
-    public void pickUpObject(int i) {
+    public void pickUpObject(int mapNum, int i) {
         if (i != 999) {
 
             // PICKUP ONLY ITEMS
-            if (gp.obj[gp.currentMap][i].type == type_pickupOnly) {
-                gp.obj[gp.currentMap][i].use(this);
-                gp.obj[i] = null;
+            if (gp.obj[mapNum][i].type == type_pickupOnly) {
+                gp.obj[mapNum][i].use(this);
+                gp.obj[mapNum][i] = null;
             } else {
                 // INVENTORY ITEMS
                 String text;
-
                 if (inventory.size() != maxInventorySize) {
-                    inventory.add(gp.obj[gp.currentMap][i]);
+                    inventory.add(gp.obj[mapNum][i]);
                     gp.playSE(1);
-                    text = "You got a " + gp.obj[gp.currentMap][i].name + "!";
+                    text = "You got a " + gp.obj[mapNum][i].name + "!";
                 } else {
                     text = "You cannot carry any more";
                 }
                 gp.ui.addMessage(text);
-                gp.obj[gp.currentMap][i] = null;
+                gp.obj[mapNum][i] = null;
             }
         }
     }
