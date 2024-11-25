@@ -100,6 +100,8 @@ public class SaveLoad {
             ds.setDefense(gp.player.defense);
             ds.setExp(gp.player.exp);
             ds.setNextLevelExp(gp.player.nextLevelExp);
+            ds.setMotion1_duration(gp.player.getMotion1_duration());
+            ds.setMotion2_duration(gp.player.getMotion2_duration());
             ds.setHasSave(true);
 
             // player inventory
@@ -150,7 +152,8 @@ public class SaveLoad {
             gp.player.setExp(ds.getExp());
             gp.player.setStrength(ds.getStrength());
             gp.player.setDexterity(ds.getDexterity());
-
+            gp.player.setMotion1_duration(ds.getMotion1_duration());
+            gp.player.setMotion2_duration(ds.getMotion2_duration());
             setHasSave(gp.getHasSave());
 
             // PLAYER INVENTORY

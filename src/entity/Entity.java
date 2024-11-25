@@ -969,4 +969,22 @@ public class Entity {
     public void setAttackValue(int attackValue) {
         this.attackValue = attackValue;
     }
+
+    public int getMotion1_duration() {
+        return motion1_duration;
+    }
+
+    public void setMotion1_duration(int motion1_duration) {
+        this.motion1_duration = motion1_duration;
+    }
+
+    public int getMotion2_duration() {
+        return motion2_duration;
+    }
+
+    public void setMotion2_duration(int motion2_duration) {
+        this.motion2_duration = motion2_duration;
+    }
+
+
 }
