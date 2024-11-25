@@ -30,6 +30,9 @@ public class NPC_Merchant extends Entity {
         setDialogue();
         setItems();
     }
+    public void setAction(){
+
+    }
 
     public void getImage() {
         up1 = setup("/res/npc/merchant_down_1", gp.tileSize, gp.tileSize);
@@ -43,7 +46,16 @@ public class NPC_Merchant extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0] = "You found me! He he. \nI have some good stuff. \nDo you want to trade?";
+        dialogues[0][0] = "Welcome, traveler!\n Take a look at my wares!";
+
+        dialogues[1][0] = "See you soon!";
+
+        dialogues[2][0] =  "You need more coin to buy that!";
+
+        dialogues[3][0] = "Your inventory is full!";
+
+        dialogues[4][0] = "You cannot sell an equipped item!";
+
     }
 
     public void setItems() {
@@ -56,7 +68,7 @@ public class NPC_Merchant extends Entity {
     }
 
     public void speak() {
-        super.speak();
+        facePlayer();
         gp.gameState = gp.tradeState;
         gp.ui.npc = this;
     }

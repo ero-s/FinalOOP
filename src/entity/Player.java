@@ -40,6 +40,7 @@ public class Player extends Entity {
         getAttackImage();
         getGuardImage();
         setItems();
+        setDialogue();
     }
 
     public void setDefaultValues() {
@@ -203,6 +204,7 @@ public class Player extends Entity {
         } else if (attacking) {
             attacking();
         } else if(keyH.spacePressed){
+            System.out.println("WorldX: "+worldX/gp.tileSize+" WorldY: "+worldY/gp.tileSize  );
             guarding = true;
             guardCounter++;
         } else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed ||
@@ -441,8 +443,11 @@ public class Player extends Entity {
 
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
+            startDialogue(this, 0);
         }
+    }
+    public void setDialogue(){
+        dialogues[0][0] = "You are level " + level + " now!\n" + "You feel stronger!";
     }
 
     public void selectItem() {

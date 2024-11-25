@@ -20,6 +20,7 @@ public class NPC_OldMan extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
+        dialogueSet = -1;
 
         getImage();
         setDialogue();
@@ -37,10 +38,21 @@ public class NPC_OldMan extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0] = "Hello, lad.";
-        dialogues[1] = "So, you've come to this island to find \nthe treasure?";
-        dialogues[2] = "I used to be a great wizard but now... \nI'm a bit too old for taking an adventure.";
-        dialogues[3] = "Well, good luck on you!";
+        dialogues[0][0] = "Hello, traveler.";
+        dialogues[0][1] = "This island holds many secrets, some \nyou may find and others you might not.";
+        dialogues[0][2] = "I once sought the treasures here, \nbut now I merely observe.";
+        dialogues[0][3] = "May your journey be fruitful!";
+
+        dialogues[1][0] = "Greetings, adventurer.";
+        dialogues[1][1] = "The winds here tell tales of daring \nheroes and mysterious treasures.";
+        dialogues[1][2] = "Though my time has passed, I find joy \nin guiding those who follow the path.";
+        dialogues[1][3] = "Be wise, and tread carefully.";
+
+        dialogues[2][0] = "Ah, a brave soul!";
+        dialogues[2][1] = "This island isn't for the faint of heart. \nLegends say the treasure changes with \neach seeker.";
+        dialogues[2][2] = "Once, I sought glory here, but now I \nsavor the peace of these shores.";
+        dialogues[2][3] = "May fortune favor you, always.";
+
     }
 
     public void setAction() {
@@ -79,8 +91,14 @@ public class NPC_OldMan extends Entity {
     }
 
     public void speak() {
-        super.speak();
+        facePlayer();
+        startDialogue(this, dialogueSet);
+        dialogueSet++;
+        if(dialogues[dialogueSet][0] == null){
+            dialogueSet = 0;                // resets to first set of dialogue
+//            dialogueSet--;                // repeats the last set of dialogue
+        }
 
-        onPath = true;
+//        onPath = true;
     }
 }
