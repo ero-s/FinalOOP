@@ -622,6 +622,44 @@ public class Entity {
         }
     }
 
+    public int getDetected(Entity user, Entity target[][], String targetName){
+        int index = 999;
+
+// Check the surrounding object
+        int nextWorldX = user.getLeftX();
+        int nextWorldY = user.getTopY();
+
+        switch (user.direction) {
+            case "up":
+                nextWorldY = user.getTopY() - 1;
+                break;
+            case "down":
+                nextWorldY = user.getBottomY() + 1;
+                break;
+            case "left":
+                nextWorldX = user.getLeftX() - 1;
+                break;
+            case "right":
+                nextWorldX = user.getRightX() + 1;
+                break;
+        }
+
+        int col = nextWorldX / gp.tileSize;
+        int row = nextWorldY / gp.tileSize;
+
+        for (int i = 0; i < target[1].length; i++) {
+            if (target[gp.currentMap][i] != null) {
+                if (target[gp.currentMap][i].getCol() == col &&
+                        target[gp.currentMap][i].getRow() == row &&
+                        target[gp.currentMap][i].name.equals(targetName)) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+
     public int getSpeed() {
         return speed;
     }
