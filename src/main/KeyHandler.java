@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
     GamePanel gp;
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed, spacePressed;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -171,6 +171,11 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ESCAPE) {
             // ESC for settings button
             gp.gameState = gp.optionState;
+        }
+
+        if (code == KeyEvent.VK_SPACE) {
+            // space for guard button
+            spacePressed = true;
         }
 
         if (code == KeyEvent.VK_R) {
@@ -445,6 +450,16 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_F) {
             // K for shot button
             shotKeyPressed = false;
+        }
+
+        if (code == KeyEvent.VK_ENTER) {
+            // space for guard button
+            enterPressed = false;
+        }
+
+        if (code == KeyEvent.VK_SPACE) {
+            // space for guard button
+            spacePressed = false;
         }
     }
 }

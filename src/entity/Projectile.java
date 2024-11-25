@@ -34,24 +34,16 @@ public class Projectile extends Entity {
 
             if (gp.player.invincible == false && contactPlayer == true) {
                 damagePlayer(attack);
-                generateParticle(user.projectile, gp.player);
+                generateParticle(user.projectile, user.projectile);
                 alive = false;
             }
         }
 
         switch (direction) {
-            case "up":
-                worldY -= speed;
-                break;
-            case "down":
-                worldY += speed;
-                break;
-            case "left":
-                worldX -= speed;
-                break;
-            case "right":
-                worldX += speed;
-                break;
+            case "up": worldY -= speed; break;
+            case "down": worldY += speed; break;
+            case "left": worldX -= speed; break;
+            case "right": worldX += speed; break;
         }
 
         life--;
