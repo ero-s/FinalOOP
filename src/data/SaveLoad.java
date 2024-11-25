@@ -81,6 +81,9 @@ public class SaveLoad {
 
     public void setHasSave(boolean hasSave) {this.hasSave = hasSave;}
 
+    public boolean getHasSave() {
+        return hasSave;
+    }
     // save method
     public void save() {
         try {
