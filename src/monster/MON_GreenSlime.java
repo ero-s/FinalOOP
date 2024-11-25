@@ -51,34 +51,20 @@ public class MON_GreenSlime extends Entity {
     }
 
     public void setAction() {
-        if(onPath){
 
-        }
-        else{
-            actionLockCounter++;
+        if (onPath) {
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
 
-            if (actionLockCounter == 120) {
-                Random random = new Random();
-                int i = random.nextInt(100) + 1;
+//            //set goal Position
+//            int goalCol = 4;
+//            int goalRow = 11;
 
-                if (i <= 25) {
-                    direction = "up";
-                }
-                if (i > 25 && i <= 50) {
-                    direction = "down";
-                }
-                if (i > 50 && i <= 75) {
-                    direction = "left";
-                }
-                if (i > 75 && i <= 100) {
-                    direction = "right";
-                }
-
-                actionLockCounter = 0;
-            }
+            //set to follow player
+            searchPath(goalCol, goalRow);
             int i = new Random().nextInt(100) + 1;
 
-            if (i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
+            if (i > 99 && !projectile.alive && shotAvailableCounter == 30) {
                 projectile.set(worldX, worldY, direction, true, this);
                 //gp.projectileList.add(projectile);
 
@@ -91,9 +77,27 @@ public class MON_GreenSlime extends Entity {
                 }
 
                 shotAvailableCounter = 0;
-            }
-        }
+            } else {
+                // Decide movement direction every 120 frames
+                actionLockCounter++;
+                if (actionLockCounter == 120) {
+                    Random random = new Random();
+                    int chance = random.nextInt(100) + 1;
 
+                    if (chance <= 25) {
+                        direction = "up";
+                    } else if (chance > 25 && chance <= 50) {
+                        direction = "down";
+                    } else if (chance > 50 && chance <= 75) {
+                        direction = "left";
+                    } else {
+                        direction = "right";
+                    }
+                    actionLockCounter = 0;
+                }
+            }
+
+        }
     }
 
     public void damageReaction() {
