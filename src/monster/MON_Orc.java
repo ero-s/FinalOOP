@@ -1,7 +1,5 @@
 package monster;
 
-import java.util.Random;
-
 import entity.Entity;
 import main.GamePanel;
 import object.OBJ_Coin_Bronze;
@@ -9,32 +7,35 @@ import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
 
-public class MON_GreenSlime extends Entity {
+import java.util.Random;
+
+public class MON_Orc extends Entity {
 
     GamePanel gp;
 
-    public MON_GreenSlime(GamePanel gp) {
+    public MON_Orc(GamePanel gp) {
         super(gp);
 
         this.gp = gp;
 
         type = type_monster;
-        name = "Green Slime";
+        name = "Orc";
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 4;
+        maxLife = 10;
         life = maxLife;
-        attack = 2;
-        defense = 0;
-        exp = 2;
-        projectile = new OBJ_Rock(gp);
+        attack = 8;
+        defense = 2;
+        exp = 10;
 
-        solidArea.x = 3;
-        solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.x = 4;
+        solidArea.y = 4;
+        solidArea.width = 40;
+        solidArea.height = 44;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        attackArea.width = 48;
+        attackArea.height = 48;
 
         getImage();
     }
@@ -48,6 +49,10 @@ public class MON_GreenSlime extends Entity {
         left2 = setup("/res/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
         right1 = setup("/res/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
         right2 = setup("/res/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+    }
+
+    public void getAttackImage(){
+
     }
 
     public void setAction() {
