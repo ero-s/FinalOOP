@@ -92,6 +92,28 @@ public class Player extends Entity {
         return attack = strength * currentWeapon.attackValue;
     }
 
+    public int getCurrentWeaponSlot() {
+        int currentWeaponSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == getCurrentWeapon()) {
+                currentWeaponSlot = i;
+            }
+        }
+
+        return currentWeaponSlot;
+    }
+
+    public int getCurrentShieldSlot() {
+        int currentShieldSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == getCurrentShield()) {
+                currentShieldSlot = i;
+            }
+        }
+
+        return currentShieldSlot;
+    }
+
     public int getDefense() {
         return defense = dexterity * currentShield.defenseValue;
     }
