@@ -18,6 +18,8 @@ public class DataStorage implements Serializable {
     private int defense;
     private int exp;
     private int nextLevelExp;
+    private int motion1_duration;
+    private int motion2_duration;
 
     // save identifier
     private boolean hasSave;
@@ -37,6 +39,22 @@ public class DataStorage implements Serializable {
     }
 
     // getter and setters
+    public int getMotion2_duration() {
+        return motion2_duration;
+    }
+
+    public void setMotion2_duration(int motion2_duration) {
+        this.motion2_duration = motion2_duration;
+    }
+
+    public int getMotion1_duration() {
+        return motion1_duration;
+    }
+
+    public void setMotion1_duration(int motion1_duration) {
+        this.motion1_duration = motion1_duration;
+    }
+
     public int getMaxLife() {
         return maxLife;
     }
