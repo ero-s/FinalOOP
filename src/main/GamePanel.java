@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // save
     private boolean hasSave;
-    private SaveLoad saveLoad;
+    public SaveLoad saveLoad;
 
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
