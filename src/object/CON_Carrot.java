@@ -1,7 +1,7 @@
 package object;
 
-import Entity.Entity;
-import pkg2dgame.GamePanel;
+import entity.Entity;
+import main.GamePanel;
 
 public class CON_Carrot extends Entity{
 
@@ -22,24 +22,24 @@ public class CON_Carrot extends Entity{
         solidArea.y = 64;
         solidArea.width = 32;
         solidArea.height = 16;
-        xOffset = 0;
-        yOffset = 0;
-        stackable = true;
-        setCollisionArea(solidArea.x, solidArea.y, solidArea.width, solidArea.height, 0, 16);
+//        xOffset = 0;
+//        yOffset = 0;
+//        stackable = true;
+//        setCollisionArea(solidArea.x, solidArea.y, solidArea.width, solidArea.height, 0, 16);
     }
 
-    public boolean use(Entity entity) {
-        if(gp.player.life >= gp.player.maxLife){
-            gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You can't eat it yet\n"
-                    + "Your health is full";
-            return false;
-        }
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "You ate the " + name + "\n"
-                + "Your health has been recovered by " + value + ".";
-        entity.life += value;
-//        gp.playSE(value);
-        return true;
-    }
+//    public boolean use(Entity entity) {
+//        if(gp.player.life >= gp.player.maxLife){
+//            gp.gameState = gp.dialogueState;
+//            gp.ui.currentDialogue = "You can't eat it yet\n"
+//                    + "Your health is full";
+//            return false;
+//        }
+//        gp.gameState = gp.dialogueState;
+//        gp.ui.currentDialogue = "You ate the " + name + "\n"
+//                + "Your health has been recovered by " + value + ".";
+//        entity.life += value;
+////        gp.playSE(value);
+//        return true;
+//    }
 }

@@ -1,9 +1,9 @@
 package object;
 
-import Entity.Entity;
-import Entity.Projectile;
+import entity.Entity;
+import entity.Projectile;
 import java.awt.*;
-import pkg2dgame.GamePanel;
+import main.GamePanel;
 
 public class OBJ_Projectile extends Projectile {
     GamePanel gp;
@@ -13,15 +13,15 @@ public class OBJ_Projectile extends Projectile {
         name = "Green Stuff";
         speed = 10;
         maxLife = 60;
-        atkPower = 1000;
+        attack = 1000;
         useCost = 1;
         alive = false;
         //collision area of projectile
         solidArea = new Rectangle(64,64,64,64);
 
         //offset of projectile
-        xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
-        yOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
+//        xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
+//        yOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
         getImage();
     }
     public void getImage(){
