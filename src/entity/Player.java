@@ -84,23 +84,6 @@ public class Player extends Entity {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
     }
 
     public int getAttack() {
@@ -481,7 +464,11 @@ public class Player extends Entity {
 
             if (selectedItem.type == type_consumable) {
                 if(selectedItem.use(this)){
-                    inventory.remove(itemIndex);
+                    if(selectedItem.amount > 1) {
+                        selectedItem.amount--;
+                    } else {
+                        inventory.remove(itemIndex);
+                    }
                 }
 
             }
