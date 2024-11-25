@@ -70,6 +70,8 @@ public class Entity {
     public Entity currentShield;
     public Projectile projectile;
 
+
+
     // ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
@@ -80,6 +82,7 @@ public class Entity {
     public int useCost;
     public int price;
     public int knockBackPower = 0;
+    public int amount = 1;
 
     // TYPE
     public int type;
@@ -501,4 +504,177 @@ public class Entity {
             // }
         }
     }
+
+    public void setGp(GamePanel gp) {
+        this.gp = gp;
+    }
+
+    public int getMaxLife() {
+        return maxLife;
+    }
+
+    public void setMaxLife(int maxLife) {
+        this.maxLife = maxLife;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public int getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+    public int getNextLevelExp() {
+        return nextLevelExp;
+    }
+
+    public void setNextLevelExp(int nextLevelExp) {
+        this.nextLevelExp = nextLevelExp;
+    }
+
+    public Entity getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    public void setCurrentWeapon(Entity currentWeapon) {
+        this.currentWeapon = currentWeapon;
+    }
+
+    public Entity getCurrentShield() {
+        return currentShield;
+    }
+
+    public void setCurrentShield(Entity currentShield) {
+        this.currentShield = currentShield;
+    }
+
+    public ArrayList<Entity> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(ArrayList<Entity> inventory) {
+        this.inventory = inventory;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public Projectile getProjectile() {
+        return projectile;
+    }
+
+    public void setProjectile(Projectile projectile) {
+        this.projectile = projectile;
+    }
+
+    public int getAttackValue() {
+        return attackValue;
+    }
+
+    public void setAttackValue(int attackValue) {
+        this.attackValue = attackValue;
+    }
+
+    public int getDefenseValue() {
+        return defenseValue;
+    }
+
+    public void setDefenseValue(int defenseValue) {
+        this.defenseValue = defenseValue;
+    }
+
+    public int getUseCost() {
+        return useCost;
+    }
+
+    public void setUseCost(int useCost) {
+        this.useCost = useCost;
+    }
+
 }

@@ -14,6 +14,7 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import ai.PathFinder;
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -58,6 +59,10 @@ public class GamePanel extends JPanel implements Runnable {
     public PathFinder pFinder = new PathFinder(this);
     Thread gameThread;
 
+    // save
+    private boolean hasSave;
+    private SaveLoad saveLoad;
+
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public Entity obj[][] = new Entity[maxMap][20];
@@ -96,6 +101,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         // Make GamePanel focused to receive input
         this.setFocusable(true);
+
+        saveLoad = new SaveLoad(this);
     }
 
     public void setupGame() {
@@ -331,5 +338,13 @@ public class GamePanel extends JPanel implements Runnable {
     public void playSE(int i) {
         se.setFile(i);
         se.play();
+    }
+
+    public boolean getHasSave() {
+        return hasSave;
+    }
+
+    public void setHasSave(boolean hasSave) {
+        this.hasSave = hasSave;
     }
 }
