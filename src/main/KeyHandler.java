@@ -46,85 +46,94 @@ public class KeyHandler implements KeyListener {
         else if (gp.gameState == gp.tradeState) { tradeState(code); }
     }
 
-    public void titleState(int code) {
-        if (code == KeyEvent.VK_W) {
-            // W button
-            gp.ui.commandNum--;
-            if (gp.ui.commandNum < 0) {
-                gp.ui.commandNum = 2;
-            }
-        }
-
-        if (code == KeyEvent.VK_S) {
-            // S button
-            gp.ui.commandNum++;
-            if (gp.ui.commandNum > 2) {
-                gp.ui.commandNum = 0;
-            }
-        }
-
-        if (code == KeyEvent.VK_ENTER) {
-            if (gp.ui.commandNum == 0) {
-                // NEW GAME
-
-                if (gp.saveLoad.getHasSave()) {
-                    gp.ui.titleScreenState = 1;
-                } else {
-                    gp.saveLoad.save();
-                    gp.saveLoad.setHasSave(false);
-                    gp.gameState = gp.playState;
-                    gp.playMusic(0);
-                }
-            }
-            if (gp.ui.commandNum == 1) {
-                // LOAD GAME
-                boolean isTrue = gp.saveLoad.getHasSave();
-
-                if (isTrue) {
-                    gp.saveLoad.load(); // need drawNoLoad and drawLoadExist
-                    gp.gameState = gp.playState;
-                } else {
-                    gp.ui.titleScreenState = 1;
-                }
-            }
-            if (gp.ui.commandNum == 2) {
-                System.exit(0);
-            }
-        }
-
-        if (gp.ui.titleScreenState == 0) {
-
-        } else if (gp.ui.titleScreenState == 1) {
-            if (code == KeyEvent.VK_W) {
-                // W button
+    public void titleState(int code){
+        if(gp.ui.titleScreenState == 0){
+            if(code == KeyEvent.VK_W){
                 gp.ui.commandNum--;
-                if (gp.ui.commandNum < 0) {
-                    gp.ui.commandNum = 3;
+                if(gp.ui.commandNum < 0){
+                    gp.ui.commandNum = 2;
                 }
             }
-
-            if (code == KeyEvent.VK_S) {
-                // S button
+            if(code == KeyEvent.VK_S){
                 gp.ui.commandNum++;
-                if (gp.ui.commandNum > 3) {
+                if(gp.ui.commandNum > 2){
                     gp.ui.commandNum = 0;
                 }
             }
+            if(code == KeyEvent.VK_ENTER){
+                if(gp.ui.commandNum == 0){ // new game
+                    if(gp.saveLoad.getHasSave()){
+                        gp.ui.titleScreenState = 1;
+                    }
+                    else{
+                        gp.setupGame();
+                        gp.player.setDefaultValues();
+                        gp.saveLoad.save();
+                        gp.saveLoad.setHasSave(false);
+                        // gp.gameState = gp.cutsceneState
+                        gp.gameState = gp.playState;
+                    }
+                }
 
-            if (code == KeyEvent.VK_ENTER) {
-                if (gp.ui.commandNum == 0) {
-                    gp.gameState = gp.playState;
-                    gp.playMusic(0);
+                if(gp.ui.commandNum == 1){ // load
+                    boolean isTrue = gp.saveLoad.getHasSave();
+
+                    if (isTrue) {
+                        gp.saveLoad.load();
+                        gp.gameState = gp.playState;
+                    }
+                    else{
+                        gp.ui.titleScreenState = 2;
+                    }
                 }
-                if (gp.ui.commandNum == 1) {
-                    gp.gameState = gp.playState;
-                    gp.playMusic(0);
+                if(gp.ui.commandNum == 2){ // exit
+                    System.exit(0);
                 }
-                if (gp.ui.commandNum == 2) {
-                    gp.gameState = gp.playState;
-                    gp.playMusic(0);
+            }
+        }
+        else if(gp.ui.titleScreenState == 1){// newgame with saved progress
+            if(code == KeyEvent.VK_W){
+                gp.ui.commandNum--;
+                if(gp.ui.commandNum < 0){
+                    gp.ui.commandNum = 1;
                 }
-                if (gp.ui.commandNum == 3) {
+            }
+            if(code == KeyEvent.VK_S){
+                gp.ui.commandNum++;
+                if(gp.ui.commandNum > 1){
+                    gp.ui.commandNum = 0;
+                }
+            }
+            if(code == KeyEvent.VK_ENTER){
+                if(gp.ui.commandNum == 0){ // back
+                    gp.ui.titleScreenState = 0;
+                }
+                if(gp.ui.commandNum == 1){ // new game
+                    gp.setupGame();
+                    gp.player.setDefaultValues();
+                    gp.saveLoad.save();
+                    gp.saveLoad.setHasSave(false);
+                    // gp.gameState = gp.cutsceneState
+                    gp.gameState = gp.playState;
+                    gp.ui.titleScreenState = 0;
+                }
+            }
+        }
+        else if(gp.ui.titleScreenState == 2){// no saved progresses
+            if(code == KeyEvent.VK_W){
+                gp.ui.commandNum--;
+                if(gp.ui.commandNum < 0){
+                    gp.ui.commandNum = 1;
+                }
+            }
+            if(code == KeyEvent.VK_S){
+                gp.ui.commandNum++;
+                if(gp.ui.commandNum > 0){
+                    gp.ui.commandNum = 0;
+                }
+            }
+            if(code == KeyEvent.VK_ENTER){
+                if(gp.ui.commandNum == 0){ // back
                     gp.ui.titleScreenState = 0;
                 }
             }
@@ -229,9 +238,15 @@ public class KeyHandler implements KeyListener {
 
         switch (gp.ui.subState) {
             case 0:
-                maxCommandNum = 5;
+                maxCommandNum = 6;
                 break;
             case 3:
+                maxCommandNum = 2;
+                break;
+            case 4:
+                maxCommandNum = 2;
+                break;
+            case 5:
                 maxCommandNum = 1;
                 break;
         }

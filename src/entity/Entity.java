@@ -80,6 +80,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
+    public Entity loot;
 
 
 
@@ -95,6 +96,7 @@ public class Entity {
     public int knockBackPower = 0;
     public boolean stackable;
     public int amount = 1;
+
     // TYPE
     public int type;
     public final int type_player = 0;
@@ -149,6 +151,9 @@ public class Entity {
     public void setAction() {}
 
     public void damageReaction() {}
+    public void setLoot(Entity loot){
+        this.loot = loot;
+    }
 
     public void interact(){}
     public void facePlayer(){
