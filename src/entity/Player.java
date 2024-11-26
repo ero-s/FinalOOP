@@ -331,12 +331,17 @@ public class Player extends Entity {
             mana = maxMana;
         }
 
-        if(!keyH.godModeOn){
+        if(!keyH.godModeOn) {
+
+
             if (life <= 0) {
+
                 gp.gameState = gp.gameOverState;
                 gp.ui.commandNum = -1;
                 gp.stopMusic();
                 gp.playSE(12);
+
+
             }
         }
     }
