@@ -180,7 +180,7 @@ public class TileManager {
 //
 //            setup(i, fileName, collision);
 //        }
-            setup(0, "/pics/tiles/master tiles/001.png", true);
+                setup(0, "/pics/tiles/master tiles/001.png", true);
             setup(1, "/pics/tiles/master tiles/002.png", true);
             setup(2, "/pics/tiles/master tiles/003.png", true);
             setup(3, "/pics/tiles/master tiles/004.png", true);
@@ -5752,8 +5752,8 @@ public class TileManager {
             setup(5553, "/pics/tiles/SummerVille/SummerVille2495.png", false);
             setup(5554, "/pics/tiles/SummerVille/SummerVille2496.png", false);
             setup(5555, "/pics/tiles/SummerVille/SummerVille2497.png", false);
-            setup(5557, "/pics/tiles/SummerVille/SummerVille2499.png", false);
             setup(5556, "/pics/tiles/SummerVille/SummerVille2498.png", false);
+            setup(5557, "/pics/tiles/SummerVille/SummerVille2499.png", false);
     }
 }
 
