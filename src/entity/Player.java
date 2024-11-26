@@ -47,7 +47,7 @@ public class Player extends Entity {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         gp.currentMap = 0;
-        defaultSpeed = 4;
+        defaultSpeed = 8;
         speed = defaultSpeed;
         direction = "down";
 
@@ -57,7 +57,7 @@ public class Player extends Entity {
         life = maxLife;
         maxMana = 4;
         mana = maxMana;
-        strength = 1;
+        strength = 5;
         dexterity = 1;
         exp = 0;
         nextLevelExp = 5;
@@ -70,6 +70,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultPositions() {
+        gp.currentMap = 0;
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         direction = "down";
@@ -86,6 +87,8 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
     }
 
@@ -328,11 +331,18 @@ public class Player extends Entity {
             mana = maxMana;
         }
 
-        if (life <= 0) {
-            gp.gameState = gp.gameOverState;
-            gp.ui.commandNum = -1;
-            gp.stopMusic();
-            gp.playSE(12);
+        if(!keyH.godModeOn) {
+
+
+            if (life <= 0) {
+
+                gp.gameState = gp.gameOverState;
+                gp.ui.commandNum = -1;
+                gp.stopMusic();
+                gp.playSE(12);
+
+
+            }
         }
     }
 

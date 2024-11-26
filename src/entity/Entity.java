@@ -40,13 +40,16 @@ public class Entity {
     public boolean attacking = false;
     public boolean alive = true;
     public boolean dying = false;
-    boolean hpBarOn = false;
+    public boolean hpBarOn = false;
     public boolean onPath = false;
     public boolean knockBack = false;
     public String knockBackDirection;
     public boolean guarding = false;
     public boolean transparent = false;
     public boolean offBalance = false;
+    public boolean inRage = false;
+    public Entity loot;
+    public boolean opened = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -54,7 +57,7 @@ public class Entity {
     public int invincibleCounter = 0;
     public int shotAvailableCounter = 0;
     int dyingCounter = 0;
-    int hpBarCounter = 0;
+    public int hpBarCounter = 0;
     int knockBackCounter = 0;
     public int guardCounter = 0;
     int offBalanceCounter = 0;
@@ -81,7 +84,8 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
-    public Entity loot;
+    public boolean boss;
+
 
     // ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();
@@ -111,6 +115,17 @@ public class Entity {
 
     public Entity(GamePanel gp) { this.gp = gp; }
 
+    public int getScreenX(){
+        int screenX = worldX - gp.player.worldX + gp.player.screenX;
+        return screenX;
+    }
+
+    public int getScreenY(){
+        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+        return screenY;
+    }
+
+
     public int getLeftX() { return worldX + solidArea.x; }
 
     public int getRightX() { return worldX + solidArea.x + solidArea.width; }
@@ -123,8 +138,19 @@ public class Entity {
 
     public int getRow() { return (worldY + solidArea.y) / gp.tileSize; }
 
+    public int getCenterX(){
+
+        int centerX = worldX + left1.getWidth()/2;
+        return centerX;
+    }
+
+    public int getCenterY(){
+
+        int centerY = worldX + up1.getWidth()/2;
+        return centerY;
+    }
     public int getXdistance(Entity target){
-        int xDistance = Math.abs(worldX - target.worldX);
+        int xDistance = Math.abs(getCenterX() - target.getCenterX());
         return xDistance;
     }
 
@@ -333,22 +359,22 @@ public class Entity {
 
         switch(direction){
             case "up":
-                if(gp.player.worldY < worldY && yDis < straight && xDis < horizontal){
+                if(gp.player.getCenterY() < getCenterY() && yDis < straight && xDis < horizontal){
                     targetInRange = true;
                 }
                 break;
             case "down":
-                if(gp.player.worldY > worldY && yDis < straight && xDis < horizontal){
+                if(gp.player.getCenterY() > getCenterY() && yDis < straight && xDis < horizontal){
                     targetInRange = true;
                 }
                 break;
             case "left":
-                if(gp.player.worldX < worldX && xDis < straight && yDis < horizontal){
+                if(gp.player.getCenterX() < getCenterX() && xDis < straight && yDis < horizontal){
                     targetInRange = true;
                 }
                 break;
             case "right":
-                if(gp.player.worldX > worldX && xDis < straight && yDis < horizontal){
+                if(gp.player.getCenterY() > getCenterX() && xDis < straight && yDis < horizontal){
                     targetInRange = true;
                 }
                 break;
@@ -406,11 +432,11 @@ public class Entity {
         }
     }
 
-    public void getRandomDirection(){
+    public void getRandomDirection(int interval){
 
         actionLockCounter++;
 
-        if (actionLockCounter == 120) {
+        if (actionLockCounter == interval) {
 
             Random random = new Random();
             int chance = random.nextInt(100) + 1;
@@ -420,6 +446,27 @@ public class Entity {
             if (chance > 50 && chance <= 75) { direction = "left"; }
             if (chance > 75 && chance <= 100) { direction = "right"; }
             actionLockCounter = 0;
+        }
+    }
+
+    public void moveTowardPlayer(int interval){
+
+        actionLockCounter++;
+        if (actionLockCounter > interval) {
+            if(getXdistance(gp.player) > getYdistance(gp.player)){
+                if(gp.player.getCenterX() < getCenterX()){
+                    direction = "left";
+                } else {
+                    direction = "right";
+                }
+            } else if(getXdistance(gp.player) < getYdistance(gp.player)){
+                if(gp.player.getCenterY() > getCenterY()){
+                    direction = "up";
+                } else {
+                    direction = "down";
+                }
+            }
+            actionLockCounter++;
         }
     }
 
@@ -543,18 +590,27 @@ public class Entity {
         target.knockBack = true;
     }
 
+    public boolean inCamera(){
+        boolean inCamera = false;
+
+        if (worldX + gp.tileSize * 5 > gp.player.worldX - gp.player.screenX &&
+                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                worldY + gp.tileSize * 5 > gp.player.worldY - gp.player.screenY &&
+                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+            inCamera = true;
+        }
+        return inCamera;
+    }
+
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+        if (inCamera()) {
 
-            int tempScreenX = screenX;
-            int tempScreenY = screenY;
+            int tempScreenX = getScreenX();
+            int tempScreenY = getScreenY();
 
             switch (direction) {
                 case "up":
@@ -563,7 +619,7 @@ public class Entity {
                         if (spriteNum == 2) { image = up2; }
                     }
                     if (attacking) {
-                        tempScreenY = screenY - gp.tileSize;
+                        tempScreenY = getScreenY() - up1.getHeight();
                         if (spriteNum == 1) { image = attackUp1; }
                         if (spriteNum == 2) { image = attackUp2; }
                     }
@@ -584,7 +640,7 @@ public class Entity {
                         if (spriteNum == 2) { image = left2; }
                     }
                     if (attacking) {
-                        tempScreenX = screenX - gp.tileSize;
+                        tempScreenX = getScreenX() - left1.getWidth();
                         if (spriteNum == 1) { image = attackLeft1; }
                         if (spriteNum == 2) { image = attackLeft2; }
                     }
@@ -599,25 +655,6 @@ public class Entity {
                         if (spriteNum == 2) { image = attackRight2; }
                     }
                     break;
-            }
-
-            // MOSNTER HEALTH BAR
-            if (type == 2 && hpBarOn) {
-                double oneScale = (double) gp.tileSize / maxLife;
-                double hpBarValue = oneScale * life;
-
-                g2.setColor(new Color(35, 35, 35));
-                g2.fillRect(screenX - 1, screenY - 16, gp.tileSize + 2, 12);
-
-                g2.setColor(new Color(255, 0, 30));
-                g2.fillRect(screenX, screenY - 15, (int) hpBarValue, 10);
-
-                hpBarCounter++;
-
-                if (hpBarCounter > 600) {
-                    hpBarCounter = 0;
-                    hpBarOn = false;
-                }
             }
 
             if (invincible) {

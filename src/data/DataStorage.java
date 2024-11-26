@@ -34,6 +34,7 @@ public class DataStorage implements Serializable {
     String[][] mapObjectNames;
     int[][] mapObjectWorldX;
     int[][] mapObjectWorldY;
+    String[][] mapObjectLootNames;
     boolean[][] mapObjectOpened;
 
     // constructor
