@@ -24,14 +24,11 @@ public class OBJ_Chest extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        setLoot(new OBJ_Potion_Red(gp));
     }
-
     public void setLoot(Entity loot){
         this.loot = loot;
         setDialogue();
     }
-
     public void setDialogue() {
         dialogues[0][0] = "You open the chest and find a " + loot.name + "!\n... But you cannot carry any more!";
         dialogues[1][0] = "You open the chest and find a " + loot.name + "!\nYou obtain the " + loot.name + "!";

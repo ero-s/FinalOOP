@@ -33,6 +33,10 @@ public class Sound {
         soundUrl[15] = getClass().getResource("/res/sound/blocked.wav");
         soundUrl[16] = getClass().getResource("/res/sound/parry.wav");
         soundUrl[17] = getClass().getResource("/res/sound/speak.wav");
+        soundUrl[18] = getClass().getResource("/res/sound/Merchant.wav");
+        soundUrl[19] = getClass().getResource("/res/sound/Dungeon.wav");
+        soundUrl[20] = getClass().getResource("/res/sound/chipwall.wav");
+        soundUrl[21] = getClass().getResource("/res/sound/dooropen.wav");
     }
 
     public void setFile(int i) {

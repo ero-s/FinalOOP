@@ -86,6 +86,26 @@ public class EventHandler {
             else if (hit(1, 12, 9, "up") ) {
                 speak(gp.npc[1][0]);
             }
+
+            // TO THE DUNGEON
+            else if (hit(0, 12, 9, "any")){
+                teleport(2, 9, 41);
+            }
+
+            // OUTSIDE OF DUNGEON
+            else if(hit(2,9,41,"any")){
+                teleport(0, 12, 9);
+            }
+
+            // FLOOR 2 DUNGEON
+            else if(hit(2,8,7,"any")){
+                teleport(3,26,41);
+            }
+
+            // FLOOR 1 DUNGEON
+            else if(hit(3,26,41, "any")){
+                teleport(2,8,7);
+            }
         }
     }
 
