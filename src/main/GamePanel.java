@@ -58,11 +58,11 @@ public class GamePanel extends JPanel implements Runnable {
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
     Thread gameThread;
+    public SaveLoad saveLoad = new SaveLoad(this);
+    public EntityGenerator eGenerator = new EntityGenerator(this);
 
     // save
     private boolean hasSave;
-    public SaveLoad saveLoad;
-
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public Entity obj[][] = new Entity[maxMap][20];

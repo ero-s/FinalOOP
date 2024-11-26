@@ -440,14 +440,17 @@ public class Player extends Entity {
             dexterity++;
             attack = getAttack();
             defense = getDefense();
-
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
+
+            dialogues[0][0] = "You are level " + level + " now!\n" + "You feel stronger!";
+            setDialogue();
+
             startDialogue(this, 0);
         }
     }
     public void setDialogue(){
-        dialogues[0][0] = "You are level " + level + " now!\n" + "You feel stronger!";
+
     }
 
     public void selectItem() {
@@ -483,23 +486,25 @@ public class Player extends Entity {
 
         boolean canObtain = false;
 
-        // CHECK IF STACKABLE
-        if(item.stackable){
+        Entity newItem = gp.eGenerator.getObject(item.name);
 
-            int index = searchItemInInventory(item.name);
+        // CHECK IF STACKABLE
+        if(newItem.stackable){
+
+            int index = searchItemInInventory(newItem.name);
 
             if(index != 999){
                 inventory.get(index).amount++;
                 canObtain = true;
             } else { // New item so need to check vacancy
                 if(inventory.size() != maxInventorySize){
-                    inventory.add(item);
+                    inventory.add(newItem);
                     canObtain = true;
                 }
             }
         } else { // NOT STACKABLE so check vacancy
             if(inventory.size() != maxInventorySize){
-                inventory.add(item);
+                inventory.add(newItem);
                 canObtain = true;
             }
         }

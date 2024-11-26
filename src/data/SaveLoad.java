@@ -38,23 +38,6 @@ public class SaveLoad {
         return true;
     }
 
-    // helper function
-    private Entity getObject(String itemName) {
-        Entity obj = null;
-
-        switch (itemName) {
-            // objects in the inventory
-            //case "Normal Sword": obj = new OBJ_Sword_Normal(gp); break;
-            //case "Wood Shield": obj = new OBJ_Shield_Wood(gp); break;
-            //case "Woodcutter's Axe": obj = new OBJ_Axe(gp); break;
-            //case "Cabbage": obj = new CON_Cabbage(gp); break;
-            //case "Axe": obj = new OBJ_Axe(gp); break;
-            //case "Key": obj = new OBJ_Key(gp); break;
-            // add more cases if necessary
-        }
-        return obj;
-    }
-
     private void readSave() {
         File saveFile = new File("src/data/save.dat");
 
@@ -161,9 +144,8 @@ public class SaveLoad {
 
             // PLAYER INVENTORY
             gp.player.inventory.clear(); // clears out the default items
-
             for (int i = 0; i < ds.getItemNames().size(); i++) {
-                gp.player.inventory.add(getObject(ds.getItemNames().get(i)));
+                gp.player.inventory.add(gp.eGenerator.getObject(ds.getItemNames().get(i)));
                 gp.player.inventory.get(i).amount = ds.getItemAmounts().get(i);
             }
 
@@ -171,6 +153,7 @@ public class SaveLoad {
             gp.player.setCurrentWeapon(gp.player.inventory.get(ds.getCurrentWeaponSlot()));
             gp.player.setCurrentShield(gp.player.inventory.get(ds.getCurrentShieldSlot()));
             // theres a getter for attack, dmg, attack image (waiting)
+
 
             System.out.println("Game loaded successfully.");
 

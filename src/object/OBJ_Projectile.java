@@ -7,10 +7,11 @@ import main.GamePanel;
 
 public class OBJ_Projectile extends Projectile {
     GamePanel gp;
+    public static final String objName = "Green Stuff";
     public OBJ_Projectile(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        name = "Green Stuff";
+        name = objName;
         speed = 10;
         maxLife = 60;
         attack = 1000;

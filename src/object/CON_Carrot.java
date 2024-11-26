@@ -4,14 +4,14 @@ import entity.Entity;
 import main.GamePanel;
 
 public class CON_Carrot extends Entity{
-
+    public static final String objName = "Carrot";
     GamePanel gp;
     public CON_Carrot(GamePanel gp){
         super(gp);
 
         this.gp = gp;
         type = type_consumable;
-        name = "Carrot";
+        name = objName;
         value = 2;
         down1 = setup("/pics/objects/carrot_buff.png",gp.tileSize/2, gp.tileSize/2);
         description = "[" + name + "]\nrestores health \nby "+value+".";

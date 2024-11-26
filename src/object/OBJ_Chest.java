@@ -7,13 +7,12 @@ public class OBJ_Chest extends Entity {
     Entity loot;
     GamePanel gp;
     boolean opened = false;
-    public OBJ_Chest(GamePanel gp, Entity loot) {
+    public static final String objName = "Chest";
+    public OBJ_Chest(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        this.loot = loot;
-
         type = type_obstacle;
-        name = "Chest";
+        name = objName;
         image = setup("/res/objects/closeChest", gp.tileSize, gp.tileSize);
         image2 = setup("/res/objects/openChest", gp.tileSize, gp.tileSize);
         down1 = image;
@@ -25,7 +24,7 @@ public class OBJ_Chest extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        setLoot(this.loot);
+        setLoot(new OBJ_Potion_Red(gp));
     }
 
     public void setLoot(Entity loot){

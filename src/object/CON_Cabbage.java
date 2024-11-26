@@ -4,13 +4,13 @@ import entity.Entity;
 import main.GamePanel;
 
 public class CON_Cabbage extends Entity {
-
+    public static final String objName = "Cabbage";
     GamePanel gp;
     public CON_Cabbage(GamePanel gp){
         super(gp);
         this.gp = gp;
 
-        name = "Cabbage";
+        name = objName;
         value = 2;
         type = type_consumable;
         down1 = setup("/pics/objects/cabbage_buff.png",gp.tileSize/2, gp.tileSize/2);
