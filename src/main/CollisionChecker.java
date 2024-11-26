@@ -33,8 +33,8 @@ public class CollisionChecker {
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
 
-                if (gp.tileM.tile[tileNum1].collision == true
-                        || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.tile[tileNum1].collision
+                        || gp.tileM.tile[tileNum2].collision) {
 
                     entity.collisionOn = true;
                 }
@@ -44,8 +44,8 @@ public class CollisionChecker {
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
 
-                if (gp.tileM.tile[tileNum1].collision == true
-                        || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.tile[tileNum1].collision
+                        || gp.tileM.tile[tileNum2].collision) {
 
                     entity.collisionOn = true;
                 }
@@ -55,8 +55,8 @@ public class CollisionChecker {
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
 
-                if (gp.tileM.tile[tileNum1].collision == true
-                        || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.tile[tileNum1].collision
+                        || gp.tileM.tile[tileNum2].collision) {
 
                     entity.collisionOn = true;
                 }
@@ -66,8 +66,8 @@ public class CollisionChecker {
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
 
-                if (gp.tileM.tile[tileNum1].collision == true
-                        || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.tile[tileNum1].collision
+                        || gp.tileM.tile[tileNum2].collision) {
 
                     entity.collisionOn = true;
                 }
@@ -99,8 +99,8 @@ public class CollisionChecker {
                 }
 
                 if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
-                    if (gp.obj[gp.currentMap][i].collision == true) { entity.collisionOn = true; }
-                    if (player == true) { index = i; }
+                    if (gp.obj[gp.currentMap][i].collision) { entity.collisionOn = true; }
+                    if (player) { index = i; }
                 }
 
                 entity.solidArea.x = entity.solidAreaDefaultX;

@@ -14,6 +14,7 @@ import main.GamePanel;
 import main.UtilityTool;
 
 public class TileManager {
+
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][][];
@@ -25,7 +26,7 @@ public class TileManager {
         this.gp = gp;
 
         // READ TILE DATA FILE
-        InputStream is = getClass().getResourceAsStream("/maps/tiledata.txt");
+        InputStream is = getClass().getResourceAsStream("/res/maps/tiledata.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
         // GETTING TILE NAMES AND COLLISION INFO FROM THE FILE
@@ -46,7 +47,7 @@ public class TileManager {
         getTileImage();
 
         // GET THE maxWorldCol && Row
-        is = getClass().getResourceAsStream("/maps/tiledata.txt");
+        is = getClass().getResourceAsStream("/res/maps/worldmap.txt");
         br = new BufferedReader(new InputStreamReader(is));
 
         try{
@@ -80,8 +81,12 @@ public class TileManager {
             fileName = fileNames.get(i);
 
             // Get a collision status
-            if(collisionStatus.get(i).equals("true")) collision = true;
-            else collision = false;
+            if(collisionStatus.get(i).equals("true")){
+                collision = true;
+            }
+            else {
+                collision = false;
+            }
 
             setup(i, fileName, collision);
         }
