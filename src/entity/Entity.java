@@ -153,9 +153,7 @@ public class Entity {
     public void move(String direction){}
 
     public void damageReaction() {}
-    public void setLoot(Entity loot){
-        this.loot = loot;
-    }
+    public void setLoot(Entity loot){}
 
     public void interact(){}
     public void facePlayer(){
