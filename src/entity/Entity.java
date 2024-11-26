@@ -81,6 +81,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
+    public Entity loot;
 
     // ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();
@@ -152,6 +153,7 @@ public class Entity {
     public void move(String direction){}
 
     public void damageReaction() {}
+    public void setLoot(Entity loot){}
 
     public void interact(){}
     public void facePlayer(){
