@@ -78,6 +78,12 @@ public class CollisionChecker {
     public int checkObject(Entity entity, boolean player) {
         int index = 999;
 
+        // Use a temporal direction when it's being knockbacked
+        String direction = entity.direction;
+        if(entity.knockBack){
+            direction = entity.knockBackDirection;
+        }
+
         for (int i = 0; i < gp.obj[1].length; i++) {
             if (gp.obj[gp.currentMap][i] != null) {
 
