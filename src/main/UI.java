@@ -198,7 +198,7 @@ public class UI {
     public void drawTitleScreen() {
         if (titleScreenState == 0) {
 
-            BufferedImage title = e.setup("/res/ui/title", 1080, 720);
+            BufferedImage title = e.setup("/res/ui/title", 2160, 1440);
             g2.drawImage(title,0,0,960, 580, null);
 
 
@@ -298,7 +298,7 @@ public class UI {
     public void drawNoLoad(){
         commandNum = 0;
 
-        BufferedImage title = e.setup("/res/ui/title", 1080, 720);
+        BufferedImage title = e.setup("/res/ui/title_1", 2160, 1440);
         g2.drawImage(title,0,0,960, 580, null);
 
         int x, y;
