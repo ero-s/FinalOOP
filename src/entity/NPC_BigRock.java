@@ -100,7 +100,7 @@ public class NPC_BigRock extends Entity{
         // Create a rock list
         for(int i = 0; i < gp.npc[1].length; i++){
 
-            if(gp.npc[gp.currentMap][i] != null && gp.iTile[gp.currentMap][i].name != null && gp.npc[gp.currentMap][i].name.equals(NPC_BigRock.npcName)){
+            if(gp.npc[gp.currentMap][i] != null && gp.npc[gp.currentMap][i].name.equals(NPC_BigRock.npcName)){
                 rockList.add(gp.npc[gp.currentMap][i]);
             }
         }
@@ -111,7 +111,7 @@ public class NPC_BigRock extends Entity{
         for(int i = 0; i < plateList.size(); i++){
 
             int xDistance = Math.abs(worldX - plateList.get(i).worldX);
-            int yDistance = Math.abs(worldX - plateList.get(i).worldY);
+            int yDistance = Math.abs(worldY - plateList.get(i).worldY);
             int distance = Math.max(xDistance, yDistance);
 
             if(distance < 8){
@@ -133,7 +133,7 @@ public class NPC_BigRock extends Entity{
 
             // Count the rock on the plate
             if(rockList.get(i).linkedEntity != null){
-                count ++;
+                count++;
             }
         }
 
