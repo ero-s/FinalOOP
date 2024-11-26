@@ -91,7 +91,6 @@ public class SaveLoad {
             ds.setHasSave(true);
 
             // player inventory
-
             for (int i = 0; i < gp.player.inventory.size(); i++) {
                 System.out.println("item loaded!");
                 ds.getItemNames().add(gp.player.inventory.get(i).name);
@@ -102,6 +101,31 @@ public class SaveLoad {
             ds.setCurrentWeaponSlot(gp.player.getCurrentWeaponSlot());
             ds.setCurrentShieldSlot(gp.player.getCurrentShieldSlot());
 
+            // objects on map
+            ds.mapObjectNames = new String[gp.maxMap][gp.obj[1].length];
+            ds.mapObjectWorldX = new int[gp.maxMap][gp.obj[1].length];
+            ds.mapObjectWorldY = new int[gp.maxMap][gp.obj[1].length];
+            ds.mapObjectOpened = new boolean[gp.maxMap][gp.obj[1].length];
+
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+
+                for (int i = 0; i < gp.obj[1].length; i++) {
+
+                    if (gp.obj[mapNum][i] == null) {
+                        ds.mapObjectNames[mapNum][i] = "NA";
+                    } else {
+                        ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].name;
+                        ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
+                        ds.mapObjectWorldY[mapNum][i] = gp.obj[mapNum][i].worldY;
+
+                        // NOT DONE (LOOKING FOR LOOT)
+                        /*if (gp.obj[mapNum][i].loot != null) {
+                            ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.name;
+                        }
+                        ds.mapObjectOpened[mapNum][i] = gp.obj[mapNum][i].opened;*/
+                    }
+                }
+            }
             oos.writeObject(ds);
             oos.close();
 

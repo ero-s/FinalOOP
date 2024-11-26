@@ -27,9 +27,14 @@ public class DataStorage implements Serializable {
     // item attributes
     private ArrayList<String> itemNames;
     private ArrayList<Integer> itemAmounts;
-
     private int currentWeaponSlot;
     private int currentShieldSlot;
+
+    // object on map
+    String[][] mapObjectNames;
+    int[][] mapObjectWorldX;
+    int[][] mapObjectWorldY;
+    boolean[][] mapObjectOpened;
 
     // constructor
     public DataStorage() {
