@@ -90,6 +90,11 @@ public class TileManager {
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
 
+            if (collision) {
+                // Set a collision area that is slightly smaller than the tile (e.g., padding by 4px)
+                tile[index].collisionBox = new Rectangle(4, 4, gp.tileSize - 8, gp.tileSize - 8);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,6 +137,7 @@ public class TileManager {
         while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 
             int tileNum = mapTileNum[gp.currentMap][worldCol][worldRow];
+            Tile currentTile =tile[tileNum];
 
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
@@ -145,6 +151,20 @@ public class TileManager {
 
                 g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 
+                if (currentTile.collision && currentTile != null) {
+                    g2.setColor(Color.red);
+                    g2.setStroke(new java.awt.BasicStroke(1));
+
+                    // Calculate the tile's collision box world position
+                    int collisionBoxX = screenX + currentTile.collisionBox.x;
+                    int collisionBoxY = screenY + currentTile.collisionBox.y;
+                    int collisionBoxWidth = currentTile.collisionBox.width;
+                    int collisionBoxHeight = currentTile.collisionBox.height;
+
+                    // Draw the tile's specific collision box
+                    g2.drawRect(collisionBoxX, collisionBoxY, collisionBoxWidth, collisionBoxHeight);
+                }
+
             }
 
             worldCol++;
@@ -154,7 +174,11 @@ public class TileManager {
 
                 worldRow++;
             }
+
+//            Draw the tile's specific collision box if it has collision
+
         }
+
     }
 
     public void drawPath(Graphics2D g2){
