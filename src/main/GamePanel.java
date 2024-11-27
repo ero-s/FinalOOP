@@ -60,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
+    public CutsceneManager csManager = new CutsceneManager(this);
 
     // save
     private boolean hasSave;
@@ -85,6 +86,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int gameOverState = 6;
     public final int transitionState = 7;
     public final int tradeState = 8;
+    public final int cutsceneState = 9;
+
+    // others
+    public boolean bossBattleOn = false;
 
     public GamePanel() {
         // Size of panel
@@ -317,6 +322,8 @@ public class GamePanel extends JPanel implements Runnable {
             // UI
             ui.draw(g2);
 
+            // cutscene
+            csManager.draw(g2);
 
         }
     }
