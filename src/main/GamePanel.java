@@ -21,75 +21,68 @@ import environment.EnvironmentManager;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
-//This class ties together all the game components:
-//  - Managing screen size, tiles, entities, and game states.
-//  - Running the game loop, which continuously updates and renders the game.
-//  - Supporting additional features like full-screen mode, saving/loading, sound effects, and environment effects.
-
 public class GamePanel extends JPanel implements Runnable {
     // SCREEN SETTINGS
-    final int originalTileSize = 16; // 16x16 tile                          - Defines the original size of a single tile (or grid unit) in the game, measured in pixels.
-    final int scale = 3; //                                                 - Sets a scaling factor to enlarge the tiles for better visibility
-    public final int tileSize = originalTileSize * scale; // 48x48 tile     - Calculates the actual size of a tile after scaling. The size of each tile is now 16×3=48 pixels
-    public final int maxScreenCol = 20; // Left to right                    - Sets the maximum number of tiles that can fit horizontally across the screen.
-    public final int maxScreenRow = 12; // Top to bottom                    - Sets the maximum number of tiles that can fit vertically on the screen.
-    public final int screenWidth = tileSize * maxScreenCol; // 768 pixels   - Calculates the total width of the game screen in pixels. screenWidth = 48x20=960 pixels
-    public final int screenHeight = tileSize * maxScreenRow; // 576 pixels  - Calculates the total height of the game screen in pixels. screenWidth = 48x12=576 pixels
+    final int originalTileSize = 16; // 16x16 tile
+    final int scale = 3;
+    public final int tileSize = originalTileSize * scale; // 48x48 tile
+    public final int maxScreenCol = 20; // Left to right
+    public final int maxScreenRow = 12; // Top to bottom
+    public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
+    public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
     // WORLD SETTINGS
-    public int maxWorldCol;                                                 //Represents the maximum number of columns in the game world grid.
-    public int maxWorldRow;                                                 //Represents the maximum number of rows in the game world grid.
-    public final int maxMap = 10;                                           //Specifies the maximum number of distinct maps or levels the game can have.
-
-    public int currentMap = 0;                                              //Tracks which map the player is currently in. (currentMap = 0 could represent the first map)
+    public int maxWorldCol;
+    public int maxWorldRow;
+    public final int maxMap = 10;
+    public int currentMap = 0;
 
     // FULL SCREEN
-    int screenWidth2 = screenWidth;                                         //assigning screenWidth to screenWidth2, serves as a modifiable version of the screen width. useful for toggling between fullscreen and windowed mode, where screenWidth2 can be adjusted dynamically while preserving the original screenWidth value for reference.
-    int screenHeight2 = screenHeight;                                       //Similar to screenWidth2, this variable holds a modifiable version of the height of the screen in pixels, allowing for adjustments in fullscreen mode.
-    BufferedImage tempScreen;                                               //Holds an off-screen temporary image of the game screen, prevent visual problems like flickering.
-    Graphics2D g2;
-    public boolean fullScreenOn = false;                                    //If fullScreenOn is true, the game adjusts screenWidth2 and screenHeight2, else, the game reverts to the original resolution using screenWidth and screenHeight
+    int screenWidth2 = screenWidth;
+    int screenHeight2 = screenHeight;
+    BufferedImage tempScreen;
+    public Graphics2D g2;
+    public boolean fullScreenOn = false;
 
     // FPS
-    int FPS = 60;                                                           //FPS refers to how many individual images (or "frames") the game can display in one second.
+    int FPS = 60;
 
     // SYSTEM
-    public TileManager tileM = new TileManager(this);                   //manages the game's tiles, helps with drawing and handling the tiles on the screen.
-    public KeyHandler keyH = new KeyHandler(this);                      //handles user input from the keyboard. It keeps track of which keys are being pressed, like moving the player character or opening the menu.
-    Sound music = new Sound();                                              //refers to background music.
-    Sound se = new Sound();                                                 //refers to sound effects, such as when the player jumps, shoots, or other game actions occur.
-    public CollisionChecker cChecker = new CollisionChecker(this);      //checks for collisions in the game (for example, whether the player hits an object or wall).
-    public AssetSetter aSetter = new AssetSetter(this);                 //responsible for placing and organizing assets (like objects, characters, and items) in the game world. It helps decide where to place things like keys, enemies, and other items that the player can interact with.
-    public UI ui = new UI(this);                                        //manages the user interface (everything the player sees on the screen that isn’t part of the game world, such as menus, health bars, and score displays).
-    public EventHandler eHandler = new EventHandler(this);              //handles events in the game, such as when the player triggers certain actions or encounters something in the world.
-    Config config = new Config(this);                                   //handles game settings or configurations, like saving user preferences (sound volume, game difficulty, or controls).
-    public PathFinder pFinder = new PathFinder(this);                   //ensures that characters can move intelligently in the game world. Without it, characters would simply get stuck in walls or move randomly, which would make the game feel awkward or broken.
-    Thread gameThread;                                                      //a thread is a way for your computer or game to do multiple things at the same time.
-    public SaveLoad saveLoad = new SaveLoad(this);                      //handles saving and loading the game
-    public EntityGenerator eGenerator = new EntityGenerator(this);      // responsible for creating these entities (uch as players, enemies, items, obstacles, or anything) at specific times or locations in the game world.
-    public EnvironmentManager eManager = new EnvironmentManager(this);  //manages aspects of the game’s environment, such as the weather, time of day, or special environmental effects.
+    public TileManager tileM = new TileManager(this);
+    public KeyHandler keyH = new KeyHandler(this);
+    Sound music = new Sound();
+    Sound se = new Sound();
+    public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
+    public EventHandler eHandler = new EventHandler(this);
+    Config config = new Config(this);
+    public PathFinder pFinder = new PathFinder(this);
+    Thread gameThread;
+    public SaveLoad saveLoad = new SaveLoad(this);
+    public EntityGenerator eGenerator = new EntityGenerator(this);
+    public EnvironmentManager eManager = new EnvironmentManager(this);
 
     // save
-    public boolean hasSave;                                                 //used to track whether the game has a saved state or not
-
+    public boolean hasSave;
     // ENTITY AND OBJECT
-    public Player player = new Player(this, keyH);                      //object of the class Player, representing the player character in the game.
-    public Entity[][] obj = new Entity[maxMap][20];                         //defines a 2D array called "obj", which will hold game objects (like items, decorations, or interactable objects in the world).
-    public Entity[][] npc = new Entity[maxMap][10];                         //This creates a 2D array called "npc", which stores Non-Player Characters (NPCs).
-    public Entity[][] monster = new Entity[maxMap][20];                     //This creates a 2D array called "monster" for storing monsters in the game.
-    public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];     //2D array that stores interactive tiles in the game, could represent tiles on the map that the player can interact with, such as doors, switches, or buttons.
-    public Entity[][] projectile = new Entity[maxMap][20];                  //2D array called projectile to store projectiles (like arrows, bullets, or magic spells). 20 is the maximum number of projectiles that can be active on each map at once.
-    // public ArrayList<Entity> projectileList = new ArrayList<>();         // ArrayList that will hold particles (like effects or visual elements) in the game,
-    public ArrayList<Entity> particleList = new ArrayList<>();              //can represent temporary effects, such as explosions, sparks, magic, or damage effects
-    ArrayList<Entity> entityList = new ArrayList<>();                       //meant to store all game entities dynamically. hold players, NPCs, monsters, projectiles, particles, and other objects as they are created or destroyed during the game.
+    public Player player = new Player(this, keyH);
+    public Entity[][] obj = new Entity[maxMap][20];
+    public Entity[][] npc = new Entity[maxMap][10];
+    public Entity[][] monster = new Entity[maxMap][20];
+    public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
+    public Entity[][] projectile = new Entity[maxMap][20];
+    // public ArrayList<Entity> projectileList = new ArrayList<>();
+    public ArrayList<Entity> particleList = new ArrayList<>();
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     // GAME STATE
-    public int gameState;                                                   //variable that holds the current state of the game. will decide which actions to take, such as showing a menu or updating the gameplay world.
+    public int gameState;
     public final int titleState = 0;
-    public final int playState = 1;                                         //enters this state when the player starts playing the game, and gameState will be set to 1.
-    public final int pauseState = 2;                                        //When the game is paused, gameState will be 2
-    public final int dialogueState = 3;                                     //enters this state when there is a conversation or dialogue happening in the game.
-    public final int characterState = 4;                                    //
+    public final int playState = 1;
+    public final int pauseState = 2;
+    public final int dialogueState = 3;
+    public final int characterState = 4;
     public final int optionState = 5;
     public final int gameOverState = 6;
     public final int transitionState = 7;
