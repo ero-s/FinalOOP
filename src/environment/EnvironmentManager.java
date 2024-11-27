@@ -5,14 +5,17 @@ import main.GamePanel;
 
 public class EnvironmentManager {
     GamePanel gp;
-    Lighting lighting;
+    public Lighting lighting;
 
     public EnvironmentManager(GamePanel gp) {
         this.gp = gp;
     }
 
     public void setup() {
-        lighting = new Lighting(gp, 750); // at circleSize 750, faint white circle shows up
+        lighting = new Lighting(gp); // at circleSize 750, faint white circle shows up
+    }
+    public void update(){
+        lighting.update();
     }
 
     public void draw(Graphics2D g2) {

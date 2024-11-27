@@ -87,6 +87,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
+    public Entity currentLight;
     public boolean boss;
 
 
@@ -102,6 +103,7 @@ public class Entity {
     public int knockBackPower = 0;
     public boolean stackable;
     public int amount = 1;
+    public int lightRadius;
 
     // TYPE
     public int type;
@@ -114,6 +116,7 @@ public class Entity {
     public final int type_consumable = 6;
     public final int type_pickupOnly = 7;
     public final int type_obstacle = 8;
+    public final int type_light = 9;
     public final int type_pickaxe = 10;
 
     public Entity(GamePanel gp) { this.gp = gp; }
@@ -583,6 +586,14 @@ public class Entity {
         target.knockBackDirection = attacker.direction;
         target.speed += knockBackPower;
         target.knockBack = true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Entity entity = (Entity) obj;
+        return name.equals(entity.name) && type == entity.type;
     }
 
     public boolean inCamera(){

@@ -8,10 +8,7 @@ import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
-import object.OBJ_Fireball;
-import object.OBJ_Key;
-import object.OBJ_Shield_Wood;
-import object.OBJ_Sword_Normal;
+import object.*;
 
 public class Player extends Entity {
     KeyHandler keyH;
@@ -19,6 +16,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    public boolean lightUpdated = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -90,6 +88,8 @@ public class Player extends Entity {
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Lantern(gp));
+        inventory.add(new OBJ_Tent(gp));
     }
 
     public int getAttack() {
@@ -132,6 +132,18 @@ public class Player extends Entity {
         left2 = setup("/res/player/boy_left_2", gp.tileSize, gp.tileSize);
         right1 = setup("/res/player/boy_right_1", gp.tileSize, gp.tileSize);
         right2 = setup("/res/player/boy_right_2", gp.tileSize, gp.tileSize);
+
+    }
+
+    public void getSleepingImage(BufferedImage image) {
+        up1 = image;
+        up2 = image;
+        down1 = image;
+        down2 = image;
+        left1 = image;
+        left2 = image;
+        right1 = image;
+        right2 = image;
 
     }
 
@@ -489,6 +501,15 @@ public class Player extends Entity {
             if (selectedItem.type == type_shield) {
                 currentShield = selectedItem;
                 defense = getDefense();
+            }
+            if(selectedItem.type == type_light){
+                if(currentLight == selectedItem){
+                    currentLight = null;
+                }
+                else{
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
             }
 
             if (selectedItem.type == type_consumable) {

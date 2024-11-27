@@ -42,7 +42,7 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize * 12;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Shield_Blue(gp);
+        gp.obj[mapNum][i] = new OBJ_Lantern(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize * 37;
         gp.obj[mapNum][i].worldY = gp.tileSize * 21;
         i++;
