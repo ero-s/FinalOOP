@@ -65,29 +65,16 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_ENTER){
                 if(gp.ui.commandNum == 0){ // new game
-                    if(gp.saveLoad.getHasSave()){
-                        gp.ui.titleScreenState = 1;
-                    }
-                    else{
-                        gp.setupGame();
-                        gp.player.setDefaultValues();
-                        gp.saveLoad.save();
-                        gp.saveLoad.setHasSave(false);
-                        // gp.gameState = gp.cutsceneState
-                        gp.gameState = gp.playState;
-                    }
+                    gp.setupGame();
+                    gp.player.setDefaultValues();
+                    gp.saveLoad.save();
+                    // gp.gameState = gp.cutsceneState
+                    gp.gameState = gp.playState;
                 }
 
                 if(gp.ui.commandNum == 1){ // load
-                    boolean isTrue = gp.saveLoad.getHasSave();
-
-                    if (isTrue) {
-                        gp.saveLoad.load();
-                        gp.gameState = gp.playState;
-                    }
-                    else{
-                        gp.ui.titleScreenState = 2;
-                    }
+                    gp.saveLoad.load();
+                    gp.gameState = gp.playState;
                 }
                 if(gp.ui.commandNum == 2){ // exit
                     System.exit(0);
@@ -115,7 +102,6 @@ public class KeyHandler implements KeyListener {
                     gp.setupGame();
                     gp.player.setDefaultValues();
                     gp.saveLoad.save();
-                    gp.saveLoad.setHasSave(false);
                     // gp.gameState = gp.cutsceneState
                     gp.gameState = gp.playState;
                     gp.ui.titleScreenState = 0;
@@ -338,11 +324,11 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
-                gp.retry();
+                gp.resetGame(false);
                 gp.playMusic(0);
             } else if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;
-                gp.restart();
+                gp.resetGame(true);
             }
         }
     }

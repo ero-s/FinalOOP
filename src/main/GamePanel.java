@@ -64,7 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
     public EnvironmentManager eManager = new EnvironmentManager(this);
 
     // save
-    private boolean hasSave;
+    public boolean hasSave;
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public Entity[][] obj = new Entity[maxMap][20];
@@ -129,23 +129,20 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void retry() {
+    public void resetGame(boolean restart){
         player.setDefaultPositions();
-        player.restoreLifeAndMana();
+        player.restoreStatus();
         aSetter.setNPC();
         aSetter.setMonster();
+
+        if(restart){
+            aSetter.setObject();
+            aSetter.setInteractiveTile();
+            player.setDefaultValues();
+            eManager.lighting.resetDay();
+        }
     }
 
-    public void restart() {
-        player.setDefaultValues();
-        player.setDefaultPositions();
-        player.restoreLifeAndMana();
-        player.setItems();
-        aSetter.setObject();
-        aSetter.setNPC();
-        aSetter.setMonster();
-        aSetter.setInteractiveTile();
-    }
 
     public void setFullScreen() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
