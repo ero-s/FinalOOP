@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class NPC_BigRock extends Entity{
-
+    int count = 0;
     public static final String npcName = "Big Rock";
 
     public NPC_BigRock(GamePanel gp) {
@@ -90,7 +90,7 @@ public class NPC_BigRock extends Entity{
         ArrayList<Entity> rockList = new ArrayList<>();
 
         // Create a plate list
-        for(int i = 0; i < gp.iTile[1].length; i++){
+        for(int i = 0; i < gp.iTile[gp.currentMap].length; i++){
 
             if(gp.iTile[gp.currentMap][i] != null && gp.iTile[gp.currentMap][i].name != null  && gp.iTile[gp.currentMap][i].name.equals(IT_MetalPlate.itName)){
                 plateList.add(gp.iTile[gp.currentMap][i]);
@@ -105,7 +105,7 @@ public class NPC_BigRock extends Entity{
             }
         }
 
-        int count = 0;
+
 
         // Scan the plate list
         for(int i = 0; i < plateList.size(); i++){
@@ -138,9 +138,9 @@ public class NPC_BigRock extends Entity{
         }
 
         // If all the rocks are on the plates, the iron door opens
-        if(count == rockList.size()){
+        if(count == rockList.size()-1){
 
-            for(int i = 0; i < gp.obj[1].length; i++){
+            for(int i = 0; i < gp.obj[gp.currentMap].length; i++){
 
                 if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(OBJ_Door_Iron.objName)){
 

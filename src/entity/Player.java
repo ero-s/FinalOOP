@@ -47,7 +47,7 @@ public class Player extends Entity {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         gp.currentMap = 0;
-        defaultSpeed = 8;
+        defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";
 
@@ -332,13 +332,10 @@ public class Player extends Entity {
         }
 
         if(!keyH.godModeOn) {
-
-
             if (life <= 0) {
-
                 gp.gameState = gp.gameOverState;
-                gp.ui.commandNum = -1;
-                gp.stopMusic();
+                gp.ui.commandNum = 0;
+                gp.stopMusic(1);
                 gp.playSE(12);
 
 

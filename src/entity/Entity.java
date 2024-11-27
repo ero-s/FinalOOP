@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.UtilityTool;
+import monster.MON_SkeletonLord;
 
 public class Entity {
     GamePanel gp;
@@ -28,6 +29,7 @@ public class Entity {
     public String dialogues[][] = new String[20][20];
     public Entity attacker;
     public Entity linkedEntity;
+    public boolean temp = false;
 
     // STATE
     public int worldX, worldY;
@@ -50,6 +52,7 @@ public class Entity {
     public boolean inRage = false;
     public Entity loot;
     public boolean opened = false;
+    public boolean sleep = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -266,11 +269,8 @@ public class Entity {
     }
 
     public void update() {
-
         if (knockBack) {
-
             checkCollision();
-
             if (collisionOn) {
                 knockBackCounter = 0;
                 knockBack = false;
@@ -292,9 +292,7 @@ public class Entity {
                     case "right": worldX += speed; break;
                 }
             }
-
             knockBackCounter++;
-
             if (knockBackCounter == 10) {
                 knockBackCounter = 0;
                 knockBack = false;
@@ -303,7 +301,6 @@ public class Entity {
         } else if(attacking){
             attacking();
         }
-
         else {
             setAction();
             checkCollision();
@@ -317,7 +314,6 @@ public class Entity {
                     case "right": worldX += speed; break;
                 }
             }
-
             spriteCounter++;
             if (spriteCounter > 26) {
                 if (spriteNum == 1) {
@@ -328,8 +324,6 @@ public class Entity {
                 spriteCounter = 0;
             }
         }
-
-
         if (invincible) {
             invincibleCounter++;
             if (invincibleCounter > 40) {
@@ -349,6 +343,7 @@ public class Entity {
                 offBalanceCounter = 0;
             }
         }
+
     }
 
     public void checkAttackOrNot(int rate, int straight, int horizontal){

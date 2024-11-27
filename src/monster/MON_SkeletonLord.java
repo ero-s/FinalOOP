@@ -18,6 +18,7 @@ public class MON_SkeletonLord extends Entity {
         super(gp);
 
         this.gp = gp;
+        sleep = true;
 
         type = type_monster;
         boss = true;
@@ -30,7 +31,7 @@ public class MON_SkeletonLord extends Entity {
         defense = 2;
         exp = 50;
         knockBackPower = 5;
-
+        alive = true;
         int size = gp.tileSize*5;
         solidArea.x = 48;
         solidArea.y = 48;
@@ -44,6 +45,7 @@ public class MON_SkeletonLord extends Entity {
         motion2_duration = 50;
 
         getImage();
+        setDialogue();
         getAttackImage();
     }
 
@@ -66,10 +68,10 @@ public class MON_SkeletonLord extends Entity {
             up2 = setup("/res/monster/skeletonlord/skeletonlord_phase2_up_2", gp.tileSize*i, gp.tileSize*i);
             down1 = setup("/res/monster/skeletonlord/skeletonlord_phase2_down_1", gp.tileSize*i, gp.tileSize*i);
             down2 = setup("/res/monster/skeletonlord/skeletonlord_phase2_down_2", gp.tileSize*i, gp.tileSize*i);
-            left1 = setup("/res/monster/skeletonlord/skeletonlord_phase2", gp.tileSize*i, gp.tileSize*i);
-            left2 = setup("/res/monster/skeletonlord/skeletonlord_phase2", gp.tileSize*i, gp.tileSize*i);
-            right1 = setup("/res/monster/skeletonlord/skeletonlord_phase2", gp.tileSize*i, gp.tileSize*i);
-            right2 = setup("/res/monster/skeletonlord/skeletonlord_phase2", gp.tileSize*i, gp.tileSize*i);
+            left1 = setup("/res/monster/skeletonlord/skeletonlord_phase2_left_1", gp.tileSize*i, gp.tileSize*i);
+            left2 = setup("/res/monster/skeletonlord/skeletonlord_phase2_left_2", gp.tileSize*i, gp.tileSize*i);
+            right1 = setup("/res/monster/skeletonlord/skeletonlord_phase2_right_1", gp.tileSize*i, gp.tileSize*i);
+            right2 = setup("/res/monster/skeletonlord/skeletonlord_phase2_right_2", gp.tileSize*i, gp.tileSize*i);
         }
 
     }
@@ -97,32 +99,39 @@ public class MON_SkeletonLord extends Entity {
             attackRight1 = setup("/res/monster/skeletonlord/skeletonlord_phase2_attack_right_1", gp.tileSize*i * 2, gp.tileSize*i);
             attackRight2 = setup("/res/monster/skeletonlord/skeletonlord_phase2_attack_right_2", gp.tileSize *i* 2, gp.tileSize*i);
         }
-
     }
-
+    public void setDialogue(){
+        dialogues[0][0] = "You have bested me, you the king";
+    }
     public void setAction() {
+        if(dying){
+            startDialogue(this, 0);
+        }
+        else{
+            if(!inRage && life < maxLife/2){
+                inRage = true;
+                getImage();
+                getAttackImage();
+                defaultSpeed++;
+                speed = defaultSpeed;
+                attack += 2;
+            }
 
-        if(!inRage && life < maxLife/2){
-            inRage = true;
-            getImage();
-            getAttackImage();
-            defaultSpeed++;
-            speed = defaultSpeed;
-            attack += 2;
+            if (getTileDistance(gp.player) < 10) {
+                moveTowardPlayer(60);
+            } else {
+
+                // Get a random direction
+                getRandomDirection(120);
+            }
+
+            // Check if it attacks
+            if(!attacking){
+                checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
+            }
         }
 
-        if (getTileDistance(gp.player) < 10) {
-            moveTowardPlayer(60);
-        } else {
 
-            // Get a random direction
-            getRandomDirection(120);
-        }
-
-        // Check if it attacks
-        if(!attacking){
-            checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
-        }
     }
 
     public void damageReaction() {

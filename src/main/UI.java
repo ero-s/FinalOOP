@@ -680,7 +680,7 @@ public class UI {
         g2.drawString(text, x, y);
 
         if (commandNum == 0) {
-            g2.drawString(">", x - 40, y);
+            drawCarrot(x-gp.tileSize/2, y-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
         }
 
         // QUIT
@@ -690,7 +690,7 @@ public class UI {
         g2.drawString(text, x, y);
 
         if (commandNum == 1) {
-            g2.drawString(">", x - 40, y);
+            drawCarrot(x-gp.tileSize/2, y-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
         }
     }
 
@@ -755,7 +755,7 @@ public class UI {
         textY += gp.tileSize * 2;
         g2.drawString("Full Screen", textX, textY);
         if (commandNum == 0) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 if (!gp.fullScreenOn) {
@@ -771,21 +771,21 @@ public class UI {
         textY += gp.tileSize;
         g2.drawString("Music", textX, textY);
         if (commandNum == 1) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
         }
 
         // SOUND EFFECT
         textY += gp.tileSize;
         g2.drawString("SE", textX, textY);
         if (commandNum == 2) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
         }
 
         // CONTROL
         textY += gp.tileSize;
         g2.drawString("Control", textX, textY);
         if (commandNum == 3) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 subState = 2;
@@ -797,7 +797,7 @@ public class UI {
         textY += gp.tileSize;
         g2.drawString("Save", textX, textY);
         if (commandNum == 4) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 subState = 4; //saveGame
@@ -809,7 +809,7 @@ public class UI {
         textY += gp.tileSize;
         g2.drawString("End Game", textX, textY);
         if (commandNum == 5) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 subState = 3; // endGame
@@ -821,7 +821,7 @@ public class UI {
         textY += gp.tileSize;
         g2.drawString("Back", textX, textY);
         if (commandNum == 6) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 gp.gameState = gp.playState;
