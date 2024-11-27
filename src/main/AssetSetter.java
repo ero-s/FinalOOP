@@ -28,6 +28,11 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize * 21;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_BlueHeart(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 13;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 14;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_Chest(gp);
         gp.obj[mapNum][i].setLoot(new OBJ_Potion_Red(gp));
         gp.obj[mapNum][i].worldX = gp.tileSize * 24;
@@ -102,10 +107,6 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize * 21;
         i++;
 
-        gp.npc[mapNum][i] = new NPC_Andres(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize * 13;
-        gp.npc[mapNum][i].worldY = gp.tileSize * 14;
-        i++;
 
         // MAP 1
         mapNum = 1;

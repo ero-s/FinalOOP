@@ -12,7 +12,7 @@ public class OBJ_BlueHeart extends Entity {
         this.gp = gp;
         type = type_pickupOnly;
         name = objName;
-        down1 = setup("/objects/blueheart", gp.tileSize, gp.tileSize);
+        down1 = setup("/res/objects/blueheart", gp.tileSize, gp.tileSize);
         setDialogues();
     }
 

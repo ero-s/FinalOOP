@@ -14,6 +14,10 @@ public class CutsceneManager {
     public int sceneNum;
     public int scenePhase;
 
+    int counter = 0;
+    float alpha = 0f;
+    int y;
+
     // scene number
     public final int NA = 0;
     public final int skeletonLord = 1;
