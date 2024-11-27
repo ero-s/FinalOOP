@@ -38,20 +38,42 @@ public class NPC_Pugtato extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "Hello, traveler.";
-        dialogues[0][1] = "This island holds many secrets, some \nyou may find and others you might not.";
-        dialogues[0][2] = "I once sought the treasures here, \nbut now I merely observe.";
-        dialogues[0][3] = "May your journey be fruitful!";
+//        dialogues[0][0] = "Hello, traveler.";
+//        dialogues[0][1] = "This island holds many secrets, some \nyou may find and others you might not.";
+//        dialogues[0][2] = "I once sought the treasures here, \nbut now I merely observe.";
+//        dialogues[0][3] = "May your journey be fruitful!";
+//
+//        dialogues[1][0] = "Greetings, adventurer.";
+//        dialogues[1][1] = "The winds here tell tales of daring \nheroes and mysterious treasures.";
+//        dialogues[1][2] = "Though my time has passed, I find joy \nin guiding those who follow the path.";
+//        dialogues[1][3] = "Be wise, and tread carefully.";
+//
+//        dialogues[2][0] = "Ah, a brave soul!";
+//        dialogues[2][1] = "This island isn't for the faint of heart. \nLegends say the treasure changes with \neach seeker.";
+//        dialogues[2][2] = "Once, I sought glory here, but now I \nsavor the peace of these shores.";
+//        dialogues[2][3] = "May fortune favor you, always.";
 
-        dialogues[1][0] = "Greetings, adventurer.";
-        dialogues[1][1] = "The winds here tell tales of daring \nheroes and mysterious treasures.";
-        dialogues[1][2] = "Though my time has passed, I find joy \nin guiding those who follow the path.";
-        dialogues[1][3] = "Be wise, and tread carefully.";
+        // story! // summeville
+        dialogues[0][0] = "You've finally woken up, strange… being?";
+        dialogues[0][1] = "It seems like you’re completely unaware of what happened to you";
+        dialogues[0][2] = "I found you lying on the beach.";
+        dialogues[0][3] = "It seemed like you needed help so I sheltered you";
+        dialogues[0][4] = "Although I was scared of you at first, my curiosity got the best of me.";
+        dialogues[0][5] = "You’re in Summerville, a capital of one of the four great seasons";
+        dialogues[0][6] = "As for your family, I’ve never seen people who look like you.";
 
-        dialogues[2][0] = "Ah, a brave soul!";
-        dialogues[2][1] = "This island isn't for the faint of heart. \nLegends say the treasure changes with \neach seeker.";
-        dialogues[2][2] = "Once, I sought glory here, but now I \nsavor the peace of these shores.";
-        dialogues[2][3] = "May fortune favor you, always.";
+
+        // scene 2
+        dialogues[1][0] = "Help me, traveler! It’s a rotten one!";
+        dialogues[1][1] = "Grab the compost hammer. It’s powered by the roots!";
+
+        // after narration
+        dialogues[2][0] = "Off to adventure we go!";
+
+        //gates at the summerville castle
+        //dialogues[3][0] = "";
+
+        // fall
 
     }
 

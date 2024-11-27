@@ -245,6 +245,7 @@ public class UI {
     public void drawTitleScreen() {
         if (titleScreenState == 0) {
 
+            //gp.stopMusic();
             BufferedImage title = e.setup("/res/ui/title", 2160, 1440);
             g2.drawImage(title,0,0,960, 580, null);
 
@@ -968,6 +969,7 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 commandNum = 0;
                 subState = 5;
+                gp.stopMusic();
             }
         }
 
@@ -1016,6 +1018,7 @@ public class UI {
             drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
             if (gp.keyH.enterPressed) {
                 gp.saveLoad.save();
+                gp.stopMusic();
                 commandNum = 0;
                 subState = 0;
                 gp.gameState = gp.titleState;
@@ -1031,6 +1034,7 @@ public class UI {
             drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
+                gp.stopMusic();
                 commandNum = 0;
                 subState = 0;
                 gp.gameState = gp.titleState;

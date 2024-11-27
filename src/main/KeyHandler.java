@@ -25,7 +25,7 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
 
         // TITLE STATE
-        if (gp.gameState == gp.titleState) { titleState(code); }
+        if (gp.gameState == gp.titleState) { gp.stopMusic(); titleState(code); }
 
         // PLAY STATE
         else if (gp.gameState == gp.playState) { playState(code); }
@@ -50,6 +50,7 @@ public class KeyHandler implements KeyListener {
     }
 
     public void titleState(int code){
+        //gp.stopMusic();
         if(gp.ui.titleScreenState == 0){
             if(code == KeyEvent.VK_W){
                 gp.ui.commandNum--;
@@ -339,6 +340,7 @@ public class KeyHandler implements KeyListener {
                 gp.resetGame(false);
                 gp.playMusic(0);
             } else if (gp.ui.commandNum == 1) {
+                gp.stopMusic();
                 gp.gameState = gp.titleState;
                 gp.resetGame(true);
             }
