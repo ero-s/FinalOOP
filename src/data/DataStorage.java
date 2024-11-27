@@ -25,6 +25,7 @@ public class DataStorage implements Serializable {
     private int motion1_duration;
     private int motion2_duration;
 
+
     // save identifier
     private boolean hasSave;
 
