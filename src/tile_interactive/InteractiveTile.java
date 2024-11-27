@@ -1,9 +1,9 @@
 package tile_interactive;
 
-import java.awt.Graphics2D;
-
 import entity.Entity;
 import main.GamePanel;
+
+import java.awt.*;
 
 public class InteractiveTile extends Entity {
     GamePanel gp;

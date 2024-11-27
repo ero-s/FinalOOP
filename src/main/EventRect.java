@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.Rectangle;
+import java.awt.*;
 
 public class EventRect extends Rectangle {
 

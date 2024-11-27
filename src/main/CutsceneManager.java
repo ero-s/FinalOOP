@@ -2,15 +2,16 @@ package main;
 
 import object.OBJ_Door_Iron;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public class CutsceneManager {
     GamePanel gp;
     Graphics2D g2;
+
     public int sceneNum;
     public int scenePhase;
 
-    // Scene Numbers
+    // scene number
     public final int NA = 0;
     public final int skeletonLord = 1;
 
@@ -21,10 +22,8 @@ public class CutsceneManager {
     public void draw(Graphics2D g2) {
         this.g2 = g2;
 
-        switch (sceneNum) {
-            case skeletonLord:
-                scene_skeletonLord();
-                break;
+        switch(sceneNum) {
+            case skeletonLord: scene_skeletonLord(); break;
         }
     }
 
@@ -32,16 +31,22 @@ public class CutsceneManager {
         if (scenePhase == 0) {
             gp.bossBattleOn = true;
 
-            // Shut the iron door
+            //shut doors
             for (int i = 0; i < gp.obj[1].length; i++) {
+
                 if (gp.obj[gp.currentMap][i] == null) {
                     gp.obj[gp.currentMap][i] = new OBJ_Door_Iron(gp);
-                    gp.obj[gp.currentMap][i].worldX = gp.tileSize * 25;
-                    gp.obj[gp.currentMap][i].worldY = gp.tileSize * 28;
+                    gp.obj[gp.currentMap][i].worldX = gp.tileSize*25;
+                    gp.obj[gp.currentMap][i].worldY = gp.tileSize*28;
                     gp.obj[gp.currentMap][i].temp = true;
                     gp.playSE(21);
+                    break;
                 }
+
             }
+
+            scenePhase++;
+
         }
     }
 }

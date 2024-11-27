@@ -1,9 +1,9 @@
 package object;
 
-import java.awt.Color;
-
 import entity.Projectile;
 import main.GamePanel;
+
+import java.awt.*;
 
 public class OBJ_Rock extends Projectile {
     GamePanel gp;

@@ -1,9 +1,8 @@
 package entity;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import main.GamePanel;
+
+import java.awt.*;
 
 public class Particle extends Entity {
     
