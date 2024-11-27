@@ -344,8 +344,7 @@ public class GamePanel extends JPanel implements Runnable {
         music.loop();
     }
 
-    public void stopMusic(int i) {
-        music.setFile(i);
+    public void stopMusic() {
         music.stop();
     }
 

@@ -5,7 +5,6 @@ import main.GamePanel;
 
 public class OBJ_Chest extends Entity {
     GamePanel gp;
-    boolean opened = false;
     public static final String objName = "Chest";
     public OBJ_Chest(GamePanel gp) {
         super(gp);
@@ -43,7 +42,7 @@ public class OBJ_Chest extends Entity {
             } else {
                 startDialogue(this, 1);
                 down1 = image2;
-                opened = true;
+                this.opened = true;
             }
         } else {
             startDialogue(this, 2);

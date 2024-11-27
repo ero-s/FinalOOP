@@ -588,13 +588,13 @@ public class Entity {
         target.knockBack = true;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Entity entity = (Entity) obj;
-        return name.equals(entity.name) && type == entity.type;
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) return true;
+//        if (obj == null || getClass() != obj.getClass()) return false;
+//        Entity entity = (Entity) obj;
+//        return name.equals(entity.name) && type == entity.type;
+//    }
 
     public boolean inCamera(){
         boolean inCamera = false;

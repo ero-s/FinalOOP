@@ -237,7 +237,6 @@ public class Player extends Entity {
         } else if (attacking) {
             attacking();
         } else if(keyH.spacePressed){
-            System.out.println("WorldX: "+worldX/gp.tileSize+" WorldY: "+worldY/gp.tileSize  );
             guarding = true;
             guardCounter++;
         } else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed ||
@@ -354,7 +353,7 @@ public class Player extends Entity {
             if (life <= 0) {
                 gp.gameState = gp.gameOverState;
                 gp.ui.commandNum = 0;
-                gp.stopMusic(1);
+                gp.stopMusic();
                 gp.playSE(12);
 
 
@@ -531,26 +530,24 @@ public class Player extends Entity {
             }
         }
     }
-    public boolean canObtainItem(Entity item){
-
+    public boolean canObtainItem(Entity item) {
         boolean canObtain = false;
         Entity newItem = gp.eGenerator.getObject(item.name);
 
         // CHECK IF STACKABLE
-        if(newItem.stackable){
+        if (newItem.stackable) {
             int index = searchItemInInventory(newItem.name);
-            if(index != 999){
+            if (index != 999) {
                 inventory.get(index).amount++;
-                return true;
-            }
-            else { // New item so need to check vacancy
-                if(inventory.size() != maxInventorySize){
+                canObtain = true;
+            } else { // New item so need to check vacancy
+                if (inventory.size() != maxInventorySize) {
                     inventory.add(newItem);
                     canObtain = true;
                 }
             }
         } else { // NOT STACKABLE so check vacancy
-            if(inventory.size() != maxInventorySize){
+            if (inventory.size() != maxInventorySize) {
                 inventory.add(newItem);
                 canObtain = true;
             }

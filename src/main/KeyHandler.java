@@ -68,12 +68,14 @@ public class KeyHandler implements KeyListener {
                     gp.setupGame();
                     gp.player.setDefaultValues();
                     gp.saveLoad.save();
+                    gp.playSE(0);
                     // gp.gameState = gp.cutsceneState
                     gp.gameState = gp.playState;
                 }
 
                 if(gp.ui.commandNum == 1){ // load
                     gp.saveLoad.load();
+                    gp.playSE(0);
                     gp.gameState = gp.playState;
                 }
                 if(gp.ui.commandNum == 2){ // exit
