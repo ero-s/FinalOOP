@@ -1,8 +1,6 @@
 package entity;
 
-import java.awt.AlphaComposite;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -20,6 +18,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    int standCounter;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -285,11 +284,13 @@ public class Player extends Entity {
             }
         }
         else {
-//            standCounter++;
-//            if(standCounter == 20){
-//                spriteNum = 1;
-//                standcounter = 0;
-//            }
+            standCounter++;
+
+            if(standCounter == 20){
+                spriteNum = 1;
+                standCounter = 0;
+            }
+
             guarding = false;
             guardCounter = 0;
         }
@@ -603,6 +604,8 @@ public class Player extends Entity {
         }
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
+        g2.setColor(Color.red);
+        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
