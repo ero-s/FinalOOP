@@ -670,9 +670,8 @@ public class Player extends Entity {
         if (transparent) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
-        if(drawing){
-            g2.drawImage(image, tempScreenX, tempScreenY, null);
-        }
+
+        g2.drawImage(image, tempScreenX, tempScreenY, null);
 
         g2.setColor(Color.red);
         g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);

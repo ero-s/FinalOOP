@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
     public SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
     public EnvironmentManager eManager = new EnvironmentManager(this);
-    public CutsceneManager csManager = new CutsceneManager(this);
+//    public CutsceneManager csManager = new CutsceneManager(this);
 
     // save
     public boolean hasSave;
@@ -328,7 +328,7 @@ public class GamePanel extends JPanel implements Runnable {
 //            eManager.draw(g2);
 
             //Cutscene
-            csManager.draw(g2);
+//            csManager.draw(g2);
 
             // UI
             ui.draw(g2);
