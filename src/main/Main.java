@@ -9,9 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         window = new JFrame();
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // Close (X) button
-        window.setResizable(false); // User unable to resize the window
-        window.setTitle("2D Adventure"); // Title of the Apps
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setTitle("Harvest Fest: A Brotherly Tale");
 
         // Call GamePanel
         GamePanel gamePanel = new GamePanel();

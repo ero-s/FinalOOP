@@ -131,6 +131,11 @@ public class AssetSetter {
         i++;
 
         gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 32;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 3;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 23;
         gp.monster[mapNum][i].worldY = gp.tileSize * 37;
         i++;
@@ -148,6 +153,14 @@ public class AssetSetter {
         gp.monster[mapNum][i] = new MON_Orc(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 12;
         gp.monster[mapNum][i].worldY = gp.tileSize * 33;
+        i++;
+
+        mapNum = 1;
+        i = 0;
+
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 32;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 3;
         i++;
 
         mapNum = 2;

@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
     GamePanel gp;
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed, spacePressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed, spacePressed, skill1Pressed;
 
     // DEBUG
     public boolean showDebugTest = false;
@@ -163,19 +163,29 @@ public class KeyHandler implements KeyListener {
             // Enter button
             enterPressed = true;
         }
+
+        // Skills
+        if (code == KeyEvent.VK_SPACE) {
+            // space for guard button
+            spacePressed = true;
+        }
+
         if (code == KeyEvent.VK_F) {
-            // K for shot button
+            // F for shot button
             shotKeyPressed = true;
         }
+
+        if(code == KeyEvent.VK_1){
+            shotKeyPressed = true;
+        }
+
+        //Options
         if (code == KeyEvent.VK_ESCAPE) {
             // ESC for settings button
             gp.gameState = gp.optionState;
         }
 
-        if (code == KeyEvent.VK_SPACE) {
-            // space for guard button
-            spacePressed = true;
-        }
+
 
         // DEBUG
 
@@ -463,19 +473,26 @@ public class KeyHandler implements KeyListener {
             // D button
             rightPressed = false;
         }
+
+        if (code == KeyEvent.VK_ENTER) {
+            // enter for interact button
+            enterPressed = false;
+        }
+
+        // Skills
         if (code == KeyEvent.VK_F) {
             // K for shot button
             shotKeyPressed = false;
-        }
-
-        if (code == KeyEvent.VK_ENTER) {
-            // space for guard button
-            enterPressed = false;
         }
 
         if (code == KeyEvent.VK_SPACE) {
             // space for guard button
             spacePressed = false;
         }
+
+        if(code == KeyEvent.VK_1){
+            shotKeyPressed = false;
+        }
+
     }
 }

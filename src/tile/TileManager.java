@@ -23,11 +23,11 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        // READ TILE DATA FILE
-        InputStream is = getClass().getResourceAsStream("/res/maps/tiledata.txt");
+//         READ TILE DATA FILE
+        InputStream is = getClass().getResourceAsStream("/res/maps/data.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-        // GETTING TILE NAMES AND COLLISION INFO FROM THE FILE
+//         GETTING TILE NAMES AND COLLISION INFO FROM THE FILE
         String line;
 
         try {
@@ -60,34 +60,24 @@ public class TileManager {
         } catch (IOException e) {
             System.out.println("Exception!");
         }
+        getTileImage();
 
-        loadMap("/res/maps/worldmap.txt", 0);
-        loadMap("/res/maps/indoor01.txt", 1);
+
+        // worlds
+
+        loadMap("/res/maps/SummerVille.txt", 0);
+        loadMap("/res/maps/FallVille.txt", 1);
         loadMap("/res/maps/dungeon01.txt", 2);
-        loadMap("/res/maps/dungeon02.txt", 3);
+        loadMap("/res/maps/SpringVille.txt", 3);
 
-    }
+        // dungeons
+            loadMap("/res/maps/dungeon01.txt", 4);
+            loadMap("/res/maps/dungeon02.txt", 5);
+            loadMap("/res/maps/dungeon01.txt", 6);
+            loadMap("/res/maps/dungeon02.txt", 7);
 
-    public void getTileImage() {
 
-        for(int i  = 0; i < fileNames.size(); i++){
 
-            String fileName;
-            boolean collision;
-
-            // Get a file name
-            fileName = fileNames.get(i);
-
-            // Get a collision status
-            if(collisionStatus.get(i).equals("true")){
-                collision = true;
-            }
-            else {
-                collision = false;
-            }
-
-            setup(i, fileName, collision);
-        }
     }
 
     public void setup(int index, String imageName, boolean collision) {
@@ -190,6 +180,7 @@ public class TileManager {
         }
 
     }
+
     public void drawPath(Graphics2D g2){
         g2.setColor(new Color(255, 0, 0, 70));
 
@@ -202,4 +193,27 @@ public class TileManager {
             g2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
         }
     }
+
+    public void getTileImage() {
+        for(int i  = 0; i < fileNames.size(); i++){
+
+            String fileName;
+            boolean collision;
+
+            // Get a file name
+            fileName = fileNames.get(i);
+
+            // Get a collision status
+            if(collisionStatus.get(i).equals("true")){
+                collision = true;
+            }
+            else {
+                collision = false;
+            }
+
+            setup(i, fileName, collision);
+        }
+    }
+
 }
+

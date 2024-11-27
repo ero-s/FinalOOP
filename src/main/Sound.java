@@ -1,5 +1,7 @@
 package main;
 
+import java.net.URL;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -53,15 +55,7 @@ public class Sound {
 
     public void loop() { clip.loop(Clip.LOOP_CONTINUOUSLY); }
 
-    public void stop() {
-
-        if (clip != null) {
-            clip.stop();
-        } else {
-            System.err.println("Clip is null, cannot stop music!");
-        }
-
-    }
+    public void stop() { if(clip != null) clip.stop(); }
 
     public void checkVolume() {
         switch (volumeScale) {

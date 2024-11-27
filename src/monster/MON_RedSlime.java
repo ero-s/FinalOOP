@@ -29,12 +29,17 @@ public class MON_RedSlime extends Entity {
         exp = 5;
         projectile = new OBJ_Rock(gp);
 
-        solidArea.x = 3;
-        solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        int size = gp.tileSize*5;
+        solidArea.x = 48;
+        solidArea.y = 48;
+        solidArea.width = size - 48 * 2;
+        solidArea.height = size - 48;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        attackArea.width = 170;
+        attackArea.height = 170;
+        motion1_duration = 25;
+        motion2_duration = 50;
 
         getImage();
     }
