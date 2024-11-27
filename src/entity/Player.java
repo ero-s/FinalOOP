@@ -395,7 +395,7 @@ public class Player extends Entity {
             if (life <= 0) {
                 gp.gameState = gp.gameOverState;
                 gp.ui.commandNum = 0;
-                gp.stopMusic(1);
+                gp.stopMusic();
                 gp.playSE(12);
             }
         }
