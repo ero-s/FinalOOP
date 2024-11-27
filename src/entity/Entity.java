@@ -24,7 +24,7 @@ public class Entity {
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
-    public int solidAreaDefaultX, solidAreaDefaultY;
+    public int solidAreaDefaultX, solidAreaDefaultY, mapCollisionDefaultX, mapCollisionDefaultY;
     public boolean collision = false;
     public String dialogues[][] = new String[20][20];
     public Entity attacker;
@@ -53,6 +53,7 @@ public class Entity {
     public Entity loot;
     public boolean opened = false;
     public boolean sleep = false;
+    public Rectangle mapCollision;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -87,6 +88,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
+    public Projectile skill1;
     public Entity currentLight;
     public boolean boss;
 
@@ -346,7 +348,7 @@ public class Entity {
                 offBalanceCounter = 0;
             }
         }
-
+        System.out.println(gp.player.worldX/gp.tileSize + " " + gp.player.worldY/gp.tileSize);
     }
 
     public void checkAttackOrNot(int rate, int straight, int horizontal){
