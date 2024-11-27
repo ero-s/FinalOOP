@@ -4,6 +4,7 @@ import entity.NPC_Andres;
 import entity.NPC_BigRock;
 import entity.NPC_Merchant;
 import entity.NPC_OldMan;
+import entity.NPC_Pugtato;
 import monster.MON_Bat;
 import monster.MON_GreenSlime;
 import monster.MON_Orc;
@@ -91,6 +92,11 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
+        gp.npc[mapNum][i] = new NPC_Pugtato(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize * 21;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 21;
+        i++;
+
         gp.npc[mapNum][i] = new NPC_OldMan(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize * 21;
         gp.npc[mapNum][i].worldY = gp.tileSize * 21;
@@ -131,6 +137,8 @@ public class AssetSetter {
         int mapNum = 0;
 
         int i = 0;
+
+
         gp.monster[mapNum][i] = new MON_GreenSlime(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 23;
         gp.monster[mapNum][i].worldY = gp.tileSize * 36;

@@ -407,6 +407,7 @@ public class Player extends Entity {
             }
             gp.npc[gp.currentMap][i].move(direction);
         }
+
     }
 
     public void contactMonster(int i) {
