@@ -9,24 +9,26 @@ import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
 
-public class MON_RedSlime extends Entity {
+public class MON_JackOLantern extends Entity {
 
     GamePanel gp;
+    public static final String monName = "Jack o'Lantern";
 
-    public MON_RedSlime(GamePanel gp) {
+    public MON_JackOLantern(GamePanel gp) {
         super(gp);
 
         this.gp = gp;
 
         type = type_monster;
-        name = "Red Slime";
-        defaultSpeed = 2;
+        boss = true;
+        name = monName;
+        defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 8;
+        maxLife = 4;
         life = maxLife;
-        attack = 7;
+        attack = 2;
         defense = 0;
-        exp = 5;
+        exp = 2;
         projectile = new OBJ_Rock(gp);
 
         int size = gp.tileSize*5;
@@ -45,30 +47,28 @@ public class MON_RedSlime extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/redslime/redslime_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/redslime/redslime_down_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/redslime/redslime_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/redslime/redslime_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/redslime/redslime_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/redslime/redslime_down_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/redslime/redslime_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/redslime/redslime_down_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/res/monster/jackolantern/up_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/res/monster/jackolantern/up_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/res/monster/jackolantern/down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/res/monster/jackolantern/down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/res/monster/jackolantern/left_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/res/monster/jackolantern/left_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/res/monster/jackolantern/right_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/res/monster/jackolantern/right_2", gp.tileSize, gp.tileSize);
     }
 
     public void setAction() {
         if (onPath) {
 
-            // Check if it stops chasing
-            checkStopChasingOrNot(gp.player, 15, 100);
-
             // Search the direction to go
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
             // Check if it shoots a projectile
-            checkShootOrNot(200, 30);
+            checkShootOrNot(60, 30);
+
         } else {
             // Check if it starts chasing
-            checkStartChasingOrNot(gp.player, 5, 100);
+            checkStartChasingOrNot(gp.player, 15, 100);
 
             // Get a random direction
             getRandomDirection(120);

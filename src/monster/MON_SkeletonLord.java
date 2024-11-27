@@ -116,7 +116,7 @@ public class MON_SkeletonLord extends Entity {
         } else {
 
             // Get a random direction
-            getRandomDirection(120);
+            getRandomDirection(60);
         }
 
         // Check if it attacks

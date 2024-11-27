@@ -84,6 +84,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
+    public Projectile skill1;
     public boolean boss;
 
 

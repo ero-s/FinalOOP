@@ -12,6 +12,7 @@ import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
+import object.OBJ_Smash;
 
 public class Player extends Entity {
     KeyHandler keyH;
@@ -28,12 +29,12 @@ public class Player extends Entity {
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
         solidArea = new Rectangle();
-        solidArea.x = 12;
+        solidArea.x = 8;
         solidArea.y = 16;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 24;
-        solidArea.height = 30;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         setDefaultValues();
         getImage();
@@ -44,7 +45,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 23;
+        worldX = gp.tileSize * 17;
         worldY = gp.tileSize * 21;
         gp.currentMap = 0;
         defaultSpeed = 8;
@@ -53,7 +54,7 @@ public class Player extends Entity {
 
         // PLAYER STATUS
         level = 1;
-        maxLife = 6;
+        maxLife = 20;
         life = maxLife;
         maxMana = 4;
         mana = maxMana;
@@ -65,6 +66,7 @@ public class Player extends Entity {
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         projectile = new OBJ_Fireball(gp);
+        skill1 = new OBJ_Smash(gp);
         attack = getAttack();
         defense = getDefense();
     }
@@ -124,57 +126,57 @@ public class Player extends Entity {
     public int getDefense() { return defense = dexterity * currentShield.defenseValue; }
 
     public void getImage() {
-        up1 = setup("/res/player/boy_up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/player/boy_up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/player/boy_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/player/boy_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/player/boy_left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/player/boy_left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/player/boy_right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/player/boy_right_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/res/player/hakobe/Walk front-1", gp.tileSize, gp.tileSize);
+        up2 = setup("/res/player/hakobe/Walk front-2", gp.tileSize, gp.tileSize);
+        down1 = setup("/res/player/hakobe/Walk back-1", gp.tileSize, gp.tileSize);
+        down2 = setup("/res/player/hakobe/Walk back-2", gp.tileSize, gp.tileSize);
+        left1 = setup("/res/player/hakobe/Walk Left-1", gp.tileSize, gp.tileSize);
+        left2 = setup("/res/player/hakobe/Walk Left-2", gp.tileSize, gp.tileSize);
+        right1 = setup("/res/player/hakobe/Walk Right-1", gp.tileSize, gp.tileSize);
+        right2 = setup("/res/player/hakobe/Walk Right-2", gp.tileSize, gp.tileSize);
 
     }
 
     public void getAttackImage() {
         if (currentWeapon.type == type_sword) {
-            attackUp1 = setup("/res/player/boy_attack_up_1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/res/player/boy_attack_up_2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/res/player/boy_attack_down_1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/res/player/boy_attack_down_2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/res/player/boy_attack_left_1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/res/player/boy_attack_left_2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/res/player/boy_attack_right_1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/res/player/boy_attack_right_2", gp.tileSize * 2, gp.tileSize);
+            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize, gp.tileSize * 2);
+            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize * 2);
+            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 2, gp.tileSize);
+            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 2, gp.tileSize);
         }
 
         if (currentWeapon.type == type_axe) {
-            attackUp1 = setup("/res/player/boy_axe_up_1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/res/player/boy_axe_up_2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/res/player/boy_axe_down_1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/res/player/boy_axe_down_2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/res/player/boy_axe_left_1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/res/player/boy_axe_left_2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/res/player/boy_axe_right_1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/res/player/boy_axe_right_2", gp.tileSize * 2, gp.tileSize);
+            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize, gp.tileSize * 2);
+            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize * 2);
+            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 2, gp.tileSize);
+            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 2, gp.tileSize);
         }
 
         if (currentWeapon.type == type_pickaxe) {
-            attackUp1 = setup("/res/player/boy_pick_up_1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/res/player/boy_pick_up_2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/res/player/boy_pick_down_1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/res/player/boy_pick_down_2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/res/player/boy_pick_left_1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/res/player/boy_pick_left_2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/res/player/boy_pick_right_1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/res/player/boy_pick_right_2", gp.tileSize * 2, gp.tileSize);
+            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize, gp.tileSize * 2);
+            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize * 2);
+            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 2, gp.tileSize);
+            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 2, gp.tileSize);
         }
     }
 
     public void getGuardImage(){
-        guardUp = setup("/res/player/boy_guard_up", gp.tileSize, gp.tileSize);
-        guardDown = setup("/res/player/boy_guard_down", gp.tileSize, gp.tileSize);
-        guardLeft = setup("/res/player/boy_guard_left", gp.tileSize, gp.tileSize);
-        guardRight = setup("/res/player/boy_guard_right", gp.tileSize, gp.tileSize);
+        guardUp = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize);
+        guardDown = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize);
+        guardLeft = setup("/res/player/hakobe/left2", gp.tileSize, gp.tileSize);
+        guardRight = setup("/res/player/hakobe/right2", gp.tileSize, gp.tileSize);
     }
 
     public void update() {
