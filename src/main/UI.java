@@ -1,19 +1,15 @@
 package main;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
 import entity.Entity;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class UI {
     GamePanel gp;
@@ -264,6 +260,8 @@ public class UI {
             if (commandNum == 0) {
                 drawCarrot(x-64, y-64, 64,64);
                 if(gp.keyH.enterPressed){
+                    gp.saveLoad.save();
+                    gp.saveLoad.setHasSave(true);
                     titleScreenState = 1;
                 }
             }
@@ -336,6 +334,7 @@ public class UI {
             if(gp.keyH.enterPressed){
                 gp.player.setDefaultValues();
                 gp.saveLoad.save();
+                gp.saveLoad.setHasSave(true);
 //                drawNarrationDialogueScreen();
 //                startNewGame();
                 commandNum = 0;
@@ -723,6 +722,7 @@ public class UI {
         commandNum = 0;
         currentDialogue = "Saving Game...";
         gp.saveLoad.save();
+        gp.saveLoad.setHasSave(true);
 
         for (String line : currentDialogue.split("\n")) {
             g2.drawString(line, textX, textY);
@@ -1015,6 +1015,7 @@ public class UI {
             drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
             if (gp.keyH.enterPressed) {
                 gp.saveLoad.save();
+                gp.saveLoad.setHasSave(true);
                 commandNum = 0;
                 subState = 0;
                 gp.gameState = gp.titleState;

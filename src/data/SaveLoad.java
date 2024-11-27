@@ -1,6 +1,5 @@
 package data;
 
-import entity.Entity;
 import main.GamePanel;
 
 import java.io.*;
@@ -60,11 +59,13 @@ public class SaveLoad {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public void setHasSave(boolean hasSave) {this.hasSave = hasSave;}
 
     public boolean getHasSave() {
+        readSave();
         return hasSave;
     }
     // save method
@@ -138,7 +139,7 @@ public class SaveLoad {
     public void load() {
         File saveFile = new File("src/data/save.dat");
 
-        if(!saveIsLoaded()) {
+        if(saveIsLoaded() == false) {
             return;
         }
 

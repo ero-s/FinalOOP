@@ -1,18 +1,14 @@
 package entity;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import main.GamePanel;
+import main.UtilityTool;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
-
-import main.GamePanel;
-import main.UtilityTool;
 
 public class Entity {
     GamePanel gp;
@@ -28,7 +24,7 @@ public class Entity {
     public String dialogues[][] = new String[20][20];
     public Entity attacker;
     public Entity linkedEntity;
-
+    public boolean temp = false;
     // STATE
     public int worldX, worldY;
     public String direction = "down";

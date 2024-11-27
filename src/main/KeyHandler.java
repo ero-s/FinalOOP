@@ -72,7 +72,7 @@ public class KeyHandler implements KeyListener {
                         gp.setupGame();
                         gp.player.setDefaultValues();
                         gp.saveLoad.save();
-                        gp.saveLoad.setHasSave(false);
+                        gp.saveLoad.setHasSave(true);
                         // gp.gameState = gp.cutsceneState
                         gp.gameState = gp.playState;
                         gp.playMusic(0);
@@ -80,9 +80,9 @@ public class KeyHandler implements KeyListener {
                 }
 
                 if(gp.ui.commandNum == 1){ // load
-                    boolean isTrue = gp.saveLoad.getHasSave();
 
-                    if (isTrue) {
+
+                    if (gp.saveLoad.getHasSave()) {
                         gp.saveLoad.load();
                         gp.gameState = gp.playState;
                     }
@@ -116,8 +116,7 @@ public class KeyHandler implements KeyListener {
                     gp.setupGame();
                     gp.player.setDefaultValues();
                     gp.saveLoad.save();
-                    gp.saveLoad.setHasSave(false);
-                    // gp.gameState = gp.cutsceneState
+                    gp.saveLoad.setHasSave(true);
                     gp.gameState = gp.playState;
                     gp.playMusic(0);
                     gp.ui.titleScreenState = 0;

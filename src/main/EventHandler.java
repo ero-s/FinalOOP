@@ -106,6 +106,11 @@ public class EventHandler {
             else if(hit(3,26,41, "any")){
                 teleport(2,8,7);
             }
+
+            //cutscene
+            else if (hit(3, 26, 41, "any") == true) {
+                skeletonLord();
+            }
         }
     }
 
@@ -171,6 +176,14 @@ public class EventHandler {
             gp.gameState = gp.dialogueState;
             gp.player.attackCanceled = true;
             entity.speak();
+        }
+    }
+
+    public void skeletonLord() {
+
+        if (gp.bossBattleOn == false) {
+            gp.gameState = gp.cutsceneState;
+            gp.csManager.sceneNum = gp.csManager.skeletonLord;
         }
     }
 }

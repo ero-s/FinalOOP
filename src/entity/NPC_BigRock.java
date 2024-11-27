@@ -7,7 +7,6 @@ import tile_interactive.InteractiveTile;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class NPC_BigRock extends Entity{
 

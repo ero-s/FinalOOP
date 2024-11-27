@@ -1,17 +1,14 @@
 package entity;
 
-import java.awt.AlphaComposite;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
     KeyHandler keyH;

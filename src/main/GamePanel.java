@@ -1,24 +1,18 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
-import javax.swing.JPanel;
-
 import ai.PathFinder;
 import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
     // SCREEN SETTINGS
@@ -107,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable {
         // Make GamePanel focused to receive input
         this.setFocusable(true);
 
-        saveLoad = new SaveLoad(this);
+        //saveLoad = new SaveLoad(this);
     }
 
     public void setupGame() {
@@ -134,6 +128,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void restart() {
         player.setDefaultValues();
+        removeTempEntity();
+        bossBattleOn = false;
         player.setDefaultPositions();
         player.restoreLifeAndMana();
         player.setItems();
@@ -351,6 +347,18 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void changeArea(){
         //TODO 34:43 missing method
+    }
+
+    // for cutscene
+    public void removeTempEntity() {
+        for (int mapNum = 0; mapNum < maxMap; mapNum++) {
+            for (int i = 0; i < obj[1].length; i++) {
+
+                if (obj[mapNum][i] != null && obj[mapNum][i].temp == true) {
+                    obj[mapNum][i] = null;
+                }
+            }
+        }
     }
 
     public boolean getHasSave() {
