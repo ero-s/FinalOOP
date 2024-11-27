@@ -25,8 +25,8 @@ public class Player extends Entity {
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
         solidArea = new Rectangle();
-        solidArea.x = 12;
-        solidArea.y = 16;
+        solidArea.x = 32;
+        solidArea.y = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 24;
@@ -130,14 +130,14 @@ public class Player extends Entity {
     public int getDefense() { return defense = dexterity * currentShield.defenseValue; }
 
     public void getImage() {
-        up1 = setup("/res/player/hakobe/Walk back-1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/player/hakobe/Walk back-2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/player/hakobe/Walk front-1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/player/hakobe/Walk front-2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/player/hakobe/Walk Left-1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/player/hakobe/Walk Left-2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/player/hakobe/Walk Right-1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/player/hakobe/Walk Right-2", gp.tileSize, gp.tileSize);
+        up1 = setup("/res/player/hakobe/Walk back-1", gp.tileSize*2, gp.tileSize*2);
+        up2 = setup("/res/player/hakobe/Walk back-2", gp.tileSize*2, gp.tileSize*2);
+        down1 = setup("/res/player/hakobe/Walk front-1", gp.tileSize*2, gp.tileSize*2);
+        down2 = setup("/res/player/hakobe/Walk front-2", gp.tileSize*2, gp.tileSize*2);
+        left1 = setup("/res/player/hakobe/Walk Left-1", gp.tileSize*2, gp.tileSize*2);
+        left2 = setup("/res/player/hakobe/Walk Left-2", gp.tileSize*2, gp.tileSize*2);
+        right1 = setup("/res/player/hakobe/Walk Right-1", gp.tileSize*2, gp.tileSize*2);
+        right2 = setup("/res/player/hakobe/Walk Right-2", gp.tileSize*2, gp.tileSize*2);
 
     }
 
@@ -155,36 +155,36 @@ public class Player extends Entity {
 
     public void getAttackImage() {
         if (currentWeapon.type == type_sword) {
-            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize * 4);
-            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize, gp.tileSize * 4);
-            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize, gp.tileSize * 4);
-            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize * 4);
-            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 4, gp.tileSize);
-            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 4, gp.tileSize);
-            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 4, gp.tileSize);
-            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 4, gp.tileSize);
+            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize*2, gp.tileSize * 4);
+            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize*2, gp.tileSize * 4);
+            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize*2, gp.tileSize * 4);
+            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize*2, gp.tileSize * 4);
+            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 4, gp.tileSize*2);
+            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 4, gp.tileSize*2);
+            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 4, gp.tileSize*2);
+            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 4, gp.tileSize*2);
         }
 
         if (currentWeapon.type == type_axe) {
-            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize * 4);
-            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize, gp.tileSize * 4);
-            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize, gp.tileSize * 4);
-            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize * 4);
-            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 4, gp.tileSize);
-            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 4, gp.tileSize);
-            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 4, gp.tileSize);
-            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 4, gp.tileSize);
+            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize*2, gp.tileSize * 4);
+            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize*2, gp.tileSize * 4);
+            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize*2, gp.tileSize * 4);
+            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize*2, gp.tileSize * 4);
+            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 4, gp.tileSize*2);
+            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 4, gp.tileSize*2);
+            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 4, gp.tileSize*2);
+            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 4, gp.tileSize*2);
         }
 
         if (currentWeapon.type == type_pickaxe) {
-            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize * 4);
-            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize, gp.tileSize * 4);
-            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize, gp.tileSize * 4);
-            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize * 4);
-            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 4, gp.tileSize);
-            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 4, gp.tileSize);
-            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 4, gp.tileSize);
-            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 4, gp.tileSize);
+            attackUp1 = setup("/res/player/hakobe/up1", gp.tileSize*2, gp.tileSize * 4);
+            attackUp2 = setup("/res/player/hakobe/up2", gp.tileSize*2, gp.tileSize * 4);
+            attackDown1 = setup("/res/player/hakobe/down1", gp.tileSize*2, gp.tileSize * 4);
+            attackDown2 = setup("/res/player/hakobe/down2", gp.tileSize*2, gp.tileSize * 4);
+            attackLeft1 = setup("/res/player/hakobe/left1", gp.tileSize * 4, gp.tileSize*2);
+            attackLeft2 = setup("/res/player/hakobe/left2", gp.tileSize * 4, gp.tileSize*2);
+            attackRight1 = setup("/res/player/hakobe/right1", gp.tileSize * 4, gp.tileSize*2);
+            attackRight2 = setup("/res/player/hakobe/right2", gp.tileSize * 4, gp.tileSize*2);
         }
     }
 
