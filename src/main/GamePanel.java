@@ -95,6 +95,8 @@ public class GamePanel extends JPanel implements Runnable {
     //Others
     public boolean bossBattleOn = false;
 
+    public CutsceneManager csManager = new CutsceneManager(this);
+
     public GamePanel() {
         // Size of panel
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
