@@ -180,7 +180,8 @@ public class TileManager {
 //
 //            setup(i, fileName, collision);
 //        }
-                setup(0, "/pics/tiles/master tiles/001.png", true);
+
+            setup(0, "/pics/tiles/master tiles/001.png", true);
             setup(1, "/pics/tiles/master tiles/002.png", true);
             setup(2, "/pics/tiles/master tiles/003.png", true);
             setup(3, "/pics/tiles/master tiles/004.png", true);
