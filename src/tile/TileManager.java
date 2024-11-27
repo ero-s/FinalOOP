@@ -158,6 +158,7 @@ public class TileManager {
             }
         }
     }
+
     public void drawPath(Graphics2D g2){
         g2.setColor(new Color(255, 0, 0, 70));
 
