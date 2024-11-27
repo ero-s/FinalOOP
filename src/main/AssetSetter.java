@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_Andres;
 import entity.NPC_BigRock;
 import entity.NPC_Merchant;
 import entity.NPC_OldMan;
@@ -93,6 +94,11 @@ public class AssetSetter {
         gp.npc[mapNum][i] = new NPC_OldMan(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize * 21;
         gp.npc[mapNum][i].worldY = gp.tileSize * 21;
+        i++;
+
+        gp.npc[mapNum][i] = new NPC_Andres(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize * 13;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 14;
         i++;
 
         // MAP 1

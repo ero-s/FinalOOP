@@ -24,6 +24,14 @@ public class OBJ_Smash extends Projectile {
         knockBackPower = 5;
         useCost = 2;
         alive = false;
+
+        solidArea = new Rectangle();
+        solidArea.x = 0;
+        solidArea.y = 0;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 128;
+        solidArea.height = 128;
     }
 
 

@@ -1,6 +1,7 @@
 package entity;
 
 import main.GamePanel;
+import object.OBJ_Smash;
 
 public class Projectile extends Entity {
     Entity user;
@@ -47,7 +48,15 @@ public class Projectile extends Entity {
         }
 
         life--;
-        if (life <= 0) { alive = false; }
+        if(life == 1){
+            if(gp.keyH.skill1Pressed && skill1.alive){
+                gp.g2.fillRect(skill1.solidArea.x,skill1.solidArea.y,skill1.solidArea.width, skill1.solidArea.height);
+            }
+        }
+        if (life <= 0) {
+            alive = false;
+
+        }
 
         spriteCounter++;
         if (spriteCounter > 12) {

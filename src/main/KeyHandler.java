@@ -34,7 +34,7 @@ public class KeyHandler implements KeyListener {
         else if (gp.gameState == gp.pauseState) { pauseState(code); }
 
         // DIALOGUE STATE
-        else if (gp.gameState == gp.dialogueState) { dialogueState(code); }
+        else if (gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState) { dialogueState(code); }
 
         // CHARACTER STATE
         else if (gp.gameState == gp.characterState) { characterState(code); }
@@ -337,7 +337,7 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
                 gp.resetGame(false);
-                gp.playMusic(0);
+//                gp.playMusic(0);
             } else if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;
                 gp.resetGame(true);

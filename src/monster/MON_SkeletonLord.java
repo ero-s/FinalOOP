@@ -105,7 +105,6 @@ public class MON_SkeletonLord extends Entity {
         }
 
     }
-
     public void setAction() {
 
         if(!inRage && life < maxLife/2){

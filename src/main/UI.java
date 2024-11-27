@@ -405,7 +405,6 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         x += gp.tileSize;
         y += gp.tileSize;
-
         if(npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null){
 //            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
 
@@ -420,7 +419,7 @@ public class UI {
             if(gp.keyH.enterPressed){
                 charIndex = 0;
                 combinedText = "";
-                if(gp.gameState == gp.dialogueState){
+                if(gp.gameState == gp.dialogueState && gp.gameState == gp.cutsceneState){
                     npc.dialogueIndex++;
                     gp.keyH.enterPressed = false;
                 }
@@ -430,6 +429,9 @@ public class UI {
             npc.dialogueIndex = 0;
             if(gp.gameState == gp.dialogueState){
                 gp.gameState = gp.playState;
+            }
+            if(gp.gameState == gp.cutsceneState){
+                gp.csManager.scenePhase++;
             }
         }
 

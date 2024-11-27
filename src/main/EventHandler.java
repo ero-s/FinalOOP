@@ -178,12 +178,4 @@ public class EventHandler {
             entity.speak();
         }
     }
-
-//    public void skeletonLord() {
-//
-//        if (gp.bossBattleOn == false) {
-//            gp.gameState = gp.cutsceneState;
-//            gp.csManager.sceneNum = gp.csManager.skeletonLord;
-//        }
-//    }
 }

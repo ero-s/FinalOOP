@@ -13,6 +13,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    private int manaRegenCounter = 0;
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
     int standCounter;
@@ -196,6 +197,11 @@ public class Player extends Entity {
     }
 
     public void update() {
+        if(manaRegenCounter >= 600){
+            mana++;
+            manaRegenCounter = 0;
+        }
+        manaRegenCounter++;
 
         if (knockBack) {
 
@@ -625,12 +631,16 @@ public class Player extends Entity {
         if (transparent) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
+        if(drawing){
+            g2.drawImage(image, tempScreenX, tempScreenY, null);
+        }
 
-        g2.drawImage(image, tempScreenX, tempScreenY, null);
         g2.setColor(Color.red);
         g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+        System.out.println("WorldX: "+gp.player.worldX / gp.tileSize +" WorldY: "+gp.player.worldY/gp.tileSize);
     }
 }

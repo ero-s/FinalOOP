@@ -12,6 +12,7 @@ public class Main {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Harvest Fest: A Brotherly Tale");
+        new Main().setIcon();
 
         // Call GamePanel
         GamePanel gamePanel = new GamePanel();
@@ -28,5 +29,9 @@ public class Main {
 
         gamePanel.setupGame();
         gamePanel.startGameThread();
+    }
+    public void setIcon() {
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("res/player/boy_attack_right_2.png"));
+        window.setIconImage(icon.getImage());
     }
 }

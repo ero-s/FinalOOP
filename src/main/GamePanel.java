@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
     int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen;
-    Graphics2D g2;
+    public Graphics2D g2;
     public boolean fullScreenOn = false;
 
     // FPS
@@ -62,13 +62,14 @@ public class GamePanel extends JPanel implements Runnable {
     public SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
     public EnvironmentManager eManager = new EnvironmentManager(this);
+    public CutsceneManager csManager = new CutsceneManager(this);
 
     // save
     public boolean hasSave;
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public Entity[][] obj = new Entity[maxMap][20];
-    public Entity[][] npc = new Entity[maxMap][10];
+    public Entity[][] npc = new Entity[maxMap][20];
     public Entity[][] monster = new Entity[maxMap][20];
     public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
     public Entity[][] projectile = new Entity[maxMap][20];
@@ -118,7 +119,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setInteractiveTile();
-        eManager.setup();
+//        eManager.setup();
         gameState = titleState;
 
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
@@ -130,6 +131,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void resetGame(boolean restart){
+        stopMusic();
         player.setDefaultPositions();
         player.restoreStatus();
         aSetter.setNPC();
@@ -245,7 +247,7 @@ public class GamePanel extends JPanel implements Runnable {
                     iTile[currentMap][i].update();
                 }
             }
-            eManager.update();
+//            eManager.update();
         }
 
 
@@ -323,7 +325,10 @@ public class GamePanel extends JPanel implements Runnable {
             entityList.clear();
 
             //Environment
-            eManager.draw(g2);
+//            eManager.draw(g2);
+
+            //Cutscene
+            csManager.draw(g2);
 
             // UI
             ui.draw(g2);
@@ -340,7 +345,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void playMusic(int i) {
         music.setFile(i);
-        music.play();
+//        music.play();
         music.loop();
     }
 

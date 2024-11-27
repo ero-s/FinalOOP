@@ -83,63 +83,63 @@ public class Lighting {
         dayState = day;
         filterAlpha = 0f;
     }
-    public void update(){
-        if(gp.player.lightUpdated){
-            setLightSource();
-            gp.player.lightUpdated = false;
-        }
-        // Check the state of the day
-        if (dayState == day) {
-            dayCounter++;
-
-            if (dayCounter > 36000) {
-                dayState = dusk;
-                dayCounter = 0;
-            }
-        }
-
-        if (dayState == dusk) {
-            filterAlpha += 0.001f;
-
-            if (filterAlpha > 1f) {
-                filterAlpha = 1f;
-                dayState = night;
-            }
-        }
-
-        if (dayState == night) {
-            dayCounter++;
-
-            if (dayCounter > 36000) {
-                dayState = dawn;
-                dayCounter = 0;
-            }
-        }
-        if (dayState == dawn){
-            filterAlpha -= 0.001f;
-
-            if(filterAlpha < 0f){
-                filterAlpha = 0f;
-                dayState = day;
-            }
-        }
-    }
-    public void draw(Graphics2D g2) {
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
-        g2.drawImage(darknessFilter, 0, 0, null);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
-        // DEBUG
-        String situation = "";
-
-        switch (dayState) {
-            case day: situation = "Day";break;
-            case dusk: situation = "Dusk";break;
-            case night: situation = "Night";break;
-            case dawn: situation = "Dawn";break;
-        }
-        g2.setColor(Color.white);
-        g2.setFont(g2.getFont().deriveFont(50f));
-        g2.drawString(situation, 800, 500);
-    }
+//    public void update(){                                           // comment out lighting class update
+//        if(gp.player.lightUpdated){
+//            setLightSource();
+//            gp.player.lightUpdated = false;
+//        }
+//        // Check the state of the day
+//        if (dayState == day) {
+//            dayCounter++;
+//
+//            if (dayCounter > 36000) {
+//                dayState = dusk;
+//                dayCounter = 0;
+//            }
+//        }
+//
+//        if (dayState == dusk) {
+//            filterAlpha += 0.001f;
+//
+//            if (filterAlpha > 1f) {
+//                filterAlpha = 1f;
+//                dayState = night;
+//            }
+//        }
+//
+//        if (dayState == night) {
+//            dayCounter++;
+//
+//            if (dayCounter > 36000) {
+//                dayState = dawn;
+//                dayCounter = 0;
+//            }
+//        }
+//        if (dayState == dawn){
+//            filterAlpha -= 0.001f;
+//
+//            if(filterAlpha < 0f){
+//                filterAlpha = 0f;
+//                dayState = day;
+//            }
+//        }
+//    }
+//    public void draw(Graphics2D g2) {
+//        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
+//        g2.drawImage(darknessFilter, 0, 0, null);
+//        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+//
+//        // DEBUG
+//        String situation = "";
+//
+//        switch (dayState) {
+//            case day: situation = "Day";break;
+//            case dusk: situation = "Dusk";break;
+//            case night: situation = "Night";break;
+//            case dawn: situation = "Dawn";break;
+//        }
+//        g2.setColor(Color.white);
+//        g2.setFont(g2.getFont().deriveFont(50f));
+//        g2.drawString(situation, 800, 500);
+//    }
 }

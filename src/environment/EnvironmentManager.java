@@ -11,14 +11,14 @@ public class EnvironmentManager {
         this.gp = gp;
     }
 
-    public void setup() {
-        lighting = new Lighting(gp); // at circleSize 750, faint white circle shows up
-    }
-    public void update(){
-        lighting.update();
-    }
-
-    public void draw(Graphics2D g2) {
-        lighting.draw(g2);
-    }
+//    public void setup() {
+//        lighting = new Lighting(gp); // at circleSize 750, faint white circle shows up
+//    }
+//    public void update(){
+//        lighting.update();
+//    }
+//
+//    public void draw(Graphics2D g2) {
+//        lighting.draw(g2);
+//    }
 }
