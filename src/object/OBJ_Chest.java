@@ -38,7 +38,7 @@ public class OBJ_Chest extends Entity {
         if (!opened) {
             gp.playSE(3);
 
-            if (loot != null && gp.player.canObtainItem(loot)) {
+            if (loot != null && !gp.player.canObtainItem(loot)) {
                 startDialogue(this, 0);
             } else {
                 startDialogue(this, 1);
