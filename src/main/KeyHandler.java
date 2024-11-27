@@ -75,6 +75,7 @@ public class KeyHandler implements KeyListener {
                         gp.saveLoad.setHasSave(false);
                         // gp.gameState = gp.cutsceneState
                         gp.gameState = gp.playState;
+                        gp.playMusic(0);
                     }
                 }
 
@@ -118,6 +119,7 @@ public class KeyHandler implements KeyListener {
                     gp.saveLoad.setHasSave(false);
                     // gp.gameState = gp.cutsceneState
                     gp.gameState = gp.playState;
+                    gp.playMusic(0);
                     gp.ui.titleScreenState = 0;
                 }
             }

@@ -19,7 +19,5 @@ public class CutsceneManager {
 
     public void draw(Graphics2D g2) {
         this.g2 = g2;
-
-
     }
 }
