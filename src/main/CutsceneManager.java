@@ -1,5 +1,6 @@
 package main;
 
+import object.OBJ_BlueHeart;
 import object.OBJ_Door_Iron;
 import object.OBJ_Shield_Blue;
 
@@ -135,11 +136,14 @@ public class CutsceneManager {
 //        }
 //    }
     public void scene_ending(){
+        if(gp.keyH.escapePressed){
+            gp.gameState = gp.titleState;
+        }
 
         if(scenePhase == 0){
 
             gp.stopMusic();
-            gp.ui.npc = new OBJ_Shield_Blue(gp);
+            gp.ui.npc = new OBJ_BlueHeart(gp);
             scenePhase++;
         }
 
@@ -157,7 +161,7 @@ public class CutsceneManager {
         if(scenePhase == 3){
 
             //Wait until the sound effect ends
-            if(counterReached(300) == true){
+            if(counterReached(150)){
                 scenePhase++;
             }
         }
@@ -192,55 +196,48 @@ public class CutsceneManager {
                     + "The Blue Boy's adventure has just begun.";
             drawString(alpha, 38f, 200, text, 70);
 
-            if(counterReached(600) == true){
+            if(counterReached(400)){
                 gp.playMusic(0);
                 scenePhase++;
             }
         }
 
         if(scenePhase == 6){
-
             drawBlackBackground(1f);
-
             drawString(1f, 120f, gp.screenHeight/2, "Blue Boy Adventure", 40);
-
-            if(counterReached(480) == true){
+            if(counterReached(480)){
                 scenePhase++;
             }
         }
 
         if(scenePhase == 7){
-
             drawBlackBackground(1f);
-
             y = gp.screenHeight/2;
             drawString(1f, 38f, gp.screenHeight/2, endCredit, 40);
-
-            if(counterReached(480) == true){
+            if(counterReached(480)){
                 scenePhase++;
             }
         }
 
         if(scenePhase == 8){
-
             drawBlackBackground(1f);
-
             //Scrolling the credit
             y--;
             drawString(1f, 38f, y, endCredit, 40);
+            scenePhase++;
+        }
+        if(scenePhase == 9){
+            gp.gameState = gp.titleState;
         }
     }
 
     public boolean counterReached(int target){
-
         boolean counterReached = false;
-
         counter++;
         if(counter > target){
             counterReached = true;
             counter = 0;
         }
-
         return counterReached;
     }
     public void drawBlackBackground(float alpha){
