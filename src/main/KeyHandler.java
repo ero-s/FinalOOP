@@ -177,7 +177,7 @@ public class KeyHandler implements KeyListener {
         }
 
         if(code == KeyEvent.VK_1){
-            shotKeyPressed = true;
+            skill1Pressed = true;
         }
 
         //Options
@@ -493,7 +493,7 @@ public class KeyHandler implements KeyListener {
         }
 
         if(code == KeyEvent.VK_1){
-            shotKeyPressed = false;
+            skill1Pressed = false;
         }
 
     }

@@ -88,23 +88,13 @@ public class EventHandler {
             }
 
             // TO THE DUNGEON
-            else if (hit(0, 12, 9, "any")){
-                teleport(2, 9, 41);
+            else if (hit(0, 41, 15, "any")){
+                teleport(4, 25, 23);
             }
 
             // OUTSIDE OF DUNGEON
-            else if(hit(2,9,41,"any")){
-                teleport(0, 12, 9);
-            }
-
-            // FLOOR 2 DUNGEON
-            else if(hit(2,8,7,"any")){
-                teleport(3,26,41);
-            }
-
-            // FLOOR 1 DUNGEON
-            else if(hit(3,26,41, "any")){
-                teleport(2,8,7);
+            else if(hit(4,25,23,"any")){
+                teleport(0, 41, 15);
             }
 
 //            //cutscene
@@ -114,31 +104,28 @@ public class EventHandler {
         }
     }
 
-    public boolean hit(int map, int col, int row, String reqDirection) {
+    public boolean hit(int map, int col, int row, String reqDirection){
         boolean hit = false;
+        if(map == gp.currentMap){
+            gp.player.mapCollision.x = gp.player.worldX + gp.player.mapCollision.x;
+            gp.player.mapCollision.y = gp.player.worldY + gp.player.mapCollision.y;
+            eventRect[map][col][row].x = col*gp.tileSize + eventRect[map][col][row].x;
+            eventRect[map][col][row].y = row*gp.tileSize + eventRect[map][col][row].y;
 
-        if (map == gp.currentMap) {
-            gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
-            gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
-            eventRect[map][col][row].x = col * gp.tileSize + eventRect[map][col][row].x;
-            eventRect[map][col][row].y = row * gp.tileSize + eventRect[map][col][row].y;
-
-            if (gp.player.solidArea.intersects(eventRect[map][col][row])
-                    && !eventRect[map][col][row].eventDone) {
-                if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
+            if(gp.player.mapCollision.intersects(eventRect[map][col][row]) && !eventRect[map][col][row].eventDone){
+                if(gp.player.direction.contentEquals(reqDirection)|| reqDirection.contentEquals("any")){
                     hit = true;
 
                     previousEventX = gp.player.worldX;
                     previousEventY = gp.player.worldY;
                 }
             }
+            gp.player.mapCollision.x = gp.player.mapCollisionDefaultX;
+            gp.player.mapCollision.y = gp.player.mapCollisionDefaultY;
 
-            gp.player.solidArea.x = gp.player.solidAreaDefaultX;
-            gp.player.solidArea.y = gp.player.solidAreaDefaultY;
             eventRect[map][col][row].x = eventRect[map][col][row].eventRectDefaultX;
             eventRect[map][col][row].y = eventRect[map][col][row].eventRectDefaultY;
         }
-
         return hit;
     }
 

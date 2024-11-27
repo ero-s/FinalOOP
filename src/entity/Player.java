@@ -17,6 +17,8 @@ public class Player extends Entity {
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
     int standCounter;
+    int manaRegen;
+    int hpRegen;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -33,13 +35,21 @@ public class Player extends Entity {
         solidArea.width = 24;
         solidArea.height = 30;
 
+        mapCollision = new Rectangle();
+        mapCollision.x = 0;
+        mapCollision.y = 0;
+        mapCollisionDefaultX = mapCollision.x;
+        mapCollisionDefaultY = mapCollision.y;
+        mapCollision.width = 64;
+        mapCollision.height = 64;
+
         setDefaultValues();
 
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 17;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 46;
+        worldY = gp.tileSize * 40;
         gp.currentMap = 0;
         defaultSpeed = 8;
         speed = defaultSpeed;
@@ -60,6 +70,7 @@ public class Player extends Entity {
         currentShield = new OBJ_Shield_Wood(gp);
         currentLight = null;
         projectile = new OBJ_Fireball(gp);
+        skill1 = new OBJ_Smash(gp);
         attack = getAttack();
         defense = getDefense();
 
@@ -335,6 +346,22 @@ public class Player extends Entity {
             gp.playSE(10);
         }
 
+        if(gp.keyH.skill1Pressed && !skill1.alive){
+            skill1.set(worldX, worldY, direction, true, this);
+
+            skill1.subtractResource(this);
+
+            // CHECK VACANCY
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if (gp.projectile[gp.currentMap][i] == null) {
+                    gp.projectile[gp.currentMap][i] = skill1;
+                    break;
+                }
+            }
+
+            shotAvailableCounter = 0;
+        }
+
         if (invincible) {
             invincibleCounter++;
             if (invincibleCounter > 60) {
@@ -347,6 +374,19 @@ public class Player extends Entity {
         if (shotAvailableCounter < 30) {
             shotAvailableCounter++;
         }
+
+        if(hpRegen == 300){
+            life++;
+            hpRegen = 0;
+        }
+
+        if(manaRegen == 180){
+            mana++;
+            manaRegen = 0;
+        }
+
+        hpRegen++;
+        manaRegen++;
 
         if (life > maxLife) {
             life = maxLife;
@@ -362,8 +402,6 @@ public class Player extends Entity {
                 gp.ui.commandNum = 0;
                 gp.stopMusic();
                 gp.playSE(12);
-
-
             }
         }
     }
@@ -638,6 +676,9 @@ public class Player extends Entity {
 
         g2.setColor(Color.red);
         g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+
+        g2.setColor(Color.green);
+        g2.drawRect(screenX + mapCollision.x, screenY + mapCollision.y, mapCollision.width, mapCollision.height);
 
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));

@@ -50,13 +50,13 @@ public class OBJ_Smash extends Projectile {
     }
 
     public Color getParticleColor() {
-        Color color = new Color(103, 68, 60);
+        Color color = new Color(103, 86, 83);
 
         return color;
     }
 
     public int getParticleSize() {
-        int size = 6;
+        int size = 12;
 
         return size;
     }
