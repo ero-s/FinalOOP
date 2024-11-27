@@ -6,6 +6,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import java.net.URL;
 
 public class Sound {
     Clip clip;
@@ -29,7 +30,7 @@ public class Sound {
         soundUrl[11] = getClass().getResource("/res/sound/cuttree.wav");
         soundUrl[12] = getClass().getResource("/res/sound/gameover.wav");
         soundUrl[13] = getClass().getResource("/res/sound/stairs.wav");
-        // sleep.wav
+        soundUrl[14] = getClass().getResource("/res/sound/sleep.wav");
         soundUrl[15] = getClass().getResource("/res/sound/blocked.wav");
         soundUrl[16] = getClass().getResource("/res/sound/parry.wav");
         soundUrl[17] = getClass().getResource("/res/sound/speak.wav");

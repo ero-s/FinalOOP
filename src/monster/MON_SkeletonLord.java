@@ -5,7 +5,6 @@ import main.GamePanel;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
-import object.OBJ_Rock;
 
 import java.util.Random;
 
@@ -30,6 +29,7 @@ public class MON_SkeletonLord extends Entity {
         defense = 2;
         exp = 50;
         knockBackPower = 5;
+        sleep = true;
 
         int size = gp.tileSize*5;
         solidArea.x = 48;
@@ -45,6 +45,12 @@ public class MON_SkeletonLord extends Entity {
 
         getImage();
         getAttackImage();
+    }
+
+    public void setDialogue() {
+        dialogues[0][0] = "No one can defeat me!";
+        dialogues[0][1] = "You shall suffer!";
+        dialogues[0][2] = "Weakling!";
     }
 
     public void getImage() {

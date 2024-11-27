@@ -2,6 +2,7 @@ package data;
 
 import entity.Entity;
 import main.GamePanel;
+import object.*;
 
 import java.io.*;
 
@@ -17,6 +18,35 @@ public class SaveLoad {
     public SaveLoad(GamePanel gp) {
         this.gp = gp;
         hasSave = false;
+    }
+    public Entity getObject(String itemName) {
+        Entity obj = null;
+
+        switch (itemName) {
+            // objects in the inventory
+            case CON_Cabbage.objName : obj = new CON_Cabbage(gp); break;
+            case CON_Carrot.objName : obj = new CON_Carrot(gp); break;
+            case OBJ_Axe.objName : obj = new OBJ_Axe(gp); break;
+            case OBJ_Boots.objName : obj = new OBJ_Boots(gp); break;
+            case OBJ_Chest.objName : obj = new OBJ_Chest(gp); break;
+            case OBJ_Coin_Bronze.objName : obj = new OBJ_Coin_Bronze(gp); break;
+            case OBJ_Door.objName : obj = new OBJ_Door(gp); break;
+            case OBJ_Door_Iron.objName : obj = new OBJ_Door_Iron(gp); break;
+            case OBJ_Fireball.objName : obj = new OBJ_Fireball(gp); break;
+            case OBJ_Heart.objName : obj = new OBJ_Heart(gp); break;
+            case OBJ_Key.objName : obj = new OBJ_Key(gp); break;
+            case OBJ_ManaCrystal.objName : obj = new OBJ_ManaCrystal(gp); break;
+            case OBJ_Pickaxe.objName : obj = new OBJ_Pickaxe(gp); break;
+            case OBJ_Potion_Red.objName : obj = new OBJ_Potion_Red(gp); break;
+            case OBJ_Projectile.objName : obj = new OBJ_Projectile(gp); break;
+            case OBJ_Rock.objName : obj = new OBJ_Rock(gp); break;
+            case OBJ_Shield_Blue.objName : obj = new OBJ_Shield_Blue(gp); break;
+            case OBJ_Shield_Wood.objName : obj = new OBJ_Shield_Wood(gp); break;
+            case OBJ_Sword_Normal.objName : obj = new OBJ_Sword_Normal(gp); break;
+            case OBJ_Lantern.objName: obj = new OBJ_Lantern(gp); break;
+            case OBJ_Tent.objName: obj = new OBJ_Tent(gp); break;
+        }
+        return obj;
     }
 
     private boolean saveIsLoaded() {
@@ -34,10 +64,9 @@ public class SaveLoad {
             hasSave = false; // No valid save data
             return false;
         }
-
         return true;
-    }
 
+    }
     private void readSave() {
         File saveFile = new File("src/data/save.dat");
 
@@ -85,12 +114,16 @@ public class SaveLoad {
             ds.setAttack(gp.player.attack);
             ds.setDefense(gp.player.defense);
             ds.setExp(gp.player.exp);
+            ds.setCurrentMap(gp.currentMap);
+            ds.setCurrX(gp.player.worldX);
+            ds.setCurrY(gp.player.worldY);
             ds.setNextLevelExp(gp.player.nextLevelExp);
             ds.setMotion1_duration(gp.player.getMotion1_duration());
             ds.setMotion2_duration(gp.player.getMotion2_duration());
             ds.setHasSave(true);
 
             // player inventory
+
             for (int i = 0; i < gp.player.inventory.size(); i++) {
                 System.out.println("item loaded!");
                 ds.getItemNames().add(gp.player.inventory.get(i).name);
@@ -101,24 +134,21 @@ public class SaveLoad {
             ds.setCurrentWeaponSlot(gp.player.getCurrentWeaponSlot());
             ds.setCurrentShieldSlot(gp.player.getCurrentShieldSlot());
 
-            // objects on map
-            ds.mapObjectNames = new String[gp.maxMap][gp.obj[1].length];
-            ds.mapObjectWorldX = new int[gp.maxMap][gp.obj[1].length];
-            ds.mapObjectWorldY = new int[gp.maxMap][gp.obj[1].length];
-            ds.mapObjectOpened = new boolean[gp.maxMap][gp.obj[1].length];
+            //OBJECTS ON MAP
+            ds.mapObjectNames = new String[gp.maxMap][gp.obj[gp.currentMap].length];
+            ds.mapObjectWorldX = new int[gp.maxMap][gp.obj[gp.currentMap].length];
+            ds.mapObjectWorldY = new int[gp.maxMap][gp.obj[gp.currentMap].length];
+            ds.mapObjectLootNames = new String[gp.maxMap][gp.obj[gp.currentMap].length];
+            ds.mapObjectOpened = new boolean[gp.maxMap][gp.obj[gp.currentMap].length];
 
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
-
                 for (int i = 0; i < gp.obj[1].length; i++) {
-
                     if (gp.obj[mapNum][i] == null) {
                         ds.mapObjectNames[mapNum][i] = "NA";
                     } else {
                         ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].name;
                         ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
                         ds.mapObjectWorldY[mapNum][i] = gp.obj[mapNum][i].worldY;
-
-                        // NOT DONE (LOOKING FOR LOOT)
                         if (gp.obj[mapNum][i].loot != null) {
                             ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.name;
                         }
@@ -126,6 +156,7 @@ public class SaveLoad {
                     }
                 }
             }
+
             oos.writeObject(ds);
             oos.close();
 
@@ -164,10 +195,14 @@ public class SaveLoad {
             gp.player.setDexterity(ds.getDexterity());
             gp.player.setMotion1_duration(ds.getMotion1_duration());
             gp.player.setMotion2_duration(ds.getMotion2_duration());
+            gp.player.worldX = ds.getCurrX();
+            gp.player.worldY = ds.getCurrY();
+            gp.currentMap = ds.getCurrentMap();
             setHasSave(gp.getHasSave());
 
             // PLAYER INVENTORY
             gp.player.inventory.clear(); // clears out the default items
+
             for (int i = 0; i < ds.getItemNames().size(); i++) {
                 gp.player.inventory.add(gp.eGenerator.getObject(ds.getItemNames().get(i)));
                 gp.player.inventory.get(i).amount = ds.getItemAmounts().get(i);
@@ -178,36 +213,28 @@ public class SaveLoad {
             gp.player.setCurrentShield(gp.player.inventory.get(ds.getCurrentShieldSlot()));
             // theres a getter for attack, dmg, attack image (waiting)
 
-            // objects on map
-
+            // OBJECTS ON MAP
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
-
-                for (int i = 0; i < gp.obj[1].length; i++) {
-
+                for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
                     if (ds.mapObjectNames[mapNum][i].equals("NA")) {
                         gp.obj[mapNum][i] = null;
                     } else {
-
-                        gp.obj[mapNum][i] = gp.eGenerator.getObject(ds.mapObjectNames[mapNum][i]);
+                        gp.obj[mapNum][i] =getObject(ds.mapObjectNames[mapNum][i]);
                         gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
                         gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
-
                         if (ds.mapObjectLootNames[mapNum][i] != null) {
-
                             gp.obj[mapNum][i].loot = gp.eGenerator.getObject(ds.mapObjectLootNames[mapNum][i]);
-
                         }
-
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
-
-                        if (gp.obj[mapNum][i].opened == true) {
+                        if (gp.obj[mapNum][i].opened) {
                             gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
                         }
                     }
                 }
             }
 
-            System.out.println("-Game loaded successfully.");
+
+            System.out.println("Game loaded successfully.");
 
             ois.close();
 

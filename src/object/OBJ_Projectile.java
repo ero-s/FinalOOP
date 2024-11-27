@@ -2,8 +2,9 @@ package object;
 
 import entity.Entity;
 import entity.Projectile;
-import java.awt.*;
 import main.GamePanel;
+
+import java.awt.*;
 
 public class OBJ_Projectile extends Projectile {
     GamePanel gp;

@@ -1,14 +1,9 @@
 package entity;
 
-import java.awt.Rectangle;
-
 import main.GamePanel;
-import object.OBJ_Axe;
-import object.OBJ_Key;
-import object.OBJ_Potion_Red;
-import object.OBJ_Shield_Blue;
-import object.OBJ_Shield_Wood;
-import object.OBJ_Sword_Normal;
+import object.*;
+
+import java.awt.*;
 
 public class NPC_Merchant extends Entity {
 

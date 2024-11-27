@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.UtilityTool;
+import monster.MON_SkeletonLord;
 
 public class Entity {
     GamePanel gp;
@@ -28,6 +29,7 @@ public class Entity {
     public String dialogues[][] = new String[20][20];
     public Entity attacker;
     public Entity linkedEntity;
+    public boolean temp = false;
 
     // STATE
     public int worldX, worldY;
@@ -50,6 +52,7 @@ public class Entity {
     public boolean inRage = false;
     public Entity loot;
     public boolean opened = false;
+    public boolean sleep = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -84,7 +87,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
-    public Projectile skill1;
+    public Entity currentLight;
     public boolean boss;
 
 
@@ -100,6 +103,7 @@ public class Entity {
     public int knockBackPower = 0;
     public boolean stackable;
     public int amount = 1;
+    public int lightRadius;
 
     // TYPE
     public int type;
@@ -112,7 +116,7 @@ public class Entity {
     public final int type_consumable = 6;
     public final int type_pickupOnly = 7;
     public final int type_obstacle = 8;
-    //
+    public final int type_light = 9;
     public final int type_pickaxe = 10;
 
     public Entity(GamePanel gp) { this.gp = gp; }
@@ -268,11 +272,8 @@ public class Entity {
     }
 
     public void update() {
-
         if (knockBack) {
-
             checkCollision();
-
             if (collisionOn) {
                 knockBackCounter = 0;
                 knockBack = false;
@@ -294,9 +295,7 @@ public class Entity {
                     case "right": worldX += speed; break;
                 }
             }
-
             knockBackCounter++;
-
             if (knockBackCounter == 10) {
                 knockBackCounter = 0;
                 knockBack = false;
@@ -305,7 +304,6 @@ public class Entity {
         } else if(attacking){
             attacking();
         }
-
         else {
             setAction();
             checkCollision();
@@ -319,7 +317,6 @@ public class Entity {
                     case "right": worldX += speed; break;
                 }
             }
-
             spriteCounter++;
             if (spriteCounter > 26) {
                 if (spriteNum == 1) {
@@ -330,8 +327,6 @@ public class Entity {
                 spriteCounter = 0;
             }
         }
-
-
         if (invincible) {
             invincibleCounter++;
             if (invincibleCounter > 40) {
@@ -351,6 +346,7 @@ public class Entity {
                 offBalanceCounter = 0;
             }
         }
+
     }
 
     public void checkAttackOrNot(int rate, int straight, int horizontal){
@@ -592,6 +588,14 @@ public class Entity {
         target.knockBack = true;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Entity entity = (Entity) obj;
+        return name.equals(entity.name) && type == entity.type;
+    }
+
     public boolean inCamera(){
         boolean inCamera = false;
 
@@ -676,7 +680,6 @@ public class Entity {
             int collisionBoxY = screenY - this.solidAreaDefaultY;
             g2.drawRect(collisionBoxX,collisionBoxY,this.solidArea.width, this.solidArea.height);
             changeAlpha(g2, 1f);
-
         }
         if(onPath && alive && !dying){
             gp.tileM.drawPath(g2);
@@ -819,10 +822,10 @@ public class Entity {
         int nextWorldY = user.getTopY();
 
         switch (user.direction) {
-            case "up": nextWorldY = user.getTopY() - 1; break;
-            case "down": nextWorldY = user.getBottomY() + 1; break;
-            case "left": nextWorldX = user.getLeftX() - 1; break;
-            case "right": nextWorldX = user.getRightX() + 1; break;
+            case "up": nextWorldY = user.getTopY() - gp.player.speed; break;
+            case "down": nextWorldY = user.getBottomY() + gp.player.speed; break;
+            case "left": nextWorldX = user.getLeftX() - gp.player.speed; break;
+            case "right": nextWorldX = user.getRightX() + gp.player.speed; break;
         }
 
         int col = nextWorldX / gp.tileSize;

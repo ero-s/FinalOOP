@@ -1,19 +1,15 @@
 package main;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
 import entity.Entity;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class UI {
     GamePanel gp;
@@ -111,6 +107,9 @@ public class UI {
 
         // TRADE STATE
         if (gp.gameState == gp.tradeState) { drawTradeScreen(); }
+
+        // SLEEP STATE
+        if (gp.gameState == gp.sleepState){ drawSleepScreen(); }
     }
 
     public void drawPlayerLife() {
@@ -264,6 +263,7 @@ public class UI {
             if (commandNum == 0) {
                 drawCarrot(x-64, y-64, 64,64);
                 if(gp.keyH.enterPressed){
+                    gp.saveLoad.save();
                     titleScreenState = 1;
                 }
             }
@@ -581,8 +581,9 @@ public class UI {
 
         // DRAW PLAYER'S ITEM
         for (int i = 0; i < entity.inventory.size(); i++) {
-            if (entity.inventory.get(i) == entity.currentWeapon
-                    || entity.inventory.get(i) == entity.currentShield) {
+            if (entity.inventory.get(i).equals(entity.currentWeapon)
+                    || entity.inventory.get(i).equals(entity.currentShield)
+                    ||entity.inventory.get(i).equals(entity.currentLight) ) {
                 g2.setColor(new Color(240, 190, 90));
                 g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
             }
@@ -680,7 +681,7 @@ public class UI {
         g2.drawString(text, x, y);
 
         if (commandNum == 0) {
-            g2.drawString(">", x - 40, y);
+            drawCarrot(x-gp.tileSize/2, y-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
         }
 
         // QUIT
@@ -690,7 +691,7 @@ public class UI {
         g2.drawString(text, x, y);
 
         if (commandNum == 1) {
-            g2.drawString(">", x - 40, y);
+            drawCarrot(x-gp.tileSize/2, y-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
         }
     }
 
@@ -755,7 +756,7 @@ public class UI {
         textY += gp.tileSize * 2;
         g2.drawString("Full Screen", textX, textY);
         if (commandNum == 0) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 if (!gp.fullScreenOn) {
@@ -771,21 +772,21 @@ public class UI {
         textY += gp.tileSize;
         g2.drawString("Music", textX, textY);
         if (commandNum == 1) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
         }
 
         // SOUND EFFECT
         textY += gp.tileSize;
         g2.drawString("SE", textX, textY);
         if (commandNum == 2) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
         }
 
         // CONTROL
         textY += gp.tileSize;
         g2.drawString("Control", textX, textY);
         if (commandNum == 3) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 subState = 2;
@@ -797,7 +798,7 @@ public class UI {
         textY += gp.tileSize;
         g2.drawString("Save", textX, textY);
         if (commandNum == 4) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 subState = 4; //saveGame
@@ -809,7 +810,7 @@ public class UI {
         textY += gp.tileSize;
         g2.drawString("End Game", textX, textY);
         if (commandNum == 5) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 subState = 3; // endGame
@@ -821,7 +822,7 @@ public class UI {
         textY += gp.tileSize;
         g2.drawString("Back", textX, textY);
         if (commandNum == 6) {
-            g2.drawString(">", textX - 25, textY);
+            drawCarrot(textX-gp.tileSize/2, textY-gp.tileSize/2, gp.tileSize/2, gp.tileSize/2);
 
             if (gp.keyH.enterPressed) {
                 gp.gameState = gp.playState;
@@ -1248,7 +1249,29 @@ public class UI {
 
         return itemIndex;
     }
+    public void drawSleepScreen() {
+        counter++;
+        if (counter < 120) {
+            gp.eManager.lighting.filterAlpha += 0.01f;
 
+            if (gp.eManager.lighting.filterAlpha > 1f) {
+                gp.eManager.lighting.filterAlpha = 1f;
+            }
+        }
+
+        if (counter >= 120) {
+            gp.eManager.lighting.filterAlpha -= 0.01f;
+
+            if (gp.eManager.lighting.filterAlpha <= 0f) {
+                gp.eManager.lighting.filterAlpha = 0f;
+                counter = 0;
+                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
+                gp.eManager.lighting.dayCounter = 0;
+                gp.gameState = gp.playState;
+                gp.player.getImage();
+            }
+        }
+    }
     public void drawSubWindow(int x, int y, int width, int height) {
         Color c = new Color(0, 0, 0, 210);
         g2.setColor(c);

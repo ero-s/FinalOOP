@@ -1,11 +1,12 @@
 package data;
 
-import javax.xml.crypto.Data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DataStorage implements Serializable {
+    boolean isHasSave = false;
 
+    public int coin;
     // encapsulated players stats
     private int life;
     private int maxLife;
@@ -18,8 +19,12 @@ public class DataStorage implements Serializable {
     private int defense;
     private int exp;
     private int nextLevelExp;
+    private int currentMap;
+    private int currX;
+    private int currY;
     private int motion1_duration;
     private int motion2_duration;
+
 
     // save identifier
     private boolean hasSave;
@@ -164,6 +169,18 @@ public class DataStorage implements Serializable {
     public void setExp(int exp) {
         this.exp = exp;
     }
+
+    public void setCurrX(int currX){this.currX = currX;}
+
+    public void setCurrY(int currY){this.currY = currY;}
+
+    public void setCurrentMap(int currentMap){this.currentMap = currentMap;}
+
+    public int getCurrX(){return currX;}
+
+    public int getCurrY(){return currY;}
+
+    public int getCurrentMap(){return currentMap;}
 
     public boolean getHasSave() {
         return hasSave;

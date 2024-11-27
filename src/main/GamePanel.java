@@ -17,6 +17,7 @@ import ai.PathFinder;
 import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
+import environment.EnvironmentManager;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
@@ -60,9 +61,10 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
+    public EnvironmentManager eManager = new EnvironmentManager(this);
 
     // save
-    private boolean hasSave;
+    public boolean hasSave;
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public Entity[][] obj = new Entity[maxMap][20];
@@ -85,6 +87,12 @@ public class GamePanel extends JPanel implements Runnable {
     public final int gameOverState = 6;
     public final int transitionState = 7;
     public final int tradeState = 8;
+    public final int sleepState = 9;
+
+    public final int cutsceneState = 11;
+
+    //Others
+    public boolean bossBattleOn = false;
 
     public GamePanel() {
         // Size of panel
@@ -110,6 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setInteractiveTile();
+        eManager.setup();
         gameState = titleState;
 
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
@@ -120,23 +129,20 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void retry() {
+    public void resetGame(boolean restart){
         player.setDefaultPositions();
-        player.restoreLifeAndMana();
+        player.restoreStatus();
         aSetter.setNPC();
         aSetter.setMonster();
+
+        if(restart){
+            aSetter.setObject();
+            aSetter.setInteractiveTile();
+            player.setDefaultValues();
+            eManager.lighting.resetDay();
+        }
     }
 
-    public void restart() {
-        player.setDefaultValues();
-        player.setDefaultPositions();
-        player.restoreLifeAndMana();
-        player.setItems();
-        aSetter.setObject();
-        aSetter.setNPC();
-        aSetter.setMonster();
-        aSetter.setInteractiveTile();
-    }
 
     public void setFullScreen() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -239,7 +245,9 @@ public class GamePanel extends JPanel implements Runnable {
                     iTile[currentMap][i].update();
                 }
             }
+            eManager.update();
         }
+
 
         if (gameState == pauseState) {
         }
@@ -314,6 +322,9 @@ public class GamePanel extends JPanel implements Runnable {
             // EMPTY ENTITIES
             entityList.clear();
 
+            //Environment
+            eManager.draw(g2);
+
             // UI
             ui.draw(g2);
 
@@ -333,7 +344,8 @@ public class GamePanel extends JPanel implements Runnable {
         music.loop();
     }
 
-    public void stopMusic() {
+    public void stopMusic(int i) {
+        music.setFile(i);
         music.stop();
     }
 
@@ -352,5 +364,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setHasSave(boolean hasSave) {
         this.hasSave = hasSave;
+    }
+
+    public void removeTempEntity() {
+        for (int mapNum = 0; mapNum < maxMap; mapNum++) {
+            for (int i = 0; i < obj[1].length; i++) {
+                if (obj[mapNum][i] != null && obj[mapNum][i].temp == true) {
+                    obj[mapNum][i] = null;
+                }
+            }
+        }
     }
 }

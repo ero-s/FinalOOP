@@ -6,11 +6,7 @@ import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
-import object.OBJ_Fireball;
-import object.OBJ_Key;
-import object.OBJ_Shield_Wood;
-import object.OBJ_Sword_Normal;
-import object.OBJ_Smash;
+import object.*;
 
 public class Player extends Entity {
     KeyHandler keyH;
@@ -18,6 +14,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    public boolean lightUpdated = false;
     int standCounter;
 
     public Player(GamePanel gp, KeyHandler keyH) {
@@ -28,19 +25,15 @@ public class Player extends Entity {
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
         solidArea = new Rectangle();
-        solidArea.x = 8;
+        solidArea.x = 12;
         solidArea.y = 16;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 32;
-        solidArea.height = 32;
+        solidArea.width = 24;
+        solidArea.height = 30;
 
         setDefaultValues();
-        getImage();
-        getAttackImage();
-        getGuardImage();
-        setItems();
-        setDialogue();
+
     }
 
     public void setDefaultValues() {
@@ -64,10 +57,16 @@ public class Player extends Entity {
         coin = 800;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
+        currentLight = null;
         projectile = new OBJ_Fireball(gp);
-        skill1 = new OBJ_Smash(gp);
         attack = getAttack();
         defense = getDefense();
+
+        getImage();
+        getAttackImage();
+        getGuardImage();
+        setItems();
+        setDialogue();
     }
 
     public void setDefaultPositions() {
@@ -77,11 +76,15 @@ public class Player extends Entity {
         direction = "down";
     }
 
-    public void restoreLifeAndMana() {
+    public void restoreStatus() {
         life = maxMana;
         mana = maxMana;
         invincible = false;
         transparent = false;
+        attacking = false;
+        guarding = false;
+        lightUpdated = true;
+        knockBack = false;
     }
 
     public void setItems() {
@@ -91,6 +94,8 @@ public class Player extends Entity {
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Lantern(gp));
+        inventory.add(new OBJ_Tent(gp));
     }
 
     public int getAttack() {
@@ -133,6 +138,18 @@ public class Player extends Entity {
         left2 = setup("/res/player/hakobe/Walk Left-2", gp.tileSize*2, gp.tileSize*2);
         right1 = setup("/res/player/hakobe/Walk Right-1", gp.tileSize*2, gp.tileSize*2);
         right2 = setup("/res/player/hakobe/Walk Right-2", gp.tileSize*2, gp.tileSize*2);
+
+    }
+
+    public void getSleepingImage(BufferedImage image) {
+        up1 = image;
+        up2 = image;
+        down1 = image;
+        down2 = image;
+        left1 = image;
+        left2 = image;
+        right1 = image;
+        right2 = image;
 
     }
 
@@ -334,12 +351,14 @@ public class Player extends Entity {
             mana = maxMana;
         }
 
-        if(!keyH.godModeOn){
+        if(!keyH.godModeOn) {
             if (life <= 0) {
                 gp.gameState = gp.gameOverState;
-                gp.ui.commandNum = -1;
-                gp.stopMusic();
+                gp.ui.commandNum = 0;
+                gp.stopMusic(1);
                 gp.playSE(12);
+
+
             }
         }
     }
@@ -490,6 +509,15 @@ public class Player extends Entity {
             if (selectedItem.type == type_shield) {
                 currentShield = selectedItem;
                 defense = getDefense();
+            }
+            if(selectedItem.type == type_light){
+                if(currentLight == selectedItem){
+                    currentLight = null;
+                }
+                else{
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
             }
 
             if (selectedItem.type == type_consumable) {
