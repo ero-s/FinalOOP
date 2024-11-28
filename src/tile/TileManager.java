@@ -30,6 +30,7 @@ public class TileManager {
 //         GETTING TILE NAMES AND COLLISION INFO FROM THE FILE
         String line;
 
+
         try {
             while((line = br.readLine()) != null){
                 fileNames.add(line);

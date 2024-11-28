@@ -97,6 +97,14 @@ public class EventHandler {
                 teleport(0, 41, 16);
             }
 
+            // FALL DUNGEON
+            // OUTSIDE OF DUNGEON
+            else if(hit(1,25,42,"any")){
+                teleport(5, 24, 28);
+            }
+
+
+
 
 
 //            //cutscene
