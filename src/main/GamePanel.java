@@ -17,7 +17,7 @@ import ai.PathFinder;
 import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
-import environment.EnvironmentManager;
+//import environment.EnvironmentManager;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
-    public EnvironmentManager eManager = new EnvironmentManager(this);
+    //public EnvironmentManager eManager = new EnvironmentManager(this);
 //    public CutsceneManager csManager = new CutsceneManager(this);
 
     // save

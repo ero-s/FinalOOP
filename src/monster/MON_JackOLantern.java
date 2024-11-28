@@ -47,6 +47,11 @@ public class MON_JackOLantern extends Entity {
         getImage();
     }
 
+    public void setDialogue() {
+        dialogues[0][0] = "The ecstacy ";
+
+    }
+
     public void getImage() {
 
         int i = 5;
@@ -58,6 +63,20 @@ public class MON_JackOLantern extends Entity {
         left2 = setup("/res/monster/jackolantern/left2", gp.tileSize*i, gp.tileSize*i);
         right1 = setup("/res/monster/jackolantern/right1", gp.tileSize*i, gp.tileSize*i);
         right2 = setup("/res/monster/jackolantern/right2", gp.tileSize*i, gp.tileSize*i);
+    }
+
+    public void setDialogue() {
+
+        dialogues[6][0] = "Jac was once known as a gifted performer, a child prodigy. Jac was once known";
+        dialogues[6][1] = "as a gifted performer, a child prodigy, and his family's pride and joy. As he grew";
+        dialogues[6][2] = "older, Jac’s parents showered him with expectations but rarely offered affection";
+        dialogues[6][3] = "or support. Instead of nurturing his talents, they demanded perfection, driving";
+        dialogues[6][4] = "him to practice relentlessly. Their indifference cut deeply, fostering a growing ";
+        dialogues[6][5] = "resentment within him. Jac felt like a mere prop in their show, overshadowed by";
+        dialogues[6][6] = "their brilliance and neglect. Years later he became the best ever performer there ";
+        dialogues[6][7] = "ever was but was blinded by his ideals which led to him enslaving people and ";
+        dialogues[6][8] = "making them suffer. This sadistic behavior was a boost to his ego, and this ";
+        dialogues[6][9] = "eventually started this cruel rule on the circus. ";
     }
 
     public void getAttackImage(){
@@ -72,6 +91,8 @@ public class MON_JackOLantern extends Entity {
         attackRight1 = setup("/res/monster/jackolantern/right1", gp.tileSize*i, gp.tileSize*i);
         attackRight2 = setup("/res/monster/jackolantern/right2", gp.tileSize*i, gp.tileSize*i);
     }
+
+    
 
     public void setAction() {
         if(!inRage && life < maxLife/2){

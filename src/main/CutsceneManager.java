@@ -48,8 +48,8 @@ public class CutsceneManager {
 
         switch(sceneNum) {
             //case skeletonLord: scene_skeletonLord(); break;
-            case ending: scene_ending(); break;
-            case opening: scene_opening(); break;
+            case ending: gp.saveLoad.save(); scene_ending(); break;
+            case opening: gp.saveLoad.save(); scene_opening(); break;
         }
     }
 
@@ -144,7 +144,9 @@ public class CutsceneManager {
 //        }
 //    }
     public void scene_ending(){
-        gp.saveLoad.save();
+        //scenePhase = 0;
+        //s
+        //gp.saveLoad.save();
         if(gp.keyH.escapePressed){
             scenePhase = 9;
             gp.gameState = gp.playState;
@@ -180,6 +182,7 @@ public class CutsceneManager {
 
             //The screen gets darker
             alpha += 0.005f;
+
             if(alpha > 1f){
                 alpha = 1f;
             }
@@ -246,11 +249,11 @@ public class CutsceneManager {
             scenePhase++;
         }
         if(scenePhase == 9){
-            gp.saveLoad.load();
+           gp.saveLoad.load();
         }
     }
     public void scene_opening(){
-        gp.saveLoad.save();
+        //gp.saveLoad.save();
         if(gp.keyH.escapePressed){
             scenePhase = 9;
             gp.gameState = gp.playState;
@@ -263,6 +266,7 @@ public class CutsceneManager {
             g2.fillRect(0,0, gp.maxScreenCol, gp.maxScreenRow);
             scenePhase++;
         }
+
 
         if(scenePhase == 1){
             //Display dialogues
