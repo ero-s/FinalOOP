@@ -24,11 +24,12 @@ public class MON_JackOLantern extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 120;
+        maxLife = 80;
         life = maxLife;
-        attack = 7;
-        defense = 0;
-        exp = 40;
+        attack = 12;
+        defense = 3;
+        exp = 50;
+        knockBackPower = 8;
         projectile = new OBJ_Rock(gp);
 
         int size = gp.tileSize*5;
