@@ -97,6 +97,8 @@ public class EventHandler {
                 teleport(0, 41, 16);
             }
 
+
+
 //            //cutscene
 //            else if (hit(3, 26, 41, "any") == true) {
 //                skeletonLord();

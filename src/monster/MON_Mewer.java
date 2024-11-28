@@ -44,14 +44,17 @@ public class MON_Mewer extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/mewer/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/mewer/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/mewer/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/mewer/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/mewer/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/mewer/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/mewer/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/mewer/right_2", gp.tileSize, gp.tileSize);
+
+        int i = 36;
+
+        up1 = setup("/res/monster/mewer/up1", gp.tileSize+i, gp.tileSize+i);
+        up2 = setup("/res/monster/mewer/up2", gp.tileSize+i, gp.tileSize+i);
+        down1 = setup("/res/monster/mewer/down1", gp.tileSize+i, gp.tileSize+i);
+        down2 = setup("/res/monster/mewer/down2", gp.tileSize+i, gp.tileSize+i);
+        left1 = setup("/res/monster/mewer/left1", gp.tileSize+i, gp.tileSize+i);
+        left2 = setup("/res/monster/mewer/left2", gp.tileSize+i, gp.tileSize+i);
+        right1 = setup("/res/monster/mewer/right1", gp.tileSize+i, gp.tileSize+i);
+        right2 = setup("/res/monster/mewer/right2", gp.tileSize+i, gp.tileSize+i);
     }
 
 //    public void getAttackImage(){

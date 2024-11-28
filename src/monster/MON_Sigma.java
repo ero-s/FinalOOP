@@ -44,14 +44,16 @@ public class MON_Sigma extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/sigma/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/sigma/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/sigma/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/sigma/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/sigma/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/sigma/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/sigma/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/sigma/right_2", gp.tileSize, gp.tileSize);
+
+        int i = 36;
+        up1 = setup("/res/monster/sigma/up1", gp.tileSize+i, gp.tileSize+i);
+        up2 = setup("/res/monster/sigma/up2", gp.tileSize+i, gp.tileSize+i);
+        down1 = setup("/res/monster/sigma/down1", gp.tileSize+i, gp.tileSize+i);
+        down2 = setup("/res/monster/sigma/down2", gp.tileSize+i, gp.tileSize+i);
+        left1 = setup("/res/monster/sigma/left1", gp.tileSize+i, gp.tileSize+i);
+        left2 = setup("/res/monster/sigma/left2", gp.tileSize+i, gp.tileSize+i);
+        right1 = setup("/res/monster/sigma/right1", gp.tileSize+i, gp.tileSize+i);
+        right2 = setup("/res/monster/sigma/right2", gp.tileSize+i, gp.tileSize+i);
     }
 
 //    public void getAttackImage(){

@@ -4,10 +4,7 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
-import object.OBJ_Coin_Bronze;
-import object.OBJ_Heart;
-import object.OBJ_ManaCrystal;
-import object.OBJ_Rock;
+import object.*;
 
 public class MON_PickleRick extends Entity {
 
@@ -26,9 +23,9 @@ public class MON_PickleRick extends Entity {
         speed = defaultSpeed;
         maxLife = 100;
         life = maxLife;
-        attack = 2;
+        attack = 7;
         defense = 0;
-        exp = 2;
+        exp = 30;
         projectile = new OBJ_Rock(gp);
 
         int size = gp.tileSize*5;
@@ -47,31 +44,39 @@ public class MON_PickleRick extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/picklerick/up1", gp.tileSize*2, gp.tileSize*2);
-        up2 = setup("/res/monster/picklerick/up2", gp.tileSize*2, gp.tileSize*2);
-        down1 = setup("/res/monster/picklerick/down1", gp.tileSize*2, gp.tileSize*2);
-        down2 = setup("/res/monster/picklerick/down2", gp.tileSize*2, gp.tileSize*2);
-        left1 = setup("/res/monster/picklerick/left1", gp.tileSize*2, gp.tileSize*2);
-        left2 = setup("/res/monster/picklerick/left2", gp.tileSize*2, gp.tileSize*2);
-        right1 = setup("/res/monster/picklerick/right1", gp.tileSize*2, gp.tileSize*2);
-        right2 = setup("/res/monster/picklerick/right2", gp.tileSize*2, gp.tileSize*2);
+        int i = 5;
+        up1 = setup("/res/monster/picklerick/up1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/monster/picklerick/up2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/monster/picklerick/down1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/monster/picklerick/down2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/monster/picklerick/left1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/monster/picklerick/left2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/monster/picklerick/right1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/monster/picklerick/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void setAction() {
-        if (onPath) {
+        if(!inRage && life < maxLife/2){
+            inRage = true;
+            getImage();
+            defaultSpeed++;
+            speed = defaultSpeed;
+            attack += 2;
+        }
 
-            // Search the direction to go
-            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
-
-            // Check if it shoots a projectile
-            checkShootOrNot(60, 20);
-
+        if (getTileDistance(gp.player) < 10) {
+            moveTowardPlayer(60);
         } else {
-            // Check if it starts chasing
-            checkStartChasingOrNot(gp.player, 15, 100);
 
             // Get a random direction
-            getRandomDirection(120);
+            getRandomDirection(60);
+            checkShootOrNot(200, 60);
+        }
+
+        // Check if it attacks
+        if(!attacking){
+            checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
+            checkShootOrNot(60,30);
         }
 
     }
@@ -83,16 +88,8 @@ public class MON_PickleRick extends Entity {
     }
 
     public void checkDrop() {
-        int i = new Random().nextInt(100) + 1;
 
-        if (i < 50) {
-            dropItem(new OBJ_Coin_Bronze(gp));
-        }
-        if (i >= 50 && i < 75) {
-            dropItem(new OBJ_Heart(gp));
-        }
-        if (i >= 75 && i < 100) {
-            dropItem(new OBJ_ManaCrystal(gp));
-        }
+        dropItem(new OBJ_BlueHeart(gp));
+
     }
 }
