@@ -46,6 +46,12 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize * 33;
         i++;
 
+        gp.npc[mapNum][i] = new NPC_Merchant(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 37;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 23;
+        i++;
+
         mapNum = 1;
         i = 0;
 
@@ -182,10 +188,6 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 18;
         i++;
 
-        gp.monster[mapNum][i] = new MON_Bat(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 27;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 18;
-        i++;
 
         gp.monster[mapNum][i] = new MON_Bat(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 27;
@@ -195,6 +197,16 @@ public class AssetSetter {
         gp.monster[mapNum][i] = new MON_Bat(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 27;
         gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 24;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
         i++;
     }
 

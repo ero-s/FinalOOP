@@ -152,20 +152,6 @@ public class TileManager {
 
                 g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 
-                if (currentTile.collision && currentTile != null) {
-                    g2.setColor(Color.red);
-                    g2.setStroke(new java.awt.BasicStroke(1));
-
-                    // Calculate the tile's collision box world position
-                    int collisionBoxX = screenX + currentTile.collisionBox.x;
-                    int collisionBoxY = screenY + currentTile.collisionBox.y;
-                    int collisionBoxWidth = currentTile.collisionBox.width;
-                    int collisionBoxHeight = currentTile.collisionBox.height;
-
-                    // Draw the tile's specific collision box
-                    g2.drawRect(collisionBoxX, collisionBoxY, collisionBoxWidth, collisionBoxHeight);
-                }
-
             }
 
             worldCol++;
