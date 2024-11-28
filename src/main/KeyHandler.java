@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -67,6 +68,8 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_ENTER){
                 if(gp.ui.commandNum == 0){ // new game
                     gp.gameState = gp.cutsceneState;
+                    gp.g2.setColor(Color.black);
+                    gp.g2.fillRect(0,0, gp.maxScreenCol, gp.maxScreenRow);
                     gp.csManager.sceneNum = gp.csManager.opening;
                 }
 

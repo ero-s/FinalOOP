@@ -245,7 +245,6 @@ public class CutsceneManager {
         if(gp.keyH.escapePressed){
             scenePhase = 9;
             gp.gameState = gp.playState;
-            gp.setupGame();
             gp.player.setDefaultValues();
 
         }
@@ -336,8 +335,8 @@ public class CutsceneManager {
             scenePhase++;
         }
         if(scenePhase == 9){
-            gp.setupGame();
-            gp.player.setDefaultValues();
+            gp.saveLoad.load();
+
         }
     }
 
