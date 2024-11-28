@@ -674,10 +674,6 @@ public class Entity {
 
             g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-            g2.setColor(Color.red);
-            int collisionBoxX = screenX - this.solidArea.x;
-            int collisionBoxY = screenY - this.solidArea.y;
-            g2.drawRect(collisionBoxX,collisionBoxY,this.solidArea.width, this.solidArea.height);
             changeAlpha(g2, 1f);
         }
         if(onPath && alive && !dying){
