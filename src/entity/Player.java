@@ -15,6 +15,7 @@ public class    Player extends Entity {
     public final int screenY;
     private int manaRegenCounter = 0;
     public boolean attackCanceled = false;
+    public int currentDialogueSet;
     public boolean lightUpdated = false;
     int standCounter;
     int manaRegen;
@@ -32,8 +33,8 @@ public class    Player extends Entity {
         solidArea.y = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 24;
-        solidArea.height = 30;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         mapCollision = new Rectangle();
         mapCollision.x = 0;
@@ -58,14 +59,15 @@ public class    Player extends Entity {
         // PLAYER STATUS
         level = 1;
         maxLife = 20;
+        maxMana = 5;
         life = maxLife;
-        setMana(maxMana);
-        setMana(maxMana);
+        mana = maxMana;
         strength = 5;
         dexterity = 1;
         exp = 0;
         nextLevelExp = 5;
         coin = 800;
+        currentDialogueSet = 1;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         currentLight = null;
@@ -524,6 +526,45 @@ public class    Player extends Entity {
         }
     }
     public void setDialogue(){
+        dialogues[1][0] = "At home, the brothers overhear their parents \narguing before their separation breaks ";
+        dialogues[1][1] = "them apart — Hakobe moves to the city, while\n Andres stays on the farm.";
+        dialogues[1][2] = " As their bond fades, Hakobe hears rumors \nof disappearances in Bukidgrown. ";
+        dialogues[1][3] = "After learning of a massacre in his \nhometown, he returns, sneaks past police,";
+        dialogues[1][4] = " and discovers a dungeon gate where he\n and Andres once played. Then Hakobe entered.";
+        dialogues[1][5] = "Ahead stands a castle, brimming with greed, a selfish king awaits";
+
+        dialogues[2][0] = "Pickle Rick! Your end has come! \nI bring the countless cries of your people";
+        dialogues[2][1] = "Your tyranny end today!.";
+
+        dialogues[3][0] = "Pickle Rick grew up in poverty which made him\n develop a strong obsession with money and power,";
+        dialogues[3][1] = "he witnessed the cruelty of the world, where\n those who are without wealth \nor power were mistreated.";
+        dialogues[3][2] = "This then sowed the seeds of in the future \nhe wanted to be the one who has power\n over everything and makes people do his bidding.";
+        dialogues[3][3] = "He then fell in love, but the woman he \nloved was taken away and became a slave;";
+        dialogues[3][4] = "he became more powerless because \nhe was incapable of buying her.";
+        dialogues[3][5] = "He worked tirelessly desperately trying \nto earn money, but she was murdered one day.";
+        dialogues[3][6] = "This led Pickle Rick to bear more anger in\n the world which made him \nstart enslaving people";
+        dialogues[3][7] = "and letting them work tirelessly like he did.";
+        dialogues[3][8] = "He was mad at the world that\n he made others suffer like he did.";
+        dialogues[3][9] = "North of where summer thrives, a town of scares lies.";
+        dialogues[3][10] = "A being of immense power lays dormant, ruling with fear";
+        dialogues[3][11] = "Jack O' Lantern waits for your arrival";
+
+        dialogues[4][0] = "Hakobe and Pugtato reach the Fall Circus, on a mission to find the ringmaster";
+        dialogues[4][0] = "Hakobe and Pugtato reach the Fall Circus, on a mission to find the ringmaster";
+
+
+
+        dialogues[6][0] = "Jac was once known as a gifted performer,\n a child prodigy. Jac was once known";
+        dialogues[6][1] = "as a gifted performer, a child prodigy, \nand his family's pride and joy. As he grew";
+        dialogues[6][2] = "older, Jac’s parents showered him with\n expectations but rarely offered affection";
+        dialogues[6][3] = "or support. Instead of nurturing his talents,\n they demanded perfection, driving";
+        dialogues[6][4] = "him to practice relentlessly. \nTheir indifference cut deeply, fostering a growing ";
+        dialogues[6][5] = "resentment within him.\n Jac felt like a mere prop in their show, overshadowed by";
+        dialogues[6][6] = "their brilliance and neglect. \nYears later he became the best ever performer there ";
+        dialogues[6][7] = "ever was but was blinded by his ideals\n which led to him enslaving people and ";
+        dialogues[6][8] = "making them suffer. This sadistic behavior\n was a boost to his ego, and this ";
+        dialogues[6][9] = "eventually started this cruel rule on the circus. ";
+
 
     }
 
@@ -662,10 +703,7 @@ public class    Player extends Entity {
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
-        System.out.println("WorldX: "+gp.player.worldX / gp.tileSize +" WorldY: "+gp.player.worldY/gp.tileSize);
     }
 }

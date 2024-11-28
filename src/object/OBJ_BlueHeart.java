@@ -19,10 +19,12 @@ public class OBJ_BlueHeart extends Entity {
     public void setDialogues() {
         dialogues[0][0] = "You pick up a beautiful blue gem.";
         dialogues[0][1] = "You find the Blue Heart, the legendary treasure!";
+        dialogues[0][2] = "It holds the remembrance of King Pickle Rick!";
+        dialogues[0][3] = "See his throne for his essence.";
     }
     public boolean use(Entity entity){
-        gp.gameState = gp.cutsceneState;
-        gp.csManager.sceneNum = gp.csManager.ending;
+        startDialogue(this, 0
+        );
         return true;
     }
 }

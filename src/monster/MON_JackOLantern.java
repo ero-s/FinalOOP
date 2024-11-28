@@ -47,6 +47,11 @@ public class MON_JackOLantern extends Entity {
         getImage();
     }
 
+    public void setDialogue() {
+        dialogues[0][0] = "The ecstacy ";
+
+    }
+
     public void getImage() {
 
         int i = 5;
@@ -73,9 +78,12 @@ public class MON_JackOLantern extends Entity {
         attackRight2 = setup("/res/monster/jackolantern/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
+    
+
     public void setAction() {
         if(!inRage && life < maxLife/2){
             inRage = true;
+
             getImage();
             defaultSpeed++;
             speed = defaultSpeed;

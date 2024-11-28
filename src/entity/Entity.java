@@ -350,8 +350,6 @@ public class Entity {
                 }
             }
         }
-
-        System.out.println(gp.player.worldX/gp.tileSize + " " + gp.player.worldY/gp.tileSize);
     }
 
     public void checkAttackOrNot(int rate, int straight, int horizontal){
@@ -675,9 +673,6 @@ public class Entity {
             g2.drawImage(image, tempScreenX, tempScreenY, null);
 
             changeAlpha(g2, 1f);
-        }
-        if(onPath && alive && !dying){
-            gp.tileM.drawPath(g2);
         }
     }
 
