@@ -8,7 +8,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import object.*;
 
-public class Player extends Entity {
+public class    Player extends Entity {
     KeyHandler keyH;
 
     public final int screenX;
@@ -59,8 +59,8 @@ public class Player extends Entity {
         level = 1;
         maxLife = 20;
         life = maxLife;
-        maxMana = 4;
-        mana = maxMana;
+        setMana(maxMana);
+        setMana(maxMana);
         strength = 5;
         dexterity = 1;
         exp = 0;
@@ -351,22 +351,6 @@ public class Player extends Entity {
             gp.playSE(10);
         }
 
-        if(gp.keyH.skill1Pressed && !skill1.alive){
-            skill1.set(worldX, worldY, direction, true, this);
-
-            skill1.subtractResource(this);
-
-            // CHECK VACANCY
-            for (int i = 0; i < gp.projectile[1].length; i++) {
-                if (gp.projectile[gp.currentMap][i] == null) {
-                    gp.projectile[gp.currentMap][i] = skill1;
-                    break;
-                }
-            }
-
-            shotAvailableCounter = 0;
-        }
-
         if (invincible) {
             invincibleCounter++;
             if (invincibleCounter > 60) {
@@ -393,12 +377,12 @@ public class Player extends Entity {
         hpRegen++;
         manaRegen++;
 
-        if (life > maxLife) {
-            life = maxLife;
+        if (getLife() > getMaxLife()) {
+            setLife(getMaxLife());
         }
 
-        if (mana > maxMana) {
-            mana = maxMana;
+        if (getMana() > getMaxMana()) {
+            setMana(getMaxMana());
         }
 
         if(!keyH.godModeOn) {
