@@ -43,8 +43,6 @@ public class NPC_CoffeeBean extends Entity {
         dialogues[0][1] = "Give me back what you’ve seized.\n";
         dialogues[0][2] = "It is our family’s treasure.\n";
         dialogues[0][3] = "I can’t take this anymore… They are asking for too much.\n";
-
-
     }
 
     public void setAction() {
