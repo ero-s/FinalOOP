@@ -92,6 +92,19 @@ public class EventHandler {
                 }
             }
 
+            //Confronting PickleRick
+            else if(hit(4, 21, 20, "any")
+                    || hit(4, 22, 20, "any")
+                    || hit(4, 23, 20, "any")
+                    || hit(4, 24, 20, "any")
+                    || hit(4, 25, 20, "any")){
+                if(gp.player.currentDialogueSet == 3){
+
+                    gp.player.startDialogue(gp.player, gp.player.currentDialogueSet);
+                    gp.player.currentDialogueSet++;
+                }
+            }
+
             // DRINK RECOVERING
             else if (hit(0, 23, 12, "up")) {
                 healingPool(gp.dialogueState);

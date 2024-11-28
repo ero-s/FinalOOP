@@ -536,6 +536,17 @@ public class    Player extends Entity {
         dialogues[2][0] = "Pickle Rick! Your end has come! \nI bring the countless cries of your people";
         dialogues[2][1] = "Your tyranny end today!.";
 
+        dialogues[3][0] = "Pickle Rick grew up in poverty which made him\n develop a strong obsession with money and power,";
+        dialogues[3][1] = "he witnessed the cruelty of the world, where\n those who are without wealth or power were mistreated.";
+        dialogues[3][2] = "This then sowed the seeds of in the future \nhe wanted to be the one who has power over everything and makes people do his bidding.";
+        dialogues[3][3] = "He then fell in love, but the woman he \nloved was taken away and became a slave;";
+        dialogues[3][4] = "he became more powerless because \nhe was incapable of buying her.";
+        dialogues[3][5] = "He worked tirelessly desperately trying \nto earn money, but she was murdered one day.";
+        dialogues[3][6] = "This led Pickle Rick to bear more anger in\n the world which made him start enslaving people";
+        dialogues[3][7] = "and letting them work tirelessly like he did.";
+        dialogues[3][8] = "He was mad at the world that\n he made others suffer like he did.";
+
+
         dialogues[6][0] = "Jac was once known as a gifted performer,\n a child prodigy. Jac was once known";
         dialogues[6][1] = "as a gifted performer, a child prodigy, \nand his family's pride and joy. As he grew";
         dialogues[6][2] = "older, Jac’s parents showered him with\n expectations but rarely offered affection";
