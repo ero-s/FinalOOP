@@ -30,6 +30,7 @@ public class TileManager {
 //         GETTING TILE NAMES AND COLLISION INFO FROM THE FILE
         String line;
 
+
         try {
             while((line = br.readLine()) != null){
                 fileNames.add(line);
@@ -151,20 +152,6 @@ public class TileManager {
 
                 g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 
-                if (currentTile.collision && currentTile != null) {
-                    g2.setColor(Color.red);
-                    g2.setStroke(new java.awt.BasicStroke(1));
-
-                    // Calculate the tile's collision box world position
-                    int collisionBoxX = screenX + currentTile.collisionBox.x;
-                    int collisionBoxY = screenY + currentTile.collisionBox.y;
-                    int collisionBoxWidth = currentTile.collisionBox.width;
-                    int collisionBoxHeight = currentTile.collisionBox.height;
-
-                    // Draw the tile's specific collision box
-                    g2.drawRect(collisionBoxX, collisionBoxY, collisionBoxWidth, collisionBoxHeight);
-                }
-
             }
 
             worldCol++;
@@ -182,16 +169,16 @@ public class TileManager {
     }
 
     public void drawPath(Graphics2D g2){
-        g2.setColor(new Color(255, 0, 0, 70));
-
-        for (int i = 0; i < gp.pFinder.pathList.size(); i++) {
-            int worldX = gp.pFinder.pathList.get(i).col * gp.tileSize;
-            int worldY = gp.pFinder.pathList.get(i).row * gp.tileSize;
-            int screenX = worldX - gp.player.worldX + gp.player.screenX;
-            int screenY = worldY - gp.player.worldY + gp.player.screenY;
-
-            g2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
-        }
+//        g2.setColor(new Color(255, 0, 0, 70));
+//
+//        for (int i = 0; i < gp.pFinder.pathList.size(); i++) {
+//            int worldX = gp.pFinder.pathList.get(i).col * gp.tileSize;
+//            int worldY = gp.pFinder.pathList.get(i).row * gp.tileSize;
+//            int screenX = worldX - gp.player.worldX + gp.player.screenX;
+//            int screenY = worldY - gp.player.worldY + gp.player.screenY;
+//
+//            g2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
+//        }
     }
 
     public void getTileImage() {

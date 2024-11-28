@@ -24,11 +24,12 @@ public class MON_JackOLantern extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 4;
+        maxLife = 80;
         life = maxLife;
-        attack = 2;
-        defense = 0;
-        exp = 2;
+        attack = 12;
+        defense = 3;
+        exp = 50;
+        knockBackPower = 8;
         projectile = new OBJ_Rock(gp);
 
         int size = gp.tileSize*5;
@@ -47,31 +48,53 @@ public class MON_JackOLantern extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/jackolantern/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/jackolantern/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/jackolantern/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/jackolantern/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/jackolantern/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/jackolantern/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/jackolantern/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/jackolantern/right_2", gp.tileSize, gp.tileSize);
+
+        int i = 5;
+        up1 = setup("/res/monster/jackolantern/up1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/monster/jackolantern/up2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/monster/jackolantern/down1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/monster/jackolantern/down2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/monster/jackolantern/left1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/monster/jackolantern/left2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/monster/jackolantern/right1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/monster/jackolantern/right2", gp.tileSize*i, gp.tileSize*i);
+    }
+
+    public void getAttackImage(){
+
+        int i = 5;
+        attackUp1 = setup("/res/monster/jackolantern/up1", gp.tileSize*i, gp.tileSize*i);
+        attackUp2 = setup("/res/monster/jackolantern/up2", gp.tileSize*i, gp.tileSize*i);
+        attackDown1 = setup("/res/monster/jackolantern/down1", gp.tileSize*i, gp.tileSize*i);
+        attackDown2 = setup("/res/monster/jackolantern/down2", gp.tileSize*i, gp.tileSize*i);
+        attackLeft1 = setup("/res/monster/jackolantern/left1", gp.tileSize*i, gp.tileSize*i);
+        attackLeft2 = setup("/res/monster/jackolantern/left2", gp.tileSize*i, gp.tileSize*i);
+        attackRight1 = setup("/res/monster/jackolantern/right1", gp.tileSize*i, gp.tileSize*i);
+        attackRight2 = setup("/res/monster/jackolantern/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void setAction() {
-        if (onPath) {
+        if(!inRage && life < maxLife/2){
+            inRage = true;
+            getImage();
+            defaultSpeed++;
+            speed = defaultSpeed;
+            attack += 2;
+        }
 
-            // Search the direction to go
-            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
-
-            // Check if it shoots a projectile
-            checkShootOrNot(60, 30);
-
+        if (getTileDistance(gp.player) < 10) {
+            moveTowardPlayer(60);
         } else {
-            // Check if it starts chasing
-            checkStartChasingOrNot(gp.player, 15, 100);
 
             // Get a random direction
-            getRandomDirection(120);
+            getRandomDirection(60);
+            checkShootOrNot(200, 60);
+        }
+
+        // Check if it attacks
+        if(!attacking){
+            checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
+            checkShootOrNot(60, 30);
         }
 
     }

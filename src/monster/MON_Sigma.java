@@ -22,11 +22,11 @@ public class MON_Sigma extends Entity {
         name = "Sigma";
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 10;
+        maxLife = 30;
         life = maxLife;
         attack = 8;
         defense = 2;
-        exp = 10;
+        exp = 15;
         knockBackPower = 5;
 
         solidArea.x = 4;
@@ -44,26 +44,31 @@ public class MON_Sigma extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/sigma/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/sigma/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/sigma/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/sigma/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/sigma/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/sigma/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/sigma/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/sigma/right_2", gp.tileSize, gp.tileSize);
+
+        int i = 36;
+        up1 = setup("/res/monster/sigma/up1", gp.tileSize+i, gp.tileSize+i);
+        up2 = setup("/res/monster/sigma/up2", gp.tileSize+i, gp.tileSize+i);
+        down1 = setup("/res/monster/sigma/down1", gp.tileSize+i, gp.tileSize+i);
+        down2 = setup("/res/monster/sigma/down2", gp.tileSize+i, gp.tileSize+i);
+        left1 = setup("/res/monster/sigma/left1", gp.tileSize+i, gp.tileSize+i);
+        left2 = setup("/res/monster/sigma/left2", gp.tileSize+i, gp.tileSize+i);
+        right1 = setup("/res/monster/sigma/right1", gp.tileSize+i, gp.tileSize+i);
+        right2 = setup("/res/monster/sigma/right2", gp.tileSize+i, gp.tileSize+i);
     }
 
-//    public void getAttackImage(){
-//        attackUp1 = setup("/res/monster/sigma/sigma_attack_up_1", gp.tileSize, gp.tileSize * 2);
-//        attackUp2 = setup("/res/monster/sigma/sigma_attack_up_2", gp.tileSize, gp.tileSize * 2);
-//        attackDown1 = setup("/res/monster/sigma/sigma_attack_down_1", gp.tileSize, gp.tileSize * 2);
-//        attackDown2 = setup("/res/monster/sigma/sigma_attack_down_2", gp.tileSize, gp.tileSize * 2);
-//        attackLeft1 = setup("/res/monster/sigma/sigma_attack_left_1", gp.tileSize * 2, gp.tileSize);
-//        attackLeft2 = setup("/res/monster/sigma/sigma_attack_left_2", gp.tileSize * 2, gp.tileSize);
-//        attackRight1 = setup("/res/monster/sigma/sigma_attack_right_1", gp.tileSize * 2, gp.tileSize);
-//        attackRight2 = setup("/res/monster/sigma/sigma_attack_right_2", gp.tileSize * 2, gp.tileSize);
-//    }
+    public void getAttackImage(){
+
+        int i = 36;
+
+        attackUp1 = setup("/res/monster/sigma/up1", gp.tileSize+i, gp.tileSize+i);
+        attackUp2 = setup("/res/monster/sigma/up2", gp.tileSize+i, gp.tileSize+i);
+        attackDown1 = setup("/res/monster/sigma/down1", gp.tileSize+i, gp.tileSize+i);
+        attackDown2 = setup("/res/monster/sigma/down2", gp.tileSize+i, gp.tileSize+i);
+        attackLeft1 = setup("/res/monster/sigma/left1", gp.tileSize+i, gp.tileSize+i);
+        attackLeft2 = setup("/res/monster/sigma/left2", gp.tileSize+i, gp.tileSize+i);
+        attackRight1 = setup("/res/monster/sigma/right1", gp.tileSize+i, gp.tileSize+i);
+        attackRight2 = setup("/res/monster/sigma/right2", gp.tileSize+i, gp.tileSize+i);
+    }
 
     public void setAction() {
         if (onPath) {

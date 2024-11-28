@@ -89,13 +89,23 @@ public class EventHandler {
 
             // TO THE DUNGEON
             else if (hit(0, 41, 15, "any") || hit(0, 40, 15, "any")){
-                teleport(4, 25, 22);
+                teleport(4, 24, 44);
             }
 
             // OUTSIDE OF DUNGEON
-            else if(hit(4,25,23,"any") || hit(4,24,23,"any") || hit(4,23,23,"any")){
+            else if(hit(4,24,44,"any")){
                 teleport(0, 41, 16);
             }
+
+            // FALL DUNGEON
+            // OUTSIDE OF DUNGEON
+            else if(hit(1,25,42,"any")){
+                teleport(5, 24, 28);
+            }
+
+
+
+
 
 //            //cutscene
 //            else if (hit(3, 26, 41, "any") == true) {

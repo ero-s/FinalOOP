@@ -1,10 +1,6 @@
 package main;
 
-import entity.NPC_Andres;
-import entity.NPC_BigRock;
-import entity.NPC_Merchant;
-import entity.NPC_OldMan;
-import entity.NPC_Pugtato;
+import entity.*;
 import monster.*;
 import object.*;
 import tile_interactive.IT_DryTree;
@@ -19,6 +15,26 @@ public class AssetSetter {
     public void setObject() {
         int mapNum = 0;
         int i = 0;
+
+        gp.obj[mapNum][i] = new OBJ_Key(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 27;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 41;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 40;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 20;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 41;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 20;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 42;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 20;
+        i++;
     }
     public void setNPC() {
         int mapNum = 0;
@@ -30,6 +46,22 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize * 33;
         i++;
 
+        gp.npc[mapNum][i] = new NPC_Merchant(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 37;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 23;
+        i++;
+
+        mapNum = 1;
+        i = 0;
+
+        gp.npc[mapNum][i] = new NPC_CoffeeBean(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 40;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+
 
 
     }
@@ -39,11 +71,142 @@ public class AssetSetter {
 
         int i = 0;
 
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 23;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 18;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 21;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 16;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 33;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 33;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 15;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Orc(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 22;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 41;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Orc(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 13;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 38;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Orc(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 33;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 15;
+        i++;
+
+
+        mapNum = 1;
+        i = 0;
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 33;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 15;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 17;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 37;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 27;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 33;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 36;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 34;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 36;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 23;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 27;
+        i++;
 
         mapNum = 4;
+        i = 0;
         gp.monster[mapNum][i] = new MON_PickleRick(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 22;
         gp.monster[mapNum][i].worldY = gp.tileSize * 11;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Sigma(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 22;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 33;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Mogger(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 22;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 22;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Mewer(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 22;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 23;
+        i++;
+
+        mapNum = 5;
+        i = 0;
+        gp.monster[mapNum][i] = new MON_JackOLantern(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 25;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 18;
+        i++;
+
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 27;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 27;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Bat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 24;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
         i++;
     }
 
@@ -52,25 +215,7 @@ public class AssetSetter {
 
         int i = 0;
 
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 27, 12);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 28, 12);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 29, 12);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 30, 12);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 32, 12);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 33, 12);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 18, 40);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 17, 40);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 16, 40);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 15, 40);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 14, 40);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 13, 40);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 12, 40);i++;
-
         mapNum = 2;
         i = 0;
-
-        gp.iTile[mapNum][i] = new IT_MetalPlate(gp, 20, 22);i++;
-        gp.iTile[mapNum][i] = new IT_MetalPlate(gp, 8, 17);i++;
-        gp.iTile[mapNum][i] = new IT_MetalPlate(gp, 15, 28);i++;
     }
 }

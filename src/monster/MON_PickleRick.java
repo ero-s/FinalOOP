@@ -21,11 +21,12 @@ public class MON_PickleRick extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 5;
+        maxLife = 50;
         life = maxLife;
-        attack = 2;
-        defense = 0;
-        exp = 2;
+        attack = 9;
+        defense = 2;
+        exp = 30;
+        knockBackPower = 8;
         projectile = new OBJ_Rock(gp);
 
         int size = gp.tileSize*5;
@@ -44,31 +45,52 @@ public class MON_PickleRick extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/picklerick/up1", gp.tileSize*2, gp.tileSize*2);
-        up2 = setup("/res/monster/picklerick/up2", gp.tileSize*2, gp.tileSize*2);
-        down1 = setup("/res/monster/picklerick/down1", gp.tileSize*2, gp.tileSize*2);
-        down2 = setup("/res/monster/picklerick/down2", gp.tileSize*2, gp.tileSize*2);
-        left1 = setup("/res/monster/picklerick/left1", gp.tileSize*2, gp.tileSize*2);
-        left2 = setup("/res/monster/picklerick/left2", gp.tileSize*2, gp.tileSize*2);
-        right1 = setup("/res/monster/picklerick/right1", gp.tileSize*2, gp.tileSize*2);
-        right2 = setup("/res/monster/picklerick/right2", gp.tileSize*2, gp.tileSize*2);
+        int i = 5;
+        up1 = setup("/res/monster/picklerick/up1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/monster/picklerick/up2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/monster/picklerick/down1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/monster/picklerick/down2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/monster/picklerick/left1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/monster/picklerick/left2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/monster/picklerick/right1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/monster/picklerick/right2", gp.tileSize*i, gp.tileSize*i);
+    }
+
+    public void getAttackImage(){
+
+        int i = 5;
+        attackUp1 = setup("/res/monster/picklerick/up1", gp.tileSize*i, gp.tileSize*i);
+        attackUp2 = setup("/res/monster/picklerick/up2", gp.tileSize*i, gp.tileSize*i);
+        attackDown1 = setup("/res/monster/picklerick/down1", gp.tileSize*i, gp.tileSize*i);
+        attackDown2 = setup("/res/monster/picklerick/down2", gp.tileSize*i, gp.tileSize*i);
+        attackLeft1 = setup("/res/monster/picklerick/left1", gp.tileSize*i, gp.tileSize*i);
+        attackLeft2 = setup("/res/monster/picklerick/left2", gp.tileSize*i, gp.tileSize*i);
+        attackRight1 = setup("/res/monster/picklerick/right1", gp.tileSize*i, gp.tileSize*i);
+        attackRight2 = setup("/res/monster/picklerick/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void setAction() {
-        if (onPath) {
+        if(!inRage && life < maxLife/2){
+            inRage = true;
+            getImage();
+            defaultSpeed++;
+            speed = defaultSpeed;
+            attack += 2;
+        }
 
-            // Search the direction to go
-            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
-
-            // Check if it shoots a projectile
-            checkShootOrNot(60, 20);
-
+        if (getTileDistance(gp.player) < 10) {
+            moveTowardPlayer(60);
         } else {
-            // Check if it starts chasing
-            checkStartChasingOrNot(gp.player, 15, 100);
 
             // Get a random direction
-            getRandomDirection(120);
+            getRandomDirection(60);
+            checkShootOrNot(200, 60);
+        }
+
+        // Check if it attacks
+        if(!attacking){
+            checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
+            checkShootOrNot(60,30);
         }
 
     }
@@ -80,6 +102,7 @@ public class MON_PickleRick extends Entity {
     }
 
     public void checkDrop() {
+
         dropItem(new OBJ_BlueHeart(gp));
 
     }
