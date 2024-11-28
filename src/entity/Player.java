@@ -536,6 +536,17 @@ public class    Player extends Entity {
         dialogues[2][0] = "Pickle Rick! Your end has come! \nI bring the countless cries of your people";
         dialogues[2][1] = "Your tyranny end today!.";
 
+        dialogues[6][0] = "Jac was once known as a gifted performer,\n a child prodigy. Jac was once known";
+        dialogues[6][1] = "as a gifted performer, a child prodigy, \nand his family's pride and joy. As he grew";
+        dialogues[6][2] = "older, Jac’s parents showered him with\n expectations but rarely offered affection";
+        dialogues[6][3] = "or support. Instead of nurturing his talents,\n they demanded perfection, driving";
+        dialogues[6][4] = "him to practice relentlessly. \nTheir indifference cut deeply, fostering a growing ";
+        dialogues[6][5] = "resentment within him.\n Jac felt like a mere prop in their show, overshadowed by";
+        dialogues[6][6] = "their brilliance and neglect. \nYears later he became the best ever performer there ";
+        dialogues[6][7] = "ever was but was blinded by his ideals\n which led to him enslaving people and ";
+        dialogues[6][8] = "making them suffer. This sadistic behavior\n was a boost to his ego, and this ";
+        dialogues[6][9] = "eventually started this cruel rule on the circus. ";
+
 
     }
 
