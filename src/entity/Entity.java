@@ -676,9 +676,6 @@ public class Entity {
 
             changeAlpha(g2, 1f);
         }
-        if(onPath && alive && !dying){
-            gp.tileM.drawPath(g2);
-        }
     }
 
     public void dyingAnimation(Graphics2D g2) {

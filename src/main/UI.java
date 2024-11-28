@@ -109,7 +109,7 @@ public class UI {
         if (gp.gameState == gp.tradeState) { drawTradeScreen(); }
 
         // SLEEP STATE
-        if (gp.gameState == gp.sleepState){ drawSleepScreen(); }
+        //if (gp.gameState == gp.sleepState){ drawSleepScreen(); }
     }
 
     public void drawPlayerLife() {
@@ -1255,29 +1255,29 @@ public class UI {
 
         return itemIndex;
     }
-    public void drawSleepScreen() {
-        counter++;
-        if (counter < 120) {
-            gp.eManager.lighting.filterAlpha += 0.01f;
-
-            if (gp.eManager.lighting.filterAlpha > 1f) {
-                gp.eManager.lighting.filterAlpha = 1f;
-            }
-        }
-
-        if (counter >= 120) {
-            gp.eManager.lighting.filterAlpha -= 0.01f;
-
-            if (gp.eManager.lighting.filterAlpha <= 0f) {
-                gp.eManager.lighting.filterAlpha = 0f;
-                counter = 0;
-                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
-                gp.eManager.lighting.dayCounter = 0;
-                gp.gameState = gp.playState;
-                gp.player.getImage();
-            }
-        }
-    }
+//    public void drawSleepScreen() {
+//        counter++;
+//        if (counter < 120) {
+//            gp.eManager.lighting.filterAlpha += 0.01f;
+//
+//            if (gp.eManager.lighting.filterAlpha > 1f) {
+//                gp.eManager.lighting.filterAlpha = 1f;
+//            }
+//        }
+//
+//        if (counter >= 120) {
+//            gp.eManager.lighting.filterAlpha -= 0.01f;
+//
+//            if (gp.eManager.lighting.filterAlpha <= 0f) {
+//                gp.eManager.lighting.filterAlpha = 0f;
+//                counter = 0;
+//                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
+//                gp.eManager.lighting.dayCounter = 0;
+//                gp.gameState = gp.playState;
+//                gp.player.getImage();
+//            }
+//        }
+//    }
     public void drawSubWindow(int x, int y, int width, int height) {
         Color c = new Color(0, 0, 0, 210);
         g2.setColor(c);
