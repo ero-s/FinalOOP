@@ -1,14 +1,17 @@
 package main;
 
+import entity.Entity;
 import object.OBJ_BlueHeart;
 import object.OBJ_Door_Iron;
 import object.OBJ_Shield_Blue;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class CutsceneManager {
     GamePanel gp;
     Graphics2D g2;
+    Entity e = new Entity(gp);
 
     public int sceneNum;
     public int scenePhase;
@@ -16,11 +19,13 @@ public class CutsceneManager {
     float alpha = 0f;
     int y;
     String endCredit;
+    String openingScene;
 
     // scene number
     public final int NA = 0;
     public final int skeletonLord = 1;
     public final int ending = 2;
+    public final int opening = 3;
 
     public CutsceneManager(GamePanel gp) {
         this.gp = gp;
@@ -34,6 +39,8 @@ public class CutsceneManager {
                 + "Someone\n"
                 + "Someone\n\n\n\n\n"
                 + "Thank you for playing!";
+
+        openingScene = "Once upon a time";
     }
 
     public void draw(Graphics2D g2) {
@@ -42,6 +49,7 @@ public class CutsceneManager {
         switch(sceneNum) {
             //case skeletonLord: scene_skeletonLord(); break;
             case ending: scene_ending(); break;
+            case opening: scene_opening(); break;
         }
     }
 
@@ -136,12 +144,14 @@ public class CutsceneManager {
 //        }
 //    }
     public void scene_ending(){
+        gp.saveLoad.save();
         if(gp.keyH.escapePressed){
-            gp.gameState = gp.titleState;
+            scenePhase = 9;
+            gp.gameState = gp.playState;
+            gp.eHandler.teleport(1,45,15);
+
         }
-
         if(scenePhase == 0){
-
             gp.stopMusic();
             gp.ui.npc = new OBJ_BlueHeart(gp);
             scenePhase++;
@@ -227,9 +237,110 @@ public class CutsceneManager {
             scenePhase++;
         }
         if(scenePhase == 9){
-            gp.gameState = gp.titleState;
+            gp.saveLoad.load();
         }
     }
+    public void scene_opening(){
+        gp.saveLoad.save();
+        if(gp.keyH.escapePressed){
+            scenePhase = 9;
+            gp.gameState = gp.playState;
+            gp.setupGame();
+            gp.player.setDefaultValues();
+
+        }
+        if(scenePhase == 0){
+            gp.stopMusic();
+            g2.setColor(Color.black);
+            g2.fillRect(0,0, gp.maxScreenCol, gp.maxScreenRow);
+            scenePhase++;
+        }
+
+        if(scenePhase == 1){
+            //Display dialogues
+            scenePhase++;
+        }
+
+        if(scenePhase == 2){
+            //PLay the fanfare
+            gp.playSE(4);
+            scenePhase++;
+        }
+
+        if(scenePhase == 3){
+
+            //Wait until the sound effect ends
+            if(counterReached(150)){
+                scenePhase++;
+            }
+        }
+
+        if(scenePhase == 4){
+
+            //The screen gets darker
+            alpha += 0.005f;
+            if(alpha > 1f){
+                alpha = 1f;
+            }
+            drawBlackBackground(alpha);
+
+            if(alpha == 1f){
+                alpha = 0;
+                scenePhase++;
+            }
+        }
+
+        if(scenePhase == 5){
+
+            drawBlackBackground(1f);
+
+            alpha += 0.005f;
+            if(alpha > 1f){
+                alpha = 1f;
+            }
+
+            String text = "After the fierce battle with the Skeleton Lord,\n"
+                    + "the Blue Boy finally found the legendary treasure.\n"
+                    + "But this is not the end of his journey.\n"
+                    + "The Blue Boy's adventure has just begun.";
+            drawString(alpha, 38f, 200, text, 70);
+
+            if(counterReached(400)){
+                gp.playMusic(0);
+                scenePhase++;
+            }
+        }
+
+        if(scenePhase == 6){
+            drawBlackBackground(1f);
+            drawString(1f, 120f, gp.screenHeight/2, "Blue Boy Adventure", 40);
+            if(counterReached(480)){
+                scenePhase++;
+            }
+        }
+
+        if(scenePhase == 7){
+            drawBlackBackground(1f);
+            y = gp.screenHeight/2;
+            drawString(1f, 38f, gp.screenHeight/2, endCredit, 40);
+            if(counterReached(480)){
+                scenePhase++;
+            }
+        }
+
+        if(scenePhase == 8){
+            drawBlackBackground(1f);
+            //Scrolling the credit
+            y--;
+            drawString(1f, 38f, y, endCredit, 40);
+            scenePhase++;
+        }
+        if(scenePhase == 9){
+            gp.setupGame();
+            gp.player.setDefaultValues();
+        }
+    }
+
 
     public boolean counterReached(int target){
         boolean counterReached = false;
