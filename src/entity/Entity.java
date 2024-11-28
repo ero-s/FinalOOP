@@ -593,13 +593,7 @@ public class Entity {
         target.knockBack = true;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Entity entity = (Entity) obj;
-        return name.equals(entity.name) && type == entity.type;
-    }
+
 
     public boolean inCamera(){
         boolean inCamera = false;
@@ -680,10 +674,6 @@ public class Entity {
 
             g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-            g2.setColor(Color.red);
-            int collisionBoxX = screenX - this.solidArea.x;
-            int collisionBoxY = screenY - this.solidArea.y;
-            g2.drawRect(collisionBoxX,collisionBoxY,this.solidArea.width, this.solidArea.height);
             changeAlpha(g2, 1f);
         }
         if(onPath && alive && !dying){

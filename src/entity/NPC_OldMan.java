@@ -52,9 +52,14 @@ public class NPC_OldMan extends Entity {
 //        dialogues[2][1] = "This island isn't for the faint of heart. \nLegends say the treasure changes with \neach seeker.";
 //        dialogues[2][2] = "Once, I sought glory here, but now I \nsavor the peace of these shores.";
 //        dialogues[2][3] = "May fortune favor you, always.";
+
         // scene in fall circus
         dialogues[0][0] = "Your brother will lose his life in the worst way possible. I pity you.";
         dialogues[0][1] = "The future rules";
+
+        // scene1 in winter circus (Villager)
+        dialogues[1][0] = "The mountains are shifting. We’re evacuating—there's a brutal winter coming!";
+        dialogues[1][1] = "There's an underground spring, but Jack and Jill guard it.";
 
     }
 

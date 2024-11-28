@@ -22,24 +22,19 @@ public class MON_RedSlime extends Entity {
         name = "Red Slime";
         defaultSpeed = 2;
         speed = defaultSpeed;
-        maxLife = 8;
+        maxLife = 15;
         life = maxLife;
-        attack = 7;
-        defense = 0;
-        exp = 5;
+        attack = 4;
+        defense = 1;
+        exp = 6;
         projectile = new OBJ_Rock(gp);
 
-        int size = gp.tileSize*5;
-        solidArea.x = 48;
-        solidArea.y = 48;
-        solidArea.width = size - 48 * 2;
-        solidArea.height = size - 48;
+        solidArea.x = 3;
+        solidArea.y = 18;
+        solidArea.width = 42;
+        solidArea.height = 30;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        attackArea.width = 170;
-        attackArea.height = 170;
-        motion1_duration = 25;
-        motion2_duration = 50;
 
         getImage();
     }

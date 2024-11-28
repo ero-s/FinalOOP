@@ -8,7 +8,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import object.*;
 
-public class Player extends Entity {
+public class    Player extends Entity {
     KeyHandler keyH;
 
     public final int screenX;
@@ -58,8 +58,8 @@ public class Player extends Entity {
         // PLAYER STATUS
         level = 1;
         maxLife = 20;
+        maxMana = 5;
         life = maxLife;
-        maxMana = 4;
         mana = maxMana;
         strength = 5;
         dexterity = 1;
@@ -83,8 +83,18 @@ public class Player extends Entity {
 
     public void setDefaultPositions() {
         gp.currentMap = 0;
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        if(gp.currentMap == 0 || gp.currentMap == 4){
+            gp.currentMap = 0;
+            worldX = gp.tileSize * 46;
+            worldY = gp.tileSize * 40;
+        }
+
+        if(gp.currentMap == 1 || gp.currentMap == 5){
+            gp.currentMap = 1;
+            worldX = gp.tileSize *  45;
+            worldY = gp.tileSize * 15;
+        }
+
         direction = "down";
     }
 
@@ -103,11 +113,6 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Lantern(gp));
-        inventory.add(new OBJ_Tent(gp));
     }
 
     public int getAttack() {
@@ -346,22 +351,6 @@ public class Player extends Entity {
             gp.playSE(10);
         }
 
-        if(gp.keyH.skill1Pressed && !skill1.alive){
-            skill1.set(worldX, worldY, direction, true, this);
-
-            skill1.subtractResource(this);
-
-            // CHECK VACANCY
-            for (int i = 0; i < gp.projectile[1].length; i++) {
-                if (gp.projectile[gp.currentMap][i] == null) {
-                    gp.projectile[gp.currentMap][i] = skill1;
-                    break;
-                }
-            }
-
-            shotAvailableCounter = 0;
-        }
-
         if (invincible) {
             invincibleCounter++;
             if (invincibleCounter > 60) {
@@ -388,12 +377,12 @@ public class Player extends Entity {
         hpRegen++;
         manaRegen++;
 
-        if (life > maxLife) {
-            life = maxLife;
+        if (getLife() > getMaxLife()) {
+            setLife(getMaxLife());
         }
 
-        if (mana > maxMana) {
-            mana = maxMana;
+        if (getMana() > getMaxMana()) {
+            setMana(getMaxMana());
         }
 
         if(!keyH.godModeOn) {
