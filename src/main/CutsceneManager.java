@@ -200,10 +200,19 @@ public class CutsceneManager {
                 alpha = 1f;
             }
 
-            String text = "After the fierce battle with the Skeleton Lord,\n"
-                    + "the Blue Boy finally found the legendary treasure.\n"
-                    + "But this is not the end of his journey.\n"
-                    + "The Blue Boy's adventure has just begun.";
+            String text = "Pickle Rick grew up in poverty which made him develop a strong obsession,\n"
+                    + "with money and power, he witnessed the cruelty of the world, where those who.\n"
+                    + "are without wealth or power were mistreated. This then sowed the seeds of in \n"
+                    + "the future he wanted to be the one who has power over everything and makes\n"
+                    + "people do his bidding. \n\n"
+
+                    + "He then fell in love, but the woman he loved was taken away and became a \n"
+                    + "slave; he became more powerless because he was incapable of buying her. He\n"
+                    + "worked tirelessly desperately trying to earn money, but she was murdered one\n"
+                    + "day.  This led Pickle Rick to bear more anger in the world which made him start\n"
+                    + "enslaving people and letting them work tirelessly like he did. He was mad at the \n"
+                    + "world that he made others suffer like he did.\n";
+
             drawString(alpha, 38f, 200, text, 70);
 
             if(counterReached(400)){
