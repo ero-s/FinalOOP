@@ -12,7 +12,7 @@ public class NPC_Pugtato extends Entity {
 
         direction = "down";
         speed = 1;
-
+        sleep = true;
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
@@ -54,13 +54,13 @@ public class NPC_Pugtato extends Entity {
 //        dialogues[2][3] = "May fortune favor you, always.";
 
         // story! // summeville
-        dialogues[0][0] = "You've finally woken up, strange… being?";
-        dialogues[0][1] = "It seems like you’re completely unaware of what happened to you";
+        dialogues[0][0] = "You've finally woken up,\nstrange… being?";
+        dialogues[0][1] = "It seems like you’re completely\nunaware of what happened to you";
         dialogues[0][2] = "I found you lying on the beach.";
-        dialogues[0][3] = "It seemed like you needed help so I sheltered you";
-        dialogues[0][4] = "Although I was scared of you at first, my curiosity got the best of me.";
-        dialogues[0][5] = "You’re in Summerville, a capital of one of the four great seasons";
-        dialogues[0][6] = "As for your family, I’ve never seen people who look like you.";
+        dialogues[0][3] = "It seemed like you needed\nhelp so I sheltered you";
+        dialogues[0][4] = "Although I was scared of you\nat first, my curiosity got the best of me.";
+        dialogues[0][5] = "You’re in Summerville, a capital\nof one of the four great seasons";
+        dialogues[0][6] = "As for your family, I’ve never\nseen people who look like you.";
 
 
         // scene 2

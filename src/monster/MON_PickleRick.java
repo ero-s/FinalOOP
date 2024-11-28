@@ -24,7 +24,7 @@ public class MON_PickleRick extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 4;
+        maxLife = 100;
         life = maxLife;
         attack = 2;
         defense = 0;
@@ -47,14 +47,14 @@ public class MON_PickleRick extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/picklerick/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/picklerick/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/picklerick/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/picklerick/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/picklerick/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/picklerick/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/picklerick/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/picklerick/right_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/res/monster/picklerick/up1", gp.tileSize*2, gp.tileSize*2);
+        up2 = setup("/res/monster/picklerick/up2", gp.tileSize*2, gp.tileSize*2);
+        down1 = setup("/res/monster/picklerick/down1", gp.tileSize*2, gp.tileSize*2);
+        down2 = setup("/res/monster/picklerick/down2", gp.tileSize*2, gp.tileSize*2);
+        left1 = setup("/res/monster/picklerick/left1", gp.tileSize*2, gp.tileSize*2);
+        left2 = setup("/res/monster/picklerick/left2", gp.tileSize*2, gp.tileSize*2);
+        right1 = setup("/res/monster/picklerick/right1", gp.tileSize*2, gp.tileSize*2);
+        right2 = setup("/res/monster/picklerick/right2", gp.tileSize*2, gp.tileSize*2);
     }
 
     public void setAction() {
@@ -64,7 +64,7 @@ public class MON_PickleRick extends Entity {
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
             // Check if it shoots a projectile
-            checkShootOrNot(60, 30);
+            checkShootOrNot(60, 20);
 
         } else {
             // Check if it starts chasing
