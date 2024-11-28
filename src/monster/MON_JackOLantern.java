@@ -46,6 +46,11 @@ public class MON_JackOLantern extends Entity {
         getImage();
     }
 
+    public void setDialogue() {
+        dialogues[0][0] = "The ecstacy ";
+
+    }
+
     public void getImage() {
         up1 = setup("/res/monster/jackolantern/up_1", gp.tileSize, gp.tileSize);
         up2 = setup("/res/monster/jackolantern/up_2", gp.tileSize, gp.tileSize);
