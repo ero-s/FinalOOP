@@ -39,10 +39,9 @@ public class NPC_Andres extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "Hello, traveler.";
-        dialogues[0][1] = "This island holds many secrets, some \nyou may find and others you might not.";
-        dialogues[0][2] = "I once sought the treasures here, \nbut now I merely observe.";
-        dialogues[0][3] = "May your journey be fruitful!";
+        dialogues[0][0] = "Another fool enters this cursed place. Leave now, or share its fate!";
+        dialogues[0][1] = "Why do you feel... familiar? Why does this pain feel so much heavier now? Who... are you?";
+        dialogues[0][2] = "Hakobe, I remember now—I once protected you, but now I’ve become your greatest threat.";
     }
 
     public void setAction() {
