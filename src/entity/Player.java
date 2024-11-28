@@ -206,10 +206,10 @@ public class    Player extends Entity {
     }
 
     public void getGuardImage(){
-        guardUp = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize);
-        guardDown = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize);
-        guardLeft = setup("/res/player/hakobe/left2", gp.tileSize, gp.tileSize);
-        guardRight = setup("/res/player/hakobe/right2", gp.tileSize, gp.tileSize);
+        guardUp = setup("/res/player/hakobe/up1", gp.tileSize*2, gp.tileSize*2);
+        guardDown = setup("/res/player/hakobe/down2", gp.tileSize*2, gp.tileSize*2);
+        guardLeft = setup("/res/player/hakobe/left2", gp.tileSize*2, gp.tileSize*2);
+        guardRight = setup("/res/player/hakobe/right2", gp.tileSize*2, gp.tileSize*2);
     }
 
     public void update() {
@@ -662,11 +662,6 @@ public class    Player extends Entity {
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-        g2.setColor(Color.red);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-
-        g2.setColor(Color.green);
-        g2.drawRect(screenX + mapCollision.x, screenY + mapCollision.y, mapCollision.width, mapCollision.height);
 
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
