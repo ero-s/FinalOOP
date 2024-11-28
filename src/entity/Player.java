@@ -2,11 +2,11 @@ package entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
 import object.*;
+import object.Skills_PK.PR_SludgeBomb;
 
 public class    Player extends Entity {
     KeyHandler keyH;
@@ -24,6 +24,7 @@ public class    Player extends Entity {
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
         this.keyH = keyH;
+        direction = "down";
 
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
@@ -71,8 +72,9 @@ public class    Player extends Entity {
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         currentLight = null;
-        projectile = new OBJ_Fireball(gp);
+        projectile = new PR_SludgeBomb(gp);
         skill1 = new OBJ_Smash(gp);
+        skill1.setUser(this);
         attack = getAttack();
         defense = getDefense();
 
@@ -349,6 +351,22 @@ public class    Player extends Entity {
                 }
             }
 
+            shotAvailableCounter = 0;
+            gp.playSE(10);
+        }
+
+        if (gp.keyH.skill1Pressed && !skill1.alive && shotAvailableCounter == 30
+                && skill1.haveResource(this)) {
+            skill1.set(worldX, worldY, direction, true, this);
+            skill1.subtractResource(this);
+
+            // CHECK VACANCY
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if (gp.projectile[gp.currentMap][i] == null) {
+                    gp.projectile[gp.currentMap][i] = skill1;
+                    break;
+                }
+            }
             shotAvailableCounter = 0;
             gp.playSE(10);
         }
