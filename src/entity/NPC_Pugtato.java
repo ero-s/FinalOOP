@@ -76,6 +76,18 @@ public class NPC_Pugtato extends Entity {
         // fall circus
         dialogues[3][0] = "Let's go. He's just a fraud.";
 
+        //scene1 in Winter
+        dialogues[4][0] = "We can help you evacuate.";
+        dialogues[4][1] = "We need that water.";
+
+        //scene2 in Winter
+        dialogues[5][0] = "The village is in danger. Without water, they won't survive the winter.";
+
+        //scene3 in Winter
+        dialogues[6][0] = "So, you’re really going to share with us.";
+
+        //scene4 in Winter
+        dialogues[7][0] = "The villagers are safe now. Time to head to Spring.";
     }
 
     public void setAction() {
