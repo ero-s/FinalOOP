@@ -15,15 +15,7 @@ public class AssetSetter {
     public void setObject() {
         int mapNum = 0;
         int i = 0;
-
-        gp.obj[mapNum][i] = new OBJ_BlueHeart(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize * 44;
-        gp.obj[mapNum][i].worldY = gp.tileSize * 34;
-        i++;
-
-
     }
-
     public void setNPC() {
         int mapNum = 0;
         int i = 0;

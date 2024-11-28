@@ -60,7 +60,8 @@ public class NPC_Pugtato extends Entity {
         //gates at the summerville castle
         //dialogues[3][0] = "";
 
-        // fall
+        // fall circus
+        dialogues[3][0] = "Let's go. He's just a fraud.";
 
     }
 
