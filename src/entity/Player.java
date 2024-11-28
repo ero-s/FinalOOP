@@ -208,10 +208,10 @@ public class    Player extends Entity {
     }
 
     public void getGuardImage(){
-        guardUp = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize);
-        guardDown = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize);
-        guardLeft = setup("/res/player/hakobe/left2", gp.tileSize, gp.tileSize);
-        guardRight = setup("/res/player/hakobe/right2", gp.tileSize, gp.tileSize);
+        guardUp = setup("/res/player/hakobe/up1", gp.tileSize*2, gp.tileSize*2);
+        guardDown = setup("/res/player/hakobe/down2", gp.tileSize*2, gp.tileSize*2);
+        guardLeft = setup("/res/player/hakobe/left2", gp.tileSize*2, gp.tileSize*2);
+        guardRight = setup("/res/player/hakobe/right2", gp.tileSize*2, gp.tileSize*2);
     }
 
     public void update() {
@@ -530,8 +530,8 @@ public class    Player extends Entity {
         dialogues[1][1] = "them apart — Hakobe moves to the city, while\n Andres stays on the farm.";
         dialogues[1][2] = " As their bond fades, Hakobe hears rumors \nof disappearances in Bukidgrown. ";
         dialogues[1][3] = "After learning of a massacre in his \nhometown, he returns, sneaks past police,";
-        dialogues[1][4] = " and discovers a dungeon gate where he\n" +
-                " and Andres once played. Then Hakobe entered.";
+        dialogues[1][4] = " and discovers a dungeon gate where he\n and Andres once played. Then Hakobe entered.";
+        dialogues[1][5] = "Ahead stands a castle, brimming with greed, a selfish king awaits";
 
         dialogues[2][0] = "Pickle Rick! Your end has come! \nI bring the countless cries of your people";
         dialogues[2][1] = "Your tyranny end today!.";
@@ -545,6 +545,13 @@ public class    Player extends Entity {
         dialogues[3][6] = "This led Pickle Rick to bear more anger in\n the world which made him \nstart enslaving people";
         dialogues[3][7] = "and letting them work tirelessly like he did.";
         dialogues[3][8] = "He was mad at the world that\n he made others suffer like he did.";
+        dialogues[3][9] = "North of where summer thrives, a town of scares lies.";
+        dialogues[3][10] = "A being of immense power lays dormant, ruling with fear";
+        dialogues[3][11] = "Jack O' Lantern waits for your arrival";
+
+        dialogues[4][0] = "Hakobe and Pugtato reach the Fall Circus, on a mission to find the ringmaster";
+        dialogues[4][0] = "Hakobe and Pugtato reach the Fall Circus, on a mission to find the ringmaster";
+
 
 
         dialogues[6][0] = "Jac was once known as a gifted performer,\n a child prodigy. Jac was once known";

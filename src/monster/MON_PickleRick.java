@@ -42,6 +42,7 @@ public class MON_PickleRick extends Entity {
         motion2_duration = 50;
 
         getImage();
+        getAttackImage();
     }
 
     public void getImage() {
@@ -81,7 +82,6 @@ public class MON_PickleRick extends Entity {
         if (getTileDistance(gp.player) < 10) {
             moveTowardPlayer(60);
         } else {
-
             // Get a random direction
             getRandomDirection(60);
             checkShootOrNot(200, 60);
@@ -104,6 +104,7 @@ public class MON_PickleRick extends Entity {
     public void checkDrop() {
 
         dropItem(new OBJ_BlueHeart(gp));
+        dropItem(new OBJ_Key(gp));
 
     }
 }

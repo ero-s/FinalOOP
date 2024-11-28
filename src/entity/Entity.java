@@ -350,8 +350,6 @@ public class Entity {
                 }
             }
         }
-
-        System.out.println(gp.player.worldX/gp.tileSize + " " + gp.player.worldY/gp.tileSize);
     }
 
     public void checkAttackOrNot(int rate, int straight, int horizontal){
