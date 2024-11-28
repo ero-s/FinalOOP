@@ -22,11 +22,11 @@ public class MON_Sigma extends Entity {
         name = "Sigma";
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 10;
+        maxLife = 30;
         life = maxLife;
         attack = 8;
         defense = 2;
-        exp = 10;
+        exp = 15;
         knockBackPower = 5;
 
         solidArea.x = 4;

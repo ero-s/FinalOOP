@@ -21,11 +21,12 @@ public class MON_PickleRick extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 5;
+        maxLife = 50;
         life = maxLife;
-        attack = 7;
-        defense = 0;
+        attack = 9;
+        defense = 2;
         exp = 30;
+        knockBackPower = 8;
         projectile = new OBJ_Rock(gp);
 
         int size = gp.tileSize*5;
