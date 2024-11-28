@@ -678,12 +678,6 @@ public class Player extends Entity {
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-        g2.setColor(Color.red);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-
-        g2.setColor(Color.green);
-        g2.drawRect(screenX + mapCollision.x, screenY + mapCollision.y, mapCollision.width, mapCollision.height);
-
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
