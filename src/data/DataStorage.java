@@ -12,6 +12,7 @@ public class DataStorage implements Serializable {
     private int maxLife;
     private int maxMana;
     private int mana;
+    private int currentDialogueSet;
     private int level;
     private int strength;
     private int dexterity;
@@ -72,6 +73,13 @@ public class DataStorage implements Serializable {
 
     public void setMaxLife(int maxLife) {
         this.maxLife = maxLife;
+    }
+    public void setCurrentDialogueSet(int currentDialogueSet){
+        this.currentDialogueSet = currentDialogueSet;
+    }
+
+    public int getCurrentDialogueSet(){
+        return currentDialogueSet;
     }
 
     public int getLife() {

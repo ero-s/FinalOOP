@@ -15,6 +15,7 @@ public class    Player extends Entity {
     public final int screenY;
     private int manaRegenCounter = 0;
     public boolean attackCanceled = false;
+    public int currentDialogueSet;
     public boolean lightUpdated = false;
     int standCounter;
     int manaRegen;
@@ -32,8 +33,8 @@ public class    Player extends Entity {
         solidArea.y = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 24;
-        solidArea.height = 30;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         mapCollision = new Rectangle();
         mapCollision.x = 0;
@@ -66,6 +67,7 @@ public class    Player extends Entity {
         exp = 0;
         nextLevelExp = 5;
         coin = 800;
+        currentDialogueSet = 1;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         currentLight = null;
@@ -524,6 +526,16 @@ public class    Player extends Entity {
         }
     }
     public void setDialogue(){
+        dialogues[1][0] = "At home, the brothers overhear their parents \narguing before their separation breaks ";
+        dialogues[1][1] = "them apart — Hakobe moves to the city, while\n Andres stays on the farm.";
+        dialogues[1][2] = " As their bond fades, Hakobe hears rumors \nof disappearances in Bukidgrown. ";
+        dialogues[1][3] = "After learning of a massacre in his \nhometown, he returns, sneaks past police,";
+        dialogues[1][4] = " and discovers a dungeon gate where he\n" +
+                " and Andres once played. Then Hakobe entered.";
+
+        dialogues[2][0] = "Pickle Rick! Your end has come! \nI bring the countless cries of your people";
+        dialogues[2][1] = "Your tyranny end today!.";
+
 
     }
 
@@ -662,15 +674,7 @@ public class    Player extends Entity {
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-        g2.setColor(Color.red);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-
-        g2.setColor(Color.green);
-        g2.drawRect(screenX + mapCollision.x, screenY + mapCollision.y, mapCollision.width, mapCollision.height);
-
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
-        System.out.println("WorldX: "+gp.player.worldX / gp.tileSize +" WorldY: "+gp.player.worldY/gp.tileSize);
     }
 }

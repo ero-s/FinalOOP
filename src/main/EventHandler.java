@@ -67,6 +67,31 @@ public class EventHandler {
                 damagePit(gp.dialogueState);
             }
 
+            //Opening Dialogue
+            else if(hit(0, 41, 38, "any")
+                    || hit(0, 42, 38, "any")
+                    || hit(0, 43, 38, "any")
+                    || hit(0, 44, 38, "any")
+                    || hit(0, 45, 38, "any")){
+                if(gp.player.currentDialogueSet == 1){
+                    gp.player.startDialogue(gp.player, gp.player.currentDialogueSet);
+                    gp.player.currentDialogueSet++;
+                }
+            }
+
+            //Confronting PickleRick
+            else if(hit(4, 21, 20, "any")
+                    || hit(4, 22, 20, "any")
+                    || hit(4, 23, 20, "any")
+                    || hit(4, 24, 20, "any")
+                    || hit(4, 25, 20, "any")){
+                if(gp.player.currentDialogueSet == 2){
+
+                    gp.player.startDialogue(gp.player, gp.player.currentDialogueSet);
+                    gp.player.currentDialogueSet++;
+                }
+            }
+
             // DRINK RECOVERING
             else if (hit(0, 23, 12, "up")) {
                 healingPool(gp.dialogueState);
