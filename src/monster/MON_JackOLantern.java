@@ -83,6 +83,7 @@ public class MON_JackOLantern extends Entity {
     public void setAction() {
         if(!inRage && life < maxLife/2){
             inRage = true;
+
             getImage();
             defaultSpeed++;
             speed = defaultSpeed;

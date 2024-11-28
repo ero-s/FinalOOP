@@ -67,15 +67,16 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_ENTER){
                 if(gp.ui.commandNum == 0){ // new game
-                    gp.saveLoad.save();
-                    gp.gameState = gp.playState;
                     gp.player.setDefaultValues();
+                    gp.setupGame();
+                    gp.gameState = gp.playState;
+
                 }
 
                 if(gp.ui.commandNum == 1){ // load
                     gp.saveLoad.load();
-                    gp.playSE(0);
                     gp.gameState = gp.playState;
+
                 }
                 if(gp.ui.commandNum == 2){ // exit
                     System.exit(0);

@@ -15,7 +15,6 @@ public class AssetSetter {
     public void setObject() {
         int mapNum = 0;
         int i = 0;
-
         gp.obj[mapNum][i] = new OBJ_Key(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize * 27;
         gp.obj[mapNum][i].worldY = gp.tileSize * 41;
@@ -51,6 +50,14 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldX = gp.tileSize * 37;
         gp.npc[mapNum][i].worldY = gp.tileSize * 23;
         i++;
+
+        if(gp.player.currentDialogueSet >=3){
+            gp.obj[4][i] = new NPC_Pugtato(gp);
+            gp.obj[4][i].sleep = true;
+            gp.obj[4][i].worldX = gp.tileSize * 22;
+            gp.obj[4][i].worldY = gp.tileSize * 33;
+            i++;
+        }
 
         mapNum = 1;
         i = 0;

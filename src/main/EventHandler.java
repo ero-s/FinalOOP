@@ -2,6 +2,8 @@ package main;
 
 import entity.Entity;
 
+import javax.swing.text.html.parser.TagElement;
+
 public class EventHandler {
     GamePanel gp;
     EventRect eventRect[][][];
@@ -92,17 +94,30 @@ public class EventHandler {
                 }
             }
 
-            //Confronting PickleRick
-            else if(hit(4, 21, 20, "any")
-                    || hit(4, 22, 20, "any")
-                    || hit(4, 23, 20, "any")
-                    || hit(4, 24, 20, "any")
-                    || hit(4, 25, 20, "any")){
+            //PickleRick BackStory
+            else if(hit(4, 18, 4, "any")
+                    || hit(4, 19, 4, "any")
+                    || hit(4, 20, 4, "any")
+                    || hit(4, 21, 4, "any")
+                    || hit(4, 22, 4, "any")
+                    || hit(4, 23, 4, "any")
+                    || hit(4, 24, 4, "any")
+                    || hit(4, 25, 4, "any")
+                    || hit(4, 26, 4, "any")
+                    || hit(4, 27, 4, "any")
+                    || hit(4, 28, 4, "any")
+                    || hit(4, 29, 4, "any")
+                    || hit(4, 30, 4, "any")){
                 if(gp.player.currentDialogueSet == 3){
 
                     gp.player.startDialogue(gp.player, gp.player.currentDialogueSet);
                     gp.player.currentDialogueSet++;
                 }
+            }
+
+            // TELEPORT TO FALL CIRCUS
+            if (hit(0, 13, 9, "any")) {
+                teleport(1,45,15);
             }
 
             // DRINK RECOVERING
