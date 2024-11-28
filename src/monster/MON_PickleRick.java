@@ -4,10 +4,7 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
-import object.OBJ_Coin_Bronze;
-import object.OBJ_Heart;
-import object.OBJ_ManaCrystal;
-import object.OBJ_Rock;
+import object.*;
 
 public class MON_PickleRick extends Entity {
 
@@ -24,7 +21,7 @@ public class MON_PickleRick extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 100;
+        maxLife = 5;
         life = maxLife;
         attack = 2;
         defense = 0;
@@ -83,16 +80,7 @@ public class MON_PickleRick extends Entity {
     }
 
     public void checkDrop() {
-        int i = new Random().nextInt(100) + 1;
+        dropItem(new OBJ_BlueHeart(gp));
 
-        if (i < 50) {
-            dropItem(new OBJ_Coin_Bronze(gp));
-        }
-        if (i >= 50 && i < 75) {
-            dropItem(new OBJ_Heart(gp));
-        }
-        if (i >= 75 && i < 100) {
-            dropItem(new OBJ_ManaCrystal(gp));
-        }
     }
 }
