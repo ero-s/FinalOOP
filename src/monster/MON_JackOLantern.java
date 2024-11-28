@@ -59,6 +59,19 @@ public class MON_JackOLantern extends Entity {
         right2 = setup("/res/monster/jackolantern/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
+    public void getAttackImage(){
+
+        int i = 5;
+        attackUp1 = setup("/res/monster/jackolantern/up1", gp.tileSize*i, gp.tileSize*i);
+        attackUp2 = setup("/res/monster/jackolantern/up2", gp.tileSize*i, gp.tileSize*i);
+        attackDown1 = setup("/res/monster/jackolantern/down1", gp.tileSize*i, gp.tileSize*i);
+        attackDown2 = setup("/res/monster/jackolantern/down2", gp.tileSize*i, gp.tileSize*i);
+        attackLeft1 = setup("/res/monster/jackolantern/left1", gp.tileSize*i, gp.tileSize*i);
+        attackLeft2 = setup("/res/monster/jackolantern/left2", gp.tileSize*i, gp.tileSize*i);
+        attackRight1 = setup("/res/monster/jackolantern/right1", gp.tileSize*i, gp.tileSize*i);
+        attackRight2 = setup("/res/monster/jackolantern/right2", gp.tileSize*i, gp.tileSize*i);
+    }
+
     public void setAction() {
         if(!inRage && life < maxLife/2){
             inRage = true;

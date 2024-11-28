@@ -55,6 +55,19 @@ public class MON_PickleRick extends Entity {
         right2 = setup("/res/monster/picklerick/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
+    public void getAttackImage(){
+
+        int i = 5;
+        attackUp1 = setup("/res/monster/picklerick/up1", gp.tileSize*i, gp.tileSize*i);
+        attackUp2 = setup("/res/monster/picklerick/up2", gp.tileSize*i, gp.tileSize*i);
+        attackDown1 = setup("/res/monster/picklerick/down1", gp.tileSize*i, gp.tileSize*i);
+        attackDown2 = setup("/res/monster/picklerick/down2", gp.tileSize*i, gp.tileSize*i);
+        attackLeft1 = setup("/res/monster/picklerick/left1", gp.tileSize*i, gp.tileSize*i);
+        attackLeft2 = setup("/res/monster/picklerick/left2", gp.tileSize*i, gp.tileSize*i);
+        attackRight1 = setup("/res/monster/picklerick/right1", gp.tileSize*i, gp.tileSize*i);
+        attackRight2 = setup("/res/monster/picklerick/right2", gp.tileSize*i, gp.tileSize*i);
+    }
+
     public void setAction() {
         if(!inRage && life < maxLife/2){
             inRage = true;

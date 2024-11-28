@@ -56,16 +56,19 @@ public class MON_Mogger extends Entity {
         right2 = setup("/res/monster/mogger/right2", gp.tileSize+i, gp.tileSize+i);
     }
 
-//    public void getAttackImage(){
-//        attackUp1 = setup("/res/monster/mogger/mogger_attack_up_1", gp.tileSize, gp.tileSize * 2);
-//        attackUp2 = setup("/res/monster/mogger/mogger_attack_up_2", gp.tileSize, gp.tileSize * 2);
-//        attackDown1 = setup("/res/monster/mogger/mogger_attack_down_1", gp.tileSize, gp.tileSize * 2);
-//        attackDown2 = setup("/res/monster/mogger/mogger_attack_down_2", gp.tileSize, gp.tileSize * 2);
-//        attackLeft1 = setup("/res/monster/mogger/mogger_attack_left_1", gp.tileSize * 2, gp.tileSize);
-//        attackLeft2 = setup("/res/monster/mogger/mogger_attack_left_2", gp.tileSize * 2, gp.tileSize);
-//        attackRight1 = setup("/res/monster/mogger/mogger_attack_right_1", gp.tileSize * 2, gp.tileSize);
-//        attackRight2 = setup("/res/monster/mogger/mogger_attack_right_2", gp.tileSize * 2, gp.tileSize);
-//    }
+    public void getAttackImage(){
+
+        int i = 36;
+
+        attackUp1 = setup("/res/monster/mewer/up1", gp.tileSize+i, gp.tileSize+i);
+        attackUp2 = setup("/res/monster/mewer/up2", gp.tileSize+i, gp.tileSize+i);
+        attackDown1 = setup("/res/monster/mewer/down1", gp.tileSize+i, gp.tileSize+i);
+        attackDown2 = setup("/res/monster/mewer/down2", gp.tileSize+i, gp.tileSize+i);
+        attackLeft1 = setup("/res/monster/mewer/left1", gp.tileSize+i, gp.tileSize+i);
+        attackLeft2 = setup("/res/monster/mewer/left2", gp.tileSize+i, gp.tileSize+i);
+        attackRight1 = setup("/res/monster/mewer/right1", gp.tileSize+i, gp.tileSize+i);
+        attackRight2 = setup("/res/monster/mewer/right2", gp.tileSize+i, gp.tileSize+i);
+    }
 
     public void setAction() {
         if (onPath) {
