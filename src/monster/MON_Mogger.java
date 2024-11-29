@@ -41,6 +41,7 @@ public class MON_Mogger extends Entity {
         motion2_duration = 80;
 
         getImage();
+        getAttackImage();
     }
 
     public void getImage() {
@@ -60,14 +61,14 @@ public class MON_Mogger extends Entity {
 
         int i = 36;
 
-        attackUp1 = setup("/res/monster/mewer/up1", gp.tileSize+i, gp.tileSize+i);
-        attackUp2 = setup("/res/monster/mewer/up2", gp.tileSize+i, gp.tileSize+i);
-        attackDown1 = setup("/res/monster/mewer/down1", gp.tileSize+i, gp.tileSize+i);
-        attackDown2 = setup("/res/monster/mewer/down2", gp.tileSize+i, gp.tileSize+i);
-        attackLeft1 = setup("/res/monster/mewer/left1", gp.tileSize+i, gp.tileSize+i);
-        attackLeft2 = setup("/res/monster/mewer/left2", gp.tileSize+i, gp.tileSize+i);
-        attackRight1 = setup("/res/monster/mewer/right1", gp.tileSize+i, gp.tileSize+i);
-        attackRight2 = setup("/res/monster/mewer/right2", gp.tileSize+i, gp.tileSize+i);
+        attackUp1 = setup("/res/monster/mogger/up1", gp.tileSize+i, gp.tileSize+i);
+        attackUp2 = setup("/res/monster/mogger/up2", gp.tileSize+i, gp.tileSize+i);
+        attackDown1 = setup("/res/monster/mogger/down1", gp.tileSize+i, gp.tileSize+i);
+        attackDown2 = setup("/res/monster/mogger/down2", gp.tileSize+i, gp.tileSize+i);
+        attackLeft1 = setup("/res/monster/mogger/left1", gp.tileSize+i, gp.tileSize+i);
+        attackLeft2 = setup("/res/monster/mogger/left2", gp.tileSize+i, gp.tileSize+i);
+        attackRight1 = setup("/res/monster/mogger/right1", gp.tileSize+i, gp.tileSize+i);
+        attackRight2 = setup("/res/monster/mogger/right2", gp.tileSize+i, gp.tileSize+i);
     }
 
     public void setAction() {

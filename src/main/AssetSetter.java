@@ -77,8 +77,8 @@ public class AssetSetter {
 
         gp.npc[mapNum][i] = new NPC_CoffeeBean(gp);
         gp.npc[mapNum][i].sleep = true;
-        gp.npc[mapNum][i].worldX = gp.tileSize * 40;
-        gp.npc[mapNum][i].worldY = gp.tileSize * 16;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 28;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 14;
         i++;
 
 
