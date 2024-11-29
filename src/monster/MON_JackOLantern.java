@@ -13,6 +13,10 @@ public class MON_JackOLantern extends Entity {
 
     GamePanel gp;
     public static final String monName = "Jack o'Lantern";
+    public int monCount = 1;
+    public int directionCounter = 0;
+    public int actCounter = 0;
+    public boolean isActing = false;
 
     public MON_JackOLantern(GamePanel gp) {
         super(gp);
@@ -32,6 +36,7 @@ public class MON_JackOLantern extends Entity {
         knockBackPower = 8;
         projectile = new OBJ_Rock(gp);
 
+
         int size = gp.tileSize*5;
         solidArea.x = 48;
         solidArea.y = 48;
@@ -45,6 +50,7 @@ public class MON_JackOLantern extends Entity {
         motion2_duration = 50;
 
         getImage();
+        getAttackImage();
     }
 
     public void setDialogue() {
@@ -78,7 +84,101 @@ public class MON_JackOLantern extends Entity {
         attackRight2 = setup("/res/monster/jackolantern/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
-    
+    public void update() {
+        if(!sleep){
+            if (knockBack) {
+                checkCollision();
+                if (collisionOn) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                } else if (!collisionOn) {
+                    spriteCounter++;
+                    if (spriteCounter > 26) {
+                        if (spriteNum == 1) {
+                            spriteNum = 2;
+                        } else if (spriteNum == 2) {
+                            spriteNum = 1;
+                        }
+                        spriteCounter = 0;
+                    }
+                    switch (knockBackDirection) {
+                        case "up": worldY -= speed; break;
+                        case "down": worldY += speed; break;
+                        case "left": worldX -= speed; break;
+                        case "right": worldX += speed; break;
+                    }
+                }
+                knockBackCounter++;
+                if (knockBackCounter == 10) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                }
+            } else if(attacking){
+                attacking();
+            }
+            else {
+                setAction();
+                checkCollision();
+
+                // IF COLLISION IS FALSE, PLAYER CAN MOVE
+                if (!collisionOn) {
+                    switch (direction) {
+                        case "up": worldY -= speed; break;
+                        case "down": worldY += speed; break;
+                        case "left": worldX -= speed; break;
+                        case "right": worldX += speed; break;
+                    }
+                }
+                spriteCounter++;
+                if (spriteCounter > 26) {
+                    if (spriteNum == 1) {
+                        spriteNum = 2;
+                    } else if (spriteNum == 2) {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
+                }
+            }
+            if (invincible) {
+                invincibleCounter++;
+                if (invincibleCounter > 40) {
+                    invincible = false;
+                    invincibleCounter = 0;
+                }
+            }
+
+            if (shotAvailableCounter < 30) {
+                shotAvailableCounter++;
+            }
+
+            if(offBalance){
+                offBalanceCounter++;
+                if(offBalanceCounter > 60){
+                    offBalance = false;
+                    offBalanceCounter = 0;
+                }
+            }
+        }
+
+        int i = new Random().nextInt(20) + 1;
+        if(i == 1){
+            int ran = new Random().nextInt(6) + 1;
+            if(ran % 2 == 0){
+                orchestra();
+            } else if (!isActing){
+                circusAct();
+                isActing = true;
+            }
+        }
+        if(actCounter == 360){
+            actCounter = 0;
+            speed = defaultSpeed;
+            isActing = false;
+        }
+        actCounter++;
+    }
 
     public void setAction() {
         if(!inRage && life < maxLife/2){
@@ -88,6 +188,10 @@ public class MON_JackOLantern extends Entity {
             defaultSpeed++;
             speed = defaultSpeed;
             attack += 2;
+            orchestra();
+            orchestra();
+            circusAct();
+            isActing = true;
         }
 
         if (getTileDistance(gp.player) < 10) {
@@ -103,8 +207,8 @@ public class MON_JackOLantern extends Entity {
         if(!attacking){
             checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
             checkShootOrNot(60, 30);
-        }
 
+        }
     }
 
     public void damageReaction() {
@@ -124,6 +228,41 @@ public class MON_JackOLantern extends Entity {
         }
         if (i >= 75 && i < 100) {
             dropItem(new OBJ_ManaCrystal(gp));
+        }
+    }
+
+    public void orchestra(){
+        int i = new Random().nextInt(100) + 1;
+
+        if(i == 1){
+            for(int j = 0; j < 8; j++){
+                int col = new Random().nextInt(18,29) + 1;
+                int row = new Random().nextInt(13,20) + 1;
+
+                if(col % 2 == 0){
+                    gp.monster[5][monCount] = new MON_Bat(gp);
+                    gp.monster[5][monCount].worldX = gp.tileSize * col;
+                    gp.monster[5][monCount].worldY = gp.tileSize * row;
+                } else {
+                    gp.monster[5][monCount] = new MON_RedSlime(gp);
+                    gp.monster[5][monCount].worldX = gp.tileSize * col;
+                    gp.monster[5][monCount].worldY = gp.tileSize * row;
+                }
+                monCount++;
+            }
+
+        }
+    }
+
+    public void circusAct(){
+        int i = new Random().nextInt(100) + 1;
+
+        if(i == 1){
+            speed = 10;
+            if(directionCounter == 120){
+                getRandomDirection(10);
+                directionCounter = 0;
+            }
         }
     }
 }

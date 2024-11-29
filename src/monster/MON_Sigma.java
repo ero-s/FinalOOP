@@ -41,6 +41,7 @@ public class MON_Sigma extends Entity {
         motion2_duration = 80;
 
         getImage();
+        getAttackImage();
     }
 
     public void getImage() {

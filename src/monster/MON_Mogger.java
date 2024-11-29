@@ -41,6 +41,7 @@ public class MON_Mogger extends Entity {
         motion2_duration = 80;
 
         getImage();
+        getAttackImage();
     }
 
     public void getImage() {

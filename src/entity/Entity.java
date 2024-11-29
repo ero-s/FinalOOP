@@ -21,7 +21,7 @@ public class Entity {
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1,
             attackRight2, guardUp, guardDown, guardLeft, guardRight;
-    public BufferedImage image, image2, image3;
+    public BufferedImage image, image2, image3, image4, image5, image6;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY, mapCollisionDefaultX, mapCollisionDefaultY;
@@ -60,11 +60,11 @@ public class Entity {
     public int actionLockCounter = 0;
     public int invincibleCounter = 0;
     public int shotAvailableCounter = 0;
-    int dyingCounter = 0;
+    public int dyingCounter = 0;
     public int hpBarCounter = 0;
-    int knockBackCounter = 0;
+    public int knockBackCounter = 0;
     public int guardCounter = 0;
-    int offBalanceCounter = 0;
+    public int offBalanceCounter = 0;
     public int skillDurationCounter = 0;
 
     // CHARACTER ATTRIBUTES

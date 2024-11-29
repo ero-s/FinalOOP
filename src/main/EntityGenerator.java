@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.NPC_Portal;
 import object.*;
 import object.Skills_PK.PR_SludgeBomb;
 

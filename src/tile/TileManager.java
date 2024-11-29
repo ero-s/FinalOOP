@@ -24,17 +24,32 @@ public class TileManager {
         this.gp = gp;
 
 //         READ TILE DATA FILE
-        InputStream is = getClass().getResourceAsStream("/res/maps/data.txt");
+        InputStream is = getClass().getResourceAsStream("/res/maps/modified_data.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 //         GETTING TILE NAMES AND COLLISION INFO FROM THE FILE
         String line;
-
+        int tileIndex = 0;
 
         try {
-            while((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 fileNames.add(line);
-                collisionStatus.add(br.readLine());
+
+                // Read the collision status from file
+                boolean isSolid = Boolean.parseBoolean(br.readLine());
+
+                int positionInMap = tileIndex % 2500;
+                int row = positionInMap / 50;
+                int col = positionInMap % 50;
+
+
+//                if (tileIndex >= 558 && (row == 0 || row == gp.maxWorldRow || col == 0 || col == gp.maxWorldCol)) {
+//                    isSolid = true;
+//                    System.out.println("Edge detected at TileIndex: " + tileIndex + " (Row: " + row + ", Col: " + col + ") set to solid.");
+//                }
+
+                collisionStatus.add(String.valueOf(isSolid));
+                tileIndex++;
             }
             br.close();
         } catch (IOException e) {
@@ -163,7 +178,19 @@ public class TileManager {
             }
 
 //            Draw the tile's specific collision box if it has collision
+            if (currentTile.collision && currentTile != null) {
+                g2.setColor(Color.red);
+                g2.setStroke(new java.awt.BasicStroke(1));
 
+                // Calculate the tile's collision box world position
+                int collisionBoxX = screenX + currentTile.collisionBox.x;
+                int collisionBoxY = screenY + currentTile.collisionBox.y;
+                int collisionBoxWidth = currentTile.collisionBox.width;
+                int collisionBoxHeight = currentTile.collisionBox.height;
+
+                // Draw the tile's specific collision box
+                g2.drawRect(collisionBoxX, collisionBoxY, collisionBoxWidth, collisionBoxHeight);
+            }
         }
 
     }

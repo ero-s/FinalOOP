@@ -3,8 +3,6 @@ package main;
 import entity.*;
 import monster.*;
 import object.*;
-import tile_interactive.IT_DryTree;
-import tile_interactive.IT_MetalPlate;
 
 public class AssetSetter {
 
@@ -42,6 +40,8 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldX = gp.tileSize * 42;
         gp.obj[mapNum][i].worldY = gp.tileSize * 20;
         i++;
+
+
     }
     public void setNPC() {
         int mapNum = 0;
@@ -66,6 +66,11 @@ public class AssetSetter {
             gp.obj[4][i].worldY = gp.tileSize * 33;
             i++;
         }
+
+//        gp.obj[mapNum][i] = new NPC_Portal(gp);
+//        gp.obj[mapNum][i].worldX = gp.tileSize * 14;
+//        gp.obj[mapNum][i].worldY = gp.tileSize * 7;
+//        i++;
 
         mapNum = 1;
         i = 0;
@@ -188,41 +193,7 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 16;
         i++;
 
-        gp.monster[mapNum][i] = new MON_Bat(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
-        i++;
 
-        gp.monster[mapNum][i] = new MON_Bat(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Bat(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 18;
-        i++;
-
-
-        gp.monster[mapNum][i] = new MON_Bat(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 27;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Bat(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 27;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Bat(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Bat(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 24;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
-        i++;
     }
 
     public void setInteractiveTile() {
