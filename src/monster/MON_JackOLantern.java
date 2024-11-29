@@ -194,8 +194,9 @@ public class MON_JackOLantern extends Entity {
             isActing = true;
         }
 
-        if (getTileDistance(gp.player) < 10) {
-            moveTowardPlayer(60);
+        if (getTileDistance(gp.player) > 5) {
+            moveTowardPlayer(10);
+
         } else {
 
             // Get a random direction
