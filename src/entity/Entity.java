@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.crypto.spec.RC2ParameterSpec;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.UtilityTool;
-import monster.MON_SkeletonLord;
 
 public class Entity {
     GamePanel gp;
@@ -65,6 +65,7 @@ public class Entity {
     int knockBackCounter = 0;
     public int guardCounter = 0;
     int offBalanceCounter = 0;
+    public int skillDurationCounter = 0;
 
     // CHARACTER ATTRIBUTES
     public String name;
@@ -91,6 +92,8 @@ public class Entity {
     public Projectile skill1;
     public Entity currentLight;
     public boolean boss;
+    public int xOffset;
+    public int yOffset;
 
 
     // ITEM ATTRIBUTES
@@ -671,6 +674,10 @@ public class Entity {
             }
 
             g2.drawImage(image, tempScreenX, tempScreenY, null);
+            g2.setColor(Color.red);
+            int collisionBoxX = screenX + this.solidAreaDefaultX;
+            int collisionBoxY = screenY + this.solidAreaDefaultY;
+            g2.drawRect(collisionBoxX, collisionBoxY, this.solidArea.width, this.solidArea.height);
 
             changeAlpha(g2, 1f);
         }
