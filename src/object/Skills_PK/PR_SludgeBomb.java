@@ -1,4 +1,4 @@
-package object;
+package object.Skills_PK;
 
 import entity.Entity;
 import entity.Projectile;
@@ -6,10 +6,10 @@ import main.GamePanel;
 
 import java.awt.*;
 
-public class OBJ_Projectile extends Projectile {
+public class PR_SludgeBomb extends Projectile {
     GamePanel gp;
-    public static final String objName = "Green Stuff";
-    public OBJ_Projectile(GamePanel gp) {
+    public static final String objName = "Sludge Bomb";
+    public PR_SludgeBomb(GamePanel gp) {
         super(gp);
         this.gp = gp;
         name = objName;
@@ -20,21 +20,23 @@ public class OBJ_Projectile extends Projectile {
         alive = false;
         //collision area of projectile
         solidArea = new Rectangle(64,64,64,64);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         //offset of projectile
-//        xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
-//        yOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
+        xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
+        yOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
         getImage();
     }
     public void getImage(){
-        up1 = setup("/pics/projectiles/green/up1.png", gp.tileSize*2, gp.tileSize*2);
-        up2 = setup("/pics/projectiles/green/up2.png", gp.tileSize*2, gp.tileSize*2);
-        right1 = setup("/pics/projectiles/green/right1.png", gp.tileSize*2, gp.tileSize*2);
-        right2 = setup("/pics/projectiles/green/right2.png", gp.tileSize*2, gp.tileSize*2);
-        down1 = setup("/pics/projectiles/green/down1.png", gp.tileSize*2, gp.tileSize*2);
-        down2 = setup("/pics/projectiles/green/down2.png", gp.tileSize*2, gp.tileSize*2);
-        left1 = setup("/pics/projectiles/green/left1.png", gp.tileSize*2, gp.tileSize*2);
-        left2 = setup("/pics/projectiles/green/left2.png", gp.tileSize*2, gp.tileSize*2);
+        up1 = setup("/res/projectile/pickleRick/up1", gp.tileSize*4, gp.tileSize*4);
+        up2 = setup("/res/projectile/pickleRick/up2", gp.tileSize*4, gp.tileSize*4);
+        right1 = setup("/res/projectile/pickleRick/right1", gp.tileSize*4, gp.tileSize*4);
+        right2 = setup("/res/projectile/pickleRick/right2", gp.tileSize*4, gp.tileSize*4);
+        down1 = setup("/res/projectile/pickleRick/down1", gp.tileSize*4, gp.tileSize*4);
+        down2 = setup("/res/projectile/pickleRick/down2", gp.tileSize*4, gp.tileSize*4);
+        left1 = setup("/res/projectile/pickleRick/left1", gp.tileSize*4, gp.tileSize*4);
+        left2 = setup("/res/projectile/pickleRick/left2", gp.tileSize*4, gp.tileSize*4);
     }
 
     public boolean haveResource(Entity user){

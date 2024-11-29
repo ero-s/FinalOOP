@@ -11,6 +11,9 @@ public class Projectile extends Entity {
         super(gp);
     }
 
+    public void setUser(Entity user){
+        this.user = user;
+    }
     public void set(int worldX, int worldY, String direction, boolean alive, Entity user) {
         this.worldX = worldX;
         this.worldY = worldY;
@@ -18,7 +21,29 @@ public class Projectile extends Entity {
         this.alive = alive;
         this.user = user;
         this.life = maxLife;
-        skill1 = new OBJ_Smash(gp);
+
+        // Calculate the offset to center the upscaled projectile relative to the player
+        int centerXOffset = xOffset;
+        int centerYOffset = yOffset;
+        // Adjust initial projectile position based on direction
+        switch (direction) {
+            case "up":
+                this.worldX -= centerXOffset;
+                this.worldY -= gp.tileSize + centerYOffset/2;
+                break;
+            case "down":
+                this.worldX -= centerXOffset;
+                this.worldY += gp.tileSize - centerYOffset;
+                break;
+            case "left":
+                this.worldX -= gp.tileSize + centerXOffset/2;
+                this.worldY -= centerYOffset;
+                break;
+            case "right":
+                this.worldX += gp.tileSize/2 - centerXOffset;
+                this.worldY -= centerYOffset;
+                break;
+        }
     }
 
     public void update() {
@@ -52,18 +77,6 @@ public class Projectile extends Entity {
         life--;
         if (life <= 0) {
             alive = false;
-
-            if(gp.keyH.skill1Pressed){ //g2 public
-                gp.g2.drawRect(this.solidArea.x, this.solidArea.y, this.solidArea.width, this.solidArea.height);
-
-                int monsterIndex = gp.cChecker.checkEntity(skill1, gp.monster);
-
-                if (monsterIndex != 999) {
-                    gp.player.damageMonster(monsterIndex, this, attack*(gp.player.level/2), knockBackPower);
-                    generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
-                    alive = false;
-                }
-            }
         }
 
         spriteCounter++;
