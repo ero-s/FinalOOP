@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.crypto.spec.RC2ParameterSpec;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.UtilityTool;
-import monster.MON_SkeletonLord;
 
 public class Entity {
     GamePanel gp;
@@ -65,6 +65,7 @@ public class Entity {
     int knockBackCounter = 0;
     public int guardCounter = 0;
     int offBalanceCounter = 0;
+    public int skillDurationCounter = 0;
 
     // CHARACTER ATTRIBUTES
     public String name;
@@ -91,6 +92,8 @@ public class Entity {
     public Projectile skill1;
     public Entity currentLight;
     public boolean boss;
+    public int xOffset;
+    public int yOffset;
 
 
     // ITEM ATTRIBUTES
@@ -350,8 +353,6 @@ public class Entity {
                 }
             }
         }
-
-        System.out.println(gp.player.worldX/gp.tileSize + " " + gp.player.worldY/gp.tileSize);
     }
 
     public void checkAttackOrNot(int rate, int straight, int horizontal){
@@ -673,11 +674,12 @@ public class Entity {
             }
 
             g2.drawImage(image, tempScreenX, tempScreenY, null);
+            g2.setColor(Color.red);
+            int collisionBoxX = screenX + this.solidAreaDefaultX;
+            int collisionBoxY = screenY + this.solidAreaDefaultY;
+            g2.drawRect(collisionBoxX, collisionBoxY, this.solidArea.width, this.solidArea.height);
 
             changeAlpha(g2, 1f);
-        }
-        if(onPath && alive && !dying){
-            gp.tileM.drawPath(g2);
         }
     }
 
@@ -736,7 +738,7 @@ public class Entity {
         return image;
     }
 
-    public void searchPath(int goalCol, int goalRow) {
+    public void searchPath(Entity entity, int goalCol, int goalRow) {
         int startCol = (worldX + solidArea.x) / gp.tileSize;
         int startRow = (worldY + solidArea.y) / gp.tileSize;
 
@@ -806,6 +808,13 @@ public class Entity {
             // if (nextCol == goalCol && nextRow == goalRow) {
             // onPath = false;
             // }
+        }
+        else{
+            if(entity.type != type_monster){
+                entity.onPath = false;
+                entity.sleep = true;
+            }
+
         }
     }
 

@@ -2,6 +2,8 @@ package main;
 
 import entity.Entity;
 import object.*;
+import object.GeneralSkills.OBJ_Smash;
+import object.Skills_PK.PR_SludgeBomb;
 
 public class EntityGenerator {
     GamePanel gp;
@@ -29,7 +31,7 @@ public class EntityGenerator {
             case OBJ_ManaCrystal.objName : obj = new OBJ_ManaCrystal(gp); break;
             case OBJ_Pickaxe.objName : obj = new OBJ_Pickaxe(gp); break;
             case OBJ_Potion_Red.objName : obj = new OBJ_Potion_Red(gp); break;
-            case OBJ_Projectile.objName : obj = new OBJ_Projectile(gp); break;
+            case PR_SludgeBomb.objName : obj = new PR_SludgeBomb(gp); break;
             case OBJ_Rock.objName : obj = new OBJ_Rock(gp); break;
             case OBJ_Shield_Blue.objName : obj = new OBJ_Shield_Blue(gp); break;
             case OBJ_Shield_Wood.objName : obj = new OBJ_Shield_Wood(gp); break;

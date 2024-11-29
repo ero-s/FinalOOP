@@ -1,13 +1,10 @@
 package main;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class Main {
-    // MAIN METHOD
-
     public static JFrame window;
-
-
     public static void main(String[] args) {
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -32,7 +29,7 @@ public class Main {
         gamePanel.startGameThread();
     }
     public void setIcon() {
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("res/player/boy_attack_right_2.png"));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("res/player/boy_attack_right_2.png")));
         window.setIconImage(icon.getImage());
     }
 }

@@ -1,10 +1,9 @@
 package monster;
 
-import java.util.Random;
-
 import entity.Entity;
 import main.GamePanel;
 import object.*;
+import object.Skills_PK.PR_SludgeBomb;
 
 public class MON_PickleRick extends Entity {
 
@@ -27,8 +26,7 @@ public class MON_PickleRick extends Entity {
         defense = 2;
         exp = 30;
         knockBackPower = 8;
-        projectile = new OBJ_Rock(gp);
-
+        projectile = new PR_SludgeBomb(gp);
         int size = gp.tileSize*5;
         solidArea.x = 48;
         solidArea.y = 48;
@@ -41,7 +39,12 @@ public class MON_PickleRick extends Entity {
         motion1_duration = 25;
         motion2_duration = 50;
 
+
+        projectile.xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
+        projectile.yOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
+
         getImage();
+        getAttackImage();
     }
 
     public void getImage() {
@@ -70,6 +73,7 @@ public class MON_PickleRick extends Entity {
     }
 
     public void setAction() {
+
         if(!inRage && life < maxLife/2){
             inRage = true;
             getImage();
@@ -79,12 +83,11 @@ public class MON_PickleRick extends Entity {
         }
 
         if (getTileDistance(gp.player) < 10) {
-            moveTowardPlayer(60);
+            moveTowardPlayer(20);
         } else {
-
             // Get a random direction
             getRandomDirection(60);
-            checkShootOrNot(200, 60);
+            checkShootOrNot(100, 30);
         }
 
         // Check if it attacks
@@ -97,13 +100,12 @@ public class MON_PickleRick extends Entity {
 
     public void damageReaction() {
         actionLockCounter = 0;
-        direction = gp.player.direction;
-        onPath = true;
     }
 
     public void checkDrop() {
 
         dropItem(new OBJ_BlueHeart(gp));
+        dropItem(new OBJ_Key(gp));
 
     }
 }

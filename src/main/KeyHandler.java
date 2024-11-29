@@ -67,16 +67,16 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_ENTER){
                 if(gp.ui.commandNum == 0){ // new game
-                    gp.gameState = gp.cutsceneState;
-                    gp.g2.setColor(Color.black);
-                    gp.g2.fillRect(0,0, gp.maxScreenCol, gp.maxScreenRow);
-                    gp.csManager.sceneNum = gp.csManager.opening;
+                    gp.player.setDefaultValues();
+                    gp.setupGame();
+                    gp.gameState = gp.playState;
+
                 }
 
                 if(gp.ui.commandNum == 1){ // load
                     gp.saveLoad.load();
-                    gp.playSE(0);
                     gp.gameState = gp.playState;
+
                 }
                 if(gp.ui.commandNum == 2){ // exit
                     System.exit(0);
@@ -339,9 +339,8 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
-                gp.gameState = gp.playState;
                 gp.resetGame(false);
-//                gp.playMusic(0);
+                gp.gameState = gp.playState;
             } else if (gp.ui.commandNum == 1) {
                 gp.stopMusic();
                 gp.gameState = gp.titleState;

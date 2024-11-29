@@ -2,11 +2,12 @@ package entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
 import object.*;
+import object.GeneralSkills.OBJ_Smash;
+import object.Skills_PK.PR_SludgeBomb;
 
 public class    Player extends Entity {
     KeyHandler keyH;
@@ -15,6 +16,7 @@ public class    Player extends Entity {
     public final int screenY;
     private int manaRegenCounter = 0;
     public boolean attackCanceled = false;
+    public int currentDialogueSet;
     public boolean lightUpdated = false;
     int standCounter;
     int manaRegen;
@@ -23,6 +25,7 @@ public class    Player extends Entity {
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
         this.keyH = keyH;
+        direction = "down";
 
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
@@ -32,8 +35,8 @@ public class    Player extends Entity {
         solidArea.y = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 24;
-        solidArea.height = 30;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         mapCollision = new Rectangle();
         mapCollision.x = 0;
@@ -66,11 +69,13 @@ public class    Player extends Entity {
         exp = 0;
         nextLevelExp = 5;
         coin = 800;
+        currentDialogueSet = 1;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         currentLight = null;
-        projectile = new OBJ_Fireball(gp);
+        projectile = new PR_SludgeBomb(gp);
         skill1 = new OBJ_Smash(gp);
+        skill1.setUser(this);
         attack = getAttack();
         defense = getDefense();
 
@@ -206,10 +211,10 @@ public class    Player extends Entity {
     }
 
     public void getGuardImage(){
-        guardUp = setup("/res/player/hakobe/up1", gp.tileSize, gp.tileSize);
-        guardDown = setup("/res/player/hakobe/down2", gp.tileSize, gp.tileSize);
-        guardLeft = setup("/res/player/hakobe/left2", gp.tileSize, gp.tileSize);
-        guardRight = setup("/res/player/hakobe/right2", gp.tileSize, gp.tileSize);
+        guardUp = setup("/res/player/hakobe/up1", gp.tileSize*2, gp.tileSize*4);
+        guardDown = setup("/res/player/hakobe/down2", gp.tileSize*2, gp.tileSize*4);
+        guardLeft = setup("/res/player/hakobe/left2", gp.tileSize*4, gp.tileSize*2);
+        guardRight = setup("/res/player/hakobe/right2", gp.tileSize*4, gp.tileSize*2);
     }
 
     public void update() {
@@ -347,6 +352,22 @@ public class    Player extends Entity {
                 }
             }
 
+            shotAvailableCounter = 0;
+            gp.playSE(10);
+        }
+
+        if (gp.keyH.skill1Pressed && !skill1.alive && shotAvailableCounter == 30
+                && skill1.haveResource(this)) {
+            skill1.set(worldX, worldY, direction, true, this);
+            skill1.subtractResource(this);
+
+            // CHECK VACANCY
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if (gp.projectile[gp.currentMap][i] == null) {
+                    gp.projectile[gp.currentMap][i] = skill1;
+                    break;
+                }
+            }
             shotAvailableCounter = 0;
             gp.playSE(10);
         }
@@ -524,6 +545,45 @@ public class    Player extends Entity {
         }
     }
     public void setDialogue(){
+        dialogues[1][0] = "At home, the brothers overhear their parents \narguing before their separation breaks ";
+        dialogues[1][1] = "them apart — Hakobe moves to the city, while\n Andres stays on the farm.";
+        dialogues[1][2] = " As their bond fades, Hakobe hears rumors \nof disappearances in Bukidgrown. ";
+        dialogues[1][3] = "After learning of a massacre in his \nhometown, he returns, sneaks past police,";
+        dialogues[1][4] = " and discovers a dungeon gate where he\n and Andres once played. Then Hakobe entered.";
+        dialogues[1][5] = "Ahead stands a castle, brimming with greed,\na selfish king awaits";
+
+        dialogues[2][0] = "Pickle Rick! Your end has come! \nI bring the countless cries of your people";
+        dialogues[2][1] = "Your tyranny end today!.";
+
+        dialogues[3][0] = "Pickle Rick grew up in poverty which made him\n develop a strong obsession with money and power,";
+        dialogues[3][1] = "he witnessed the cruelty of the world, where\n those who are without wealth \nor power were mistreated.";
+        dialogues[3][2] = "This then sowed the seeds of in the future \nhe wanted to be the one who has power\n over everything and makes people do his bidding.";
+        dialogues[3][3] = "He then fell in love, but the woman he \nloved was taken away and became a slave;";
+        dialogues[3][4] = "he became more powerless because \nhe was incapable of buying her.";
+        dialogues[3][5] = "He worked tirelessly desperately trying \nto earn money, but she was murdered one day.";
+        dialogues[3][6] = "This led Pickle Rick to bear more anger in\n the world which made him \nstart enslaving people";
+        dialogues[3][7] = "and letting them work tirelessly like he did.";
+        dialogues[3][8] = "He was mad at the world that\n he made others suffer like he did.";
+        dialogues[3][9] = "North of where summer thrives, a town of scares lies.";
+        dialogues[3][10] = "A being of immense power lays dormant, ruling with fear";
+        dialogues[3][11] = "Jack O' Lantern waits for your arrival";
+
+        dialogues[4][0] = "Hakobe and Pugtato reach the Fall Circus, on a mission to find the ringmaster";
+        dialogues[4][0] = "Hakobe and Pugtato reach the Fall Circus, on a mission to find the ringmaster";
+
+
+
+        dialogues[6][0] = "Jac was once known as a gifted performer,\n a child prodigy. Jac was once known";
+        dialogues[6][1] = "as a gifted performer, a child prodigy, \nand his family's pride and joy. As he grew";
+        dialogues[6][2] = "older, Jac’s parents showered him with\n expectations but rarely offered affection";
+        dialogues[6][3] = "or support. Instead of nurturing his talents,\n they demanded perfection, driving";
+        dialogues[6][4] = "him to practice relentlessly. \nTheir indifference cut deeply, fostering a growing ";
+        dialogues[6][5] = "resentment within him.\n Jac felt like a mere prop in their show, overshadowed by";
+        dialogues[6][6] = "their brilliance and neglect. \nYears later he became the best ever performer there ";
+        dialogues[6][7] = "ever was but was blinded by his ideals\n which led to him enslaving people and ";
+        dialogues[6][8] = "making them suffer. This sadistic behavior\n was a boost to his ego, and this ";
+        dialogues[6][9] = "eventually started this cruel rule on the circus. ";
+
 
     }
 
@@ -661,16 +721,12 @@ public class    Player extends Entity {
         }
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
-
         g2.setColor(Color.red);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-
-        g2.setColor(Color.green);
-        g2.drawRect(screenX + mapCollision.x, screenY + mapCollision.y, mapCollision.width, mapCollision.height);
+        int collisionBoxX = screenX + this.solidArea.x;
+        int collisionBoxY = screenY + this.solidArea.y;
+        g2.drawRect(collisionBoxX, collisionBoxY, this.solidArea.width, this.solidArea.height);
 
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
-        System.out.println("WorldX: "+gp.player.worldX / gp.tileSize +" WorldY: "+gp.player.worldY/gp.tileSize);
     }
 }
