@@ -86,7 +86,7 @@ public class MON_Jill extends Entity {
         if (onPath) {
 
             // Search the direction to go
-            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
+            searchPath(this,getGoalCol(gp.player), getGoalRow(gp.player));
 
             // Check if it shoots a projectile
             checkShootOrNot(60, 30);

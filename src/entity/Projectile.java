@@ -1,7 +1,6 @@
 package entity;
 
 import main.GamePanel;
-import object.OBJ_Smash;
 
 public class Projectile extends Entity {
     Entity user;

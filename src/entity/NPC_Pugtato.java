@@ -12,7 +12,7 @@ public class NPC_Pugtato extends Entity {
 
         direction = "down";
         speed = 1;
-        sleep = true;
+        sleep = false;
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
@@ -82,14 +82,12 @@ public class NPC_Pugtato extends Entity {
         if (onPath) {
             // int goalCol = 12;
             // int goalRow =  9;
-            int goalCol = 14 * gp.tileSize;
-            int goalRow = 10 * gp.tileSize;
+            int goalCol = 14;
+            int goalRow = 11;
 
-            searchPath(goalCol, goalRow);
+            searchPath(this, goalCol, goalRow);
         } else {
-
             actionLockCounter++;
-
             if (actionLockCounter == 120) {
                 Random random = new Random();
                 int i = random.nextInt(100) + 1;
@@ -112,7 +110,7 @@ public class NPC_Pugtato extends Entity {
         }
     }
 
-    public void speak(int dialogueSet) {
+    public void speak() {
         facePlayer();
         startDialogue(this, dialogueSet);
         dialogueSet++;

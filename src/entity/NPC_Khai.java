@@ -63,7 +63,7 @@ public class NPC_Khai extends Entity {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
 
-            searchPath(goalCol, goalRow);
+            searchPath(this, goalCol, goalRow);
         } else {
 
             actionLockCounter++;
