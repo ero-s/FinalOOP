@@ -7,8 +7,10 @@ import main.GamePanel;
 import java.awt.*;
 
 public class OBJ_Smash extends Projectile {
+    //TODO improve graphics
     GamePanel gp;
     Entity user;
+
     public static final String objName = "Smash";
 
     public OBJ_Smash(GamePanel gp) {
@@ -18,19 +20,20 @@ public class OBJ_Smash extends Projectile {
 
         name = objName;
         speed = 0;
-        maxLife = 150;
+        maxLife = 60;
         life = maxLife;
         attack = 5;
         knockBackPower = 5;
         useCost = 2;
         alive = false;
-        xOffset = gp.tileSize/ 2;
-        yOffset = -gp.tileSize * 3/2;
-//        yOffset = gp.tileSize* 3/2;
+        //offset of projectile
+        xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
+        yOffset = gp.tileSize/ 2 + 64;
+
 
         solidArea = new Rectangle();
         solidArea.x = -64;
-        solidArea.y = -64;
+        solidArea.y = -32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 256;
@@ -40,6 +43,7 @@ public class OBJ_Smash extends Projectile {
 
     public void setUser(Entity user){
         this.user = user;
+
     }
 
 
@@ -53,34 +57,58 @@ public class OBJ_Smash extends Projectile {
         return haveResource;
     }
 
-    public void update(){
-        if(skillDurationCounter >= 150){
+    public void update() {
+        if (skillDurationCounter >= 60) {
             alive = false;
             skillDurationCounter = 0;
         }
-        if (user == gp.player) {
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 
-            if (monsterIndex != 999) {
-                gp.player.damageMonster(monsterIndex, this, attack*(gp.player.level/2), knockBackPower);
-                generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
+        if (user == gp.player) {
+            // Adjust the solid area to match the current world position
+            solidArea.x = worldX + solidAreaDefaultX;
+            solidArea.y = worldY + solidAreaDefaultY;
+
+            // Check all monsters in the current map
+            for (int i = 0; i < gp.monster[gp.currentMap].length; i++) {
+                Entity monster = gp.monster[gp.currentMap][i];
+                if (monster != null && monster.alive) {
+                    // Check if the monster is within the projectile's solidArea
+                    Rectangle monsterArea = new Rectangle(
+                            monster.worldX + monster.solidArea.x,
+                            monster.worldY + monster.solidArea.y,
+                            monster.solidArea.width,
+                            monster.solidArea.height
+                    );
+                    if (solidArea.intersects(monsterArea)) {
+                        gp.player.damageMonster(i, this, attack * (gp.player.level / 2), knockBackPower);
+                    }
+                }
             }
+
+            // Reset solidArea position to avoid affecting other calculations
+            solidArea.x = solidAreaDefaultX;
+            solidArea.y = solidAreaDefaultY;
         }
 
         if (user != gp.player) {
-            boolean contactPlayer = gp.cChecker.checkPlayer(this);
+            // Adjust the solid area for the projectile
+            solidArea.x = worldX + solidAreaDefaultX;
+            solidArea.y = worldY + solidAreaDefaultY;
+            // Check if the projectile hits the player
+            Rectangle playerArea = new Rectangle(
+                    gp.player.worldX + gp.player.solidArea.x,
+                    gp.player.worldY + gp.player.solidArea.y,
+                    gp.player.solidArea.width,
+                    gp.player.solidArea.height
+            );
 
-            if (!gp.player.invincible && contactPlayer) {
+            if (!gp.player.invincible && solidArea.intersects(playerArea)) {
                 damagePlayer(attack);
                 generateParticle(user.projectile, user.projectile);
             }
-        }
-
-        switch (direction) {
-            case "up": worldY -= speed; break;
-            case "down": worldY += speed; break;
-            case "left": worldX -= speed; break;
-            case "right": worldX += speed; break;
+            // Reset solidArea position
+            solidArea.x = solidAreaDefaultX;
+            solidArea.y = solidAreaDefaultY;
         }
 
         life--;
@@ -90,22 +118,22 @@ public class OBJ_Smash extends Projectile {
 
         spriteCounter++;
         if (spriteCounter > 12) {
-            if (spriteNum == 1) { spriteNum = 2; }
-            else if (spriteNum == 2) { spriteNum = 1; }
+            spriteNum = (spriteNum == 1) ? 2 : 1;
             spriteCounter = 0;
         }
+
         skillDurationCounter++;
     }
 
     public void getImage(){
-        up1 = setup("/res/projectile/pickleRick/up1", gp.tileSize*4, gp.tileSize*4);
-        up2 = setup("/res/projectile/pickleRick/up2", gp.tileSize*4, gp.tileSize*4);
-        right1 = setup("/res/projectile/pickleRick/right1", gp.tileSize*4, gp.tileSize*4);
-        right2 = setup("/res/projectile/pickleRick/right2", gp.tileSize*4, gp.tileSize*4);
-        down1 = setup("/res/projectile/pickleRick/down1", gp.tileSize*4, gp.tileSize*4);
-        down2 = setup("/res/projectile/pickleRick/down2", gp.tileSize*4, gp.tileSize*4);
-        left1 = setup("/res/projectile/pickleRick/left1", gp.tileSize*4, gp.tileSize*4);
-        left2 = setup("/res/projectile/pickleRick/left2", gp.tileSize*4, gp.tileSize*4);
+        up1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        up2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        right1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        right2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        down1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        down2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        left1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        left2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
     }
 
     public void subtractResource(Entity user) {
