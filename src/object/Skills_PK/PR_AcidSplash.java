@@ -6,22 +6,23 @@ import main.GamePanel;
 
 import java.awt.*;
 
-public class PR_AcidRain extends Projectile {
+public class PR_AcidSplash extends Projectile {
     //TODO improve graphics
     GamePanel gp;
     Entity user;
 
-    public static final String objName = "Acid Rain";
+    public static final String objName = "Smash";
 
-    public PR_AcidRain(GamePanel gp) {
+    public PR_AcidSplash(GamePanel gp) {
         super(gp);
+
         this.gp = gp;
         name = objName;
         speed = 0;
         maxLife = 60;
         life = maxLife;
-        attack = 5;
-        knockBackPower = 5;
+        attack = 20;
+        knockBackPower = 0;
         useCost = 2;
         alive = false;
 
@@ -45,7 +46,6 @@ public class PR_AcidRain extends Projectile {
 
     }
 
-
     public boolean haveResource(Entity user) {
         boolean haveResource = false;
 
@@ -61,6 +61,7 @@ public class PR_AcidRain extends Projectile {
             alive = false;
             skillDurationCounter = 0;
         }
+
         if (user == gp.player) {
             // Adjust the solid area to match the current world position
             solidArea.x = worldX + solidAreaDefaultX;
@@ -82,10 +83,12 @@ public class PR_AcidRain extends Projectile {
                     }
                 }
             }
+
             // Reset solidArea position to avoid affecting other calculations
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
         }
+
         if (user != gp.player) {
             // Adjust the solid area for the projectile
             solidArea.x = worldX + solidAreaDefaultX;
@@ -97,6 +100,7 @@ public class PR_AcidRain extends Projectile {
                     gp.player.solidArea.width,
                     gp.player.solidArea.height
             );
+
             if (!gp.player.invincible && solidArea.intersects(playerArea)) {
                 damagePlayer(attack);
                 generateParticle(user.projectile, user.projectile);
@@ -105,43 +109,58 @@ public class PR_AcidRain extends Projectile {
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
         }
+
         life--;
         if (life <= 0) {
             alive = false;
         }
+
         spriteCounter++;
         if (spriteCounter > 12) {
             spriteNum = (spriteNum == 1) ? 2 : 1;
             spriteCounter = 0;
         }
+
         skillDurationCounter++;
     }
 
     public void getImage(){
-        up1 = setup("/res/projectile/pickleRick/up1", gp.tileSize*4, gp.tileSize*4);
-        up2 = setup("/res/projectile/pickleRick/up2", gp.tileSize*4, gp.tileSize*4);
-        right1 = setup("/res/projectile/pickleRick/right1", gp.tileSize*4, gp.tileSize*4);
-        right2 = setup("/res/projectile/pickleRick/right2", gp.tileSize*4, gp.tileSize*4);
-        down1 = setup("/res/projectile/pickleRick/down1", gp.tileSize*4, gp.tileSize*4);
-        down2 = setup("/res/projectile/pickleRick/down2", gp.tileSize*4, gp.tileSize*4);
-        left1 = setup("/res/projectile/pickleRick/left1", gp.tileSize*4, gp.tileSize*4);
-        left2 = setup("/res/projectile/pickleRick/left2", gp.tileSize*4, gp.tileSize*4);
+        int i = 8;
+        up1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
     }
+
     public void subtractResource(Entity user) {
         user.mana -= useCost;
     }
+
     public Color getParticleColor() {
-        return new Color(103, 86, 83);
+        Color color = new Color(103, 86, 83);
+
+        return color;
     }
+
     public int getParticleSize() {
-        return 12;
+        int size = 12;
+
+        return size;
     }
 
     public int getParticleSpeed() {
-        return 1;
+        int speed = 1;
+
+        return speed;
     }
 
     public int getParticleMaxLife() {
-        return 20;
+        int maxLife = 20;
+
+        return maxLife;
     }
 }
