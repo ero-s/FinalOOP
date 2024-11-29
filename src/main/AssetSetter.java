@@ -54,7 +54,7 @@ public class AssetSetter {
         i++;
 
         gp.npc[mapNum][i] = new NPC_Portal(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize * 14;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 12; // -2 because imageWidth is 2
         gp.npc[mapNum][i].worldY = gp.tileSize * 7;
         i++;
 
