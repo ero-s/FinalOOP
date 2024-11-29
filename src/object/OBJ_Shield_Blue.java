@@ -30,7 +30,7 @@ public class OBJ_Shield_Blue extends Entity {
     public boolean use(Entity entity){
 
         gp.gameState = gp.cutsceneState;
-        gp.csManager.sceneNum = gp.csManager.ending;
+//        gp.csManager.sceneNum = gp.csManager.ending;
         return true;
     }
     

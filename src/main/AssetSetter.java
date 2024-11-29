@@ -86,6 +86,13 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize * 16;
         i++;
 
+        if(gp.player.currentDialogueSet >= 3){
+            gp.npc[4][0] = new NPC_Pugtato(gp);
+            gp.npc[4][0].sleep = true;
+            gp.npc[mapNum][i].worldX = gp.tileSize * 22;
+            gp.npc[mapNum][i].worldY = gp.tileSize * 33;
+            i++;
+        }
 
 
 
