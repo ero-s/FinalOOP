@@ -9,7 +9,7 @@ import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
 
-public class MON_Jill extends Entity {
+public class  MON_Jill extends Entity {
 
     GamePanel gp;
     public static final String monName = "Jill";

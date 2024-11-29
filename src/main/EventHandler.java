@@ -115,10 +115,10 @@ public class EventHandler {
                 }
             }
 
-//            // TELEPORT TO FALL CIRCUS
-//            if (hit(0, 13, 9, "any")) {
-//                teleport(1,45,15);
-//            }
+            // TELEPORT TO FALL CIRCUS
+            if (hit(0, 14, 7, "any")) {
+                teleport(1,45,15);
+            }
 
             // DRINK RECOVERING
             else if (hit(0, 23, 12, "up")) {

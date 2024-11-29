@@ -414,6 +414,8 @@ public class    Player extends Entity {
                 gp.playSE(12);
             }
         }
+
+        System.out.println(worldX/gp.tileSize + ", " + worldY/gp.tileSize);
     }
 
     public void pickUpObject(int mapNum, int i) {

@@ -22,7 +22,7 @@ public class OBJ_Smash extends Projectile {
         maxLife = 60;
         life = maxLife;
         attack = 5;
-        knockBackPower = 5;
+        knockBackPower = 1;
         useCost = 2;
         alive = false;
 
