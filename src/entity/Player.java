@@ -545,12 +545,12 @@ public class    Player extends Entity {
         }
     }
     public void setDialogue(){
-        dialogues[1][0] = "At home, the brothers overhear their parents \narguing before their separation breaks ";
-        dialogues[1][1] = "them apart — Hakobe moves to the city, while\n Andres stays on the farm.";
-        dialogues[1][2] = " As their bond fades, Hakobe hears rumors \nof disappearances in Bukidgrown. ";
-        dialogues[1][3] = "After learning of a massacre in his \nhometown, he returns, sneaks past police,";
-        dialogues[1][4] = " and discovers a dungeon gate where he\n and Andres once played. Then Hakobe entered.";
-        dialogues[1][5] = "Ahead stands a castle, brimming with greed,\na selfish king awaits";
+//        dialogues[1][0] = "At home, the brothers overhear their parents \narguing before their separation breaks ";
+//        dialogues[1][1] = "them apart — Hakobe moves to the city, while\n Andres stays on the farm.";
+//        dialogues[1][2] = " As their bond fades, Hakobe hears rumors \nof disappearances in Bukidgrown. ";
+//        dialogues[1][3] = "After learning of a massacre in his \nhometown, he returns, sneaks past police,";
+//        dialogues[1][4] = " and discovers a dungeon gate where he\n and Andres once played. Then Hakobe entered.";
+//        dialogues[1][5] = "Ahead stands a castle, brimming with greed,\na selfish king awaits";
 
         dialogues[2][0] = "Pickle Rick! Your end has come! \nI bring the countless cries of your people";
         dialogues[2][1] = "Your tyranny end today!.";

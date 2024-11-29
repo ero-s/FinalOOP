@@ -1,386 +1,110 @@
 package main;
 
-import entity.Entity;
-import object.OBJ_BlueHeart;
-import object.OBJ_Door_Iron;
-import object.OBJ_Shield_Blue;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class CutsceneManager {
     GamePanel gp;
     Graphics2D g2;
-    Entity e = new Entity(gp);
 
     public int sceneNum;
     public int scenePhase;
     int counter = 0;
-    float alpha = 0f;
-    int y;
-    String endCredit;
-    String openingScene;
+    float alpha = 0f; // Transparency for fade effect
+    ArrayList<String> openingTextPages = new ArrayList<>();
+    int currentTextPage = 0;
 
-    // scene number
+    // Scene numbers
     public final int NA = 0;
-    public final int skeletonLord = 1;
-    public final int ending = 2;
-    public final int opening = 3;
+    public final int opening = 1;
 
     public CutsceneManager(GamePanel gp) {
         this.gp = gp;
-
-        endCredit = "Program/Music/Art\n"
-                + "RyiSnow"
-                + "\n\n\n\n\n\n\n\n\n\n\n\n\n"
-                + "Special Thanks\n"
-                + "Someone\n"
-                + "Someone\n"
-                + "Someone\n"
-                + "Someone\n\n\n\n\n"
-                + "Thank you for playing!";
-
-        openingScene = "Once upon a time";
+        // Store paragraphs as separate elements
+        openingTextPages.add("In the heart of a dense forest lay Bukidgrown, a serene farming village where two brothers, Hakobe and his older sibling Andres, grew up under the warmth of their family's modest home.");
+        openingTextPages.add("One fateful evening, Hakobe and Andres overheard their parents locked in a heated argument. The following days unraveled their lives—dividing the family as their parents separated.");
+        openingTextPages.add("Hakobe left for the city, seeking a fresh start, while Andres remained tethered to the soil of Bukidgrown, clinging to the familiar. As their bond fades, Hakobe hears rumors of disappearances in Bukidgrown.");
+        openingTextPages.add("After learning of a massacre in his hometown, he returns, sneaks past police, and discovers a dungeon gate where he and Andres once played. Then Hakobe entered.");
     }
 
     public void draw(Graphics2D g2) {
         this.g2 = g2;
 
-        switch(sceneNum) {
-            //case skeletonLord: scene_skeletonLord(); break;
-            case ending: gp.saveLoad.save(); scene_ending(); break;
-            case opening: gp.saveLoad.save(); scene_opening(); break;
+        if (sceneNum == opening) {
+            playOpeningScene();
         }
     }
 
-//    public void scene_skeletonLord() {
-//        if (scenePhase == 0) {
-//            gp.bossBattleOn = true;
-//
-//            //shut doors
-//            for (int i = 0; i < gp.obj[1].length; i++) {
-//
-//                if (gp.obj[gp.currentMap][i] == null) {
-//                    gp.obj[gp.currentMap][i] = new OBJ_Door_Iron(gp);
-//                    gp.obj[gp.currentMap][i].worldX = gp.tileSize*25;
-//                    gp.obj[gp.currentMap][i].worldY = gp.tileSize*28;
-//                    gp.obj[gp.currentMap][i].temp = true;
-//                    gp.playSE(21);
-//                    break;
-//                }
-//            }
-//
-//            //Search a vacant slot for the dummy
-//            for (int i = 0; i < gp.npc[1].length; i++) {
-//
-//                if (gp.npc[gp.currentMap][i] == null) {
-//                    gp.npc[gp.currentMap][i] = new PlayerDummy(gp);
-//                    gp.npc[gp.currentMap][i].worldX = gp.player.worldX;
-//                    gp.npc[gp.currentMap][i].worldY = gp.player.worldY;
-//                    gp.npc[gp.currentMap][i].direction = gp.player.direction;
-//                    break;
-//                }
-//            }
-//
-//            gp.player.drawing = false;
-//
-//            scenePhase++;
-//        }
-//
-//        if(scenePhase == 1){
-//
-//        }
-//
-//        if(scenePhase == 2){
-//
-//            //Search the boss
-//            for(int i = 0; i < gp.monster[1].length; i++){
-//
-//                if(gp.monster[gp.currentMap][i] != null &&
-//                        gp.monster[gp.currentMap][i].name == MON_SkeletonLord.monName){
-//
-//                    gp.monster[gp.currentMap][i].sleep = false;
-//                    gp.ui.npc = gp.monster[gp.currentMap][i];
-//                    scenePhase++;
-//                    break;
-//                }
-//            }
-//        }
-//
-//        if(scenePhase == 3){
-//
-//            //The boss speaks
-//            gp.ui.drawDialogueScreen();
-//        }
-//
-//        if(scenePhase == 4){
-//
-//            //Return to the player
-//
-//            //Search the dummy
-//            for(int i = 0; i < gp.npc[1].length; i++){
-//
-//                if(gp.npc[gp.currentMap][i] != null && gp.npc[gp.currentMap][i].name.equals(PlayerDummy.npcName)){
-//                    //Restore the player position
-//                    gp.player.worldX = gp.npc[gp.currentMap][i].worldX;
-//                    gp.player.worldY = gp.npc[gp.currentMap][i].worldY;
-//                    //Delete the dummy
-//                    gp.npc[gp.currentMap][i] = null;
-//                    break;
-//                }
-//            }
-//
-//            //Start drawing the player
-//            gp.player.drawing = true;
-//
-//            //Reset
-//            sceneNum = NA;
-//            scenePhase = 0;
-//            gp.gameState = gp.playState;
-//
-//            //Change the music
-//            gp.stopMusic();
-//            gp.playMusic(22);
-//        }
-//    }
-    public void scene_ending(){
-        //scenePhase = 0;
-        //s
-        //gp.saveLoad.save();
-        if(gp.keyH.escapePressed){
-            scenePhase = 9;
-            gp.gameState = gp.playState;
-            gp.eHandler.teleport(1,45,15);
-
-        }
-        if(scenePhase == 0){
-            gp.stopMusic();
-            gp.ui.npc = new OBJ_BlueHeart(gp);
-            scenePhase++;
-        }
-
-        if(scenePhase == 1){
-            //Display dialogues
-            gp.ui.drawDialogueScreen();
-        }
-
-        if(scenePhase == 2){
-            //PLay the fanfare
-            gp.playSE(4);
-            scenePhase++;
-        }
-
-        if(scenePhase == 3){
-
-            //Wait until the sound effect ends
-            if(counterReached(150)){
-                scenePhase++;
-            }
-        }
-
-        if(scenePhase == 4){
-
-            //The screen gets darker
+    private void playOpeningScene() {
+        if (scenePhase == 0) {
+            // Fade-in effect
             alpha += 0.005f;
-
-            if(alpha > 1f){
+            if (alpha >= 1f) {
                 alpha = 1f;
+                scenePhase = 1;
+                counter = 0;
             }
-            drawBlackBackground(alpha);
-
-            if(alpha == 1f){
-                alpha = 0;
-                scenePhase++;
+        } else if (scenePhase == 1) {
+            // Hold text
+            counter++;
+            if (counter > 600) { // Hold for 10 seconds at 60 FPS
+                scenePhase = 2;
             }
-        }
-
-        if(scenePhase == 5){
-
-            drawBlackBackground(1f);
-
-            alpha += 0.005f;
-            if(alpha > 1f){
-                alpha = 1f;
-            }
-
-            String text = "Pickle Rick grew up in poverty which made him develop a strong obsession,\n"
-                    + "with money and power, he witnessed the cruelty of the world, where those who.\n"
-                    + "are without wealth or power were mistreated. This then sowed the seeds of in \n"
-                    + "the future he wanted to be the one who has power over everything and makes\n"
-                    + "people do his bidding. \n\n"
-
-                    + "He then fell in love, but the woman he loved was taken away and became a \n"
-                    + "slave; he became more powerless because he was incapable of buying her. He\n"
-                    + "worked tirelessly desperately trying to earn money, but she was murdered one\n"
-                    + "day.  This led Pickle Rick to bear more anger in the world which made him start\n"
-                    + "enslaving people and letting them work tirelessly like he did. He was mad at the \n"
-                    + "world that he made others suffer like he did.\n";
-
-            drawString(alpha, 38f, 200, text, 70);
-
-            if(counterReached(400)){
-                gp.playMusic(0);
-                scenePhase++;
+        } else if (scenePhase == 2) {
+            // Fade-out effect
+            alpha -= 0.005f;
+            if (alpha <= 0f) {
+                alpha = 0f;
+                if (currentTextPage < openingTextPages.size() - 1) {
+                    currentTextPage++;
+                    scenePhase = 0; // Reset to fade-in for the next page
+                } else {
+                    sceneNum = NA; // Reset the scene number
+                    gp.gameState = gp.playState; // Transition to gameplay
+                    scenePhase = 0; // Reset phase for potential future scenes
+                }
             }
         }
 
-        if(scenePhase == 6){
-            drawBlackBackground(1f);
-            drawString(1f, 120f, gp.screenHeight/2, "Blue Boy Adventure", 40);
-            if(counterReached(480)){
-                scenePhase++;
-            }
-        }
-
-        if(scenePhase == 7){
-            drawBlackBackground(1f);
-            y = gp.screenHeight/2;
-            drawString(1f, 38f, gp.screenHeight/2, endCredit, 40);
-            if(counterReached(480)){
-                scenePhase++;
-            }
-        }
-
-        if(scenePhase == 8){
-            drawBlackBackground(1f);
-            //Scrolling the credit
-            y--;
-            drawString(1f, 38f, y, endCredit, 40);
-            scenePhase++;
-        }
-        if(scenePhase == 9){
-           gp.saveLoad.load();
-        }
-    }
-    public void scene_opening(){
-        //gp.saveLoad.save();
-        if(gp.keyH.escapePressed){
-            scenePhase = 9;
-            gp.gameState = gp.playState;
-            gp.player.setDefaultValues();
-
-        }
-        if(scenePhase == 0){
-            gp.stopMusic();
-            g2.setColor(Color.black);
-            g2.fillRect(0,0, gp.maxScreenCol, gp.maxScreenRow);
-            scenePhase++;
-        }
-
-
-        if(scenePhase == 1){
-            //Display dialogues
-            scenePhase++;
-        }
-
-        if(scenePhase == 2){
-            //PLay the fanfare
-            gp.playSE(4);
-            scenePhase++;
-        }
-
-        if(scenePhase == 3){
-
-            //Wait until the sound effect ends
-            if(counterReached(150)){
-                scenePhase++;
-            }
-        }
-
-        if(scenePhase == 4){
-
-            //The screen gets darker
-            alpha += 0.005f;
-            if(alpha > 1f){
-                alpha = 1f;
-            }
-            drawBlackBackground(alpha);
-
-            if(alpha == 1f){
-                alpha = 0;
-                scenePhase++;
-            }
-        }
-
-        if(scenePhase == 5){
-
-            drawBlackBackground(1f);
-
-            alpha += 0.005f;
-            if(alpha > 1f){
-                alpha = 1f;
-            }
-
-            String text = "After the fierce battle with the Skeleton Lord,\n"
-                    + "the Blue Boy finally found the legendary treasure.\n"
-                    + "But this is not the end of his journey.\n"
-                    + "The Blue Boy's adventure has just begun.";
-            drawString(alpha, 38f, 200, text, 70);
-
-            if(counterReached(400)){
-                gp.playMusic(0);
-                scenePhase++;
-            }
-        }
-
-        if(scenePhase == 6){
-            drawBlackBackground(1f);
-            drawString(1f, 120f, gp.screenHeight/2, "Blue Boy Adventure", 40);
-            if(counterReached(480)){
-                scenePhase++;
-            }
-        }
-
-        if(scenePhase == 7){
-            drawBlackBackground(1f);
-            y = gp.screenHeight/2;
-            drawString(1f, 38f, gp.screenHeight/2, endCredit, 40);
-            if(counterReached(480)){
-                scenePhase++;
-            }
-        }
-
-        if(scenePhase == 8){
-            drawBlackBackground(1f);
-            //Scrolling the credit
-            y--;
-            drawString(1f, 38f, y, endCredit, 40);
-            scenePhase++;
-        }
-        if(scenePhase == 9){
-            gp.saveLoad.load();
-
-        }
-    }
-
-
-    public boolean counterReached(int target){
-        boolean counterReached = false;
-        counter++;
-        if(counter > target){
-            counterReached = true;
-            counter = 0;
-        }
-        return counterReached;
-    }
-    public void drawBlackBackground(float alpha){
-
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        // Draw the black background
         g2.setColor(Color.black);
-        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        // Draw the current paragraph
+        drawParagraph(g2, openingTextPages.get(currentTextPage));
     }
-    public void drawString(float alpha, float fontSize, int y, String text, int lineHeight){
 
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-        g2.setColor(Color.white);
-        g2.setFont(g2.getFont().deriveFont(fontSize));
+    private void drawParagraph(Graphics2D g2, String text) {
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28f));
+        g2.setColor(new Color(1f, 1f, 1f, alpha)); // Use alpha for transparency
 
-        for(String line: text.split("\n")){
-            int x = gp.ui.getXforCenteredText(line);
-            g2.drawString(line, x, y);
-            y += lineHeight;
+        int margin = 100; // Larger margin for centering
+        int lineSpacing = 40;
+        int maxWidth = gp.screenWidth - 2 * margin;
+
+        int yStart = (gp.screenHeight / 2) - 100; // Start slightly above the center
+        int y = yStart;
+
+        // Wrap text to fit within screen width using StringTokenizer
+        StringTokenizer tokenizer = new StringTokenizer(text);
+        StringBuilder line = new StringBuilder();
+
+        while (tokenizer.hasMoreTokens()) {
+            String word = tokenizer.nextToken();
+            String testLine = line + word + " ";
+            if (g2.getFontMetrics().stringWidth(testLine) > maxWidth) {
+                // Draw the line when it exceeds the maximum width
+                int x = (gp.screenWidth - g2.getFontMetrics().stringWidth(line.toString())) / 2; // Center the line
+                g2.drawString(line.toString(), x, y);
+                line = new StringBuilder(word + " ");
+                y += lineSpacing;
+            } else {
+                line.append(word).append(" ");
+            }
         }
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        // Draw the last line
+        int x = (gp.screenWidth - g2.getFontMetrics().stringWidth(line.toString())) / 2;
+        g2.drawString(line.toString(), x, y);
     }
 }

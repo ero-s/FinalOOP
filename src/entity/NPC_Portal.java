@@ -14,19 +14,37 @@ public class NPC_Portal extends Entity {
         speed = 0;
         sleep = false;
         solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
-        solidAreaDefaultX = solidArea.x;
-        solidAreaDefaultY = solidArea.y;
+        solidArea.x = worldX + solidAreaDefaultX;
+        solidArea.y = worldY + solidAreaDefaultY;
         solidArea.width = 32;
         solidArea.height = 32;
         dialogueSet = -1;
         onPath = false;
 
-        xOffset = gp.tileSize*2;
+        xOffset = gp.tileSize*4;
         yOffset = 0;
 
+        int centerXOffset = xOffset;
+        int centerYOffset = yOffset;
 
+        switch (direction) {
+            case "up":
+                this.worldX -= centerXOffset;
+                this.worldY -= gp.tileSize + centerYOffset/2;
+                break;
+            case "down":
+                this.worldX -= centerXOffset;
+                this.worldY += gp.tileSize - centerYOffset;
+                break;
+            case "left":
+                this.worldX -= gp.tileSize + centerXOffset/2;
+                this.worldY -= centerYOffset;
+                break;
+            case "right":
+                this.worldX += gp.tileSize/2 - centerXOffset;
+                this.worldY -= centerYOffset;
+                break;
+        }
         // Adjust initial projectile position based on direction
 
         getImage();
