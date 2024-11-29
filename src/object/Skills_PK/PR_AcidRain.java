@@ -1,4 +1,4 @@
-package object;
+package object.Skills_PK;
 
 import entity.Entity;
 import entity.Projectile;
@@ -6,18 +6,16 @@ import main.GamePanel;
 
 import java.awt.*;
 
-public class OBJ_Smash extends Projectile {
+public class PR_AcidRain extends Projectile {
     //TODO improve graphics
     GamePanel gp;
     Entity user;
 
-    public static final String objName = "Smash";
+    public static final String objName = "Acid Rain";
 
-    public OBJ_Smash(GamePanel gp) {
+    public PR_AcidRain(GamePanel gp) {
         super(gp);
-
         this.gp = gp;
-
         name = objName;
         speed = 0;
         maxLife = 60;
@@ -26,6 +24,7 @@ public class OBJ_Smash extends Projectile {
         knockBackPower = 5;
         useCost = 2;
         alive = false;
+
         //offset of projectile
         xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
         yOffset = gp.tileSize/ 2 + 64;
@@ -58,11 +57,10 @@ public class OBJ_Smash extends Projectile {
     }
 
     public void update() {
-        if (skillDurationCounter >= 60) {
+        if (skillDurationCounter >= 600) {
             alive = false;
             skillDurationCounter = 0;
         }
-
         if (user == gp.player) {
             // Adjust the solid area to match the current world position
             solidArea.x = worldX + solidAreaDefaultX;
@@ -84,12 +82,10 @@ public class OBJ_Smash extends Projectile {
                     }
                 }
             }
-
             // Reset solidArea position to avoid affecting other calculations
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
         }
-
         if (user != gp.player) {
             // Adjust the solid area for the projectile
             solidArea.x = worldX + solidAreaDefaultX;
@@ -101,7 +97,6 @@ public class OBJ_Smash extends Projectile {
                     gp.player.solidArea.width,
                     gp.player.solidArea.height
             );
-
             if (!gp.player.invincible && solidArea.intersects(playerArea)) {
                 damagePlayer(attack);
                 generateParticle(user.projectile, user.projectile);
@@ -110,57 +105,43 @@ public class OBJ_Smash extends Projectile {
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
         }
-
         life--;
         if (life <= 0) {
             alive = false;
         }
-
         spriteCounter++;
         if (spriteCounter > 12) {
             spriteNum = (spriteNum == 1) ? 2 : 1;
             spriteCounter = 0;
         }
-
         skillDurationCounter++;
     }
 
     public void getImage(){
-        up1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        up2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        right1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        right2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        down1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        down2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        left1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        left2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        up1 = setup("/res/projectile/pickleRick/up1", gp.tileSize*4, gp.tileSize*4);
+        up2 = setup("/res/projectile/pickleRick/up2", gp.tileSize*4, gp.tileSize*4);
+        right1 = setup("/res/projectile/pickleRick/right1", gp.tileSize*4, gp.tileSize*4);
+        right2 = setup("/res/projectile/pickleRick/right2", gp.tileSize*4, gp.tileSize*4);
+        down1 = setup("/res/projectile/pickleRick/down1", gp.tileSize*4, gp.tileSize*4);
+        down2 = setup("/res/projectile/pickleRick/down2", gp.tileSize*4, gp.tileSize*4);
+        left1 = setup("/res/projectile/pickleRick/left1", gp.tileSize*4, gp.tileSize*4);
+        left2 = setup("/res/projectile/pickleRick/left2", gp.tileSize*4, gp.tileSize*4);
     }
-
     public void subtractResource(Entity user) {
         user.mana -= useCost;
     }
-
     public Color getParticleColor() {
-        Color color = new Color(103, 86, 83);
-
-        return color;
+        return new Color(103, 86, 83);
     }
-
     public int getParticleSize() {
-        int size = 12;
-
-        return size;
+        return 12;
     }
 
     public int getParticleSpeed() {
-        int speed = 1;
-
-        return speed;
+        return 1;
     }
 
     public int getParticleMaxLife() {
-        int maxLife = 20;
-
-        return maxLife;
+        return 20;
     }
 }

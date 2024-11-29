@@ -78,7 +78,7 @@ public class MON_Mewer extends Entity {
             checkStopChasingOrNot(gp.player, 40, 100);
 
             // Search the direction to go
-            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
+            searchPath(this, getGoalCol(gp.player), getGoalRow(gp.player));
         } else {
             // Check if it starts chasing
             checkStartChasingOrNot(gp.player, 5, 100);

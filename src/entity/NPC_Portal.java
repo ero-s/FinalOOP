@@ -5,15 +5,14 @@ import java.util.Random;
 
 import main.GamePanel;
 
-public class NPC_Andres extends Entity {
+public class NPC_Portal extends Entity {
 
-    public NPC_Andres(GamePanel gp) {
+    public NPC_Portal(GamePanel gp) {
         super(gp);
 
         direction = "down";
-        name = "Andres";
-        speed = 1;
-        sleep = true;
+        speed = 0;
+        sleep = false;
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
@@ -21,27 +20,35 @@ public class NPC_Andres extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
-        dialogueSet = 0;
+        dialogueSet = -1;
+        onPath = false;
+
+        xOffset = gp.tileSize*2;
+        yOffset = 0;
+
+
+        // Adjust initial projectile position based on direction
 
         getImage();
         setDialogue();
     }
 
     public void getImage() {
-        up1 = setup("/res/npc/andres/up1", gp.tileSize*2, gp.tileSize*2);
-        up2 = setup("/res/npc/andres/up2", gp.tileSize*2, gp.tileSize*2);
-        down1 = setup("/res/npc/andres/down1", gp.tileSize*2, gp.tileSize*2);
-        down2 = setup("/res/npc/andres/down2", gp.tileSize*2, gp.tileSize*2);
-        left1 = setup("/res/npc/andres/left1", gp.tileSize*2, gp.tileSize*2);
-        left2 = setup("/res/npc/andres/left2", gp.tileSize*2, gp.tileSize*2);
-        right1 = setup("/res/npc/andres/right1", gp.tileSize*2, gp.tileSize*2);
-        right2 = setup("/res/npc/andres/right2", gp.tileSize*2, gp.tileSize*2);
+        int i = 2;
+        int j = 4;
+        up1 = setup("/res/npc/portal/up1", gp.tileSize*j, gp.tileSize*i);
+        up2 = setup("/res/npc/portal/up2", gp.tileSize*j, gp.tileSize*i);
+        down1 = setup("/res/npc/portal/down1", gp.tileSize*j, gp.tileSize*i);
+        down2 = setup("/res/npc/portal/down2", gp.tileSize*j, gp.tileSize*i);
+        left1 = setup("/res/npc/portal/left1", gp.tileSize*j, gp.tileSize*i);
+        left2 = setup("/res/npc/portal/left2", gp.tileSize*j, gp.tileSize*i);
+        right1 = setup("/res/npc/portal/right1", gp.tileSize*j, gp.tileSize*i);
+        right2 = setup("/res/npc/portal/right2", gp.tileSize*j, gp.tileSize*i);
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "Another fool enters this cursed place. Leave now, or share its fate!";
-        dialogues[0][1] = "Why do you feel... familiar? Why does this pain feel so much heavier now? Who... are you?";
-        dialogues[0][2] = "Hakobe, I remember now—I once protected you, but now I’ve become your greatest threat.";
+
+
     }
 
     public void setAction() {
@@ -49,14 +56,12 @@ public class NPC_Andres extends Entity {
         if (onPath) {
             // int goalCol = 12;
             // int goalRow =  9;
-            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
+            int goalCol = 14;
+            int goalRow = 11;
 
             searchPath(this, goalCol, goalRow);
         } else {
-
             actionLockCounter++;
-
             if (actionLockCounter == 120) {
                 Random random = new Random();
                 int i = random.nextInt(100) + 1;
@@ -82,13 +87,13 @@ public class NPC_Andres extends Entity {
     public void speak() {
         facePlayer();
         startDialogue(this, dialogueSet);
+        gp.eHandler.teleport(1,45,15);
         dialogueSet++;
-        if(dialogues[dialogueSet] != null){
+        if(dialogues[dialogueSet][0] == null){
             dialogueSet = 0;                // resets to first set of dialogue
 //            dialogueSet--;                // repeats the last set of dialogue
         }
-
-
-//        onPath = true;
+        sleep = false;
+        onPath = true;
     }
 }
