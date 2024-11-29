@@ -738,7 +738,7 @@ public class Entity {
         return image;
     }
 
-    public void searchPath(int goalCol, int goalRow) {
+    public void searchPath(Entity entity, int goalCol, int goalRow) {
         int startCol = (worldX + solidArea.x) / gp.tileSize;
         int startRow = (worldY + solidArea.y) / gp.tileSize;
 
@@ -808,6 +808,13 @@ public class Entity {
             // if (nextCol == goalCol && nextRow == goalRow) {
             // onPath = false;
             // }
+        }
+        else{
+            if(entity.type != type_monster){
+                entity.onPath = false;
+                entity.sleep = true;
+            }
+
         }
     }
 

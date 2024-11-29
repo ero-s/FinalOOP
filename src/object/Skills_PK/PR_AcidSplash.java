@@ -1,4 +1,4 @@
-package object;
+package object.Skills_PK;
 
 import entity.Entity;
 import entity.Projectile;
@@ -6,26 +6,26 @@ import main.GamePanel;
 
 import java.awt.*;
 
-public class OBJ_Smash extends Projectile {
+public class PR_AcidSplash extends Projectile {
     //TODO improve graphics
     GamePanel gp;
     Entity user;
 
     public static final String objName = "Smash";
 
-    public OBJ_Smash(GamePanel gp) {
+    public PR_AcidSplash(GamePanel gp) {
         super(gp);
 
         this.gp = gp;
-
         name = objName;
         speed = 0;
         maxLife = 60;
         life = maxLife;
-        attack = 5;
-        knockBackPower = 5;
+        attack = 20;
+        knockBackPower = 0;
         useCost = 2;
         alive = false;
+
         //offset of projectile
         xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
         yOffset = gp.tileSize/ 2 + 64;
@@ -46,7 +46,6 @@ public class OBJ_Smash extends Projectile {
 
     }
 
-
     public boolean haveResource(Entity user) {
         boolean haveResource = false;
 
@@ -58,7 +57,7 @@ public class OBJ_Smash extends Projectile {
     }
 
     public void update() {
-        if (skillDurationCounter >= 60) {
+        if (skillDurationCounter >= 600) {
             alive = false;
             skillDurationCounter = 0;
         }
@@ -126,14 +125,15 @@ public class OBJ_Smash extends Projectile {
     }
 
     public void getImage(){
-        up1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        up2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        right1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        right2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        down1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        down2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        left1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        left2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        int i = 8;
+        up1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void subtractResource(Entity user) {

@@ -52,7 +52,7 @@ public class NPC_Andres extends Entity {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
 
-            searchPath(goalCol, goalRow);
+            searchPath(this, goalCol, goalRow);
         } else {
 
             actionLockCounter++;
@@ -87,6 +87,7 @@ public class NPC_Andres extends Entity {
             dialogueSet = 0;                // resets to first set of dialogue
 //            dialogueSet--;                // repeats the last set of dialogue
         }
+
 
 //        onPath = true;
     }

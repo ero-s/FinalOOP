@@ -71,7 +71,11 @@ public class NPC_OldMan extends Entity {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
 
-            searchPath(goalCol, goalRow);
+            searchPath(this,goalCol, goalRow);
+            if(gp.pFinder.search()){
+                onPath = false;
+                sleep = true;
+            }
         } else {
 
             actionLockCounter++;

@@ -15,7 +15,7 @@ public class PR_SludgeBomb extends Projectile {
         name = objName;
         speed = 10;
         maxLife = 60;
-        attack = 1000;
+        attack = 10;
         useCost = 1;
         alive = false;
         //collision area of projectile
