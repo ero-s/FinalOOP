@@ -130,6 +130,8 @@ public class GamePanel extends JPanel implements Runnable {
         if (fullScreenOn) {
             setFullScreen();
         }
+
+        csManager.sceneNum = csManager.opening;
     }
 
     public void resetGame(boolean restart){
