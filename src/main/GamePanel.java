@@ -316,6 +316,9 @@ public class GamePanel extends Canvas implements Runnable {
             // RESET ENTITY LIST AFTER DRAWING
             entityList.clear();
 
+            //CUTSCENES
+            csManager.draw(g2);
+
             // UI
             ui.draw(g2);
         }
