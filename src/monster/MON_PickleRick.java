@@ -217,7 +217,7 @@ public class MON_PickleRick extends Entity {
     }
 
     public void scene(){
-        gp.csManager.sceneNum = gp.csManager.pickleRickBackstory; // Set the cutscene number
+        gp.csManager.sceneNum = gp.csManager.PICKLE_RICK_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
     }
