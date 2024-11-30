@@ -23,7 +23,7 @@ public class MON_PickleRick extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 50;
+        maxLife = 435;
         life = maxLife;
         maxMana = 50;
         mana = maxMana;
