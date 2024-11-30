@@ -12,6 +12,7 @@ public class MON_PickleRick extends Entity {
 
     GamePanel gp;
     private int skill1Counter = 0;
+    boolean ultUsed = false;
     public static final String monName = "Pickle Rick";
 
     public MON_PickleRick(GamePanel gp) {
@@ -24,7 +25,7 @@ public class MON_PickleRick extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 50;
+        maxLife = 435;
         life = maxLife;
         maxMana = 50;
         mana = maxMana;
@@ -173,6 +174,11 @@ public class MON_PickleRick extends Entity {
             if(skill1Counter == 3600){
                 acidSplash();
             }
+            if(!ultUsed){
+                selfReliance();
+                ultUsed = true;
+            }
+
             shootProjectile();
         }
 
@@ -250,6 +256,13 @@ public class MON_PickleRick extends Entity {
         }
     }
 
+    public void selfReliance(){
+        gp.monster[4][4] = new MON_PickleRick(gp);
+        gp.monster[4][4].life = maxLife/2;
+        gp.monster[4][4].inRage = true;
+        gp.monster[4][4].worldX = gp.tileSize * 22;
+        gp.monster[4][4].worldY = gp.tileSize * 25;
+    }
     //nag rest
 
 

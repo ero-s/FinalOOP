@@ -28,10 +28,10 @@ public class MON_JackOLantern extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 80;
+        maxLife = 660;
         life = maxLife;
         attack = 12;
-        defense = 3;
+        defense = 6;
         exp = 50;
         knockBackPower = 8;
         projectile = new OBJ_Rock(gp);
@@ -162,12 +162,16 @@ public class MON_JackOLantern extends Entity {
             }
         }
 
-        int i = new Random().nextInt(20) + 1;
+        int i = new Random().nextInt(10) + 1;
         if(i == 1){
             int ran = new Random().nextInt(6) + 1;
             if(ran % 2 == 0){
                 orchestra();
-            } else if (!isActing){
+            } else if (!isActing && inRage){
+                circusAct();
+                isActing = true;
+            } else if(ran == 4){
+                orchestra();
                 circusAct();
                 isActing = true;
             }
@@ -187,7 +191,8 @@ public class MON_JackOLantern extends Entity {
             getImage();
             defaultSpeed++;
             speed = defaultSpeed;
-            attack += 2;
+            attack += 4;
+            defense += 3;
             orchestra();
             orchestra();
             circusAct();
@@ -232,6 +237,25 @@ public class MON_JackOLantern extends Entity {
         }
     }
 
+    public void checkShootOrNot(int rate, int shotInterval){
+
+        int i = new Random().nextInt(rate);
+        if (i == 0 && !projectile.alive && shotAvailableCounter == shotInterval) {
+
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // CHECK VACANCY
+            for (int ii = 0; ii < gp.projectile[1].length; ii++) {
+                if (gp.projectile[gp.currentMap][ii] == null) {
+                    gp.projectile[gp.currentMap][ii] = projectile;
+                    break;
+                }
+            }
+
+            shotAvailableCounter = 0;
+        }
+    }
+
     public void orchestra(){
         int i = new Random().nextInt(100) + 1;
 
@@ -251,19 +275,16 @@ public class MON_JackOLantern extends Entity {
                 }
                 monCount++;
             }
-
         }
     }
 
     public void circusAct(){
-        int i = new Random().nextInt(100) + 1;
+        speed = 10;
 
-        if(i == 1){
-            speed = 10;
-            if(directionCounter == 120){
-                getRandomDirection(10);
-                directionCounter = 0;
-            }
+        if(directionCounter == 120){
+            getRandomDirection(10);
+            directionCounter = 0;
         }
+        directionCounter++;
     }
 }

@@ -34,6 +34,7 @@ public class OBJ_Rock extends Projectile {
         right2 = setup("/res/projectile/rock_down_1", gp.tileSize, gp.tileSize);
     }
 
+
     public Color getParticleColor() {
         Color color = new Color(40, 50, 30);
 
@@ -41,7 +42,7 @@ public class OBJ_Rock extends Projectile {
     }
 
     public int getParticleSize() {
-        int size = 6;
+        int size = 12;
 
         return size;
     }

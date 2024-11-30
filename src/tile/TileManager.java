@@ -43,11 +43,6 @@ public class TileManager {
                 int col = positionInMap % 50;
 
 
-//                if (tileIndex >= 558 && (row == 0 || row == gp.maxWorldRow || col == 0 || col == gp.maxWorldCol)) {
-//                    isSolid = true;
-//                    System.out.println("Edge detected at TileIndex: " + tileIndex + " (Row: " + row + ", Col: " + col + ") set to solid.");
-//                }
-
                 collisionStatus.add(String.valueOf(isSolid));
                 tileIndex++;
             }

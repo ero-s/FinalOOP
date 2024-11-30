@@ -125,7 +125,7 @@ public class EventHandler {
                 healingPool(gp.dialogueState);
             }
 
-            // TELEPORT
+            // TELEPORT to FALL
             else if (hit(0, 10, 39, "any")) {
                 teleport(1, 12, 13);
             }
