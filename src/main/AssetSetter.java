@@ -80,6 +80,12 @@ public class AssetSetter {
         mapNum = 1;
         i = 0;
 
+        gp.npc[mapNum][i] = new NPC_Merchant(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 38;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 14;
+        i++;
+
         gp.npc[mapNum][i] = new NPC_CoffeeBean(gp);
         gp.npc[mapNum][i].sleep = true;
         gp.npc[mapNum][i].worldX = gp.tileSize * 28;
@@ -154,16 +160,6 @@ public class AssetSetter {
         gp.monster[mapNum][i] = new MON_RedSlime(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 37;
         gp.monster[mapNum][i].worldY = gp.tileSize * 27;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_RedSlime(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 33;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 36;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_RedSlime(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 34;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 36;
         i++;
 
         gp.monster[mapNum][i] = new MON_Bat(gp);
