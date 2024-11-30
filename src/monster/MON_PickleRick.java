@@ -11,6 +11,7 @@ import java.util.Random;
 public class MON_PickleRick extends Entity {
 
     GamePanel gp;
+    private int skill1Counter = 0;
     public static final String monName = "Pickle Rick";
 
     public MON_PickleRick(GamePanel gp) {
@@ -35,8 +36,8 @@ public class MON_PickleRick extends Entity {
         projectile = new PR_SludgeBomb(gp);
         projectile.setUser(this);
 
-        skill1 = new PR_AcidSplash(gp);
-        skill1.setUser(this);
+        this.skill1 = new PR_AcidSplash(gp);
+        this.skill1.setUser(this);
 
         int size = gp.tileSize*5;
         solidArea.x = 48;
@@ -169,32 +170,39 @@ public class MON_PickleRick extends Entity {
             defaultSpeed++;
             speed = defaultSpeed;
             attack += 2;
+            if(skill1Counter == 3600){
+                acidSplash();
+            }
+            shootProjectile();
         }
 
         if (getTileDistance(gp.player) < 10) {
             moveTowardPlayer(20);
-
-            // Consistently use SludgeBomb and occasionally use AcidSplash
-            if (new Random().nextInt(0, 100) < 20) { // 20% chance to use AcidSplash
+            // Randomly decide to shoot SludgeBomb
+            if (skill1Counter == 4800) { // 30% chance to shoot
                 acidSplash();
-            } else {
-                shootProjectile(); // SludgeBomb
             }
-
+            else{
+                shootProjectile();
+            }
         } else {
             // Random movement
             getRandomDirection(60);
-
-            // Randomly decide to shoot SludgeBomb
-            if (new Random().nextInt(0, 100) < 30) { // 30% chance to shoot
+            if (new Random().nextInt(0, 100)+1 < 40) { // 30% chance to shoot
+                if(!skill1.alive){
+                    acidSplash();
+                }
+            }
+            else{
                 shootProjectile();
             }
         }
 
-        // Check for melee attacks
+        // Check for melee attack\[-??/p00ol,lo87nmn
         if (!attacking) {
             checkAttackOrNot(60, gp.tileSize * 7, gp.tileSize * 5);
         }
+        skill1Counter++;
     }
 
 
@@ -210,27 +218,31 @@ public class MON_PickleRick extends Entity {
     }
 
     public void acidSplash(){
-        if (shotAvailableCounter >= 30 && skill1.haveResource(this)){
-            skill1.set(worldX, worldY, direction, true, this);
+        if (shotAvailableCounter >= 30 && skill1.haveResource(this)) {
+            this.skill1.set(worldX, worldY, direction, true, this);
+            this.skill1.subtractResource(this);
 
             // CHECK VACANCY
-            for (int j = 0; j < gp.projectile[1].length; j++) {
-                if (gp.projectile[gp.currentMap][j] == null) {
-                    gp.projectile[gp.currentMap][j] = skill1;
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if (gp.projectile[gp.currentMap][i] == null) {
+                    gp.projectile[gp.currentMap][i] = this.skill1;
                     break;
                 }
             }
+            shotAvailableCounter = 0;
             gp.playSE(10);
         }
     }
 
     private void shootProjectile() {
-        if (shotAvailableCounter >= 30 && projectile.haveResource(this)) {
+        if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
             projectile.set(worldX, worldY, direction, true, this);
 
             // Place the projectile in the game world
             for (int i = 0; i < gp.projectile[1].length; i++) {
-                gp.projectile[gp.currentMap][i] = projectile;
+                if(gp.projectile[gp.currentMap][i] == null){
+                    gp.projectile[gp.currentMap][i] = projectile;
+                }
                 break;
             }
             shotAvailableCounter = 0;

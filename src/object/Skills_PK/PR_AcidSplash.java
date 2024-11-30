@@ -32,12 +32,12 @@ public class PR_AcidSplash extends Projectile {
 
 
         solidArea = new Rectangle();
-        solidArea.x = -64;
-        solidArea.y = -32;
+        solidArea.x = 0;
+        solidArea.y = -16;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 256;
-        solidArea.height = 256;
+        solidArea.width = 416;
+        solidArea.height = 416;
         getImage();
     }
 
@@ -57,7 +57,7 @@ public class PR_AcidSplash extends Projectile {
     }
 
     public void update() {
-        if (skillDurationCounter >= 1000) {
+        if (skillDurationCounter >= 300) {
             alive = false;
             skillDurationCounter = 0;
         }
@@ -88,7 +88,6 @@ public class PR_AcidSplash extends Projectile {
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
         }
-
         if (user != gp.player) {
             // Adjust the solid area for the projectile
             solidArea.x = worldX + solidAreaDefaultX;
@@ -103,19 +102,16 @@ public class PR_AcidSplash extends Projectile {
 
             if (!gp.player.invincible && solidArea.intersects(playerArea)) {
                 damagePlayer(attack);
-                generateParticle(user.projectile, user.projectile);
             }
             // Reset solidArea position
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
         }
-
         spriteCounter++;
         if (spriteCounter > 12) {
             spriteNum = (spriteNum == 1) ? 2 : 1;
             spriteCounter = 0;
         }
-
         skillDurationCounter++;
     }
 
