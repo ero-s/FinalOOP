@@ -118,15 +118,25 @@ public class CutsceneManager {
     }
 
     private void drawParagraph(Graphics2D g2, String text) {
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28f));
-        g2.setColor(new Color(1f, 1f, 1f, alpha)); // Use alpha for transparency
+
 
         int margin = 100; // Larger margin for centering
         int lineSpacing = 40;
         int maxWidth = gp.screenWidth - 2 * margin;
-
-        int yStart = (gp.screenHeight / 2) - 100; // Start slightly above the center
+        int yStart = gp.screenHeight - 180; // Start slightly above the center
         int y = yStart;
+
+        // Set the color for the rectangle to black and draw it
+        g2.setColor(Color.BLACK); // Set color for the rectangle
+        g2.fillRect(100, 350, maxWidth, yStart - 200);
+
+        g2.setColor(Color.WHITE);
+        g2.drawRect(100, 350, maxWidth, yStart - 200);
+
+        // Set the color for the text to white and draw it
+        g2.setColor(Color.WHITE); // Set color for the text
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28f));
+
 
         // Wrap text to fit within screen width using StringTokenizer
         StringTokenizer tokenizer = new StringTokenizer(text);
