@@ -251,7 +251,6 @@ public class MON_JackOLantern extends Entity {
                 }
                 monCount++;
             }
-
         }
     }
 

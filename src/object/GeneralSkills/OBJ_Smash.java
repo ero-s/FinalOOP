@@ -32,12 +32,12 @@ public class OBJ_Smash extends Projectile {
 
 
         solidArea = new Rectangle();
-        solidArea.x = -32;
-        solidArea.y = -32;
+        solidArea.x = -16;
+        solidArea.y = -16;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 516;
-        solidArea.height = 516;
+        solidArea.width = 318;
+        solidArea.height = 318;
         getImage();
     }
 
@@ -121,15 +121,15 @@ public class OBJ_Smash extends Projectile {
     }
 
     public void getImage(){
-        int i = 8;
-        up1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
-        up2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
-        right1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
-        right2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
-        down1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
-        down2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
-        left1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
-        left2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        int i = 6;
+        up1 = setup("/res/objects/smash/smash1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/objects/smash/smash2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/objects/smash/smash1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/objects/smash/smash2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/objects/smash/smash1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/objects/smash/smash2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/objects/smash/smash1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/objects/smash/smash2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void subtractResource(Entity user) {
