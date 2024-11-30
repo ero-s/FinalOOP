@@ -1,6 +1,9 @@
 package main;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -13,78 +16,149 @@ public class CutsceneManager {
     int counter = 0;
     float alpha = 0f; // Transparency for fade effect
     ArrayList<String> openingTextPages = new ArrayList<>();
+    ArrayList<String> pickleRickBackstoryTextPages = new ArrayList<>();
     int currentTextPage = 0;
 
     // Scene numbers
     public final int NA = 0;
     public final int opening = 1;
+    public final int pickleRickBackstory = 2;
+
+    //background image
+    private BufferedImage openingBackground;
+    private BufferedImage pickleRickBackGround;
 
     public CutsceneManager(GamePanel gp) {
         this.gp = gp;
         // Store paragraphs as separate elements
-        openingTextPages.add("In the heart of a dense forest lay Bukidgrown, a serene farming village where two brothers, Hakobe and his older sibling Andres, grew up under the warmth of their family's modest home.");
-        openingTextPages.add("One fateful evening, Hakobe and Andres overheard their parents locked in a heated argument. The following days unraveled their lives—dividing the family as their parents separated.");
-        openingTextPages.add("Hakobe left for the city, seeking a fresh start, while Andres remained tethered to the soil of Bukidgrown, clinging to the familiar. As their bond fades, Hakobe hears rumors of disappearances in Bukidgrown.");
-        openingTextPages.add("After learning of a massacre in his hometown, he returns, sneaks past police, and discovers a dungeon gate where he and Andres once played. Then Hakobe entered.");
+        initializeTextPages();
+        loadResources();
+    }
+
+    private void loadResources() {
+        try {
+            openingBackground = ImageIO.read(getClass().getResource("/res/ui/openingScene.png"));
+            pickleRickBackGround = ImageIO.read(getClass().getResource("/res/ui/pickleRickCS.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            openingBackground = null; // Handle missing image gracefully
+            pickleRickBackGround = null;
+        }
     }
 
     public void draw(Graphics2D g2) {
         this.g2 = g2;
 
-        if (sceneNum == opening) {
-            playOpeningScene();
+        switch(sceneNum){
+            case opening:
+                playOpeningScene();
+                break;
+            case pickleRickBackstory:
+                playPickleRickScene();
+                break;
         }
+
+    }
+    private void playOpeningScene(){
+        transitionScene(openingBackground, openingTextPages);
     }
 
-    private void playOpeningScene() {
-        if (scenePhase == 0) {
-            // Fade-in effect
-            alpha += 0.005f;
-            if (alpha >= 1f) {
-                alpha = 1f;
-                scenePhase = 1;
-                counter = 0;
-            }
-        } else if (scenePhase == 1) {
-            // Hold text
-            counter++;
-            if (counter > 600) { // Hold for 10 seconds at 60 FPS
-                scenePhase = 2;
-            }
-        } else if (scenePhase == 2) {
-            // Fade-out effect
-            alpha -= 0.005f;
-            if (alpha <= 0f) {
-                alpha = 0f;
-                if (currentTextPage < openingTextPages.size() - 1) {
-                    currentTextPage++;
-                    scenePhase = 0; // Reset to fade-in for the next page
-                } else {
-                    sceneNum = NA; // Reset the scene number
-                    gp.gameState = gp.playState; // Transition to gameplay
-                    scenePhase = 0; // Reset phase for potential future scenes
+    private void playPickleRickScene(){
+        transitionScene(pickleRickBackGround, pickleRickBackstoryTextPages);
+    }
+    private void transitionScene(BufferedImage backgroundImage, ArrayList<String> textPages) {
+        final float FADE_STEP = 0.005f; // Control fade-in/out speed
+        final int HOLD_DURATION = 200; // 10 seconds at 60 FPS
+
+        // Skip scene if Enter key is pressed
+        if (gp.keyH.escapePressed) {
+            sceneNum = NA;
+            gp.player.setDefaultValues();
+            gp.gameState = gp.playState;
+            scenePhase = 0;
+        }
+
+        // Handle the scene phases
+        switch (scenePhase) {
+            case 0: // Fade-in phase
+                alpha = Math.min(alpha + FADE_STEP, 1f);
+                if (alpha == 1f) {
+                    scenePhase = 1;
+                    counter = 0;
                 }
-            }
+                break;
+
+            case 1: // Hold text phase
+                if (++counter > HOLD_DURATION) {
+                    scenePhase = 2;
+                }
+                break;
+
+            case 2: // Fade-out phase
+                alpha = Math.max(alpha - FADE_STEP, 0f);
+                if (alpha == 0f) {
+                    if (currentTextPage < textPages.size() - 1) {
+                        currentTextPage++;
+                        scenePhase = 0; // Reset to fade-in for the next page
+                    } else {
+                        sceneNum = NA; // Reset the scene number
+                        gp.gameState = gp.playState; // Transition to gameplay
+                        scenePhase = 0; // Prepare for potential future scenes
+                    }
+                }
+                break;
         }
 
-        // Draw the black background
-        g2.setColor(Color.black);
-        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        // Draw the background image if available, otherwise fallback to black
+        if (backgroundImage != null) {
+            g2.drawImage(backgroundImage, 0, 0, gp.screenWidth, gp.screenHeight, null);
+        } else {
+            g2.setColor(Color.black);
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        }
 
-        // Draw the current paragraph
-        drawParagraph(g2, openingTextPages.get(currentTextPage));
+        // Apply alpha transparency effect
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+
+        // Draw the current text page
+        drawParagraph(g2, textPages.get(currentTextPage));
+
+        // Reset composite to default for subsequent rendering
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
+    private void initializeTextPages(){
+        openingTextPages.add("In the heart of a dense forest lay Bukidgrown, a serene farming village where two brothers, Hakobe and his older sibling Andres, grew up under the warmth of their family's modest home.");
+        openingTextPages.add("One fateful evening, Hakobe and Andres overheard their parents locked in a heated argument. The following days unraveled their lives—dividing the family as their parents separated.");
+        openingTextPages.add("Hakobe left for the city, seeking a fresh start, while Andres remained tethered to the soil of Bukidgrown, clinging to the familiar. As their bond fades, Hakobe hears rumors of disappearances in Bukidgrown.");
+        openingTextPages.add("After learning of a massacre in his hometown, he returns, sneaks past police, and discovers a dungeon gate where he and Andres once played. Then Hakobe entered.");
+
+        pickleRickBackstoryTextPages.add("In a world not so far from here, there lived a brilliant scientist named Rick Sanchez. He was known for his reckless experiments and unusual intellect.");
+        pickleRickBackstoryTextPages.add("One day, Rick had an epiphany — an idea that could change everything. He turned himself into a pickle to avoid family therapy, a decision that led to a series of unforeseen events.");
+        pickleRickBackstoryTextPages.add("After navigating through treacherous dangers and battling foes in a sewer, Pickle Rick realized that his journey had a deeper meaning. It was not just about avoiding responsibility, but confronting his inner demons.");
+        pickleRickBackstoryTextPages.add("His survival instincts and cunning mind allowed him to outsmart any obstacle, proving that even in the form of a pickle, he could overcome the impossible.");
+    }
+
 
     private void drawParagraph(Graphics2D g2, String text) {
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28f));
-        g2.setColor(new Color(1f, 1f, 1f, alpha)); // Use alpha for transparency
+
 
         int margin = 100; // Larger margin for centering
         int lineSpacing = 40;
         int maxWidth = gp.screenWidth - 2 * margin;
-
-        int yStart = (gp.screenHeight / 2) - 100; // Start slightly above the center
+        int yStart = gp.screenHeight - 180; // Start slightly above the center
         int y = yStart;
+
+        // Set the color for the rectangle to black and draw it
+        g2.setColor(Color.BLACK); // Set color for the rectangle
+        g2.fillRect(100, 350, maxWidth, yStart - 200);
+
+        g2.setColor(Color.WHITE);
+        g2.drawRect(100, 350, maxWidth, yStart - 200);
+
+        // Set the color for the text to white and draw it
+        g2.setColor(Color.WHITE); // Set color for the text
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28f));
+
 
         // Wrap text to fit within screen width using StringTokenizer
         StringTokenizer tokenizer = new StringTokenizer(text);

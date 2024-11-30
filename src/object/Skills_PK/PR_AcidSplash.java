@@ -11,7 +11,7 @@ public class PR_AcidSplash extends Projectile {
     GamePanel gp;
     Entity user;
 
-    public static final String objName = "Smash";
+    public static final String objName = "Acid Splash";
 
     public PR_AcidSplash(GamePanel gp) {
         super(gp);
@@ -21,7 +21,7 @@ public class PR_AcidSplash extends Projectile {
         speed = 0;
         maxLife = 60;
         life = maxLife;
-        attack = 20;
+        attack = 2;
         knockBackPower = 0;
         useCost = 2;
         alive = false;
@@ -32,12 +32,12 @@ public class PR_AcidSplash extends Projectile {
 
 
         solidArea = new Rectangle();
-        solidArea.x = -64;
-        solidArea.y = -32;
+        solidArea.x = 0;
+        solidArea.y = -16;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 256;
-        solidArea.height = 256;
+        solidArea.width = 416;
+        solidArea.height = 416;
         getImage();
     }
 
@@ -57,7 +57,7 @@ public class PR_AcidSplash extends Projectile {
     }
 
     public void update() {
-        if (skillDurationCounter >= 600) {
+        if (skillDurationCounter >= 300) {
             alive = false;
             skillDurationCounter = 0;
         }
@@ -88,7 +88,6 @@ public class PR_AcidSplash extends Projectile {
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
         }
-
         if (user != gp.player) {
             // Adjust the solid area for the projectile
             solidArea.x = worldX + solidAreaDefaultX;
@@ -103,37 +102,29 @@ public class PR_AcidSplash extends Projectile {
 
             if (!gp.player.invincible && solidArea.intersects(playerArea)) {
                 damagePlayer(attack);
-                generateParticle(user.projectile, user.projectile);
             }
             // Reset solidArea position
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
         }
-
-        life--;
-        if (life <= 0) {
-            alive = false;
-        }
-
         spriteCounter++;
         if (spriteCounter > 12) {
             spriteNum = (spriteNum == 1) ? 2 : 1;
             spriteCounter = 0;
         }
-
         skillDurationCounter++;
     }
 
     public void getImage(){
         int i = 8;
-        up1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        up2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        right1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        right2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        down1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        down2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        left1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        left2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        up1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void subtractResource(Entity user) {

@@ -45,14 +45,15 @@ public class MON_Jack extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/mewer/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/mewer/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/mewer/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/mewer/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/mewer/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/mewer/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/mewer/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/mewer/right_2", gp.tileSize, gp.tileSize);
+        int i = 5;
+        up1 = setup("/res/monster/jack/up1", gp.tileSize*i*i, gp.tileSize*i);
+        up2 = setup("/res/monster/jack/up2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/monster/jack/down1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/monster/jack/down2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/monster/jack/left1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/monster/jack/left2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/monster/jack/right1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/monster/jack/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void setDialogue() {
@@ -76,14 +77,14 @@ public class MON_Jack extends Entity {
     }
 
 //    public void getAttackImage(){
-//        attackUp1 = setup("/res/monster/mewer/mewer_attack_up_1", gp.tileSize, gp.tileSize * 2);
-//        attackUp2 = setup("/res/monster/mewer/mewer_attack_up_2", gp.tileSize, gp.tileSize * 2);
-//        attackDown1 = setup("/res/monster/mewer/mewer_attack_down_1", gp.tileSize, gp.tileSize * 2);
-//        attackDown2 = setup("/res/monster/mewer/mewer_attack_down_2", gp.tileSize, gp.tileSize * 2);
-//        attackLeft1 = setup("/res/monster/mewer/mewer_attack_left_1", gp.tileSize * 2, gp.tileSize);
-//        attackLeft2 = setup("/res/monster/mewer/mewer_attack_left_2", gp.tileSize * 2, gp.tileSize);
-//        attackRight1 = setup("/res/monster/mewer/mewer_attack_right_1", gp.tileSize * 2, gp.tileSize);
-//        attackRight2 = setup("/res/monster/mewer/mewer_attack_right_2", gp.tileSize * 2, gp.tileSize);
+//        attackUp1 = setup("/res/monster/mewer/mewer_attack_up_1", gp.tileSize*i, gp.tileSize*i * 2);
+//        attackUp2 = setup("/res/monster/mewer/mewer_attack_up_2", gp.tileSize*i, gp.tileSize*i * 2);
+//        attackDown1 = setup("/res/monster/mewer/mewer_attack_down_1", gp.tileSize*i, gp.tileSize*i * 2);
+//        attackDown2 = setup("/res/monster/mewer/mewer_attack_down_2", gp.tileSize*i, gp.tileSize*i * 2);
+//        attackLeft1 = setup("/res/monster/mewer/mewer_attack_left_1", gp.tileSize*i * 2, gp.tileSize*i);
+//        attackLeft2 = setup("/res/monster/mewer/mewer_attack_left_2", gp.tileSize*i * 2, gp.tileSize*i);
+//        attackRight1 = setup("/res/monster/mewer/mewer_attack_right_1", gp.tileSize*i * 2, gp.tileSize*i);
+//        attackRight2 = setup("/res/monster/mewer/mewer_attack_right_2", gp.tileSize*i * 2, gp.tileSize*i);
 //    }
 
     public void setAction() {

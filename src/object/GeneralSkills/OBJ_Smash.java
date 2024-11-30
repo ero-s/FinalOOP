@@ -32,12 +32,12 @@ public class OBJ_Smash extends Projectile {
 
 
         solidArea = new Rectangle();
-        solidArea.x = -64;
-        solidArea.y = -32;
+        solidArea.x = -16;
+        solidArea.y = -16;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 256;
-        solidArea.height = 256;
+        solidArea.width = 318;
+        solidArea.height = 318;
         getImage();
     }
 
@@ -58,7 +58,7 @@ public class OBJ_Smash extends Projectile {
     }
 
     public void update() {
-        if (skillDurationCounter >= 60) {
+        if (skillDurationCounter >= 30) {
             alive = false;
             skillDurationCounter = 0;
         }
@@ -111,11 +111,6 @@ public class OBJ_Smash extends Projectile {
             solidArea.y = solidAreaDefaultY;
         }
 
-        life--;
-        if (life <= 0) {
-            alive = false;
-        }
-
         spriteCounter++;
         if (spriteCounter > 12) {
             spriteNum = (spriteNum == 1) ? 2 : 1;
@@ -126,14 +121,15 @@ public class OBJ_Smash extends Projectile {
     }
 
     public void getImage(){
-        up1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        up2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        right1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        right2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        down1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        down2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        left1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        left2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        int i = 6;
+        up1 = setup("/res/objects/smash/smash1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/objects/smash/smash2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/objects/smash/smash1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/objects/smash/smash2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/objects/smash/smash1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/objects/smash/smash2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/objects/smash/smash1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/objects/smash/smash2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void subtractResource(Entity user) {

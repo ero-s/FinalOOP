@@ -11,7 +11,7 @@ public class KeyHandler implements KeyListener {
 
     // DEBUG
     public boolean showDebugTest = false;
-    public boolean godModeOn = false;
+    public boolean godModeOn = true;
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
     }
@@ -67,9 +67,9 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_ENTER){
                 if(gp.ui.commandNum == 0){ // new game
+                    gp.gameState = gp.cutsceneState;
+                    gp.csManager.sceneNum = gp.csManager.opening;
                     gp.player.setDefaultValues();
-                    gp.setupGame();
-                    gp.gameState = gp.playState;
 
                 }
 
@@ -101,7 +101,6 @@ public class KeyHandler implements KeyListener {
                     gp.ui.titleScreenState = 0;
                 }
                 if(gp.ui.commandNum == 1){ // new game
-                    gp.setupGame();
                     gp.player.setDefaultValues();
                     gp.saveLoad.save();
                     // gp.gameState = gp.cutsceneState

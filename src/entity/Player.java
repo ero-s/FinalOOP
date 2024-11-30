@@ -356,8 +356,7 @@ public class    Player extends Entity {
             gp.playSE(10);
         }
 
-        if (gp.keyH.skill1Pressed && !skill1.alive && shotAvailableCounter == 30
-                && skill1.haveResource(this)) {
+        if (gp.keyH.skill1Pressed && !skill1.alive && shotAvailableCounter == 30 && skill1.haveResource(this)) {
             skill1.set(worldX, worldY, direction, true, this);
             skill1.subtractResource(this);
 

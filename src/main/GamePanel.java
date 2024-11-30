@@ -125,7 +125,6 @@ public class GamePanel extends Canvas implements Runnable {
             setFullScreen();
         }
 
-        csManager.sceneNum = csManager.opening;
     }
 
     public void resetGame(boolean restart){
@@ -215,6 +214,7 @@ public class GamePanel extends Canvas implements Runnable {
                     }
                     if (!monster[currentMap][i].alive) {
                         monster[currentMap][i].checkDrop();
+                        monster[currentMap][i].scene();
                         monster[currentMap][i] = null;
                     }
                 }
