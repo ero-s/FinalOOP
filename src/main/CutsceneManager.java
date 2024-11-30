@@ -16,15 +16,17 @@ public class CutsceneManager {
     int counter = 0;
     float alpha = 0f; // Transparency for fade effect
     ArrayList<String> openingTextPages = new ArrayList<>();
+    ArrayList<String> pickleRickBackstoryTextPages = new ArrayList<>();
     int currentTextPage = 0;
 
     // Scene numbers
     public final int NA = 0;
     public final int opening = 1;
+    public final int pickleRickBackstory = 2;
 
     //background image
-    private BufferedImage backgroundImage;
-
+    private BufferedImage openingBackground;
+    private BufferedImage pickleRickBackGround;
 
     public CutsceneManager(GamePanel gp) {
         this.gp = gp;
@@ -33,15 +35,38 @@ public class CutsceneManager {
         loadResources();
     }
 
-    public void draw(Graphics2D g2) {
-        this.g2 = g2;
-
-        if (sceneNum == opening) {
-            playOpeningScene();
+    private void loadResources() {
+        try {
+            openingBackground = ImageIO.read(getClass().getResource("/res/ui/openingScene.png"));
+            pickleRickBackGround = ImageIO.read(getClass().getResource("/res/ui/pickleRickCS.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            openingBackground = null; // Handle missing image gracefully
+            pickleRickBackGround = null;
         }
     }
 
-    private void playOpeningScene() {
+    public void draw(Graphics2D g2) {
+        this.g2 = g2;
+
+        switch(sceneNum){
+            case opening:
+                playOpeningScene();
+                break;
+            case pickleRickBackstory:
+                playPickleRickScene();
+                break;
+        }
+
+    }
+    private void playOpeningScene(){
+        transitionScene(openingBackground, openingTextPages);
+    }
+
+    private void playPickleRickScene(){
+        transitionScene(pickleRickBackGround, pickleRickBackstoryTextPages);
+    }
+    private void transitionScene(BufferedImage backgroundImage, ArrayList<String> textPages) {
         final float FADE_STEP = 0.005f; // Control fade-in/out speed
         final int HOLD_DURATION = 200; // 10 seconds at 60 FPS
 
@@ -72,7 +97,7 @@ public class CutsceneManager {
             case 2: // Fade-out phase
                 alpha = Math.max(alpha - FADE_STEP, 0f);
                 if (alpha == 0f) {
-                    if (currentTextPage < openingTextPages.size() - 1) {
+                    if (currentTextPage < textPages.size() - 1) {
                         currentTextPage++;
                         scenePhase = 0; // Reset to fade-in for the next page
                     } else {
@@ -96,7 +121,7 @@ public class CutsceneManager {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 
         // Draw the current text page
-        drawParagraph(g2, openingTextPages.get(currentTextPage));
+        drawParagraph(g2, textPages.get(currentTextPage));
 
         // Reset composite to default for subsequent rendering
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
@@ -106,16 +131,13 @@ public class CutsceneManager {
         openingTextPages.add("One fateful evening, Hakobe and Andres overheard their parents locked in a heated argument. The following days unraveled their lives—dividing the family as their parents separated.");
         openingTextPages.add("Hakobe left for the city, seeking a fresh start, while Andres remained tethered to the soil of Bukidgrown, clinging to the familiar. As their bond fades, Hakobe hears rumors of disappearances in Bukidgrown.");
         openingTextPages.add("After learning of a massacre in his hometown, he returns, sneaks past police, and discovers a dungeon gate where he and Andres once played. Then Hakobe entered.");
+
+        pickleRickBackstoryTextPages.add("In a world not so far from here, there lived a brilliant scientist named Rick Sanchez. He was known for his reckless experiments and unusual intellect.");
+        pickleRickBackstoryTextPages.add("One day, Rick had an epiphany — an idea that could change everything. He turned himself into a pickle to avoid family therapy, a decision that led to a series of unforeseen events.");
+        pickleRickBackstoryTextPages.add("After navigating through treacherous dangers and battling foes in a sewer, Pickle Rick realized that his journey had a deeper meaning. It was not just about avoiding responsibility, but confronting his inner demons.");
+        pickleRickBackstoryTextPages.add("His survival instincts and cunning mind allowed him to outsmart any obstacle, proving that even in the form of a pickle, he could overcome the impossible.");
     }
 
-    private void loadResources() {
-        try {
-            backgroundImage = ImageIO.read(getClass().getResource("/res/ui/openingScene.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            backgroundImage = null; // Handle missing image gracefully
-        }
-    }
 
     private void drawParagraph(Graphics2D g2, String text) {
 

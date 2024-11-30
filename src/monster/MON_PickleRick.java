@@ -216,6 +216,11 @@ public class MON_PickleRick extends Entity {
         actionLockCounter = 0;
     }
 
+    public void scene(){
+        gp.csManager.sceneNum = gp.csManager.pickleRickBackstory; // Set the cutscene number
+        gp.gameState = gp.cutsceneState; // Switch game state
+        gp.csManager.scenePhase = 0;
+    }
     public void checkDrop() {
 
         dropItem(new OBJ_BlueHeart(gp));

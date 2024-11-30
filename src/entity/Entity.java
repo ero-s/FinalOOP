@@ -206,6 +206,8 @@ public class Entity {
 
     public void checkDrop() { }
 
+    public void scene(){ }
+
     public void dropItem(Entity droppedItem) {
         for (int i = 0; i < gp.obj[1].length; i++) {
             if (gp.obj[gp.currentMap][i] == null) {

@@ -11,7 +11,7 @@ public class KeyHandler implements KeyListener {
 
     // DEBUG
     public boolean showDebugTest = false;
-    public boolean godModeOn = false;
+    public boolean godModeOn = true;
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
     }
