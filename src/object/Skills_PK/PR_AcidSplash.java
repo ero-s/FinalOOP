@@ -11,7 +11,7 @@ public class PR_AcidSplash extends Projectile {
     GamePanel gp;
     Entity user;
 
-    public static final String objName = "Smash";
+    public static final String objName = "Acid Splash";
 
     public PR_AcidSplash(GamePanel gp) {
         super(gp);
@@ -21,7 +21,7 @@ public class PR_AcidSplash extends Projectile {
         speed = 0;
         maxLife = 60;
         life = maxLife;
-        attack = 20;
+        attack = 2;
         knockBackPower = 0;
         useCost = 2;
         alive = false;
@@ -57,7 +57,7 @@ public class PR_AcidSplash extends Projectile {
     }
 
     public void update() {
-        if (skillDurationCounter >= 600) {
+        if (skillDurationCounter >= 1000) {
             alive = false;
             skillDurationCounter = 0;
         }
@@ -110,11 +110,6 @@ public class PR_AcidSplash extends Projectile {
             solidArea.y = solidAreaDefaultY;
         }
 
-        life--;
-        if (life <= 0) {
-            alive = false;
-        }
-
         spriteCounter++;
         if (spriteCounter > 12) {
             spriteNum = (spriteNum == 1) ? 2 : 1;
@@ -126,14 +121,14 @@ public class PR_AcidSplash extends Projectile {
 
     public void getImage(){
         int i = 8;
-        up1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        up2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        right1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        right2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        down1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        down2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        left1 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
-        left2 = setup("/res/objects/smash", gp.tileSize*i, gp.tileSize*i);
+        up1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void subtractResource(Entity user) {

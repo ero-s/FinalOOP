@@ -126,14 +126,15 @@ public class OBJ_Smash extends Projectile {
     }
 
     public void getImage(){
-        up1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        up2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        right1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        right2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        down1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        down2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        left1 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
-        left2 = setup("/res/objects/smash", gp.tileSize*4, gp.tileSize*4);
+        int i = 8;
+        up1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/projectile/pickleRick/acidSplash/poison1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/projectile/pickleRick/acidSplash/poison2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void subtractResource(Entity user) {

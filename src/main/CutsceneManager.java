@@ -37,6 +37,12 @@ public class CutsceneManager {
     }
 
     private void playOpeningScene() {
+        if(gp.keyH.escapePressed){
+            sceneNum = NA; // Reset the scene number
+            gp.gameState = gp.playState; // Transition to gameplay
+            scenePhase = 0; // Reset phase for potential future scenes
+        }
+
         if (scenePhase == 0) {
             // Fade-in effect
             alpha += 0.005f;
@@ -59,9 +65,10 @@ public class CutsceneManager {
                 if (currentTextPage < openingTextPages.size() - 1) {
                     currentTextPage++;
                     scenePhase = 0; // Reset to fade-in for the next page
-                } else {
+                } else{
                     sceneNum = NA; // Reset the scene number
-                    gp.gameState = gp.playState; // Transition to gameplay
+                    gp.player.setDefaultValues();
+                    gp.gameState = gp.playState;
                     scenePhase = 0; // Reset phase for potential future scenes
                 }
             }

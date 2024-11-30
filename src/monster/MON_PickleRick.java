@@ -3,7 +3,10 @@ package monster;
 import entity.Entity;
 import main.GamePanel;
 import object.*;
+import object.Skills_PK.PR_AcidSplash;
 import object.Skills_PK.PR_SludgeBomb;
+
+import java.util.Random;
 
 public class MON_PickleRick extends Entity {
 
@@ -22,11 +25,19 @@ public class MON_PickleRick extends Entity {
         speed = defaultSpeed;
         maxLife = 50;
         life = maxLife;
+        maxMana = 50;
+        mana = maxMana;
         attack = 9;
         defense = 2;
         exp = 30;
         knockBackPower = 8;
+
         projectile = new PR_SludgeBomb(gp);
+        projectile.setUser(this);
+
+        skill1 = new PR_AcidSplash(gp);
+        skill1.setUser(this);
+
         int size = gp.tileSize*5;
         solidArea.x = 48;
         solidArea.y = 48;
@@ -72,9 +83,87 @@ public class MON_PickleRick extends Entity {
         attackRight2 = setup("/res/monster/picklerick/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
-    public void setAction() {
+    public void update() {
+        if(!sleep){
+            if (knockBack) {
+                checkCollision();
+                if (collisionOn) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                } else if (!collisionOn) {
+                    spriteCounter++;
+                    if (spriteCounter > 26) {
+                        if (spriteNum == 1) {
+                            spriteNum = 2;
+                        } else if (spriteNum == 2) {
+                            spriteNum = 1;
+                        }
+                        spriteCounter = 0;
+                    }
+                    switch (knockBackDirection) {
+                        case "up": worldY -= speed; break;
+                        case "down": worldY += speed; break;
+                        case "left": worldX -= speed; break;
+                        case "right": worldX += speed; break;
+                    }
+                }
+                knockBackCounter++;
+                if (knockBackCounter == 10) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                }
+            } else if(attacking){
+                attacking();
+            }
+            else {
+                setAction();
+                checkCollision();
 
-        if(!inRage && life < maxLife/2){
+                // IF COLLISION IS FALSE, PLAYER CAN MOVE
+                if (!collisionOn) {
+                    switch (direction) {
+                        case "up": worldY -= speed; break;
+                        case "down": worldY += speed; break;
+                        case "left": worldX -= speed; break;
+                        case "right": worldX += speed; break;
+                    }
+                }
+                spriteCounter++;
+                if (spriteCounter > 26) {
+                    if (spriteNum == 1) {
+                        spriteNum = 2;
+                    } else if (spriteNum == 2) {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
+                }
+            }
+            if (invincible) {
+                invincibleCounter++;
+                if (invincibleCounter > 40) {
+                    invincible = false;
+                    invincibleCounter = 0;
+                }
+            }
+
+            if (shotAvailableCounter < 30) {
+                shotAvailableCounter++;
+            }
+
+            if(offBalance){
+                offBalanceCounter++;
+                if(offBalanceCounter > 60){
+                    offBalance = false;
+                    offBalanceCounter = 0;
+                }
+            }
+        }
+    }
+
+    public void setAction() {
+        if (!inRage && life < maxLife / 2) {
             inRage = true;
             getImage();
             defaultSpeed++;
@@ -84,19 +173,30 @@ public class MON_PickleRick extends Entity {
 
         if (getTileDistance(gp.player) < 10) {
             moveTowardPlayer(20);
+
+            // Consistently use SludgeBomb and occasionally use AcidSplash
+            if (new Random().nextInt(0, 100) < 20) { // 20% chance to use AcidSplash
+                acidSplash();
+            } else {
+                shootProjectile(); // SludgeBomb
+            }
+
         } else {
-            // Get a random direction
+            // Random movement
             getRandomDirection(60);
-            checkShootOrNot(100, 30);
+
+            // Randomly decide to shoot SludgeBomb
+            if (new Random().nextInt(0, 100) < 30) { // 30% chance to shoot
+                shootProjectile();
+            }
         }
 
-        // Check if it attacks
-        if(!attacking){
-            checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
-            checkShootOrNot(60,30);
+        // Check for melee attacks
+        if (!attacking) {
+            checkAttackOrNot(60, gp.tileSize * 7, gp.tileSize * 5);
         }
-
     }
+
 
     public void damageReaction() {
         actionLockCounter = 0;
@@ -108,4 +208,37 @@ public class MON_PickleRick extends Entity {
         dropItem(new OBJ_Key(gp));
 
     }
+
+    public void acidSplash(){
+        if (shotAvailableCounter >= 30 && skill1.haveResource(this)){
+            skill1.set(worldX, worldY, direction, true, this);
+
+            // CHECK VACANCY
+            for (int j = 0; j < gp.projectile[1].length; j++) {
+                if (gp.projectile[gp.currentMap][j] == null) {
+                    gp.projectile[gp.currentMap][j] = skill1;
+                    break;
+                }
+            }
+            gp.playSE(10);
+        }
+    }
+
+    private void shootProjectile() {
+        if (shotAvailableCounter >= 30 && projectile.haveResource(this)) {
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // Place the projectile in the game world
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                gp.projectile[gp.currentMap][i] = projectile;
+                break;
+            }
+            shotAvailableCounter = 0;
+            gp.playSE(10); // Play shooting sound
+        }
+    }
+
+    //nag rest
+
+
 }

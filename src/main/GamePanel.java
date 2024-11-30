@@ -125,7 +125,6 @@ public class GamePanel extends Canvas implements Runnable {
             setFullScreen();
         }
 
-        csManager.sceneNum = csManager.opening;
     }
 
     public void resetGame(boolean restart){
