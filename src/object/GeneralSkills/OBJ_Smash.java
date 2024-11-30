@@ -32,12 +32,12 @@ public class OBJ_Smash extends Projectile {
 
 
         solidArea = new Rectangle();
-        solidArea.x = -64;
+        solidArea.x = -32;
         solidArea.y = -32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 256;
-        solidArea.height = 256;
+        solidArea.width = 516;
+        solidArea.height = 516;
         getImage();
     }
 
@@ -58,7 +58,7 @@ public class OBJ_Smash extends Projectile {
     }
 
     public void update() {
-        if (skillDurationCounter >= 60) {
+        if (skillDurationCounter >= 30) {
             alive = false;
             skillDurationCounter = 0;
         }
@@ -109,11 +109,6 @@ public class OBJ_Smash extends Projectile {
             // Reset solidArea position
             solidArea.x = solidAreaDefaultX;
             solidArea.y = solidAreaDefaultY;
-        }
-
-        life--;
-        if (life <= 0) {
-            alive = false;
         }
 
         spriteCounter++;

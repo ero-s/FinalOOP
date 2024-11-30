@@ -69,6 +69,7 @@ public class KeyHandler implements KeyListener {
                 if(gp.ui.commandNum == 0){ // new game
                     gp.gameState = gp.cutsceneState;
                     gp.csManager.sceneNum = gp.csManager.opening;
+                    gp.player.setDefaultValues();
 
                 }
 
