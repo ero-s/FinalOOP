@@ -18,6 +18,7 @@ public class CutsceneManager {
     private float alpha = 0f; // Transparency for fade effect
     private final List<String> openingTextPages = new ArrayList<>();
     private final List<String> pickleRickBackstoryTextPages = new ArrayList<>();
+    private final List<String> jacOLanternBackstoryTextPages = new ArrayList<>();
     private int currentTextPage = 0;
 
     // Scene numbers
@@ -29,7 +30,7 @@ public class CutsceneManager {
     // Background images
     private BufferedImage openingBackground;
     private BufferedImage pickleRickBackground;
-    private BufferedImage JacBackground;
+    private BufferedImage jacBackground;
 
     public CutsceneManager(GamePanel gp) {
         this.gp = gp;
@@ -41,10 +42,12 @@ public class CutsceneManager {
         try {
             openingBackground = ImageIO.read(getClass().getResource("/res/ui/openingScene.png"));
             pickleRickBackground = ImageIO.read(getClass().getResource("/res/ui/pickleRickCS.png"));
+            jacBackground = ImageIO.read(getClass().getResource("/res/ui/jacOLanternCS.png"));
         } catch (IOException e) {
             e.printStackTrace();
             openingBackground = null;
             pickleRickBackground = null;
+            jacBackground = null;
         }
     }
 
@@ -57,6 +60,9 @@ public class CutsceneManager {
                 break;
             case PICKLE_RICK_BACKSTORY :
                 playScene(pickleRickBackground, pickleRickBackstoryTextPages);
+                break;
+            case JACoLANTERN_BACKSTORY :
+                playScene(jacBackground, jacOLanternBackstoryTextPages);
                 break;
         }
     }
@@ -101,7 +107,7 @@ public class CutsceneManager {
 
     private void resetScene() {
         sceneNum = NA;
-        gp.player.setDefaultValues();
+       // gp.player.setDefaultValues();
         gp.gameState = gp.playState;
         scenePhase = 0;
     }
@@ -131,11 +137,11 @@ public class CutsceneManager {
         pickleRickBackstoryTextPages.add("This led Pickle Rick to bear more anger in the world which made him start enslaving people and letting them work tirelessly like he did. He was mad at the world that he made others suffer like he did");
         pickleRickBackstoryTextPages.add("North of where summer thrives, a town of scares lies. A being of immense power lays dormant, ruling with fear Jack O' Lantern waits for your arrival.");
 
-        //  pickleRickBackstoryTextPages.add("Jac was once known as a gifted performer, a child prodigy. Jac was once known as a gifted performer, a child prodigy, and his family's pride and joy. As he grew");
-       // pickleRickBackstoryTextPages.add("older, Jac’s parents showered him with expectations but rarely offered affection or support. Instead of nurturing his talents, they demanded perfection, driving");
-      //  pickleRickBackstoryTextPages.add("him to practice relentlessly. Their indifference cut deeply, fostering a growing resentment within him. Jac felt like a mere prop in their show, overshadowed by");
-      //  pickleRickBackstoryTextPages.add("their brilliance and neglect. Years later he became the best ever performer there ever was but was blinded by his ideals which led to him enslaving people and");
-       // pickleRickBackstoryTextPages.add("making them suffer. This sadistic behavior was a boost to his ego, and this eventually started this cruel rule on the circus. ");
+        jacOLanternBackstoryTextPages.add("Jac was once known as a gifted performer, a child prodigy. Jac was once known as a gifted performer, a child prodigy, and his family's pride and joy. As he grew");
+        jacOLanternBackstoryTextPages.add("older, Jac’s parents showered him with expectations but rarely offered affection or support. Instead of nurturing his talents, they demanded perfection, driving");
+        jacOLanternBackstoryTextPages.add("him to practice relentlessly. Their indifference cut deeply, fostering a growing resentment within him. Jac felt like a mere prop in their show, overshadowed by");
+        jacOLanternBackstoryTextPages.add("their brilliance and neglect. Years later he became the best ever performer there ever was but was blinded by his ideals which led to him enslaving people and");
+        jacOLanternBackstoryTextPages.add("making them suffer. This sadistic behavior was a boost to his ego, and this eventually started this cruel rule on the circus. ");
     }
 
     private void drawParagraph(String text) {

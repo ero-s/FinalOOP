@@ -3,6 +3,7 @@ package monster;
 import java.util.Random;
 
 import entity.Entity;
+import main.CutsceneManager;
 import main.GamePanel;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
@@ -221,6 +222,13 @@ public class MON_JackOLantern extends Entity {
         actionLockCounter = 0;
         direction = gp.player.direction;
         onPath = true;
+    }
+
+    @Override
+    public void scene() {
+        gp.csManager.sceneNum = CutsceneManager.JACoLANTERN_BACKSTORY; // Set the cutscene number
+        gp.gameState = gp.cutsceneState; // Switch game state
+        gp.csManager.scenePhase = 0;
     }
 
     public void checkDrop() {
