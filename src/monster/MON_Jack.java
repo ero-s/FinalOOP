@@ -6,12 +6,18 @@ import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
+import object.Skills_Jack.OBJ_Blizzard;
+import object.Skills_Jack.OBJ_Icycle;
 
+import java.util.AbstractList;
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class MON_Jack extends Entity {
 
     GamePanel gp;
+    int skill1Counter = 0;
+    boolean ultUsed = false;
     public static final String monName = "King Jack";
     public MON_Jack(GamePanel gp) {
         super(gp);
@@ -24,6 +30,8 @@ public class MON_Jack extends Entity {
         speed = defaultSpeed;
         maxLife = 10;
         life = maxLife;
+        projectile = new OBJ_Icycle(gp);
+        skill1 = new OBJ_Blizzard(gp);
         attack = 8;
         defense = 2;
         exp = 10;
@@ -75,38 +83,60 @@ public class MON_Jack extends Entity {
         // scene4 in winter
         dialogues[0][0] = "I'm sorry, Jill...";
     }
-
-//    public void getAttackImage(){
-//        attackUp1 = setup("/res/monster/mewer/mewer_attack_up_1", gp.tileSize*i, gp.tileSize*i * 2);
-//        attackUp2 = setup("/res/monster/mewer/mewer_attack_up_2", gp.tileSize*i, gp.tileSize*i * 2);
-//        attackDown1 = setup("/res/monster/mewer/mewer_attack_down_1", gp.tileSize*i, gp.tileSize*i * 2);
-//        attackDown2 = setup("/res/monster/mewer/mewer_attack_down_2", gp.tileSize*i, gp.tileSize*i * 2);
-//        attackLeft1 = setup("/res/monster/mewer/mewer_attack_left_1", gp.tileSize*i * 2, gp.tileSize*i);
-//        attackLeft2 = setup("/res/monster/mewer/mewer_attack_left_2", gp.tileSize*i * 2, gp.tileSize*i);
-//        attackRight1 = setup("/res/monster/mewer/mewer_attack_right_1", gp.tileSize*i * 2, gp.tileSize*i);
-//        attackRight2 = setup("/res/monster/mewer/mewer_attack_right_2", gp.tileSize*i * 2, gp.tileSize*i);
-//    }
+    public void getAttackImage(){
+        int i = 5;
+        up1 = setup("/res/monster/jack/up1", gp.tileSize*i*i, gp.tileSize*i);
+        up2 = setup("/res/monster/jack/up2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/monster/jack/down1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/monster/jack/down2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/monster/jack/left1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/monster/jack/left2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/monster/jack/right1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/monster/jack/right2", gp.tileSize*i, gp.tileSize*i);
+    }
 
     public void setAction() {
-        if (onPath) {
+        if (!inRage && life < maxLife / 2) {
+            inRage = true;
+            getImage();
+            defaultSpeed++;
+            speed = defaultSpeed;
+            attack += 2;
+            if(skill1Counter == 3600){
+                blizzard();
+                skill1Counter = 0;
+            }
+            icycle();
+        }
 
-            // Check if it stops chasing
-            checkStopChasingOrNot(gp.player, 40, 100);
-
-            // Search the direction to go
-            searchPath(this, getGoalCol(gp.player), getGoalRow(gp.player));
+        if (getTileDistance(gp.player) < 10) {
+            moveTowardPlayer(20);
+            // Randomly decide to shoot SludgeBomb
+            if (skill1Counter == 4800) { // 30% chance to shoot
+                ;blizzard();
+                skill1Counter = 0;
+            }
+            else{
+                icycle();
+            }
         } else {
-            // Check if it starts chasing
-            checkStartChasingOrNot(gp.player, 5, 100);
-
-            // Get a random direction
-            getRandomDirection(120);
+            // Random movement
+            getRandomDirection(60);
+            if (new Random().nextInt(0, 100)+1 < 40) { // 30% chance to shoot
+                if(!skill1.alive){
+                    blizzard();
+                }
+            }
+            else{
+                icycle();
+            }
         }
 
-        // Check if it attacks
-        if(!attacking){
-            checkAttackOrNot(30, gp.tileSize*4, gp.tileSize);
+        // Check for melee attack\[-??/p00ol,lo87nmn
+        if (!attacking) {
+            checkAttackOrNot(60, gp.tileSize * 7, gp.tileSize * 5);
         }
+        skill1Counter++;
     }
 
     public void damageReaction() {
@@ -126,6 +156,39 @@ public class MON_Jack extends Entity {
         }
         if (i >= 75 && i < 100) {
             dropItem(new OBJ_ManaCrystal(gp));
+        }
+    }
+
+    private void icycle() {
+        if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // Place the projectile in the game world
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if(gp.projectile[gp.currentMap][i] == null){
+                    gp.projectile[gp.currentMap][i] = projectile;
+                }
+                break;
+            }
+            shotAvailableCounter = 0;
+            gp.playSE(10); // Play shooting sound
+        }
+    }
+
+    private void blizzard() {
+        if (shotAvailableCounter >= 30 && skill1.haveResource(this)) {
+            this.skill1.set(worldX, worldY, direction, true, this);
+            this.skill1.subtractResource(this);
+
+            // CHECK VACANCY
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if (gp.projectile[gp.currentMap][i] == null) {
+                    gp.projectile[gp.currentMap][i] = this.skill1;
+                    break;
+                }
+            }
+            shotAvailableCounter = 0;
+            gp.playSE(10);
         }
     }
 }
