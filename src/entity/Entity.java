@@ -90,6 +90,7 @@ public class Entity {
     public Entity currentShield;
     public Projectile projectile;
     public Projectile skill1;
+    public Projectile skill2;
     public Entity currentLight;
     public boolean boss;
     public int xOffset;
