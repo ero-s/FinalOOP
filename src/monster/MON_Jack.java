@@ -6,8 +6,6 @@ import main.GamePanel;
 import object.*;
 import object.Skills_Jack.OBJ_Blizzard;
 import object.Skills_Jack.OBJ_Icycle;
-import object.Skills_PK.PR_AcidSplash;
-import object.Skills_PK.PR_SludgeBomb;
 
 import java.util.Random;
 
@@ -236,20 +234,18 @@ public class MON_Jack extends Entity {
     }
 
     private void shootProjectile() {
-        if(new Random().nextInt(0,100) < 80) {
-            if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
-                projectile.set(worldX, worldY, direction, true, this);
+        if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
+            projectile.set(worldX, worldY, direction, true, this);
 
-                // Place the projectile in the game world
-                for (int i = 0; i < gp.projectile[1].length; i++) {
-                    if (gp.projectile[gp.currentMap][i] == null) {
-                        gp.projectile[gp.currentMap][i] = projectile;
-                    }
-                    break;
+            // Place the projectile in the game world
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if(gp.projectile[gp.currentMap][i] == null){
+                    gp.projectile[gp.currentMap][i] = projectile;
                 }
-                shotAvailableCounter = 0;
-                gp.playSE(10); // Play shooting sound
+                break;
             }
+            shotAvailableCounter = 0;
+            gp.playSE(10); // Play shooting sound
         }
     }
 
