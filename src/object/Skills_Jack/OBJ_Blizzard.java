@@ -57,7 +57,7 @@ public class OBJ_Blizzard extends Projectile {
     }
 
     public void update() {
-        if (skillDurationCounter >= 300) {
+        if (skillDurationCounter >= 600) {
             alive = false;
             skillDurationCounter = 0;
         }
