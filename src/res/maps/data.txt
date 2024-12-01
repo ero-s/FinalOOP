@@ -11961,9 +11961,9 @@ true
 Winter0421.png
 true
 Winter0422.png
-true
+false
 Winter0423.png
-true
+false
 Winter0424.png
 true
 Winter0425.png
@@ -12457,7 +12457,7 @@ true
 Winter0669.png
 true
 Winter0670.png
-true
+false
 Winter0671.png
 false
 Winter0672.png
@@ -13091,9 +13091,9 @@ true
 Winter0986.png
 true
 Winter0987.png
-true
+false
 Winter0988.png
-true
+false
 Winter0989.png
 true
 Winter0990.png
@@ -14335,11 +14335,11 @@ false
 Winter1608.png
 false
 Winter1609.png
-true
+false
 Winter1610.png
-true
+false
 Winter1611.png
-true
+false
 Winter1612.png
 false
 Winter1613.png
