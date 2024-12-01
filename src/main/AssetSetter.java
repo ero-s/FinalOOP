@@ -100,8 +100,14 @@ public class AssetSetter {
             i++;
         }
 
+        mapNum = 2;
+        i = 0;
 
-
+        gp.npc[mapNum][i] = new NPC_Turnip(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 9;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 38;
+        i++;
     }
 
     public void setMonster() {
@@ -232,6 +238,21 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 14;
         i++;
 
+        //SPRING
+        mapNum = 3;
+        i = 0;
+
+        gp.monster[mapNum][i] = new MON_CursedOnion(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 18;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 32;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_ZombieBroccoli(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
+        i++;
+
+        //SUMMER DUNGEON
         mapNum = 4;
         i = 0;
         gp.monster[mapNum][i] = new MON_PickleRick(
@@ -256,7 +277,7 @@ public class AssetSetter {
         i++;
 
 
-        //FALL DUNGEOND
+        //FALL DUNGEON
         mapNum = 5;
         i = 0;
         gp.monster[mapNum][i] = new MON_JackOLantern(gp);
