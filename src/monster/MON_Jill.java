@@ -47,14 +47,17 @@ public class MON_Jill extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/jill/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/jill/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/jill/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/jill/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/jill/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/jill/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/jill/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/jill/right_2", gp.tileSize, gp.tileSize);
+
+        int i = 5;
+
+        up1 = setup("/res/monster/jill/up1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/monster/jill/up2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/monster/jill/down1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/monster/jill/down2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/monster/jill/left1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/monster/jill/left2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/monster/jill/right1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/monster/jill/right2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void setDialogue() {
