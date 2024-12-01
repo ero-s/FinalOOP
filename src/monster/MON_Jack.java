@@ -169,7 +169,7 @@ public class MON_Jack extends Entity {
     }
 
     public void setAction() {
-        if (!inRage && life < maxLife / 2) {
+        if (!gp.monster[6][1].alive) {
             inRage = true;
             getImage();
             defaultSpeed++;
