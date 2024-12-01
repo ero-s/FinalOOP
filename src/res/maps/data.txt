@@ -14983,7 +14983,7 @@ false
 Winter1932.png
 false
 Winter1933.png
-false
+true
 Winter1934.png
 false
 Winter1935.png
@@ -15083,7 +15083,7 @@ false
 Winter1982.png
 false
 Winter1983.png
-false
+true
 Winter1984.png
 false
 Winter1985.png
