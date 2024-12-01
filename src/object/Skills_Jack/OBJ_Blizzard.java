@@ -117,14 +117,14 @@ public class OBJ_Blizzard extends Projectile {
 
     public void getImage(){
         int i = 8;
-        up1 = setup("/res/objects/jack/blizzard/tornado1", gp.tileSize*i, gp.tileSize*i);
-        up2 = setup("/res/objects/jack/blizzard/tornado2", gp.tileSize*i, gp.tileSize*i);
-        right1 = setup("/res/objects/jack/blizzard/tornado1", gp.tileSize*i, gp.tileSize*i);
-        right2 = setup("/res/objects/jack/blizzard/tornado2", gp.tileSize*i, gp.tileSize*i);
-        down1 = setup("/res/objects/jack/blizzard/tornado1", gp.tileSize*i, gp.tileSize*i);
-        down2 = setup("/res/objects/jack/blizzard/tornado2", gp.tileSize*i, gp.tileSize*i);
-        left1 = setup("/res/objects/jack/blizzard/tornado1", gp.tileSize*i, gp.tileSize*i);
-        left2 = setup("/res/objects/jack/blizzard/tornado2", gp.tileSize*i, gp.tileSize*i);
+        up1 = setup("/res/monster/jack/blizzard/tornado1", gp.tileSize*i, gp.tileSize*i);
+        up2 = setup("/res/monster/jack/blizzard/tornado2", gp.tileSize*i, gp.tileSize*i);
+        right1 = setup("/res/monster/jack/blizzard/tornado1", gp.tileSize*i, gp.tileSize*i);
+        right2 = setup("/res/monster/jack/blizzard/tornado2", gp.tileSize*i, gp.tileSize*i);
+        down1 = setup("/res/monster/jack/blizzard/tornado1", gp.tileSize*i, gp.tileSize*i);
+        down2 = setup("/res/monster/jack/blizzard/tornado2", gp.tileSize*i, gp.tileSize*i);
+        left1 = setup("/res/monster/jack/blizzard/tornado1", gp.tileSize*i, gp.tileSize*i);
+        left2 = setup("/res/monster/jack/blizzard/tornado2", gp.tileSize*i, gp.tileSize*i);
     }
 
     public void subtractResource(Entity user) {
