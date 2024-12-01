@@ -61,11 +61,6 @@ public class PR_SludgeBomb extends Projectile {
         return size;
     }
 
-    public int getParticleSpeed(){
-        int speed = 1;
-        return speed;
-    }
-
     public int getParticleMaxLife(){
         int maxLife = 20;
         return maxLife;

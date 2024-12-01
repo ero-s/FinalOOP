@@ -5,6 +5,7 @@ import entity.NPC_Portal;
 import object.*;
 import object.GeneralSkills.OBJ_Smash;
 import object.Skills_PK.PR_SludgeBomb;
+import object.Jill_Skills.JILL_IceSlicer;
 
 public class EntityGenerator {
     GamePanel gp;
@@ -41,7 +42,7 @@ public class EntityGenerator {
             case OBJ_Tent.objName: obj = new OBJ_Tent(gp); break;
             case OBJ_Smash.objName: obj = new OBJ_Smash(gp); break;
             case OBJ_BlueHeart.objName: obj = new OBJ_BlueHeart(gp); break;
-
+            case JILL_IceSlicer.objName: obj = new JILL_IceSlicer(gp); break;
         }
         return obj;
     }
