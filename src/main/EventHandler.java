@@ -173,6 +173,8 @@ public class EventHandler {
 
 
 
+
+
 //            //cutscene
 //            else if (hit(3, 26, 41, "any") == true) {
 //                skeletonLord();
