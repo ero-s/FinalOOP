@@ -3,11 +3,9 @@ package monster;
 import java.util.Random;
 
 import entity.Entity;
+import main.CutsceneManager;
 import main.GamePanel;
-import object.OBJ_Coin_Bronze;
-import object.OBJ_Heart;
-import object.OBJ_ManaCrystal;
-import object.OBJ_Rock;
+import object.*;
 
 public class MON_JackOLantern extends Entity {
 
@@ -34,7 +32,7 @@ public class MON_JackOLantern extends Entity {
         defense = 6;
         exp = 50;
         knockBackPower = 8;
-        projectile = new OBJ_Rock(gp);
+        projectile = new OBJ_Joker(gp);
 
 
         int size = gp.tileSize*5;
@@ -207,11 +205,16 @@ public class MON_JackOLantern extends Entity {
             // Get a random direction
             getRandomDirection(60);
             checkShootOrNot(200, 60);
+            checkShootOrNot(60, 30);
+            checkShootOrNot(60, 30);
+
         }
 
         // Check if it attacks
         if(!attacking){
             checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
+            checkShootOrNot(60, 30);
+            checkShootOrNot(60, 30);
             checkShootOrNot(60, 30);
 
         }
@@ -221,6 +224,13 @@ public class MON_JackOLantern extends Entity {
         actionLockCounter = 0;
         direction = gp.player.direction;
         onPath = true;
+    }
+
+    @Override
+    public void scene() {
+        gp.csManager.sceneNum = CutsceneManager.JACoLANTERN_BACKSTORY; // Set the cutscene number
+        gp.gameState = gp.cutsceneState; // Switch game state
+        gp.csManager.scenePhase = 0;
     }
 
     public void checkDrop() {
