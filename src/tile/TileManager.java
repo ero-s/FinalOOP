@@ -78,13 +78,13 @@ public class TileManager {
 
         loadMap("/res/maps/SummerVille.txt", 0);
         loadMap("/res/maps/FallVille.txt", 1);
-        loadMap("/res/maps/dungeon01.txt", 2);
+        loadMap("/res/maps/WinterVille.txt", 2);
         loadMap("/res/maps/SpringVille.txt", 3);
 
         // dungeons
             loadMap("/res/maps/dungeon01.txt", 4);
             loadMap("/res/maps/dungeon02.txt", 5);
-            loadMap("/res/maps/dungeon01.txt", 6);
+            loadMap("/res/maps/dungeon03.txt", 6);
             loadMap("/res/maps/dungeon02.txt", 7);
 
 

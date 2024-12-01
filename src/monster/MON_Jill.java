@@ -10,7 +10,7 @@ import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
 
-public class  MON_Jill extends Entity {
+public class MON_Jill extends Entity {
 
     GamePanel gp;
     private int skill1Counter;
@@ -220,48 +220,13 @@ public class  MON_Jill extends Entity {
     }
 
     public void setAction() {
-
-        if (getTileDistance(gp.player) < 10) {
-            moveTowardPlayer(20);
-
-            iceSlicer();
-            
-//            if (skill1Counter == 3600) {
-//                iceArrow();
-//            }
-
-//            if (projectileCounter == 4500) {
-//                iceSlicer();
-//            }
-
-        } else {
-            if (new Random().nextInt(0, 100)+1 < 40) { // 30% chance to shoot
-//                if(!skill1.alive){
-//                    iceArrow();
-//                }
-
-                if(!projectile.alive) {
-                    iceSlicer();
-                }
-                //iceSlicer();
-
-            }
-        }
-
-        if (!attacking) {
-            checkAttackOrNot(60, gp.tileSize * 7, gp.tileSize * 5);
-        }
-        skill2Counter++;
-
-
         if (onPath) {
 
-             //Search the direction to go
+            // Search the direction to go
             searchPath(this,getGoalCol(gp.player), getGoalRow(gp.player));
 
-             //Check if it shoots a projectile
+            // Check if it shoots a projectile
             checkShootOrNot(60, 30);
-            iceSlicer();
 
         } else {
             // Check if it starts chasing
@@ -269,7 +234,6 @@ public class  MON_Jill extends Entity {
 
             // Get a random direction
             getRandomDirection(120);
-            iceSlicer();
         }
 
     }

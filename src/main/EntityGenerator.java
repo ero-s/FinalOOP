@@ -1,9 +1,10 @@
 package main;
-
 import entity.Entity;
 import entity.NPC_Portal;
 import object.*;
 import object.GeneralSkills.OBJ_Smash;
+import object.Skills_Jack.OBJ_Blizzard;
+import object.Skills_Jack.OBJ_Icycle;
 import object.Skills_PK.PR_SludgeBomb;
 import object.Jill_Skills.JILL_IceSlicer;
 
@@ -42,6 +43,8 @@ public class EntityGenerator {
             case OBJ_Tent.objName: obj = new OBJ_Tent(gp); break;
             case OBJ_Smash.objName: obj = new OBJ_Smash(gp); break;
             case OBJ_BlueHeart.objName: obj = new OBJ_BlueHeart(gp); break;
+            case OBJ_Blizzard.objName: obj = new OBJ_Blizzard(gp);break;
+            case OBJ_Icycle.objName: obj = new OBJ_Icycle(gp);break;
             case JILL_IceSlicer.objName: obj = new JILL_IceSlicer(gp); break;
         }
         return obj;

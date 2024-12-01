@@ -68,7 +68,7 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_ENTER){
                 if(gp.ui.commandNum == 0){ // new game
                     gp.gameState = gp.cutsceneState;
-                    gp.csManager.sceneNum = gp.csManager.opening;
+                    gp.csManager.sceneNum = gp.csManager.OPENING;
                     gp.player.setDefaultValues();
 
                 }

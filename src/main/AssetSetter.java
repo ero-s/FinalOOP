@@ -124,11 +124,6 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 33;
         i++;
 
-        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 33;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 15;
-        i++;
-
         gp.monster[mapNum][i] = new MON_Orc(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 22;
         gp.monster[mapNum][i].worldY = gp.tileSize * 41;
@@ -137,11 +132,6 @@ public class AssetSetter {
         gp.monster[mapNum][i] = new MON_Orc(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 13;
         gp.monster[mapNum][i].worldY = gp.tileSize * 38;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Orc(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 33;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 15;
         i++;
 
 
@@ -172,9 +162,80 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 27;
         i++;
 
+
+        //WINTER
+        mapNum = 2;
+        i = 0;
+
+        gp.monster[mapNum][i] = new MON_Snowman(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 43;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 9;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Snowman(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 39;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 13;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Snowman(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 40;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Snowman(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 37;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 19;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Snowman(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 34;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 20;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_BlueSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 20;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_BlueSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_BlueSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 22;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 11;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_BlueSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 15;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 23;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_BlueSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 11;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 28;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_BlueSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 8;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 9;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_BlueSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 6;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_BlueSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
+        i++;
+
         mapNum = 4;
         i = 0;
-        gp.monster[mapNum][i] = new MON_PickleRick(gp);
+        gp.monster[mapNum][i] = new MON_PickleRick(
+                gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 22;
         gp.monster[mapNum][i].worldY = gp.tileSize * 11;
         i++;
@@ -194,11 +255,27 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 23;
         i++;
 
+
+        //FALL DUNGEOND
         mapNum = 5;
         i = 0;
         gp.monster[mapNum][i] = new MON_JackOLantern(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 25;
         gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+        i++;
+
+
+        //WINTER DUNGEON
+        mapNum = 6;
+        i = 0;
+        gp.monster[mapNum][i] = new MON_Jack(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 20;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 20;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Jill(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 28;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 20;
         i++;
 
 

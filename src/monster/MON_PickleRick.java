@@ -1,6 +1,7 @@
 package monster;
 
 import entity.Entity;
+import main.CutsceneManager;
 import main.GamePanel;
 import object.*;
 import object.Skills_PK.PR_AcidSplash;
@@ -217,9 +218,10 @@ public class MON_PickleRick extends Entity {
     }
 
     public void scene(){
-        gp.csManager.sceneNum = gp.csManager.pickleRickBackstory; // Set the cutscene number
-        gp.gameState = gp.cutsceneState; // Switch game state
-        gp.csManager.scenePhase = 0;
+       gp.csManager.sceneNum = CutsceneManager.PICKLE_RICK_BACKSTORY; // Set the cutscene number
+       gp.gameState = gp.cutsceneState; // Switch game state
+       gp.csManager.scenePhase = 0;
+
     }
     public void checkDrop() {
 
