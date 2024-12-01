@@ -46,8 +46,13 @@ public class EntityGenerator {
             case OBJ_Blizzard.objName: obj = new OBJ_Blizzard(gp);break;
             case OBJ_Icycle.objName: obj = new OBJ_Icycle(gp);break;
             case JILL_IceSlicer.objName: obj = new JILL_IceSlicer(gp); break;
+            case OBJ_WinterKey.objName: obj  = new OBJ_WinterKey(gp); break;
+            case OBJ_WinterDoor.objName: obj  = new OBJ_WinterDoor(gp); break;
+            case OBJ_SpringKey.objName: obj = new OBJ_SpringKey(gp); break;
+            case OBJ_SpringDoor.objName: obj  = new OBJ_SpringDoor(gp); break;
+            case OBJ_FallKey.objName: obj = new OBJ_FallKey(gp); break;
+            case OBJ_FallDoor.objName: obj  = new OBJ_FallDoor(gp); break;
         }
         return obj;
     }
-
 }

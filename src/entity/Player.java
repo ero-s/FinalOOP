@@ -36,15 +36,15 @@ public class    Player extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
-        solidArea.height = 32;
+        solidArea.height = 16;
 
         mapCollision = new Rectangle();
         mapCollision.x = 0;
         mapCollision.y = 0;
         mapCollisionDefaultX = mapCollision.x;
         mapCollisionDefaultY = mapCollision.y;
-        mapCollision.width = 64;
-        mapCollision.height = 64;
+        mapCollision.width = 32;
+        mapCollision.height = 32;
 
         setDefaultValues();
 
