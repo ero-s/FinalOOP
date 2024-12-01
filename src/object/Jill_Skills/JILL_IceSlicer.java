@@ -39,7 +39,7 @@ public class JILL_IceSlicer extends Projectile {
         left1 = setup("/res/projectile/IceSlicer/ICleft", gp.tileSize*4, gp.tileSize*4);
         left2  = setup("/res/projectile/IceSlicer/ICleft2", gp.tileSize*4, gp.tileSize*4);
         right1 = setup("/res/projectile/IceSlicer/ICright", gp.tileSize*4, gp.tileSize*4);
-         right2 = setup("/res/projectile/IceSlicer/ICright2", gp.tileSize*4, gp.tileSize*4);
+        right2 = setup("/res/projectile/IceSlicer/ICright2", gp.tileSize*4, gp.tileSize*4);
     }
 
     public boolean haveResource(Entity user){

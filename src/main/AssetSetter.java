@@ -255,8 +255,7 @@ public class AssetSetter {
         //SUMMER DUNGEON
         mapNum = 4;
         i = 0;
-        gp.monster[mapNum][i] = new MON_PickleRick(
-                gp);
+        gp.monster[mapNum][i] = new MON_PickleRick(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 22;
         gp.monster[mapNum][i].worldY = gp.tileSize * 11;
         i++;
