@@ -53,9 +53,6 @@ public class MON_CursedOnion extends Entity {
         motion2_duration = 50;
 
 
-        projectile.xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
-        projectile.yOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
-
         getImage();
         getAttackImage();
     }

@@ -226,7 +226,7 @@ public class MON_PickleRick extends Entity {
     public void checkDrop() {
 
         dropItem(new OBJ_BlueHeart(gp));
-        dropItem(new OBJ_Key(gp));
+        dropItem(new OBJ_FallKey(gp));
 
     }
 
