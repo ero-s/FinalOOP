@@ -66,7 +66,6 @@ public class Entity {
     public int guardCounter = 0;
     public int offBalanceCounter = 0;
     public int skillDurationCounter = 0;
-
     // CHARACTER ATTRIBUTES
     public String name;
     public int defaultSpeed;

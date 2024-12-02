@@ -3,11 +3,13 @@ package monster;
 import java.util.Random;
 
 import entity.Entity;
+import main.CutsceneManager;
 import main.GamePanel;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
+
 
 public class MON_Jill extends Entity {
 
@@ -31,7 +33,7 @@ public class MON_Jill extends Entity {
         exp = 2;
         projectile = new OBJ_Rock(gp);
 
-        int size = gp.tileSize*5;
+        int size = gp.tileSize * 5;
         solidArea.x = 48;
         solidArea.y = 48;
         solidArea.width = size - 48 * 2;
@@ -42,7 +44,6 @@ public class MON_Jill extends Entity {
         attackArea.height = 170;
         motion1_duration = 25;
         motion2_duration = 50;
-
         getImage();
     }
 
@@ -50,14 +51,14 @@ public class MON_Jill extends Entity {
 
         int i = 5;
 
-        up1 = setup("/res/monster/jill/up1", gp.tileSize*i, gp.tileSize*i);
-        up2 = setup("/res/monster/jill/up2", gp.tileSize*i, gp.tileSize*i);
-        down1 = setup("/res/monster/jill/down1", gp.tileSize*i, gp.tileSize*i);
-        down2 = setup("/res/monster/jill/down2", gp.tileSize*i, gp.tileSize*i);
-        left1 = setup("/res/monster/jill/left1", gp.tileSize*i, gp.tileSize*i);
-        left2 = setup("/res/monster/jill/left2", gp.tileSize*i, gp.tileSize*i);
-        right1 = setup("/res/monster/jill/right1", gp.tileSize*i, gp.tileSize*i);
-        right2 = setup("/res/monster/jill/right2", gp.tileSize*i, gp.tileSize*i);
+        up1 = setup("/res/monster/jill/up1", gp.tileSize * i, gp.tileSize * i);
+        up2 = setup("/res/monster/jill/up2", gp.tileSize * i, gp.tileSize * i);
+        down1 = setup("/res/monster/jill/down1", gp.tileSize * i, gp.tileSize * i);
+        down2 = setup("/res/monster/jill/down2", gp.tileSize * i, gp.tileSize * i);
+        left1 = setup("/res/monster/jill/left1", gp.tileSize * i, gp.tileSize * i);
+        left2 = setup("/res/monster/jill/left2", gp.tileSize * i, gp.tileSize * i);
+        right1 = setup("/res/monster/jill/right1", gp.tileSize * i, gp.tileSize * i);
+        right2 = setup("/res/monster/jill/right2", gp.tileSize * i, gp.tileSize * i);
     }
 
     public void setDialogue() {
@@ -85,11 +86,111 @@ public class MON_Jill extends Entity {
         dialogues[1][1] = "The spring has more than enough for all of us if we work together.";
     }
 
+    public void update() {
+        if (!sleep) {
+            if (knockBack) {
+                checkCollision();
+                if (collisionOn) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                } else if (!collisionOn) {
+                    spriteCounter++;
+                    if (spriteCounter > 26) {
+                        if (spriteNum == 1) {
+                            spriteNum = 2;
+                        } else if (spriteNum == 2) {
+                            spriteNum = 1;
+                        }
+                        spriteCounter = 0;
+                    }
+                    switch (knockBackDirection) {
+                        case "up":
+                            worldY -= speed;
+                            break;
+                        case "down":
+                            worldY += speed;
+                            break;
+                        case "left":
+                            worldX -= speed;
+                            break;
+                        case "right":
+                            worldX += speed;
+                            break;
+                    }
+                }
+                knockBackCounter++;
+                if (knockBackCounter == 10) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                }
+            } else if (attacking) {
+                attacking();
+            } else {
+                setAction();
+                checkCollision();
+
+                // IF COLLISION IS FALSE, PLAYER CAN MOVE
+                if (!collisionOn) {
+                    switch (direction) {
+                        case "up":
+                            worldY -= speed;
+                            break;
+                        case "down":
+                            worldY += speed;
+                            break;
+                        case "left":
+                            worldX -= speed;
+                            break;
+                        case "right":
+                            worldX += speed;
+                            break;
+                    }
+                }
+                spriteCounter++;
+                if (spriteCounter > 26) {
+                    if (spriteNum == 1) {
+                        spriteNum = 2;
+                    } else if (spriteNum == 2) {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
+                }
+            }
+            if (invincible) {
+                invincibleCounter++;
+                if (invincibleCounter > 40) {
+                    invincible = false;
+                    invincibleCounter = 0;
+                }
+            }
+
+            if (shotAvailableCounter < 30) {
+                shotAvailableCounter++;
+            }
+
+            if (offBalance) {
+                offBalanceCounter++;
+                if (offBalanceCounter > 60) {
+                    offBalance = false;
+                    offBalanceCounter = 0;
+                }
+            }
+
+            if (!alive) {
+               // jackNJillCounter++;
+                // jillAlive = false;
+
+            }
+        }
+    }
+
     public void setAction() {
         if (onPath) {
 
             // Search the direction to go
-            searchPath(this,getGoalCol(gp.player), getGoalRow(gp.player));
+            searchPath(this, getGoalCol(gp.player), getGoalRow(gp.player));
 
             // Check if it shoots a projectile
             checkShootOrNot(60, 30);
@@ -110,6 +211,13 @@ public class MON_Jill extends Entity {
         onPath = true;
     }
 
+    public void scene() {
+        gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
+        gp.gameState = gp.cutsceneState; // Switch game state
+        gp.csManager.scenePhase = 0;
+
+    }
+
     public void checkDrop() {
         int i = new Random().nextInt(100) + 1;
 
@@ -122,5 +230,9 @@ public class MON_Jill extends Entity {
         if (i >= 75 && i < 100) {
             dropItem(new OBJ_ManaCrystal(gp));
         }
+
     }
+
+
 }
+

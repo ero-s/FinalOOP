@@ -1,6 +1,7 @@
 package monster;
 
 import entity.Entity;
+import monster.*;
 import main.CutsceneManager;
 import main.GamePanel;
 import object.*;
@@ -17,6 +18,7 @@ public class MON_Jack extends Entity {
     private int skill1Counter = 0;
     boolean ultUsed = false;
     public static final String monName = "Jack";
+
 
     public MON_Jack(GamePanel gp) {
         super(gp);
@@ -165,11 +167,17 @@ public class MON_Jack extends Entity {
                     offBalanceCounter = 0;
                 }
             }
+
+            if(!alive){
+              //  jackNJillCounter++;
+               // jackAlive = false;
+
+            }
         }
     }
 
     public void setAction() {
-        if (!gp.monster[6][1].alive) {
+        if (!inRage && life < maxLife / 2) {
             inRage = true;
             getImage();
             defaultSpeed++;
@@ -203,16 +211,19 @@ public class MON_Jack extends Entity {
         actionLockCounter = 0;
     }
 
-    public void scene(){
-        gp.csManager.sceneNum = CutsceneManager.PICKLE_RICK_BACKSTORY; // Set the cutscene number
-        gp.gameState = gp.cutsceneState; // Switch game state
-        gp.csManager.scenePhase = 0;
+    public void scene() {
+
+            gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
+            gp.gameState = gp.cutsceneState; // Switch game state
+            gp.csManager.scenePhase = 0;
 
     }
+
     public void checkDrop() {
 
         dropItem(new OBJ_BlueHeart(gp));
         dropItem(new OBJ_Key(gp));
+
 
     }
 
@@ -261,6 +272,8 @@ public class MON_Jack extends Entity {
         gp.monster[4][4].worldY = gp.tileSize * 25;
     }
     //nag rest
+
+
 
 
 }

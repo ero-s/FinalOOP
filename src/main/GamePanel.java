@@ -19,10 +19,13 @@ import ai.PathFinder;
 import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
+import monster.MON_Jack;
+import monster.MON_Jill;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
 public class GamePanel extends Canvas implements Runnable {
+
     // SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
@@ -212,13 +215,34 @@ public class GamePanel extends Canvas implements Runnable {
                     if (monster[currentMap][i].alive && !monster[currentMap][i].dying) {
                         monster[currentMap][i].update();
                     }
+
                     if (!monster[currentMap][i].alive) {
                         monster[currentMap][i].checkDrop();
                         monster[currentMap][i].scene();
                         monster[currentMap][i] = null;
                     }
+
+//                    if (monster[currentMap][i] == monster[6][0] && monster[currentMap][i+1] == monster[6][1]) {
+//                        if(monster[currentMap][i].life == 0 && monster[currentMap][i+1].life == 0){
+//                            if(monster[currentMap][i].boss && monster[currentMap][i+1].boss){
+//                                monster[currentMap][i].scene();
+//                            }
+//                            monster[currentMap][i].checkDrop();
+//                           // monster[currentMap][i] = null;
+//                           // monster[currentMap][i+1]= null;
+//                        }
+//                       // monster[currentMap][i] = null;;
+//
+//                    }
                 }
             }
+
+
+
+//            if (!monster[6][0].alive && !monster[6][1].alive) {
+//                monster[6][0].scene();
+//                monster[6][0] = null;
+//            }
 
             for (int i = 0; i < projectile[1].length; i++) {
                 if (projectile[currentMap][i] != null) {
