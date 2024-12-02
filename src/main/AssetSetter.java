@@ -253,11 +253,6 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 32;
         i++;
 
-        gp.monster[mapNum][i] = new MON_ZombieBroccoli(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
-        i++;
-
         //SUMMER DUNGEON
         mapNum = 4;
         i = 0;

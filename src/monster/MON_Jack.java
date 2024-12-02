@@ -24,7 +24,7 @@ public class MON_Jack extends Entity {
         type = type_monster;
         boss = true;
         name = monName;
-        defaultSpeed = 1;
+        defaultSpeed = 5;
         speed = defaultSpeed;
         maxLife = 435;
         life = maxLife;
