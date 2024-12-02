@@ -731,11 +731,6 @@ public class Player extends Entity {
         }
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
-        g2.setColor(Color.red);
-        int collisionBoxX = screenX + this.solidArea.x;
-        int collisionBoxY = screenY + this.solidArea.y;
-        g2.drawRect(collisionBoxX, collisionBoxY, this.solidArea.width, this.solidArea.height);
-
         // RESET
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }

@@ -178,10 +178,10 @@ public class MON_Jack extends Entity {
         if (gp.monster[6][1] == null) {
             inRage = true;
             getImage();
-            defaultSpeed++;
-            speed = defaultSpeed;
+            speed = 3;
             attack += 2;
             blizzard();
+
             shootProjectile();
         }
 
