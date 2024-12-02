@@ -1,7 +1,9 @@
 package entity;
 
 import main.GamePanel;
-import object.*;
+import object.OBJ_Axe;
+import object.OBJ_Potion_Red;
+import object.OBJ_Shield_Blue;
 
 import java.awt.*;
 

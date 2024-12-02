@@ -50,7 +50,7 @@ public class CutsceneManager {
             pickleRickBackground = ImageIO.read(getClass().getResource("/res/ui/pickleRickCS.png"));
             jacBackground = ImageIO.read(getClass().getResource("/res/ui/jacOLanternCS.png"));
             jackNJillBackground = ImageIO.read(getClass().getResource("/res/ui/jackNJillCS.png"));
-            cursedOnionBackground = ImageIO.read(getClass().getResource("/res/ui/jackNJillCS.png"));
+            cursedOnionBackground = ImageIO.read(getClass().getResource("/res/ui/cursedOnionCS.png"));
         } catch (IOException e) {
             e.printStackTrace();
             openingBackground = null;

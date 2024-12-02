@@ -1,12 +1,13 @@
 package monster;
 
-import java.util.Random;
-
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
-import object.*;
-import object.OBJ_TrophyJoker;
+import object.OBJ_Coin_Bronze;
+import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
+
+import java.util.Random;
 
 public class MON_CursedOnion extends Entity {
 
@@ -43,10 +44,6 @@ public class MON_CursedOnion extends Entity {
         attackArea.height = 170;
         motion1_duration = 25;
         motion2_duration = 50;
-
-
-        projectile.xOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
-        projectile.yOffset = (gp.tileSize * 2 - gp.tileSize) / 2;
 
         getImage();
         getAttackImage();
@@ -168,52 +165,33 @@ public class MON_CursedOnion extends Entity {
     }
 
     public void setAction() {
-        if (!gp.monster[6][1].alive) {
+        if(!inRage && life < maxLife/2){
             inRage = true;
+
             getImage();
             defaultSpeed++;
             speed = defaultSpeed;
-            attack += 2;
-            if(skill1Counter == 3600){
-                acidSplash();
-            }
-            if(!ultUsed){
-                selfReliance();
-                ultUsed = true;
-            }
-
-            shootProjectile();
+            attack += 4;
+            defense += 3;
+            arise();
+            arise();
         }
 
-        if (getTileDistance(gp.player) < 10) {
-            moveTowardPlayer(20);
-            // Randomly decide to shoot SludgeBomb
-            if (skill1Counter == 4800) { // 30% chance to shoot
-                acidSplash();
-            }
-            else{
-                shootProjectile();
-            }
+        if (getTileDistance(gp.player) > 5) {
+            moveTowardPlayer(10);
+
         } else {
-            // Random movement
+
+            // Get a random direction
             getRandomDirection(60);
-            if (new Random().nextInt(0, 100)+1 < 40) { // 30% chance to shoot
-                if(!skill1.alive){
-                    acidSplash();
-                }
-            }
-            else{
-                shootProjectile();
-            }
         }
 
-        // Check for melee attack\[-??/p00ol,lo87nmn
-        if (!attacking) {
-            checkAttackOrNot(60, gp.tileSize * 7, gp.tileSize * 5);
+        // Check if it attacks
+        if(!attacking){
+            checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
+            arise();
         }
-        skill1Counter++;
     }
-
 
     public void damageReaction() {
         actionLockCounter = 0;
@@ -221,13 +199,10 @@ public class MON_CursedOnion extends Entity {
         onPath = true;
     }
 
-//    public void scene(){
-//        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
     public void scene() {
-        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the c // Set the cutscene number
+        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
-
     }
 
     public void checkDrop() {
@@ -244,27 +219,21 @@ public class MON_CursedOnion extends Entity {
         }
     }
 
-    private void shootProjectile() {
-        if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
-            projectile.set(worldX, worldY, direction, true, this);
+    public void arise(){
+        int i = new Random().nextInt(100) + 1;
 
-            // Place the projectile in the game world
-            for (int i = 0; i < gp.projectile[1].length; i++) {
-                if(gp.projectile[gp.currentMap][i] == null){
-                    gp.projectile[gp.currentMap][i] = projectile;
-                }
-                break;
-            }
-            shotAvailableCounter = 0;
-            gp.playSE(10); // Play shooting sound
-        }
+        if(i == 1){
+            for(int j = 0; j < 8; j++){
+                int col = new Random().nextInt(10,29) + 1;
+                int row = new Random().nextInt(21,33) + 1;
 
 
-
-                    gp.monster[4][monCount] = new MON_ZombieBroccoli(gp);
-                    gp.monster[4][monCount].worldX = gp.tileSize * col;
-                    gp.monster[4][monCount].worldY = gp.tileSize * row;
+                gp.monster[4][monCount] = new MON_ZombieBroccoli(gp);
+                gp.monster[4][monCount].worldX = gp.tileSize * col;
+                gp.monster[4][monCount].worldY = gp.tileSize * row;
 
                 monCount++;
             }
         }
+    }
+}

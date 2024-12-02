@@ -2,7 +2,9 @@ package main;
 
 import entity.*;
 import monster.*;
-import object.*;
+import object.OBJ_Door;
+import object.OBJ_FallDoor;
+import object.OBJ_Key;
 
 public class AssetSetter {
 

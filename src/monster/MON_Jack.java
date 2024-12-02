@@ -1,14 +1,12 @@
 package monster;
 
 import entity.Entity;
-import monster.*;
 import main.CutsceneManager;
 import main.GamePanel;
-import object.*;
+import object.OBJ_BlueHeart;
+import object.OBJ_Key;
 import object.Skills_Jack.OBJ_Blizzard;
 import object.Skills_Jack.OBJ_Icycle;
-import object.Skills_PK.PR_AcidSplash;
-import object.Skills_PK.PR_SludgeBomb;
 
 import java.util.Random;
 
@@ -212,7 +210,7 @@ public class MON_Jack extends Entity {
     }
 
     public void scene(){
-        gp.csManager.sceneNum = CutsceneManager.PICKLE_RICK_BACKSTORY; // Set the cutscene number
+        gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
 

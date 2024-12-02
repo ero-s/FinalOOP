@@ -2,8 +2,6 @@ package main;
 
 import entity.Entity;
 
-import javax.swing.text.html.parser.TagElement;
-
 public class EventHandler {
     GamePanel gp;
     EventRect eventRect[][][];

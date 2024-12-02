@@ -3,7 +3,8 @@ package monster;
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
-import object.*;
+import object.OBJ_BlueHeart;
+import object.OBJ_FallKey;
 import object.Skills_PK.PR_AcidSplash;
 import object.Skills_PK.PR_SludgeBomb;
 

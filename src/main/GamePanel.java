@@ -1,28 +1,18 @@
 package main;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
+import ai.PathFinder;
+import data.SaveLoad;
+import entity.Entity;
+import entity.Player;
+import tile.TileManager;
+import tile_interactive.InteractiveTile;
+
+import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import data.SaveLoad;
-import javax.swing.JFrame;
-
-import ai.PathFinder;
-import data.SaveLoad;
-import entity.Entity;
-import entity.Player;
-import monster.MON_Jack;
-import monster.MON_Jill;
-import tile.TileManager;
-import tile_interactive.InteractiveTile;
 
 public class GamePanel extends Canvas implements Runnable {
 

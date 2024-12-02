@@ -1,9 +1,9 @@
 package entity;
 
-import java.awt.Rectangle;
-import java.util.Random;
-
 import main.GamePanel;
+
+import java.awt.*;
+import java.util.Random;
 
 public class NPC_Pugtato extends Entity {
 
