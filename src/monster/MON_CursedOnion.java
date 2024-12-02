@@ -185,7 +185,7 @@ public class MON_CursedOnion extends Entity {
             defense += 3;
             arise();
             arise();
-            scene();
+            halfScene();
         }
 
         if (getTileDistance(gp.player) > 5) {
@@ -213,6 +213,12 @@ public class MON_CursedOnion extends Entity {
     @Override
     public void scene() {
         gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
+        gp.gameState = gp.cutsceneState; // Switch game state
+        gp.csManager.scenePhase = 0;
+    }
+
+    public void halfScene() {
+        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_HALF_SCENE_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
     }

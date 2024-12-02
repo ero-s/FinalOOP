@@ -20,6 +20,7 @@ public class CutsceneManager {
     private final List<String> pickleRickBackstoryTextPages = new ArrayList<>();
     private final List<String> jacOLanternBackstoryTextPages = new ArrayList<>();
     private final List<String> jackNJillBackstoryTextPages = new ArrayList<>();
+    private final List<String> cursedOnionHalfSceneBackstoryTextPages = new ArrayList<>();
     private final List<String> cursedOnionBackstoryTextPages = new ArrayList<>();
     private int currentTextPage = 0;
 
@@ -29,14 +30,19 @@ public class CutsceneManager {
     public static final int PICKLE_RICK_BACKSTORY = 2;
     public static final int JACoLANTERN_BACKSTORY = 3;
     public static final int JACKNJILL_BACKSTORY = 4;
-    public static final int CURSED_ONION_BACKSTORY = 5;
+    public static final int CURSED_ONION_HALF_SCENE_BACKSTORY = 5;
+    public static final int CURSED_ONION_BACKSTORY = 6;
+
+
 
     // Background images
     private BufferedImage openingBackground;
     private BufferedImage pickleRickBackground;
     private BufferedImage jacBackground;
     private BufferedImage jackNJillBackground;
+    private BufferedImage cursedOnionHalfSceneBackground;
     private BufferedImage cursedOnionBackground;
+
 
     public CutsceneManager(GamePanel gp) {
         this.gp = gp;
@@ -50,6 +56,7 @@ public class CutsceneManager {
             pickleRickBackground = ImageIO.read(getClass().getResource("/res/ui/pickleRickCS.png"));
             jacBackground = ImageIO.read(getClass().getResource("/res/ui/jacOLanternCS.png"));
             jackNJillBackground = ImageIO.read(getClass().getResource("/res/ui/jackNJillCS.png"));
+            cursedOnionHalfSceneBackground = ImageIO.read(getClass().getResource("/res/ui/cursedOnionHalfSceneCS.png"));
             cursedOnionBackground = ImageIO.read(getClass().getResource("/res/ui/cursedOnionCS.png"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,6 +64,7 @@ public class CutsceneManager {
             pickleRickBackground = null;
             jacBackground = null;
             jackNJillBackground = null;
+            cursedOnionHalfSceneBackground = null;
             cursedOnionBackground = null;
 
         }
@@ -77,6 +85,9 @@ public class CutsceneManager {
                 break;
             case JACKNJILL_BACKSTORY :
                 playScene(jackNJillBackground, jackNJillBackstoryTextPages);
+                break;
+            case CURSED_ONION_HALF_SCENE_BACKSTORY :
+                playScene(cursedOnionHalfSceneBackground, cursedOnionHalfSceneBackstoryTextPages);
                 break;
             case CURSED_ONION_BACKSTORY :
                 playScene(cursedOnionBackground, cursedOnionBackstoryTextPages);
@@ -169,6 +180,7 @@ public class CutsceneManager {
         cursedOnionBackstoryTextPages.add("The curse served as a means to protect Hakobe, as he knew that dark forces were emerging from the dungeons. By becoming a cursed guardian,");
         cursedOnionBackstoryTextPages.add("he inadvertently became a shield for Hakobe, isolating himself to keep him safe from the growing threats until they could reunite and restore balance together.");
 
+        cursedOnionHalfSceneBackstoryTextPages.add("The farm was their safe haven, where every corner held a story of their childhood adventures, from building forts in the hay to watching sunsets that painted the sky with hope.");
     }
 
     private void drawParagraph(String text) {

@@ -211,9 +211,9 @@ public class MON_Jill extends Entity {
     }
 
     public void scene(){
-        gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
-        gp.gameState = gp.cutsceneState; // Switch game state
-        gp.csManager.scenePhase = 0;
+      //  gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
+       // gp.gameState = gp.cutsceneState; // Switch game state
+       // gp.csManager.scenePhase = 0;
 
     }
     public void checkDrop() {
