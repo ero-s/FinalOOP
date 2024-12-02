@@ -1,18 +1,18 @@
 package monster;
 
+import java.util.Random;
+
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
-import object.OBJ_Coin_Bronze;
-import object.OBJ_Heart;
-import object.OBJ_ManaCrystal;
-
-import java.util.Random;
+import object.*;
+import object.OBJ_TrophyJoker;
 
 public class MON_CursedOnion extends Entity {
 
     GamePanel gp;
     public static final String monName = "\"Cursed Onion\"";
+    private int skillCounter = 0;
     public int monCount = 1;
 
     public MON_CursedOnion(GamePanel gp) {
@@ -159,8 +159,14 @@ public class MON_CursedOnion extends Entity {
         }
 
         int i = new Random().nextInt(20) + 1;
-        if(i == 1){
-            arise();
+        if(i == 1 || i == 2){
+            if(i % 2 == 0){
+                arise();
+            } else {
+                arise();
+                arise();
+            }
+
         }
     }
 
@@ -199,8 +205,9 @@ public class MON_CursedOnion extends Entity {
         onPath = true;
     }
 
+    @Override
     public void scene() {
-        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
+        gp.csManager.sceneNum = CutsceneManager.JACoLANTERN_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
     }
