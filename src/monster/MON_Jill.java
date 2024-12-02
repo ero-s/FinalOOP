@@ -14,7 +14,7 @@ public class MON_Jill extends Entity {
     GamePanel gp;
     private int skill1Counter = 0;
     boolean ultUsed = false;
-    public static final String monName = "Pickle Rick";
+    public static final String monName = "              Jill";
 
     public MON_Jill(GamePanel gp) {
         super(gp);
@@ -27,7 +27,7 @@ public class MON_Jill extends Entity {
         defaultSpeed = 1;
         speed = defaultSpeed;
         //maxLife = 435;
-        maxLife = 5;
+        maxLife = 435;
         life = maxLife;
         maxMana = 50;
         mana = maxMana;

@@ -14,6 +14,7 @@ public class MON_CursedOnion extends Entity {
     GamePanel gp;
     public static final String monName = "\"Cursed Onion\"";
     private int skill1Counter = 0;
+    private int ariseCounter = 0;
     private boolean skill1Used = false;
     public int monCount = 1;
 
@@ -185,11 +186,12 @@ public class MON_CursedOnion extends Entity {
             defense += 3;
             arise();
             arise();
-            halfScene();
+            scene();
         }
 
         if (getTileDistance(gp.player) > 5) {
             moveTowardPlayer(10);
+            acidSplash();
 
         } else {
 
@@ -237,6 +239,23 @@ public class MON_CursedOnion extends Entity {
         }
     }
 
+    public void acidSplash(){
+        if (shotAvailableCounter >= 30 && skill1.haveResource(this)) {
+            this.skill1.set(worldX, worldY, direction, true, this);
+            this.skill1.subtractResource(this);
+
+            // CHECK VACANCY
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if (gp.projectile[gp.currentMap][i] == null) {
+                    gp.projectile[gp.currentMap][i] = this.skill1;
+                    break;
+                }
+            }
+            shotAvailableCounter = 0;
+            gp.playSE(10);
+        }
+    }
+
     public void arise(){
         int i = new Random().nextInt(100) + 1;
 
@@ -251,6 +270,7 @@ public class MON_CursedOnion extends Entity {
 
                 monCount++;
             }
+            ariseCounter=0;
         }
     }
 }
