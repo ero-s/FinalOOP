@@ -237,16 +237,7 @@ public class MON_JackOLantern extends Entity {
         int i = new Random().nextInt(100) + 1;
 
         dropItem(new OBJ_TrophyJoker(gp));
-
-        if (i < 50) {
-            dropItem(new OBJ_Coin_Bronze(gp));
-        }
-        if (i >= 50 && i < 75) {
-            dropItem(new OBJ_Heart(gp));
-        }
-        if (i >= 75 && i < 100) {
-            dropItem(new OBJ_ManaCrystal(gp));
-        }
+        dropItem(new OBJ_WinterKey(gp));
     }
 
     public void checkShootOrNot(int rate, int shotInterval){
