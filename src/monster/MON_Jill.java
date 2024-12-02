@@ -27,7 +27,7 @@ public class MON_Jill extends Entity {
         defaultSpeed = 1;
         speed = defaultSpeed;
         //maxLife = 435;
-        maxLife = 5;
+        maxLife = 435;
         life = maxLife;
         maxMana = 50;
         mana = maxMana;

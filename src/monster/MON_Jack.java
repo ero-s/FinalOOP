@@ -28,7 +28,7 @@ public class MON_Jack extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 435;
+        maxLife = 800;
         life = maxLife;
         maxMana = 50;
         mana = maxMana;
