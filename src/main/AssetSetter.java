@@ -103,9 +103,15 @@ public class AssetSetter {
         mapNum = 2;
         i = 0;
 
-        gp.npc[mapNum][i] = new NPC_Turnip(gp);
+        gp.npc[mapNum][i] = new NPC_OldMan(gp);
         gp.npc[mapNum][i].sleep = true;
         gp.npc[mapNum][i].worldX = gp.tileSize * 9;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 38;
+        i++;
+
+        gp.npc[mapNum][i] = new NPC_Turnip(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 12;
         gp.npc[mapNum][i].worldY = gp.tileSize * 38;
         i++;
     }
