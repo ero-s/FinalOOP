@@ -155,7 +155,7 @@ public class EventHandler {
 
             // EXIT FALL DUNGEON
             else if(hit(5,24,28,"any")){
-                teleport(1, 25, 242);
+                teleport(1, 25, 42);
             }
 
             // FALL TO WINTER
