@@ -59,6 +59,14 @@ public class Player extends Entity {
         speed = defaultSpeed;
         direction = "down";
 
+        solidArea = new Rectangle();
+        solidArea.x = 32;
+        solidArea.y = 32;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 32;
+        solidArea.height = 16;
+
         // PLAYER STATUS
         level = 1;
         maxLife = 20;

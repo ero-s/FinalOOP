@@ -14,12 +14,12 @@ public class NPC_Khai extends Entity {
         speed = 1;
 
         solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
+        solidArea.x = 0;
+        solidArea.y = 0;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 32;
-        solidArea.height = 32;
+        solidArea.width = 64;
+        solidArea.height = 64;
         dialogueSet = -1;
 
         getImage();
@@ -38,20 +38,10 @@ public class NPC_Khai extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "Hello, traveler.";
-        dialogues[0][1] = "This island holds many secrets, some \nyou may find and others you might not.";
-        dialogues[0][2] = "I once sought the treasures here, \nbut now I merely observe.";
-        dialogues[0][3] = "May your journey be fruitful!";
-
-        dialogues[1][0] = "Greetings, adventurer.";
-        dialogues[1][1] = "The winds here tell tales of daring \nheroes and mysterious treasures.";
-        dialogues[1][2] = "Though my time has passed, I find joy \nin guiding those who follow the path.";
-        dialogues[1][3] = "Be wise, and tread carefully.";
-
-        dialogues[2][0] = "Ah, a brave soul!";
-        dialogues[2][1] = "This island isn't for the faint of heart. \nLegends say the treasure changes with \neach seeker.";
-        dialogues[2][2] = "Once, I sought glory here, but now I \nsavor the peace of these shores.";
-        dialogues[2][3] = "May fortune favor you, always.";
+        dialogues[0][0] = "Welcome to BukidGrooooooooooown!\nMy name is Khai.";
+        dialogues[0][1] = "Goodluck on your journey!";
+        dialogues[0][2] = "Quote of the week";
+        dialogues[0][3] = "Practice makes progress.\nTake your time,\nbut use it wisely.";
 
     }
 
