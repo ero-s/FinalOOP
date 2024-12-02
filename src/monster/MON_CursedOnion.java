@@ -7,11 +7,13 @@ import main.CutsceneManager;
 import main.GamePanel;
 import object.*;
 import object.OBJ_TrophyJoker;
+import object.Skills_PK.PR_AcidSplash;
 
 public class MON_CursedOnion extends Entity {
 
     GamePanel gp;
     public static final String monName = "\"Cursed Onion\"";
+    private int skillCounter = 0;
     public int monCount = 1;
 
     public MON_CursedOnion(GamePanel gp) {
@@ -31,6 +33,8 @@ public class MON_CursedOnion extends Entity {
         exp = 50;
         knockBackPower = 8;
 
+        this.skill1 = new PR_AcidSplash(gp);
+        this.skill1.setUser(this);
 
         int size = gp.tileSize*5;
         solidArea.x = 48;
@@ -49,7 +53,7 @@ public class MON_CursedOnion extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "The ecstacy ";
+        dialogues[0][0] = "";
 
     }
 
@@ -158,8 +162,14 @@ public class MON_CursedOnion extends Entity {
         }
 
         int i = new Random().nextInt(20) + 1;
-        if(i == 1){
-            arise();
+        if(i == 1 || i == 2){
+            if(i % 2 == 0){
+                arise();
+            } else {
+                arise();
+                arise();
+            }
+
         }
     }
 
@@ -174,6 +184,7 @@ public class MON_CursedOnion extends Entity {
             defense += 3;
             arise();
             arise();
+            scene();
         }
 
         if (getTileDistance(gp.player) > 5) {
