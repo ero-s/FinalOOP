@@ -1,18 +1,21 @@
 package monster;
 
+import java.util.Random;
+
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
 import object.*;
-
-import java.util.Random;
+import object.OBJ_TrophyJoker;
+import object.Skills_PK.PR_AcidSplash;
 
 public class MON_CursedOnion extends Entity {
 
     GamePanel gp;
+    public static final String monName = "\"Cursed Onion\"";
     private int skill1Counter = 0;
-    boolean ultUsed = false;
-    public static final String monName = "Cursed Onion";
+    private boolean skill1Used = false;
+    public int monCount = 1;
 
     public MON_CursedOnion(GamePanel gp) {
         super(gp);
@@ -24,21 +27,15 @@ public class MON_CursedOnion extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 435;
+        maxLife = 660;
         life = maxLife;
-        maxMana = 50;
-        mana = maxMana;
-        attack = 9;
-        defense = 2;
-        exp = 30;
+        attack = 12;
+        defense = 6;
+        exp = 50;
         knockBackPower = 8;
 
-//        projectile = new OBJ_Icycle(gp);
-//        projectile.setUser(this);
-//
-//        this.skill1 = new OBJ_Blizzard(gp);
-//        this.skill1.setUser(this);
-
+        this.skill1 = new PR_AcidSplash(gp);
+        this.skill1.setUser(this);
 
         int size = gp.tileSize*5;
         solidArea.x = 48;
@@ -52,12 +49,17 @@ public class MON_CursedOnion extends Entity {
         motion1_duration = 25;
         motion2_duration = 50;
 
-
         getImage();
         getAttackImage();
     }
 
+    public void setDialogue() {
+        dialogues[0][0] = "";
+
+    }
+
     public void getImage() {
+
         int i = 5;
         up1 = setup("/res/monster/cursedonion/up1", gp.tileSize*i, gp.tileSize*i);
         up2 = setup("/res/monster/cursedonion/up2", gp.tileSize*i, gp.tileSize*i);
@@ -159,114 +161,90 @@ public class MON_CursedOnion extends Entity {
                 }
             }
         }
-    }
 
-    public void setAction() {
-        if (!gp.monster[6][1].alive) {
-            inRage = true;
-            getImage();
-            defaultSpeed++;
-            speed = defaultSpeed;
-            attack += 2;
-            if(skill1Counter == 3600){
-                acidSplash();
-            }
-            if(!ultUsed){
-                selfReliance();
-                ultUsed = true;
-            }
-
-            shootProjectile();
+        int i = new Random().nextInt(40) + 1;
+        if(i == 1 && !skill1Used){
+            arise();
+            skill1Used = true;
         }
-
-        if (getTileDistance(gp.player) < 10) {
-            moveTowardPlayer(20);
-            // Randomly decide to shoot SludgeBomb
-            if (skill1Counter == 4800) { // 30% chance to shoot
-                acidSplash();
-            }
-            else{
-                shootProjectile();
-            }
-        } else {
-            // Random movement
-            getRandomDirection(60);
-            if (new Random().nextInt(0, 100)+1 < 40) { // 30% chance to shoot
-                if(!skill1.alive){
-                    acidSplash();
-                }
-            }
-            else{
-                shootProjectile();
-            }
-        }
-
-        // Check for melee attack\[-??/p00ol,lo87nmn
-        if (!attacking) {
-            checkAttackOrNot(60, gp.tileSize * 7, gp.tileSize * 5);
+        if(skill1Counter == 300){
+            skill1Counter = 0;
+            skill1Used = false;
         }
         skill1Counter++;
     }
 
+    public void setAction() {
+        if(!inRage && life < maxLife/2){
+            inRage = true;
+
+            getImage();
+            defaultSpeed++;
+            speed = defaultSpeed;
+            attack += 4;
+            defense += 3;
+            arise();
+            arise();
+            scene();
+        }
+
+        if (getTileDistance(gp.player) > 5) {
+            moveTowardPlayer(10);
+
+        } else {
+
+            // Get a random direction
+            getRandomDirection(60);
+        }
+
+        // Check if it attacks
+        if(!attacking){
+            checkAttackOrNot(60, gp.tileSize*7, gp.tileSize*5);
+            arise();
+        }
+    }
 
     public void damageReaction() {
         actionLockCounter = 0;
+        direction = gp.player.direction;
+        onPath = true;
     }
 
-    public void scene(){
-        gp.csManager.sceneNum = CutsceneManager.PICKLE_RICK_BACKSTORY; // Set the cutscene number
+    @Override
+    public void scene() {
+//        gp.csManager.sceneNum = CutsceneManager.// Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
-
     }
+
     public void checkDrop() {
+        int i = new Random().nextInt(100) + 1;
 
-        dropItem(new OBJ_BlueHeart(gp));
-        dropItem(new OBJ_Key(gp));
-
-    }
-
-    public void acidSplash(){
-        if (shotAvailableCounter >= 30 && skill1.haveResource(this)) {
-            this.skill1.set(worldX, worldY, direction, true, this);
-            this.skill1.subtractResource(this);
-
-            // CHECK VACANCY
-            for (int i = 0; i < gp.projectile[1].length; i++) {
-                if (gp.projectile[gp.currentMap][i] == null) {
-                    gp.projectile[gp.currentMap][i] = this.skill1;
-                    break;
-                }
-            }
-            shotAvailableCounter = 0;
-            gp.playSE(10);
+        if (i < 50) {
+            dropItem(new OBJ_Coin_Bronze(gp));
+        }
+        if (i >= 50 && i < 75) {
+            dropItem(new OBJ_Heart(gp));
+        }
+        if (i >= 75 && i < 100) {
+            dropItem(new OBJ_ManaCrystal(gp));
         }
     }
 
-    private void shootProjectile() {
-        if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
-            projectile.set(worldX, worldY, direction, true, this);
+    public void arise(){
+        int i = new Random().nextInt(100) + 1;
 
-            // Place the projectile in the game world
-            for (int i = 0; i < gp.projectile[1].length; i++) {
-                if(gp.projectile[gp.currentMap][i] == null){
-                    gp.projectile[gp.currentMap][i] = projectile;
-                }
-                break;
+        if(i == 1){
+            for(int j = 0; j < 8; j++){
+                int col = new Random().nextInt(10,29) + 1;
+                int row = new Random().nextInt(21,33) + 1;
+
+                    gp.monster[3][monCount] = new MON_ZombieBroccoli(gp);
+                    gp.monster[3][monCount].worldX = gp.tileSize * col;
+                    gp.monster[3][monCount].worldY = gp.tileSize * row;
+
+                monCount++;
             }
-            shotAvailableCounter = 0;
-            gp.playSE(10); // Play shooting sound
         }
     }
-
-    public void selfReliance(){
-        gp.monster[4][4] = new MON_PickleRick(gp);
-        gp.monster[4][4].life = maxLife/2;
-        gp.monster[4][4].inRage = true;
-        gp.monster[4][4].worldX = gp.tileSize * 22;
-        gp.monster[4][4].worldY = gp.tileSize * 25;
-    }
-    //nag rest
-
-
 }

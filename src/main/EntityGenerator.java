@@ -1,12 +1,12 @@
 package main;
+
 import entity.Entity;
-import entity.NPC_Portal;
 import object.*;
 import object.GeneralSkills.OBJ_Smash;
+import object.Jill_Skills.JILL_IceSlicer;
 import object.Skills_Jack.OBJ_Blizzard;
 import object.Skills_Jack.OBJ_Icycle;
 import object.Skills_PK.PR_SludgeBomb;
-import object.Jill_Skills.JILL_IceSlicer;
 
 public class EntityGenerator {
     GamePanel gp;

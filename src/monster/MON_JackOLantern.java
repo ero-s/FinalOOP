@@ -1,12 +1,11 @@
 package monster;
 
-import java.util.Random;
-
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
 import object.*;
-import object.OBJ_TrophyJoker;
+
+import java.util.Random;
 
 public class MON_JackOLantern extends Entity {
 

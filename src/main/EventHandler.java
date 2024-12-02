@@ -2,8 +2,6 @@ package main;
 
 import entity.Entity;
 
-import javax.swing.text.html.parser.TagElement;
-
 public class EventHandler {
     GamePanel gp;
     EventRect eventRect[][][];
@@ -140,20 +138,24 @@ public class EventHandler {
                 speak(gp.npc[1][0]);
             }
 
-            // TO THE DUNGEON
+            // SUMMER DUNGEON
             else if (hit(0, 41, 15, "any") || hit(0, 40, 15, "any")){
                 teleport(4, 24, 44);
             }
 
-            // OUTSIDE OF DUNGEON
+            // EXIT SUMMER DUNGEON
             else if(hit(4,24,44,"any")){
                 teleport(0, 41, 16);
             }
 
             // FALL DUNGEON
-            // OUTSIDE OF DUNGEON
             else if(hit(1,25,42,"any")){
                 teleport(5, 24, 28);
+            }
+
+            // EXIT FALL DUNGEON
+            else if(hit(5,24,28,"any")){
+                teleport(1, 25, 242);
             }
 
             // FALL TO WINTER
@@ -171,14 +173,10 @@ public class EventHandler {
                 teleport(6, 3, 4);
             }
 
-
-
-
-
-//            //cutscene
-//            else if (hit(3, 26, 41, "any") == true) {
-//                skeletonLord();
-//            }
+            // EXIT WINTER DUNGEON
+            else if(hit(6,3,4,"any")){
+                teleport(2, 43, 6);
+            }
         }
     }
 

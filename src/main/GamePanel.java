@@ -1,20 +1,5 @@
 package main;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import data.SaveLoad;
-import javax.swing.JFrame;
-
 import ai.PathFinder;
 import data.SaveLoad;
 import entity.Entity;
@@ -22,7 +7,15 @@ import entity.Player;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class GamePanel extends Canvas implements Runnable {
+
     // SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
@@ -69,7 +62,7 @@ public class GamePanel extends Canvas implements Runnable {
     public Player player = new Player(this, keyH);
     public Entity[][] obj = new Entity[maxMap][20];
     public Entity[][] npc = new Entity[maxMap][20];
-    public Entity[][] monster = new Entity[maxMap][100];
+    public Entity[][] monster = new Entity[maxMap][250];
     public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
     public Entity[][] projectile = new Entity[maxMap][20];
     public ArrayList<Entity> particleList = new ArrayList<>();
@@ -212,13 +205,34 @@ public class GamePanel extends Canvas implements Runnable {
                     if (monster[currentMap][i].alive && !monster[currentMap][i].dying) {
                         monster[currentMap][i].update();
                     }
+
                     if (!monster[currentMap][i].alive) {
                         monster[currentMap][i].checkDrop();
                         monster[currentMap][i].scene();
                         monster[currentMap][i] = null;
                     }
+
+//                    if (monster[currentMap][i] == monster[6][0] && monster[currentMap][i+1] == monster[6][1]) {
+//                        if(monster[currentMap][i].life == 0 && monster[currentMap][i+1].life == 0){
+//                            if(monster[currentMap][i].boss && monster[currentMap][i+1].boss){
+//                                monster[currentMap][i].scene();
+//                            }
+//                            monster[currentMap][i].checkDrop();
+//                           // monster[currentMap][i] = null;
+//                           // monster[currentMap][i+1]= null;
+//                        }
+//                       // monster[currentMap][i] = null;;
+//
+//                    }
                 }
             }
+
+
+
+//            if (!monster[6][0].alive && !monster[6][1].alive) {
+//                monster[6][0].scene();
+//                monster[6][0] = null;
+//            }
 
             for (int i = 0; i < projectile[1].length; i++) {
                 if (projectile[currentMap][i] != null) {

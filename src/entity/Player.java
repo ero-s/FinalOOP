@@ -1,13 +1,14 @@
 package entity;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 import main.GamePanel;
 import main.KeyHandler;
-import object.*;
 import object.GeneralSkills.OBJ_Smash;
+import object.OBJ_Shield_Wood;
+import object.OBJ_Sword_Normal;
 import object.Skills_PK.PR_SludgeBomb;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class    Player extends Entity {
     KeyHandler keyH;
@@ -64,7 +65,7 @@ public class    Player extends Entity {
         maxMana = 5;
         life = maxLife;
         mana = maxMana;
-        strength = 5;
+        strength = 40;
         dexterity = 1;
         exp = 0;
         nextLevelExp = 5;

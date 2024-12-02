@@ -1,19 +1,14 @@
 package entity;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import main.GamePanel;
+import main.UtilityTool;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.crypto.spec.RC2ParameterSpec;
-import javax.imageio.ImageIO;
-
-import main.GamePanel;
-import main.UtilityTool;
 
 public class Entity {
     GamePanel gp;
@@ -66,7 +61,6 @@ public class Entity {
     public int guardCounter = 0;
     public int offBalanceCounter = 0;
     public int skillDurationCounter = 0;
-
     // CHARACTER ATTRIBUTES
     public String name;
     public int defaultSpeed;

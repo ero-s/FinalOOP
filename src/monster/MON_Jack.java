@@ -3,7 +3,8 @@ package monster;
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
-import object.*;
+import object.OBJ_BlueHeart;
+import object.OBJ_Key;
 import object.Skills_Jack.OBJ_Blizzard;
 import object.Skills_Jack.OBJ_Icycle;
 
@@ -15,6 +16,7 @@ public class MON_Jack extends Entity {
     private int skill1Counter = 0;
     boolean ultUsed = false;
     public static final String monName = "Jack";
+
 
     public MON_Jack(GamePanel gp) {
         super(gp);
@@ -163,11 +165,17 @@ public class MON_Jack extends Entity {
                     offBalanceCounter = 0;
                 }
             }
+
+            if(!alive){
+              //  jackNJillCounter++;
+               // jackAlive = false;
+
+            }
         }
     }
 
     public void setAction() {
-        if (!inRage && life < maxLife/2) {
+        if (!gp.monster[6][1].alive) {
             inRage = true;
             getImage();
             defaultSpeed++;
@@ -202,15 +210,17 @@ public class MON_Jack extends Entity {
     }
 
     public void scene(){
-        gp.csManager.sceneNum = CutsceneManager.PICKLE_RICK_BACKSTORY; // Set the cutscene number
+        gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
 
     }
+
     public void checkDrop() {
 
         dropItem(new OBJ_BlueHeart(gp));
         dropItem(new OBJ_Key(gp));
+
 
     }
 
@@ -234,18 +244,20 @@ public class MON_Jack extends Entity {
     }
 
     private void shootProjectile() {
-        if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
-            projectile.set(worldX, worldY, direction, true, this);
+        if(new Random().nextInt(0,100) < 80) {
+            if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
+                projectile.set(worldX, worldY, direction, true, this);
 
-            // Place the projectile in the game world
-            for (int i = 0; i < gp.projectile[1].length; i++) {
-                if(gp.projectile[gp.currentMap][i] == null){
-                    gp.projectile[gp.currentMap][i] = projectile;
+                // Place the projectile in the game world
+                for (int i = 0; i < gp.projectile[1].length; i++) {
+                    if (gp.projectile[gp.currentMap][i] == null) {
+                        gp.projectile[gp.currentMap][i] = projectile;
+                    }
+                    break;
                 }
-                break;
+                shotAvailableCounter = 0;
+                gp.playSE(10); // Play shooting sound
             }
-            shotAvailableCounter = 0;
-            gp.playSE(10); // Play shooting sound
         }
     }
 

@@ -53,13 +53,15 @@ public class NPC_OldMan extends Entity {
 //        dialogues[2][2] = "Once, I sought glory here, but now I \nsavor the peace of these shores.";
 //        dialogues[2][3] = "May fortune favor you, always.";
 
-        // scene in fall circus
-        dialogues[0][0] = "Your brother will lose his life in the worst way possible. I pity you.";
-        dialogues[0][1] = "The future rules";
+//        // scene in fall circus
+//        dialogues[0][0] = "Your brother will lose his life in the worst way possible. I pity you.";
+//        dialogues[0][1] = "The future rules";
 
         // scene1 in winter circus (Villager)
-        dialogues[1][0] = "The mountains are shifting. We’re evacuating—there's a brutal winter coming!";
-        dialogues[1][1] = "There's an underground spring, but Jack and Jill guard it.";
+        dialogues[0][0] = "You’re not from around here, are you?";
+        dialogues[0][1] = "We’re currently evacuating—there’s a brutal\nwinter coming, worse than anything we’ve seen\nbefore.";
+        dialogues[0][2] = "The mountains are shifting, and we could get\nburied under the snow!";
+
 
     }
 
