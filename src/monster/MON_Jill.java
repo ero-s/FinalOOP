@@ -27,7 +27,7 @@ public class MON_Jill extends Entity {
         defaultSpeed = 1;
         speed = defaultSpeed;
         //maxLife = 435;
-        maxLife = 5;
+        maxLife = 435;
         life = maxLife;
         maxMana = 50;
         mana = maxMana;
@@ -211,9 +211,9 @@ public class MON_Jill extends Entity {
     }
 
     public void scene(){
-        gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
-        gp.gameState = gp.cutsceneState; // Switch game state
-        gp.csManager.scenePhase = 0;
+      //  gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
+       // gp.gameState = gp.cutsceneState; // Switch game state
+       // gp.csManager.scenePhase = 0;
 
     }
     public void checkDrop() {

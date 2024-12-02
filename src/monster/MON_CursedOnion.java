@@ -1,13 +1,14 @@
 package monster;
 
-import java.util.Random;
-
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
-import object.*;
-import object.OBJ_TrophyJoker;
+import object.OBJ_Coin_Bronze;
+import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
 import object.Skills_PK.PR_AcidSplash;
+
+import java.util.Random;
 
 public class MON_CursedOnion extends Entity {
 
@@ -86,7 +87,6 @@ public class MON_CursedOnion extends Entity {
     }
 
     public void update() {
-        ariseCounter++;
         if(!sleep){
             if (knockBack) {
                 checkCollision();
@@ -187,7 +187,7 @@ public class MON_CursedOnion extends Entity {
             defense += 3;
             arise();
             arise();
-//            scene();
+            halfScene();
         }
 
         if (getTileDistance(gp.player) > 5) {
@@ -216,6 +216,12 @@ public class MON_CursedOnion extends Entity {
     @Override
     public void scene() {
         gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
+        gp.gameState = gp.cutsceneState; // Switch game state
+        gp.csManager.scenePhase = 0;
+    }
+
+    public void halfScene() {
+        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_HALF_SCENE_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
     }
@@ -254,8 +260,8 @@ public class MON_CursedOnion extends Entity {
     public void arise(){
         int i = new Random().nextInt(100) + 1;
 
-        if(i == 1 && ariseCounter == 600){
-            for(int j = 0; j < 10; j++){
+        if(i == 1){
+            for(int j = 0; j < 8; j++){
                 int col = new Random().nextInt(10,29) + 1;
                 int row = new Random().nextInt(21,33) + 1;
 
