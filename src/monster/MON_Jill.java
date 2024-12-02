@@ -14,7 +14,7 @@ public class MON_Jill extends Entity {
     GamePanel gp;
     private int skill1Counter = 0;
     boolean ultUsed = false;
-    public static final String monName = "Pickle Rick";
+    public static final String monName = "              Jill";
 
     public MON_Jill(GamePanel gp) {
         super(gp);

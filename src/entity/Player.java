@@ -3,14 +3,14 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import object.GeneralSkills.OBJ_Smash;
+import object.OBJ_Fireball;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
-import object.Skills_PK.PR_SludgeBomb;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class    Player extends Entity {
+public class Player extends Entity {
     KeyHandler keyH;
 
     public final int screenX;
@@ -59,6 +59,14 @@ public class    Player extends Entity {
         speed = defaultSpeed;
         direction = "down";
 
+        solidArea = new Rectangle();
+        solidArea.x = 32;
+        solidArea.y = 32;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 32;
+        solidArea.height = 16;
+
         // PLAYER STATUS
         level = 1;
         maxLife = 20;
@@ -74,7 +82,7 @@ public class    Player extends Entity {
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         currentLight = null;
-        projectile = new PR_SludgeBomb(gp);
+        projectile = new OBJ_Fireball(gp);
         skill1 = new OBJ_Smash(gp);
         skill1.setUser(this);
         attack = getAttack();
