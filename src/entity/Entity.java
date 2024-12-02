@@ -89,6 +89,7 @@ public class Entity {
     public Entity currentShield;
     public Projectile projectile;
     public Projectile skill1;
+    public Projectile skill2;
     public Entity currentLight;
     public boolean boss;
     public int xOffset;
@@ -122,6 +123,7 @@ public class Entity {
     public final int type_obstacle = 8;
     public final int type_light = 9;
     public final int type_pickaxe = 10;
+    public final int type_trophy = 11;
 
     public Entity(GamePanel gp) { this.gp = gp; }
 

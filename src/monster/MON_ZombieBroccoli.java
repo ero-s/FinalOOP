@@ -44,25 +44,25 @@ public class MON_ZombieBroccoli extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/res/monster/zombiebroccoli/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/res/monster/zombiebroccoli/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/res/monster/zombiebroccoli/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/res/monster/zombiebroccoli/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/res/monster/zombiebroccoli/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/res/monster/zombiebroccoli/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/res/monster/zombiebroccoli/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/res/monster/zombiebroccoli/right_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/res/monster/zombiebroccoli/up1", gp.tileSize, gp.tileSize);
+        up2 = setup("/res/monster/zombiebroccoli/up2", gp.tileSize, gp.tileSize);
+        down1 = setup("/res/monster/zombiebroccoli/down1", gp.tileSize, gp.tileSize);
+        down2 = setup("/res/monster/zombiebroccoli/down2", gp.tileSize, gp.tileSize);
+        left1 = setup("/res/monster/zombiebroccoli/left1", gp.tileSize, gp.tileSize);
+        left2 = setup("/res/monster/zombiebroccoli/left2", gp.tileSize, gp.tileSize);
+        right1 = setup("/res/monster/zombiebroccoli/right1", gp.tileSize, gp.tileSize);
+        right2 = setup("/res/monster/zombiebroccoli/right2", gp.tileSize, gp.tileSize);
     }
 
-//    public void getAttackImage(){
-//        attackUp1 = setup("/res/monster/zombiebroccoli/zombiebroccoli_attack_up_1", gp.tileSize, gp.tileSize * 2);
-//        attackUp2 = setup("/res/monster/zombiebroccoli/zombiebroccoli_attack_up_2", gp.tileSize, gp.tileSize * 2);
-//        attackDown1 = setup("/res/monster/zombiebroccoli/zombiebroccoli_attack_down_1", gp.tileSize, gp.tileSize * 2);
-//        attackDown2 = setup("/res/monster/zombiebroccoli/zombiebroccoli_attack_down_2", gp.tileSize, gp.tileSize * 2);
-//        attackLeft1 = setup("/res/monster/zombiebroccoli/zombiebroccoli_attack_left_1", gp.tileSize * 2, gp.tileSize);
-//        attackLeft2 = setup("/res/monster/zombiebroccoli/zombiebroccoli_attack_left_2", gp.tileSize * 2, gp.tileSize);
-//        attackRight1 = setup("/res/monster/zombiebroccoli/zombiebroccoli_attack_right_1", gp.tileSize * 2, gp.tileSize);
-//        attackRight2 = setup("/res/monster/zombiebroccoli/zombiebroccoli_attack_right_2", gp.tileSize * 2, gp.tileSize);
+//    public void getImage() {
+//        up1 = setup("/res/monster/zombiebroccoli/up1", gp.tileSize, gp.tileSize);
+//        up2 = setup("/res/monster/zombiebroccoli/up2", gp.tileSize, gp.tileSize);
+//        down1 = setup("/res/monster/zombiebroccoli/down1", gp.tileSize, gp.tileSize);
+//        down2 = setup("/res/monster/zombiebroccoli/down2", gp.tileSize, gp.tileSize);
+//        left1 = setup("/res/monster/zombiebroccoli/left1", gp.tileSize, gp.tileSize);
+//        left2 = setup("/res/monster/zombiebroccoli/left2", gp.tileSize, gp.tileSize);
+//        right1 = setup("/res/monster/zombiebroccoli/right1", gp.tileSize, gp.tileSize);
+//        right2 = setup("/res/monster/zombiebroccoli/right2", gp.tileSize, gp.tileSize);
 //    }
 
     public void setAction() {

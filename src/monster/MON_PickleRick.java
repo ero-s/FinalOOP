@@ -175,11 +175,6 @@ public class MON_PickleRick extends Entity {
             if(skill1Counter == 3600){
                 acidSplash();
             }
-            if(!ultUsed){
-                selfReliance();
-                ultUsed = true;
-            }
-
             shootProjectile();
         }
 
@@ -226,7 +221,7 @@ public class MON_PickleRick extends Entity {
     public void checkDrop() {
 
         dropItem(new OBJ_BlueHeart(gp));
-        dropItem(new OBJ_Key(gp));
+        dropItem(new OBJ_FallKey(gp));
 
     }
 
@@ -261,14 +256,6 @@ public class MON_PickleRick extends Entity {
             shotAvailableCounter = 0;
             gp.playSE(10); // Play shooting sound
         }
-    }
-
-    public void selfReliance(){
-        gp.monster[4][4] = new MON_PickleRick(gp);
-        gp.monster[4][4].life = maxLife/2;
-        gp.monster[4][4].inRage = true;
-        gp.monster[4][4].worldX = gp.tileSize * 22;
-        gp.monster[4][4].worldY = gp.tileSize * 25;
     }
     //nag rest
 

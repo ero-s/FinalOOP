@@ -158,12 +158,12 @@ public class EventHandler {
 
             // FALL TO WINTER
             else if(hit(1,1,44,"any")){
-                teleport(2, 24, 19);
+                teleport(2, 2, 39);
             }
 
             // WINTER TO SPRING
-            else if(hit(2,2,39,"any")){
-                teleport(3, 24, 19);
+            else if(hit(2,42,45,"any")){
+                teleport(3, 18, 46);
             }
 
             // WINTER DUNGEON

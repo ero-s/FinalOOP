@@ -177,7 +177,7 @@ public class MON_Jack extends Entity {
     }
 
     public void setAction() {
-        if (!inRage && life < maxLife / 2) {
+        if (!gp.monster[6][1].alive) {
             inRage = true;
             getImage();
             defaultSpeed++;
@@ -211,11 +211,10 @@ public class MON_Jack extends Entity {
         actionLockCounter = 0;
     }
 
-    public void scene() {
-
-            gp.csManager.sceneNum = CutsceneManager.JACKNJILL_BACKSTORY; // Set the cutscene number
-            gp.gameState = gp.cutsceneState; // Switch game state
-            gp.csManager.scenePhase = 0;
+    public void scene(){
+        gp.csManager.sceneNum = CutsceneManager.PICKLE_RICK_BACKSTORY; // Set the cutscene number
+        gp.gameState = gp.cutsceneState; // Switch game state
+        gp.csManager.scenePhase = 0;
 
     }
 
@@ -272,8 +271,6 @@ public class MON_Jack extends Entity {
         gp.monster[4][4].worldY = gp.tileSize * 25;
     }
     //nag rest
-
-
 
 
 }

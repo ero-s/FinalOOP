@@ -1,18 +1,18 @@
 package monster;
 
+import java.util.Random;
+
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
 import object.*;
-
-import java.util.Random;
+import object.OBJ_TrophyJoker;
 
 public class MON_CursedOnion extends Entity {
 
     GamePanel gp;
-    private int skill1Counter = 0;
-    boolean ultUsed = false;
-    public static final String monName = "Cursed Onion";
+    public static final String monName = "\"Cursed Onion\"";
+    public int monCount = 1;
 
     public MON_CursedOnion(GamePanel gp) {
         super(gp);
@@ -24,20 +24,12 @@ public class MON_CursedOnion extends Entity {
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 435;
+        maxLife = 660;
         life = maxLife;
-        maxMana = 50;
-        mana = maxMana;
-        attack = 9;
-        defense = 2;
-        exp = 30;
+        attack = 12;
+        defense = 6;
+        exp = 50;
         knockBackPower = 8;
-
-//        projectile = new OBJ_Icycle(gp);
-//        projectile.setUser(this);
-//
-//        this.skill1 = new OBJ_Blizzard(gp);
-//        this.skill1.setUser(this);
 
 
         int size = gp.tileSize*5;
@@ -60,7 +52,13 @@ public class MON_CursedOnion extends Entity {
         getAttackImage();
     }
 
+    public void setDialogue() {
+        dialogues[0][0] = "The ecstacy ";
+
+    }
+
     public void getImage() {
+
         int i = 5;
         up1 = setup("/res/monster/cursedonion/up1", gp.tileSize*i, gp.tileSize*i);
         up2 = setup("/res/monster/cursedonion/up2", gp.tileSize*i, gp.tileSize*i);
@@ -162,6 +160,11 @@ public class MON_CursedOnion extends Entity {
                 }
             }
         }
+
+        int i = new Random().nextInt(20) + 1;
+        if(i == 1){
+            arise();
+        }
     }
 
     public void setAction() {
@@ -214,35 +217,30 @@ public class MON_CursedOnion extends Entity {
 
     public void damageReaction() {
         actionLockCounter = 0;
+        direction = gp.player.direction;
+        onPath = true;
     }
 
-    public void scene(){
-        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
+//    public void scene(){
+//        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
+    public void scene() {
+        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the c // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
 
     }
+
     public void checkDrop() {
+        int i = new Random().nextInt(100) + 1;
 
-        dropItem(new OBJ_BlueHeart(gp));
-        dropItem(new OBJ_Key(gp));
-
-    }
-
-    public void acidSplash(){
-        if (shotAvailableCounter >= 30 && skill1.haveResource(this)) {
-            this.skill1.set(worldX, worldY, direction, true, this);
-            this.skill1.subtractResource(this);
-
-            // CHECK VACANCY
-            for (int i = 0; i < gp.projectile[1].length; i++) {
-                if (gp.projectile[gp.currentMap][i] == null) {
-                    gp.projectile[gp.currentMap][i] = this.skill1;
-                    break;
-                }
-            }
-            shotAvailableCounter = 0;
-            gp.playSE(10);
+        if (i < 50) {
+            dropItem(new OBJ_Coin_Bronze(gp));
+        }
+        if (i >= 50 && i < 75) {
+            dropItem(new OBJ_Heart(gp));
+        }
+        if (i >= 75 && i < 100) {
+            dropItem(new OBJ_ManaCrystal(gp));
         }
     }
 
@@ -260,16 +258,13 @@ public class MON_CursedOnion extends Entity {
             shotAvailableCounter = 0;
             gp.playSE(10); // Play shooting sound
         }
-    }
-
-    public void selfReliance(){
-        gp.monster[4][4] = new MON_PickleRick(gp);
-        gp.monster[4][4].life = maxLife/2;
-        gp.monster[4][4].inRage = true;
-        gp.monster[4][4].worldX = gp.tileSize * 22;
-        gp.monster[4][4].worldY = gp.tileSize * 25;
-    }
-    //nag rest
 
 
-}
+
+                    gp.monster[4][monCount] = new MON_ZombieBroccoli(gp);
+                    gp.monster[4][monCount].worldX = gp.tileSize * col;
+                    gp.monster[4][monCount].worldY = gp.tileSize * row;
+
+                monCount++;
+            }
+        }

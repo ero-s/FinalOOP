@@ -18,15 +18,15 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize * 41;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i] = new OBJ_FallDoor(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize * 13;
         gp.obj[mapNum][i].worldY = gp.tileSize * 10;
         i++;
-        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i] = new OBJ_FallDoor(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize * 14;
         gp.obj[mapNum][i].worldY = gp.tileSize * 10;
         i++;
-        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i] = new OBJ_FallDoor(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize * 15;
         gp.obj[mapNum][i].worldY = gp.tileSize * 10;
         i++;
@@ -100,8 +100,20 @@ public class AssetSetter {
             i++;
         }
 
+        mapNum = 2;
+        i = 0;
 
+        gp.npc[mapNum][i] = new NPC_OldMan(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 9;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 38;
+        i++;
 
+        gp.npc[mapNum][i] = new NPC_Turnip(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 12;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 38;
+        i++;
     }
 
     public void setMonster() {
@@ -232,10 +244,19 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 14;
         i++;
 
+        //SPRING
+        mapNum = 3;
+        i = 0;
+
+        gp.monster[mapNum][i] = new MON_CursedOnion(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 18;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 32;
+        i++;
+
+        //SUMMER DUNGEON
         mapNum = 4;
         i = 0;
-        gp.monster[mapNum][i] = new MON_PickleRick(
-                gp);
+        gp.monster[mapNum][i] = new MON_PickleRick(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 22;
         gp.monster[mapNum][i].worldY = gp.tileSize * 11;
         i++;
@@ -256,7 +277,7 @@ public class AssetSetter {
         i++;
 
 
-        //FALL DUNGEOND
+        //FALL DUNGEON
         mapNum = 5;
         i = 0;
         gp.monster[mapNum][i] = new MON_JackOLantern(gp);

@@ -33,7 +33,7 @@ public class MON_Jill extends Entity {
         exp = 2;
         projectile = new OBJ_Rock(gp);
 
-        int size = gp.tileSize * 5;
+        int size = gp.tileSize*5;
         solidArea.x = 48;
         solidArea.y = 48;
         solidArea.width = size - 48 * 2;
@@ -44,7 +44,9 @@ public class MON_Jill extends Entity {
         attackArea.height = 170;
         motion1_duration = 25;
         motion2_duration = 50;
+
         getImage();
+        getAttackImage();
     }
 
     public void getImage() {
@@ -77,9 +79,43 @@ public class MON_Jill extends Entity {
 //        dialogues[2][2] = "Once, I sought glory here, but now I \nsavor the peace of these shores.";
 //        dialogues[2][3] = "May fortune favor you, always.";
 
-        // scene2 in fall circus
-        dialogues[0][0] = "Who dares to enter our sanctuary.";
-        dialogues[0][1] = "The villagers are not our concern. We protect what is ours.";
+    public void update() {
+        if(!sleep){
+            if (knockBack) {
+                checkCollision();
+                if (collisionOn) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                } else if (!collisionOn) {
+                    spriteCounter++;
+                    if (spriteCounter > 26) {
+                        if (spriteNum == 1) {
+                            spriteNum = 2;
+                        } else if (spriteNum == 2) {
+                            spriteNum = 1;
+                        }
+                        spriteCounter = 0;
+                    }
+                    switch (knockBackDirection) {
+                        case "up": worldY -= speed; break;
+                        case "down": worldY += speed; break;
+                        case "left": worldX -= speed; break;
+                        case "right": worldX += speed; break;
+                    }
+                }
+                knockBackCounter++;
+                if (knockBackCounter == 10) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                }
+            } else if(attacking){
+                attacking();
+            }
+            else {
+                setAction();
+                checkCollision();
 
         // scene3 in fall circus
         dialogues[1][0] = "Jack, we must give up our sanctuary. I can't see you get hurt again.";
@@ -190,7 +226,7 @@ public class MON_Jill extends Entity {
         if (onPath) {
 
             // Search the direction to go
-            searchPath(this, getGoalCol(gp.player), getGoalRow(gp.player));
+            searchPath(this,getGoalCol(gp.player), getGoalRow(gp.player));
 
             // Check if it shoots a projectile
             checkShootOrNot(60, 30);
@@ -230,9 +266,5 @@ public class MON_Jill extends Entity {
         if (i >= 75 && i < 100) {
             dropItem(new OBJ_ManaCrystal(gp));
         }
-
     }
-
-
 }
-
