@@ -2,7 +2,9 @@ package main;
 
 import entity.*;
 import monster.*;
-import object.*;
+import object.OBJ_Door;
+import object.OBJ_FallDoor;
+import object.OBJ_Key;
 
 public class AssetSetter {
 
@@ -72,10 +74,6 @@ public class AssetSetter {
             i++;
         }
 
-//        gp.obj[mapNum][i] = new NPC_Portal(gp);
-//        gp.obj[mapNum][i].worldX = gp.tileSize * 14;
-//        gp.obj[mapNum][i].worldY = gp.tileSize * 7;
-//        i++;
 
         mapNum = 1;
         i = 0;
@@ -100,14 +98,46 @@ public class AssetSetter {
             i++;
         }
 
+        gp.npc[mapNum][i] = new NPC_Portal(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize * 0; // -2 because imageWidth is 2
+        gp.npc[mapNum][i].worldY = gp.tileSize * 44;
+        i++;
+
         mapNum = 2;
         i = 0;
 
+        gp.npc[mapNum][i] = new NPC_Merchant(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 14;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 38;
+        i++;
+
         gp.npc[mapNum][i] = new NPC_Turnip(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 12;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 38;
+        i++;
+
+        gp.npc[mapNum][i] = new NPC_OldMan(gp);
         gp.npc[mapNum][i].sleep = true;
         gp.npc[mapNum][i].worldX = gp.tileSize * 9;
         gp.npc[mapNum][i].worldY = gp.tileSize * 38;
         i++;
+
+        gp.npc[mapNum][i] = new NPC_Portal(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize * 42; // -2 because imageWidth is 2
+        gp.npc[mapNum][i].worldY = gp.tileSize * 45;
+        i++;
+
+        mapNum = 3;
+        i = 0;
+
+        gp.npc[mapNum][i] = new NPC_Merchant(gp);
+        gp.npc[mapNum][i].sleep = true;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 21;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 46;
+        i++;
+
     }
 
     public void setMonster() {
@@ -245,11 +275,6 @@ public class AssetSetter {
         gp.monster[mapNum][i] = new MON_CursedOnion(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 18;
         gp.monster[mapNum][i].worldY = gp.tileSize * 32;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_ZombieBroccoli(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 26;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 14;
         i++;
 
         //SUMMER DUNGEON

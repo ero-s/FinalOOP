@@ -20,6 +20,7 @@ public class CutsceneManager {
     private final List<String> pickleRickBackstoryTextPages = new ArrayList<>();
     private final List<String> jacOLanternBackstoryTextPages = new ArrayList<>();
     private final List<String> jackNJillBackstoryTextPages = new ArrayList<>();
+    private final List<String> cursedOnionBackstoryTextPages = new ArrayList<>();
     private int currentTextPage = 0;
 
     // Scene numbers
@@ -28,12 +29,14 @@ public class CutsceneManager {
     public static final int PICKLE_RICK_BACKSTORY = 2;
     public static final int JACoLANTERN_BACKSTORY = 3;
     public static final int JACKNJILL_BACKSTORY = 4;
+    public static final int CURSED_ONION_BACKSTORY = 5;
 
     // Background images
     private BufferedImage openingBackground;
     private BufferedImage pickleRickBackground;
     private BufferedImage jacBackground;
     private BufferedImage jackNJillBackground;
+    private BufferedImage cursedOnionBackground;
 
     public CutsceneManager(GamePanel gp) {
         this.gp = gp;
@@ -47,12 +50,15 @@ public class CutsceneManager {
             pickleRickBackground = ImageIO.read(getClass().getResource("/res/ui/pickleRickCS.png"));
             jacBackground = ImageIO.read(getClass().getResource("/res/ui/jacOLanternCS.png"));
             jackNJillBackground = ImageIO.read(getClass().getResource("/res/ui/jackNJillCS.png"));
+            cursedOnionBackground = ImageIO.read(getClass().getResource("/res/ui/cursedOnionCS.png"));
         } catch (IOException e) {
             e.printStackTrace();
             openingBackground = null;
             pickleRickBackground = null;
             jacBackground = null;
             jackNJillBackground = null;
+            cursedOnionBackground = null;
+
         }
     }
 
@@ -71,6 +77,9 @@ public class CutsceneManager {
                 break;
             case JACKNJILL_BACKSTORY :
                 playScene(jackNJillBackground, jackNJillBackstoryTextPages);
+                break;
+            case CURSED_ONION_BACKSTORY :
+                playScene(cursedOnionBackground, cursedOnionBackstoryTextPages);
                 break;
         }
     }
@@ -154,6 +163,11 @@ public class CutsceneManager {
         jackNJillBackstoryTextPages.add("Jack and Jill were once ordinary children, but after the snow village was attacked by bandits, they were forced to fend for themselves leaving the village behind and hid in a cave.");
         jackNJillBackstoryTextPages.add("They learned to rely on each other in their darkest times. Jack, protective and fierce, embraced his darker instincts, ");
         jackNJillBackstoryTextPages.add("while Jill became cunning and strategic, using her intelligence to navigate the harsh world around them. With no trust in the people, they shut off any sort of connections.");
+
+        cursedOnionBackstoryTextPages.add("Cursed onion, who brings misfortune to all it touches, causing crops to wither and die, has been Andres the whole time. Andres stumbled upon an erupting dungeon bound to turn into an outbreak");
+        cursedOnionBackstoryTextPages.add("To seal the dungeon he encountered a nearby dungeon researcher who had been monitoring the gate, the researcher says that in order for it to be sealed one must embrace the curse of the dungeon.");
+        cursedOnionBackstoryTextPages.add("The curse served as a means to protect Hakobe, as he knew that dark forces were emerging from the dungeons. By becoming a cursed guardian,");
+        cursedOnionBackstoryTextPages.add("he inadvertently became a shield for Hakobe, isolating himself to keep him safe from the growing threats until they could reunite and restore balance together.");
 
     }
 
