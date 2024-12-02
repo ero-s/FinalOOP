@@ -13,7 +13,8 @@ public class MON_CursedOnion extends Entity {
 
     GamePanel gp;
     public static final String monName = "\"Cursed Onion\"";
-    private int skillCounter = 0;
+    private int skill1Counter = 0;
+    private boolean skill1Used = false;
     public int monCount = 1;
 
     public MON_CursedOnion(GamePanel gp) {
@@ -161,16 +162,16 @@ public class MON_CursedOnion extends Entity {
             }
         }
 
-        int i = new Random().nextInt(20) + 1;
-        if(i == 1 || i == 2){
-            if(i % 2 == 0){
-                arise();
-            } else {
-                arise();
-                arise();
-            }
-
+        int i = new Random().nextInt(40) + 1;
+        if(i == 1 && !skill1Used){
+            arise();
+            skill1Used = true;
         }
+        if(skill1Counter == 300){
+            skill1Counter = 0;
+            skill1Used = false;
+        }
+        skill1Counter++;
     }
 
     public void setAction() {
@@ -211,7 +212,7 @@ public class MON_CursedOnion extends Entity {
 
     @Override
     public void scene() {
-        gp.csManager.sceneNum = CutsceneManager.JACoLANTERN_BACKSTORY; // Set the cutscene number
+//        gp.csManager.sceneNum = CutsceneManager.// Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
     }
@@ -238,10 +239,9 @@ public class MON_CursedOnion extends Entity {
                 int col = new Random().nextInt(10,29) + 1;
                 int row = new Random().nextInt(21,33) + 1;
 
-
-                    gp.monster[4][monCount] = new MON_ZombieBroccoli(gp);
-                    gp.monster[4][monCount].worldX = gp.tileSize * col;
-                    gp.monster[4][monCount].worldY = gp.tileSize * row;
+                    gp.monster[3][monCount] = new MON_ZombieBroccoli(gp);
+                    gp.monster[3][monCount].worldX = gp.tileSize * col;
+                    gp.monster[3][monCount].worldY = gp.tileSize * row;
 
                 monCount++;
             }

@@ -122,6 +122,11 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize * 38;
         i++;
 
+        gp.npc[mapNum][i] = new NPC_Portal(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize * 42; // -2 because imageWidth is 2
+        gp.npc[mapNum][i].worldY = gp.tileSize * 45;
+        i++;
+
         mapNum = 3;
         i = 0;
 
@@ -130,6 +135,7 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldX = gp.tileSize * 21;
         gp.npc[mapNum][i].worldY = gp.tileSize * 46;
         i++;
+
     }
 
     public void setMonster() {
