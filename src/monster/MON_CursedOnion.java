@@ -1,13 +1,14 @@
 package monster;
 
-import java.util.Random;
-
 import entity.Entity;
 import main.CutsceneManager;
 import main.GamePanel;
-import object.*;
-import object.OBJ_TrophyJoker;
+import object.OBJ_Coin_Bronze;
+import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
 import object.Skills_PK.PR_AcidSplash;
+
+import java.util.Random;
 
 public class MON_CursedOnion extends Entity {
 
@@ -186,7 +187,7 @@ public class MON_CursedOnion extends Entity {
             defense += 3;
             arise();
             arise();
-            scene();
+            halfScene();
         }
 
         if (getTileDistance(gp.player) > 5) {
