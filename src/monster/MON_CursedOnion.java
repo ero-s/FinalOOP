@@ -212,7 +212,7 @@ public class MON_CursedOnion extends Entity {
 
     @Override
     public void scene() {
-//        gp.csManager.sceneNum = CutsceneManager.// Set the cutscene number
+        gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
     }
