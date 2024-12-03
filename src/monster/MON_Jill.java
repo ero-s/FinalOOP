@@ -170,32 +170,17 @@ public class MON_Jill extends Entity {
             defaultSpeed++;
             speed = defaultSpeed;
             attack += 2;
-            if(skill1Counter == 3600){
-//                acidSplash();
-            }
             shootProjectile();
         }
 
         if (getTileDistance(gp.player) < 10) {
             moveTowardPlayer(20);
             // Randomly decide to shoot SludgeBomb
-            if (skill1Counter == 4800) { // 30% chance to shoot
-//                acidSplash();
-            }
-            else{
-                shootProjectile();
-            }
+            shootProjectile();
         } else {
             // Random movement
             getRandomDirection(60);
-            if (new Random().nextInt(0, 100)+1 < 40) { // 30% chance to shoot
-//                if(!skill1.alive){
-////                    acidSplash();
-//                }
-            }
-            else{
-                shootProjectile();
-            }
+            shootProjectile();
         }
 
         // Check for melee attack\[-??/p00ol,lo87nmn
@@ -218,27 +203,7 @@ public class MON_Jill extends Entity {
     }
     public void checkDrop() {
 
-        dropItem(new OBJ_BlueHeart(gp));
-        dropItem(new OBJ_Key(gp));
-
     }
-//
-//    public void acidSplash(){
-//        if (shotAvailableCounter >= 30 && skill1.haveResource(this)) {
-//            this.skill1.set(worldX, worldY, direction, true, this);
-//            this.skill1.subtractResource(this);
-//
-//            // CHECK VACANCY
-//            for (int i = 0; i < gp.projectile[1].length; i++) {
-//                if (gp.projectile[gp.currentMap][i] == null) {
-//                    gp.projectile[gp.currentMap][i] = this.skill1;
-//                    break;
-//                }
-//            }
-//            shotAvailableCounter = 0;
-//            gp.playSE(10);
-//        }
-//    }
 
     private void shootProjectile() {
         if ((shotAvailableCounter >= 30) && projectile.haveResource(this)) {
@@ -256,12 +221,5 @@ public class MON_Jill extends Entity {
         }
     }
 
-    public void selfReliance(){
-        gp.monster[4][4] = new MON_PickleRick(gp);
-        gp.monster[4][4].life = maxLife/2;
-        gp.monster[4][4].inRage = true;
-        gp.monster[4][4].worldX = gp.tileSize * 22;
-        gp.monster[4][4].worldY = gp.tileSize * 25;
-    }
     //nag rest
 }

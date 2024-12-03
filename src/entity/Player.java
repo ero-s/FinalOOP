@@ -52,8 +52,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 45;
-        worldY = gp.tileSize * 40;
+        worldX = gp.tileSize * 37;
+        worldY = gp.tileSize * 34;
         gp.currentMap = 0;
         defaultSpeed = 8;
         speed = defaultSpeed;
@@ -422,8 +422,6 @@ public class Player extends Entity {
                 gp.playSE(12);
             }
         }
-
-        System.out.println(worldX/gp.tileSize + ", " + worldY/gp.tileSize);
     }
 
     public void pickUpObject(int mapNum, int i) {

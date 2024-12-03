@@ -5,6 +5,7 @@ import main.CutsceneManager;
 import main.GamePanel;
 import object.OBJ_BlueHeart;
 import object.OBJ_Key;
+import object.OBJ_SpringKey;
 import object.Skills_Jack.OBJ_Blizzard;
 import object.Skills_Jack.OBJ_Icycle;
 
@@ -217,11 +218,7 @@ public class MON_Jack extends Entity {
     }
 
     public void checkDrop() {
-
-        dropItem(new OBJ_BlueHeart(gp));
-        dropItem(new OBJ_Key(gp));
-
-
+        dropItem(new OBJ_SpringKey(gp));
     }
 
     public void blizzard(){

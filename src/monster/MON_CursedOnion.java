@@ -218,6 +218,7 @@ public class MON_CursedOnion extends Entity {
         gp.csManager.sceneNum = CutsceneManager.CURSED_ONION_BACKSTORY; // Set the cutscene number
         gp.gameState = gp.cutsceneState; // Switch game state
         gp.csManager.scenePhase = 0;
+
     }
 
     public void halfScene() {

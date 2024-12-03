@@ -114,7 +114,8 @@ public class EventHandler {
             }
 
             // TELEPORT TO FALL CIRCUS
-            if (hit(0, 14, 7, "any")) {
+            if (hit(0, 14, 7, "any") || hit(0, 13, 7, "any")
+                    || hit(0, 14, 6, "any") || hit(0, 13, 6, "any")) {
                 teleport(1,45,15);
             }
 
